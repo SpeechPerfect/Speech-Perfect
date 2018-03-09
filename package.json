@@ -7,6 +7,8 @@
     "start-server": "cd server && nodemon server.js",
     "start-client": "cd client && npm start",
 
+    "start-native-client": "cd native-client && react-native run-ios --simulator=\"iPhone 8\"",
+
     "install": "npm run install-server && npm run install-client",
     "install-server": "cd server && npm install",
     "install-client": "cd client && npm install",
