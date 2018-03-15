@@ -37,29 +37,24 @@ export default class App extends React.Component {
         if (!this.state.fontLoaded){
             return <AppLoading />
         }
-        return (
-            <View style={styles.container}>
-              <Text style={styles.title}>fetch</Text>
-              <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
-                <View>
-                  <Text>get started</Text>
-                </View>
-              </TouchableHighlight>
-            </View>
-        )
+      return (
+        <View style={styles.container}>
+          <Text style={styles.title}>Speech Perfect</Text>
+        </View>
+      )
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#e0ecef',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    title: {
-        fontFamily: 'Arial',
-        fontSize: 70,
-        color: '#b77575'
-    }
+  container: {
+    flex: 1,
+    backgroundColor: '#e0ecef',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontFamily: 'Arial',
+    fontSize: 70,
+    color: 'black'
+  }
 })
