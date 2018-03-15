@@ -4,11 +4,12 @@ import './App.css';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import RootNavigation from './navigation/RootNavigation';
 
+
 class App extends Component {
   render() {
     fetch('/users')
     .then((res) => res.text())
-    .then((data) => console.log(data));
+    .then((data) => console.log(data))
 
     return (
       <View style={styles.container}>
@@ -41,3 +42,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.2)',
   },
 });
+
