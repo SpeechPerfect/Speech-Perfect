@@ -1,5 +1,5 @@
 {
-    "extends": "fullstack", //"eslint:recommended",
+    "extends": "fullstack",
     "rules": {
 	"semi": ["error", "never"],
 	"id-length": ["error", {"min": 1 }]
