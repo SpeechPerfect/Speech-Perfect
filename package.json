@@ -1,20 +1,20 @@
 {
-  "name": "fetch",
+  "name": "speech-perfect",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "concurrently --kill-others-on-fail \"npm run start-server\" \"npm run start-client\"",
     "start-server": "cd server && nodemon server.js",
     "start-client": "cd client && npm start",
-
     "start-native-client": "cd native-client && react-native run-ios --simulator=\"iPhone 8\"",
-
     "install": "npm run install-server && npm run install-client",
     "install-server": "cd server && npm install",
     "install-client": "cd client && npm install",
-
     "prod": "npm run prod-client && npm run prod-server",
     "prod-server": "cd server && npm start",
     "prod-client": "cd client && npm run build"
+  },
+  "dependencies": {
+    "concurrently": "^3.5.1"
   }
 }
