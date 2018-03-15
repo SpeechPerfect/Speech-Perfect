@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
 
 class App extends Component {
   render() {
     fetch('/users')
     .then((res) => res.text())
-    .then((data) => console.log(data));
+    .then((data) => console.log(data))
 
     return (
       <div className="App">
@@ -18,8 +18,8 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
