@@ -1,5 +1,6 @@
-import React from 'react'
-import { Alert, Button, TouchableHighlight, StyleSheet, Text, View, Platform } from 'react-native'
+import React from 'react';
+import { Alert, Button, TouchableHighlight, Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
+import RootNavigation from './src/navigation/RootNavigation';
 import { Font, AppLoading } from 'expo'
 
 let API_ROOT
@@ -10,6 +11,7 @@ API_ROOT = 'http://192.168.1.190:5000'
 // }
 
 export default class App extends React.Component {
+
     constructor(props){
         super(props)
         this.state = {
@@ -38,19 +40,24 @@ export default class App extends React.Component {
             return <AppLoading />
         }
       return (
-        <View style={styles.container}>
-          <Text style={styles.title}>Speech Perfect</Text>
-        </View>
-      )
-    }
+      <View style={styles.container}>
+        {/* <Text style={styles.title}>fetch</Text>
+        <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
+          <View>
+            <Text>get started</Text>
+          </View>
+        </TouchableHighlight> */}
+         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
+        <RootNavigation />
+      </View>
+    )}
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e0ecef',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'lightgrey',
   },
   title: {
     fontFamily: 'Arial',
