@@ -1,5 +1,5 @@
-import React from 'react';
-import { Alert, Button, TouchableHighlight, StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { Alert, Button, TouchableHighlight, StyleSheet, Text, View } from 'react-native'
 
 let API_ROOT
 // if (IS_SIM) {
@@ -12,7 +12,7 @@ export default class App extends React.Component {
   _onPressButton() {
     fetch(`${API_ROOT}/users`)
     .then((res) => res.text())
-    .then((data) => Alert.alert(data));
+    .then((data) => Alert.alert(data))
     // Alert.alert('You tapped the button!');
   }
   render() {
@@ -20,7 +20,7 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <Text style={styles.title}>Speech Perfect</Text>
       </View>
-    );
+    )
   }
 }
 
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
     fontSize: 70,
     color: 'black'
   }
-});
+})

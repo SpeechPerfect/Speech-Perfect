@@ -1,0 +1,8 @@
+{
+    "extends": "fullstack",
+    "rules": {
+	"semi": ["error", "never"],
+	"id-length": ["error", {"min": 1 }]
+    },
+    "parser": "babel-eslint"
+}
