@@ -18,12 +18,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>fetch</Text>
-        <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
-          <View>
-            <Text>get started</Text>
-          </View>
-        </TouchableHighlight>
+        <Text style={styles.title}>Speech Perfect</Text>
       </View>
     );
   }
@@ -39,6 +34,6 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'Arial',
     fontSize: 70,
-    color: '#b77575'
+    color: 'black'
   }
 });
