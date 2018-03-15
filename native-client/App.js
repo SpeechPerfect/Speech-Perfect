@@ -1,5 +1,6 @@
 import React from 'react';
-import { Alert, Button, TouchableHighlight, StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, TouchableHighlight, Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
+import RootNavigation from './src/navigation/RootNavigation';
 
 let API_ROOT
 // if (IS_SIM) {
@@ -18,12 +19,15 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>fetch</Text>
+        {/* <Text style={styles.title}>fetch</Text>
         <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
           <View>
             <Text>get started</Text>
           </View>
-        </TouchableHighlight>
+        </TouchableHighlight> */}
+         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
+        <RootNavigation />
       </View>
     );
   }
@@ -32,9 +36,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e0ecef',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'lightgrey',
   },
   title: {
     fontFamily: 'Arial',
