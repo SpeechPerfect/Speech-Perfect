@@ -1,32 +1,48 @@
-import React from 'react';
-import { Alert, Button, TouchableHighlight, StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { Alert, Button, TouchableHighlight, StyleSheet, Text, View, Platform } from 'react-native'
+import { Font, AppLoading } from 'expo'
 
 let API_ROOT
 // if (IS_SIM) {
 //   API_ROOT = 'http://localhost:5000'
 // } else {
-  API_ROOT = 'http://192.168.1.190:5000'
+API_ROOT = 'http://192.168.1.190:5000'
 // }
 
 export default class App extends React.Component {
-  _onPressButton() {
-    fetch(`${API_ROOT}/users`)
-    .then((res) => res.text())
-    .then((data) => Alert.alert(data));
-    // Alert.alert('You tapped the button!');
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>fetch</Text>
-        <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
-          <View>
-            <Text>get started</Text>
-          </View>
-        </TouchableHighlight>
-      </View>
-    );
-  }
+    constructor(props){
+        super(props)
+        this.state = {
+            fontLoaded: false
+        }
+    }
+
+    componentWillMount() {
+        if (Platform.OS === 'android'){
+            Font.loadAsync({
+                Arial: require('./fonts/Arial.ttf')
+            })
+                .then(() => this.setState({ fontLoaded: true }))
+        }
+        else this.setState({ fontLoaded: true })
+    }
+
+    _onPressButton() {
+        fetch(`${API_ROOT}/users`)
+            .then((res) => res.text())
+            .then((data) => Alert.alert(data))
+        // Alert.alert('You tapped the button!');
+    }
+    render() {
+        if (!this.state.fontLoaded){
+            return <AppLoading />
+        }
+      return (
+        <View style={styles.container}>
+          <Text style={styles.title}>Speech Perfect</Text>
+        </View>
+      )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -39,6 +55,6 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'Arial',
     fontSize: 70,
-    color: '#b77575'
+    color: 'black'
   }
-});
+})
