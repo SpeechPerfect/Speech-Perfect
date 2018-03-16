@@ -45,15 +45,23 @@ export default TabNavigator(
             name={iconName}
             size={28}
             style={{ marginBottom: -3 }}
-            color={"green"}
+            color={"#12092f"}
             // color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
           />
-        );
+        )
       },
     }),
+    tabBarOptions: {
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
+      style: {
+        // backgroundColor: '#12092f',
+        height: 45,
+          },
+        },
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     animationEnabled: false,
     swipeEnabled: false,
-  }
-);
+  },
+)

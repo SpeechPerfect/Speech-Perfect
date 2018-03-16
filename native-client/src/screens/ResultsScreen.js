@@ -1,6 +1,5 @@
-import React from 'react';
-import { ExpoConfigView } from '@expo/samples';
-import { Text, ScrollView, StyleSheet } from 'react-native';
+import React from 'react'
+import { Text, ScrollView, StyleSheet } from 'react-native'
 
 
 export default class ResultsScreen extends React.Component {
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: 'lightgrey',
   },
-});
+})
 
 
 // import React, {Component} from 'react';
