@@ -24,28 +24,28 @@ export default TabNavigator (
   {
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused }) => {
-        const { routeName } = navigation.state;
-        let iconName;
+        const { routeName } = navigation.state
+        let iconName
         switch (routeName) {
           case 'Home':
             iconName =
               Platform.OS === 'ios'
                 ? `ios-information-circle${focused ? '' : '-outline'}`
-                : 'md-home';
-            break;
+                : 'md-home'
+            break
           case 'Record':
-            iconName = Platform.OS === 'ios' ? `ios-microphone${focused ? '' : '-outline'}` : 'md-microphone';
-            break;
+            iconName = Platform.OS === 'ios' ? `ios-microphone${focused ? '' : '-outline'}` : 'md-microphone'
+            break
           case 'Results':
             iconName =
-              Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options';
+              Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
         }
         return (
           <Ionicons
             name={iconName}
             size={28}
             style={{ marginBottom: -3 }}
-            color={"#12092f"}
+            color={'#12092f'}
             // color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
           />
         )

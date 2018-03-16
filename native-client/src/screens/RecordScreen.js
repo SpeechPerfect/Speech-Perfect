@@ -14,8 +14,7 @@ export default class RecordScreen extends React.Component {
            <Recorder />
       </View>
 
-
-    );
+    )
   }
 }
 
