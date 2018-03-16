@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+
 
 class App extends Component {
   render() {
@@ -18,8 +19,20 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  statusBarUnderlay: {
+    height: 24,
+    backgroundColor: 'rgba(0,0,0,0.2)',
+  },
+});
+
