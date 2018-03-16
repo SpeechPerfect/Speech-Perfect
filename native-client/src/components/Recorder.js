@@ -5,6 +5,12 @@ import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo';
 export default class Recorder extends Component {
     constructor(){
         super()
+        this.state = {
+          haveRecordingPermissions: false,
+          isRecording: false,
+          recordingDuration: null,
+          recording: {}
+        }
         this.startRecording = this.startRecording.bind(this)
         this.stopRecording = this.stopRecording.bind(this)
     }
@@ -19,8 +25,8 @@ export default class Recorder extends Component {
     // Audio.setAudioModeAsync
 
     async startRecording(){
-
-    console.log('pressed')
+    const recording = new Expo.Audio.Recording();
+   
     await Audio.setAudioModeAsync({
       allowsRecordingIOS: true,
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
@@ -28,25 +34,24 @@ export default class Recorder extends Component {
       shouldDuckAndroid: true,
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
     });
-    const recording = new Expo.Audio.Recording();
       try {
         await recording.prepareToRecordAsync(Expo.Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
         await recording.startAsync();
         console.log('recording has begun')
+        this.setState({recording})
         // You are now recording!
       } catch (error) {
         console.log(error)
         // An error occurred!
       }
-      console.log('recording is', recording)
+     
   }
 
   async stopRecording(){
-    console.log('pressed stopped')
-    const recording = new Expo.Audio.Recording();
+    console.log('recording object', this.state.recording)
     try {
       console.log('recording has stopped')
-      await recording.stopAndUnloadAsync();
+      await this.state.recording.stopAndUnloadAsync();
       // You are now recording!
     } catch (error) {
       // An error occurred!
