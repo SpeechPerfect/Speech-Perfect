@@ -1,7 +1,7 @@
 {
   "name": "speech-perfect",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "An app that coaches you to become a better public speaker!",
   "engines": {
     "node": ">= 7.0.0"
   },
@@ -22,17 +22,6 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
-<<<<<<< HEAD
-    "body-parser": "^1.18.2",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.15.5",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.0",
-    "pg": "^7.4.1",
-    "sequelize": "^4.37.1",
-    "serve-favicon": "~2.4.5"
-=======
     "axios": "^0.15.3",
     "body-parser": "^1.16.1",
     "compression": "^1.7.1",
@@ -81,6 +70,5 @@
     "supertest": "^3.0.0",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9"
->>>>>>> bcfe62b028fec6152a2af1f353156b4775667d75
   }
 }
