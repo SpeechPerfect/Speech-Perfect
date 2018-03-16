@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-router.get('/:id', report, (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   Speech.scope('populated').findById(req.params.id)
     .then(result => res.json(result))
 })
