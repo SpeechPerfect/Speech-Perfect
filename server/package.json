@@ -11,7 +11,7 @@
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
     "lint": "eslint ./",
-    "prepush": "npm run lint && npm test",
+    "prepush": "npm run lint",
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
     "start": "node server",
