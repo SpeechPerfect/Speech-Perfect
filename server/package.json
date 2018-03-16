@@ -10,7 +10,7 @@
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
-    "lint": "eslint ./ --ignore-path .gitignore",
+    "lint": "eslint ./",
     "prepush": "npm run lint && npm test",
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
