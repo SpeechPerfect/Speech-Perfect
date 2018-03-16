@@ -5,6 +5,13 @@ import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo';
 export default class Recorder extends Component {
     constructor(){
         super()
+        this.recording = null
+        this.state = {
+          haveRecordingPermissions: false,
+          isRecording: false,
+          recordingDuration: null
+        }
+        this.recordingSettings = JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY))
         this.startRecording = this.startRecording.bind(this)
         this.stopRecording = this.stopRecording.bind(this)
     }
@@ -16,9 +23,8 @@ export default class Recorder extends Component {
         })
       }
 
-    // Audio.setAudioModeAsync
 
-    async startRecording(){
+    async startRecording() {
 
     console.log('pressed')
     await Audio.setAudioModeAsync({
@@ -27,8 +33,8 @@ export default class Recorder extends Component {
       playsInSilentModeIOS: true,
       shouldDuckAndroid: true,
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-    });
-    const recording = new Expo.Audio.Recording();
+    })
+    const recording = new Expo.Audio.Recording()
       try {
         await recording.prepareToRecordAsync(Expo.Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
         await recording.startAsync();
