@@ -10,6 +10,8 @@ var users = require('./routes/users')
 
 var app = express()
 
+const db = require('./db')
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -28,6 +30,10 @@ app.use(function(req, res, next) {
   err.status = 404
   next(err)
 })
+
+// sync db
+db.sync({})
+
 
 // error handler
 app.use(function(err, req, res, next) {
