@@ -23,10 +23,11 @@ export default class Recorder extends Component {
       }
 
     // Audio.setAudioModeAsync
+    
 
     async startRecording(){
-    const recording = new Expo.Audio.Recording();
-   
+      const recording = new Expo.Audio.Recording();
+      this.setState({recording})
     await Audio.setAudioModeAsync({
       allowsRecordingIOS: true,
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
@@ -35,10 +36,13 @@ export default class Recorder extends Component {
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
     });
       try {
-        await recording.prepareToRecordAsync(Expo.Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
-        await recording.startAsync();
+        await this.state.recording.prepareToRecordAsync(Expo.Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
+        await this.state.recording.startAsync();
         console.log('recording has begun')
-        this.setState({recording})
+        setTimeout(async () => {
+           await this.state.recording.getStatusAsync()
+            .then(data => console.log(data))
+        }, 2000)
         // You are now recording!
       } catch (error) {
         console.log(error)
