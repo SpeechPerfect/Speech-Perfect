@@ -1,13 +1,18 @@
 const User = require('./user')
-const Report = require('./report')
 const Speech = require('./speech')
+const AwsReport = require('./aws-report')
+const BvReport = require('./bv-report')
+const WatsonReport = require('./watson-report.js')
 
 Speech.belongsTo(User)
-Report.belongsTo(Speech)
-Report.belongsTo(User)
+AwsReport.belongsTo(Speech)
+BvReport.belongsTo(Speech)
+WatsonReport.belongsTo(Speech)
 
 module.exports = {
   User,
-  Report,
-  Speech
+  Speech,
+  AwsReport,
+  BvReport,
+  WatsonReport
 }

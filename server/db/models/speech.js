@@ -1,13 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Speech = db.define('speech', {
-  recordingUrl: {
-    type: Sequelize.STRING
-  },
-  transcript: {
-    type: Sequelize.TEXT
-  }
-})
+const Speech = db.define('speech', {})
 
 module.exports = Speech
