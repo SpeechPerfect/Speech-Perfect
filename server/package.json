@@ -1,7 +1,7 @@
 {
   "name": "speech-perfect",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "An app that coaches you to become a better public speaker!",
   "engines": {
     "node": ">= 7.0.0"
   },
@@ -10,8 +10,8 @@
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
-    "lint": "eslint ./ --ignore-path .gitignore",
-    "prepush": "npm run lint && npm test",
+    "lint": "eslint ./",
+    "prepush": "npm run lint",
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
     "start": "node server",
