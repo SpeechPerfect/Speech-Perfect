@@ -3,7 +3,6 @@
 # dependencies
 node_modules
 
-secrets.js
 
 # testing
 /coverage
@@ -26,6 +25,5 @@ yarn-error.log*
 .tern-port
 
 # secrets
-secrets.js
-server/secrets.js
+
 server/api/s3_config.json
