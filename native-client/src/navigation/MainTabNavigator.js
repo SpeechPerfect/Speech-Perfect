@@ -5,16 +5,10 @@ import { TabNavigator, TabBarBottom } from 'react-navigation'
 
 // import Colors from '../constants/Colors';
 
-<<<<<<< HEAD
 import HomeScreen from '../screens/HomeScreen';
 import RecordScreen from '../screens/RecordScreen';
 import ResultsScreen from '../screens/ResultsScreen';
 import Testing from '../components/TextToSpeech';
-=======
-import HomeScreen from '../screens/HomeScreen'
-import RecordScreen from '../screens/RecordScreen'
-import ResultsScreen from '../screens/ResultsScreen'
->>>>>>> master
 
 export default TabNavigator (
   {
