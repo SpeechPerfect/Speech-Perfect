@@ -27,7 +27,7 @@ const upload = multer({
 })
 
 router.post('/upload', upload.single('soundFile'), (req, res, next) => {
-  console.log('in post route')
+  console.log('in post route, file is ', req.file)
   res.send('Successfully uploaded ' + req.file.fieldName + ' file!')
 })
 

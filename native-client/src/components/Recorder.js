@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Button, View, StyleSheet, Text} from 'react-native';
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo';
 import Timer  from './Timer'
+import {Uploader} from './'
 
 export default class Recorder extends Component {
     constructor(){
@@ -23,8 +24,6 @@ export default class Recorder extends Component {
         })
       }
 
-    // Audio.setAudioModeAsync
-
     _renderTitle() {
       return (
         <View style={styles.header}>
@@ -42,7 +41,7 @@ export default class Recorder extends Component {
     }
 
     async startRecording() {
-      const recording = new Expo.Audio.Recording();
+      const recording = new Expo.Audio.Recording()
       this.setState({recording:recording, isRecording: true})
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
@@ -50,7 +49,7 @@ export default class Recorder extends Component {
         playsInSilentModeIOS: true,
         shouldDuckAndroid: true,
         interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-      });
+      })
       try {
         await this.state.recording.prepareToRecordAsync(Expo.Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY)
         await this.state.recording.startAsync()
@@ -71,9 +70,9 @@ export default class Recorder extends Component {
     console.log('recording object', this.state.recording)
     try {
       console.log('recording has stopped')
-      await this.state.recording.stopAndUnloadAsync();
+      await this.state.recording.stopAndUnloadAsync()
       console.log('our recording')
-      console.log(this.state.recording)
+      console.log(this.state.recording._uri)
     } catch (error) {
       console.log(error)
     }
@@ -94,6 +93,7 @@ export default class Recorder extends Component {
             <Button onPress={buttonMethod} title={text}/>
           </View>
         </View>
+        <Uploader uri={this.state.recording.uri}/>
       </View>
     )
   }
@@ -121,4 +121,4 @@ const styles = StyleSheet.create({
     flex: 2,
     backgroundColor: '#F0EFF5'
   }
-});
+})
