@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, AsyncStorage as store, Button, TextInput} from 'react-native'
 import MainTabNavigator from '../navigation/MainTabNavigator.js'
 import axios from 'axios'
+import API_ROOT from '../../IP_addresses.js'
 
 const styles = {
     errorTextStyle: {
@@ -27,7 +28,7 @@ export default class LoginForm extends Component {
 
     onButtonPress() {
         const { email, password } = this.state
-        axios.post('http://172.16.27.150:3000/auth/login', {email, password})
+        axios.post(`${API_ROOT}/auth/login`, {email, password})
             .then(res => {
                 console.log(res)
                 store.setItem('user', JSON.stringify(res.data))
