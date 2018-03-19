@@ -15,6 +15,9 @@ export default class Recorder extends Component {
         }
         this.startRecording = this.startRecording.bind(this)
         this.stopRecording = this.stopRecording.bind(this)
+        this.recordingSettings = JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY))
+        this.recordingSettings.ios.outputFormat = Expo.Audio.RECORDING_OPTION_IOS_OUTPUT_FORMAT_LINEARPCM
+        this.recordingSettings.ios.extension = '.wav'
     }
 
     componentDidMount = async () => {
@@ -51,7 +54,7 @@ export default class Recorder extends Component {
         interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
       })
       try {
-        await this.state.recording.prepareToRecordAsync(Expo.Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY)
+        await this.state.recording.prepareToRecordAsync(this.recordingSettings)
         await this.state.recording.startAsync()
         console.log('recording has begun')
         setTimeout(async () => {
@@ -79,6 +82,7 @@ export default class Recorder extends Component {
   }
 
   render() {
+    console.log(this.recordingSettings)
     let text
     let buttonMethod
     this.state.isRecording ? text = 'Stop Recording' : text = 'Start Recording'
@@ -107,7 +111,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'black'
   },
   container: {
-    flex: 1,
+    // flex: 1,
+    height: 600
   },
   startRecording: {
     margin: 10,

@@ -14,11 +14,11 @@ export default class Timer extends Component {
         </View>
       )
     }
-    
+
     _renderTimers() {
       return (
         <View style={styles.timerWrapper}>
-          <Text>00:00.95</Text>
+          <Text>00:00.00</Text>
           <Text>00:02.95</Text>
         </View>
       )
@@ -27,12 +27,12 @@ export default class Timer extends Component {
 
   render() {
     return  (
-    
+
         <View>
             {this._renderTitle()}
             {this._renderTimers()}
         </View>
-     
+
     )
   }
 }
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         paddingTop: 20,
         paddingBottom: 10,
-        backgroundColor: '#F9F9F9'   
+        backgroundColor: '#F9F9F9'
     },
     timerWrapper: {
         backgroundColor: '#FFFFFF'

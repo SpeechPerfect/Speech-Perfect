@@ -19,14 +19,15 @@ class Uploader extends Component {
       // type: "image/jpeg",
       name: "testAudio"
     })
-    fetch(`${API_ROOT}/api/audio/upload`, {
-      method: "post",
-      body: data
-    })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => console.log(err))
+    // fetch(`${API_ROOT}/api/audio/upload`, {
+    //   method: "post",
+    //   body: data
+    // })
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+      // .catch(err => console.log(err))
+    console.log('data is ', data)
   }
 
   render() {
