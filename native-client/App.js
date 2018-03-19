@@ -1,6 +1,6 @@
-import React from 'react';
-import { Alert, Button, TouchableHighlight, Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
-import RootNavigation from './src/navigation/RootNavigation';
+import React from 'react'
+import { Alert, Platform, StatusBar, StyleSheet, View } from 'react-native'
+import RootNavigation from './src/navigation/RootNavigation'
 import { Font, AppLoading } from 'expo'
 
 let API_ROOT

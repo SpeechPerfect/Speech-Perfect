@@ -14,7 +14,7 @@ export default class RecordScreen extends React.Component {
            <Recorder />
       </View>
 
-    
+
     );
   }
 }
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: 'black',
   },
-});
+})
