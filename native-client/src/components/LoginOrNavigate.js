@@ -1,5 +1,5 @@
 import React from 'react'
-import MainTabNavigator from './MainTabNavigator.js'
+import MainTabNavigator from '../navigation/MainTabNavigator.js'
 import { View, Text } from 'react-native'
 
 const Login = props => {
