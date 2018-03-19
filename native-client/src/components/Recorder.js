@@ -82,7 +82,6 @@ export default class Recorder extends Component {
   }
 
   render() {
-    console.log(this.recordingSettings)
     let text
     let buttonMethod
     this.state.isRecording ? text = 'Stop Recording' : text = 'Start Recording'
@@ -97,7 +96,7 @@ export default class Recorder extends Component {
             <Button onPress={buttonMethod} title={text}/>
           </View>
         </View>
-        <Uploader uri={this.state.recording.uri}/>
+        <Uploader uri={this.state.recording._uri}/>
       </View>
     )
   }

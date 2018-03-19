@@ -16,18 +16,23 @@ class Uploader extends Component {
     const data = new FormData()
     data.append("soundFile", {
       uri: this.props.uri,
-      // type: "image/jpeg",
+      type: "audio/vnd.wav",
       name: "testAudio"
     })
-    // fetch(`${API_ROOT}/api/audio/upload`, {
-    //   method: "post",
-    //   body: data
-    // })
-    //   .then(res => {
-    //     console.log(res)
-    //   })
-      // .catch(err => console.log(err))
-    console.log('data is ', data)
+
+    //SEND TO BACK-END
+    fetch(`${API_ROOT}/api/audio/upload`, {
+      method: "post",
+      body: data,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log(err))
   }
 
   render() {

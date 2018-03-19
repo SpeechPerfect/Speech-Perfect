@@ -8,7 +8,7 @@ const creds = require('../secrets')
 
 // AWS.config.loadFromPath('./s3_config.json')
 
-AWS.config.update(creds)
+AWS.config.update(creds.creds)
 
 
 const s3 = new AWS.S3()
@@ -16,7 +16,10 @@ const s3 = new AWS.S3()
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'speech-perfect',
+    bucket: creds.bucket,
+    contentType: (req, file, cb) => {
+      return cb(null, 'audio/x-wav')
+    }, // multerS3.AUTO_CONTENT_TYPE,
     metadata: function (req, file, cb) {
       cb(null, {fieldName: file.fieldname})
     },
