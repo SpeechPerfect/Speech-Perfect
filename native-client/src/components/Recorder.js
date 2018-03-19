@@ -26,7 +26,7 @@ export default class Recorder extends Component {
 
 
     async startRecording(){
-      const recording = new Expo.Audio.Recording();
+      const recording = new Expo.Audio.Recording()
       this.setState({recording})
     await Audio.setAudioModeAsync({
       allowsRecordingIOS: true,
