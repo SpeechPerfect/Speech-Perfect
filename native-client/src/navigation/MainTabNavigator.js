@@ -1,15 +1,15 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
+import React from 'react'
+import { Platform } from 'react-native'
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { TabNavigator, TabBarBottom } from 'react-navigation'
 
 // import Colors from '../constants/Colors';
 
-import HomeScreen from '../screens/HomeScreen';
-import RecordScreen from '../screens/RecordScreen';
-import ResultsScreen from '../screens/ResultsScreen';
+import HomeScreen from '../screens/HomeScreen'
+import RecordScreen from '../screens/RecordScreen'
+import ResultsScreen from '../screens/ResultsScreen'
 
-export default TabNavigator(
+export default TabNavigator (
   {
     Home: {
       screen: HomeScreen,
