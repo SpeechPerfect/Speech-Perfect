@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Button, View} from 'react-native';
+import {Button, View, StyleSheet, Text} from 'react-native';
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo';
+import Timer  from './Timer'
 
 export default class Recorder extends Component {
     constructor(){
@@ -23,18 +24,33 @@ export default class Recorder extends Component {
       }
 
     // Audio.setAudioModeAsync
-    
 
-    async startRecording(){
+    _renderTitle() {
+      return (
+        <View style={styles.header}>
+          <Text style={styles.title}>Stopwatch</Text>
+        </View>
+      )
+    }
+    
+    _renderTitle() {
+      return (
+        <View style={styles.header}>
+          <Text style={styles.title}>Stopwatch</Text>
+        </View>
+      )
+    }
+
+    async startRecording() {
       const recording = new Expo.Audio.Recording();
-      this.setState({recording})
-    await Audio.setAudioModeAsync({
-      allowsRecordingIOS: true,
-      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-      playsInSilentModeIOS: true,
-      shouldDuckAndroid: true,
-      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-    });
+      this.setState({recording:recording, isRecording: true})
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+        playsInSilentModeIOS: true,
+        shouldDuckAndroid: true,
+        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+      });
       try {
         await this.state.recording.prepareToRecordAsync(Expo.Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
         await this.state.recording.startAsync();
@@ -48,29 +64,61 @@ export default class Recorder extends Component {
         console.log(error)
         // An error occurred!
       }
-     
-  }
+    }
 
   async stopRecording(){
+    this.setState({isRecording: false})
     console.log('recording object', this.state.recording)
     try {
       console.log('recording has stopped')
       await this.state.recording.stopAndUnloadAsync();
-      // You are now recording!
+      console.log('our recording')
+      console.log(this.state.recording)
     } catch (error) {
-      // An error occurred!
+      console.log(error)
     }
-}
+  }
 
   render() {
+    let text 
+    let buttonMethod
+    this.state.isRecording ? text = 'Stop Recording' : text = 'Start Recording'
+    this.state.isRecording ? buttonMethod = this.stopRecording : buttonMethod = this.startRecording
     return  (
-      <View>
-        <Button onPress={this.startRecording} title="Start recording"/>
-        <Button onPress={this.stopRecording} title="Stop recording"/>
+      <View style={styles.container}>
+      <View style={styles.top}>
+        <Timer />
+      </View>
+        <View style={styles.bottom}>
+          <View style={styles.startRecording}>
+            <Button onPress={buttonMethod} title={text}/>
+          </View>
+        </View>
       </View>
     )
   }
 }
 
 
-
+const styles = StyleSheet.create({
+  top: {
+    flex: 1,
+    height: 200,
+    backgroundColor: 'black'
+  },
+  container: {
+    flex: 1,
+  },
+  startRecording: {
+    margin: 10,
+    height: 40,
+    borderRadius: 15,
+    borderColor: '#d6d7da',
+    borderWidth: 0.5,
+    justifyContent: 'center'
+  },
+  bottom: {
+    flex: 2,
+    backgroundColor: '#F0EFF5'
+  }
+});
