@@ -17,6 +17,7 @@ const upload = multer({
   storage: multerS3({
     s3: s3,
     bucket: creds.bucket,
+    acl: 'public-read',
     contentType: (req, file, cb) => {
       return cb(null, 'audio/x-wav')
     }, // multerS3.AUTO_CONTENT_TYPE,
