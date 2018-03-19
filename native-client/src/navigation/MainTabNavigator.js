@@ -5,9 +5,10 @@ import { TabNavigator, TabBarBottom } from 'react-navigation'
 
 // import Colors from '../constants/Colors';
 
-import HomeScreen from '../screens/HomeScreen'
-import RecordScreen from '../screens/RecordScreen'
-import ResultsScreen from '../screens/ResultsScreen'
+import HomeScreen from '../screens/HomeScreen';
+import RecordScreen from '../screens/RecordScreen';
+import ResultsScreen from '../screens/ResultsScreen';
+import Testing from '../components/TextToSpeech';
 
 export default TabNavigator (
   {
@@ -20,12 +21,15 @@ export default TabNavigator (
     Results: {
       screen: ResultsScreen,
     },
+    Audio: {
+      screen: Testing,
+    }
   },
   {
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused }) => {
         const { routeName } = navigation.state;
-        let iconName;
+        let iconName
         switch (routeName) {
           case 'Home':
             iconName =
@@ -37,6 +41,9 @@ export default TabNavigator (
             iconName = Platform.OS === 'ios' ? `ios-microphone${focused ? '' : '-outline'}` : 'md-microphone';
             break;
           case 'Results':
+            iconName =
+              Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options';
+          case 'Audio':
             iconName =
               Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options';
         }
