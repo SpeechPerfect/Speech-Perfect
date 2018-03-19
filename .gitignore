@@ -25,5 +25,5 @@ yarn-error.log*
 .tern-port
 
 # secrets
-
+secrets.js
 server/api/s3_config.json
