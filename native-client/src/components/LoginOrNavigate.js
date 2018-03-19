@@ -1,23 +1,12 @@
 import React from 'react'
 import MainTabNavigator from '../navigation/MainTabNavigator.js'
-import { View, Text, AsyncStorage as store, Button } from 'react-native'
+import { AsyncStorage as store } from 'react-native'
+import Login from './Login'
 
 const getLogin = async () => {
-    let login = await store.getItem('login')
+    let login = await store.getItem('user')
     login = JSON.parse(login)
     return login
-}
-
-const Login = props => {
-    return (
-        <View>
-          <Text>Hello </Text>
-          <Button
-            title="LogmeIn"
-            onPress={() => store.setItem('login', JSON.stringify(true))}
-            />
-        </View>
-    )
 }
 
 class LoginOrNavigate extends React.Component {
@@ -36,8 +25,8 @@ class LoginOrNavigate extends React.Component {
     }
 
     render(){
-        store.setItem('login', JSON.stringify(false))
-        const loggedin = this.state.loggedin
+        let loggedin = this.state.loggedin
+        console.log('loggedin', loggedin)
         return (loggedin) ? <MainTabNavigator /> : <Login />
     }
 }
