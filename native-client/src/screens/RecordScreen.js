@@ -1,11 +1,12 @@
-import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
-import  {Recorder}  from '../components';
+import React, { Component } from 'react'
+import { ScrollView, StyleSheet, View } from 'react-native'
+import { ExpoLinksView } from '@expo/samples'
+import  {Recorder}  from '../components'
 
-export default class RecordScreen extends React.Component {
+export default class RecordScreen extends Component {
   static navigationOptions = {
     title: 'Record',
+    header: null
   };
 
   render() {

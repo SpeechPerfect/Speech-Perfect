@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Text, ScrollView, StyleSheet } from 'react-native'
 
 
-export default class ResultsScreen extends React.Component {
+export default class ResultsScreen extends Component {
   static navigationOptions = {
     title: 'Results',
   };
