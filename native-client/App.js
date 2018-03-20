@@ -47,8 +47,10 @@ export default class App extends React.Component {
             <Text>get started</Text>
           </View>
         </TouchableHighlight> */}
-         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        <View style={{height:20}}>
+         {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
+        </View>
         <RootNavigation />
       </View>
     )}
@@ -57,7 +59,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightgrey',
+    backgroundColor: 'black',
   },
   title: {
     fontFamily: 'Arial',

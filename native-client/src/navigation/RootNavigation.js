@@ -1,8 +1,10 @@
 import { Notifications } from 'expo'
 import React from 'react'
 import { StackNavigator } from 'react-navigation'
-// import MainTabNavigator from './MainTabNavigator'
+import MainTabNavigator from './MainTabNavigator'
 import LoginOrNavigate from '../components/LoginOrNavigate.js'
+import {  View, StyleSheet } from 'react-native'
+
 // import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
@@ -11,13 +13,13 @@ const RootStackNavigator = StackNavigator(
       screen: LoginOrNavigate,
     },
   },
-  {
-    navigationOptions: () => ({
-      headerTitleStyle: {
-        fontWeight: 'normal',
-      },
-    }),
-  }
+  // {
+  //   navigationOptions: () => ({
+  //     headerTitleStyle: {
+  //       fontWeight: 'normal',
+  //     },
+  //   }),
+  // }
 )
 
 export default class RootNavigator extends React.Component {
@@ -30,7 +32,11 @@ export default class RootNavigator extends React.Component {
   // }
 
   render() {
-    return <RootStackNavigator />
+    return (
+    <View style={styles.container}>
+        <RootStackNavigator />
+    </View>
+    )
   }
 
   // _registerForPushNotifications() {
@@ -48,3 +54,13 @@ export default class RootNavigator extends React.Component {
   //   console.log(`Push notification ${origin} with data: ${JSON.stringify(data)}`);
   // };
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  smallContainer: {
+    flexGrow: 10,
+    backgroundColor: 'yellow',
+  },
+})
