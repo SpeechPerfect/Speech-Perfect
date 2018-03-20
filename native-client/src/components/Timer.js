@@ -30,8 +30,6 @@ export default class Timer extends Component {
 
 
   render() {
-      let miliseconds = this.props.miliseconds
-      console.log(this.props.seconds)
     return  (
         <View style={styles.stopwatch}>
             {this._renderTitle()}

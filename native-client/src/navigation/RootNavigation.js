@@ -1,7 +1,7 @@
 import { Notifications } from 'expo'
 import React from 'react'
 import { StackNavigator } from 'react-navigation'
-// import MainTabNavigator from './MainTabNavigator'
+import MainTabNavigator from './MainTabNavigator'
 import LoginOrNavigate from '../components/LoginOrNavigate.js'
 import {  View, StyleSheet } from 'react-native'
 
@@ -13,13 +13,13 @@ const RootStackNavigator = StackNavigator(
       screen: LoginOrNavigate,
     },
   },
-  {
-    navigationOptions: () => ({
-      headerTitleStyle: {
-        fontWeight: 'normal',
-      },
-    }),
-  }
+  // {
+  //   navigationOptions: () => ({
+  //     headerTitleStyle: {
+  //       fontWeight: 'normal',
+  //     },
+  //   }),
+  // }
 )
 
 export default class RootNavigator extends React.Component {
@@ -34,7 +34,7 @@ export default class RootNavigator extends React.Component {
   render() {
     return (
     <View style={styles.container}>
-      <RootStackNavigator />
+        <MainTabNavigator />
     </View>
     )
   }
@@ -57,6 +57,10 @@ export default class RootNavigator extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
+  },
+  smallContainer: {
+    flexGrow: 10,
+    backgroundColor: 'yellow',
   },
 })
