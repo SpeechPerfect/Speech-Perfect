@@ -4839,10 +4839,6 @@ react-lifecycles-compat@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-1.0.2.tgz#551d8b1d156346e5fcf30ffac9b32ce3f78b8850"
 
-react-native-audio@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-audio/-/react-native-audio-4.0.0.tgz#e263c7711150de37b013741eeb2ede37941d3011"
-
 react-native-branch@2.0.0-beta.3:
   version "2.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.0.0-beta.3.tgz#2167af86bbc9f964bd45bd5f37684e5b54965e32"

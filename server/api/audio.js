@@ -5,8 +5,15 @@ const fs = require('fs')
 const multerS3 = require('multer-s3')
 const AWS = require('aws-sdk')
 const creds = require('../secrets')
+const { 
+   Speech,
+   AwsReport,
+   BvReport,
+   WatsonReport} = require('../db/models')
 
 // AWS.config.loadFromPath('./s3_config.json')
+
+console.log(creds.creds)
 
 AWS.config.update(creds.creds)
 
@@ -32,7 +39,20 @@ const upload = multer({
 
 router.post('/upload', upload.single('soundFile'), (req, res, next) => {
   console.log('in post route, file is ', req.file)
-  res.send('Successfully uploaded ' + req.file.fieldName + ' file!')
+  console.log('hit',req.file)
+  Speech.create({
+    //userId: req.user.id
+  })
+  .then((speech) => {
+    AwsReport.create({
+      speechId: speech.id,
+      url: req.file.location
+    })
+    .then(aws => {
+        let audio = aws.url
+
+    })
+  })
 })
 
 module.exports = router
