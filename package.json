@@ -10,12 +10,15 @@
     "install": "npm run install-server && npm run install-native-client",
     "install-server": "cd server && npm install",
     "install-native-client": "cd native-client && yarn install",
-      "seed": "cd seed && node userSeed.js",
+    "seed": "cd seed && node userSeed.js",
     "prod": "npm run prod-client && npm run prod-server",
     "prod-server": "cd server && npm start",
     "prod-client": "cd client && npm run build"
   },
   "dependencies": {
-    "concurrently": "^3.5.1"
+    "axios": "^0.18.0",
+    "concurrently": "^3.5.1",
+    "s3": "^4.4.0",
+    "s3-streams": "^0.3.0"
   }
 }

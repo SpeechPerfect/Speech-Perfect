@@ -5,6 +5,7 @@ const fs = require('fs')
 const multerS3 = require('multer-s3')
 const AWS = require('aws-sdk')
 const creds = require('../secrets')
+const stt= require('../watson/stt')
 const { 
    Speech,
    AwsReport,
@@ -12,8 +13,6 @@ const {
    WatsonReport} = require('../db/models')
 
 // AWS.config.loadFromPath('./s3_config.json')
-
-console.log(creds.creds)
 
 AWS.config.update(creds.creds)
 
@@ -26,7 +25,7 @@ const upload = multer({
     bucket: creds.bucket,
     acl: 'public-read',
     contentType: (req, file, cb) => {
-      return cb(null, 'audio/x-wav')
+      return cb(null, 'audio/flac')
     }, // multerS3.AUTO_CONTENT_TYPE,
     metadata: function (req, file, cb) {
       cb(null, {fieldName: file.fieldname})
@@ -37,9 +36,9 @@ const upload = multer({
   })
 })
 
+
+
 router.post('/upload', upload.single('soundFile'), (req, res, next) => {
-  console.log('in post route, file is ', req.file)
-  console.log('hit',req.file)
   Speech.create({
     //userId: req.user.id
   })
@@ -49,9 +48,10 @@ router.post('/upload', upload.single('soundFile'), (req, res, next) => {
       url: req.file.location
     })
     .then(aws => {
-        let audio = aws.url
-
+      
+        stt(aws.url)
     })
+    .then(data => console.log(data))
   })
 })
 

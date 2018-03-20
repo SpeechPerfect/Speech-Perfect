@@ -24,7 +24,7 @@ export default class Testing extends React.Component {
       console.log('front', results)
       return results
     })
-    .then(result => console.log(result[0]))
+    .then(result => result)
   }
 
   render() {
