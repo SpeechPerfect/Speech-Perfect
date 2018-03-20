@@ -14,8 +14,16 @@ router.post('/', (req, res, next) => {
     .catch(next)
 })
 
-router.get('/:id', (req, res, next) => {
-  Speech.scope('populated').findById(req.params.id)
-    .then(result => res.json(result))
-})
+// router.get('/:id', (req, res, next) => {
+//   Speech.scope('populated').findById(req.params.id)
+//     .then(result => res.json(result))
+// })
 
+router.get('/:userId', (req, res, next) => {
+  Speech.findAll({
+    where: {
+      userId: req.params.userId
+    }
+  })
+  .then(foundSpeeches => res.json(foundSpeeches))
+})
