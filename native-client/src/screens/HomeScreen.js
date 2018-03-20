@@ -19,8 +19,6 @@ export default class HomeScreen extends React.Component {
       </View>
     )
   }
-
-
 }
 
 const styles = StyleSheet.create({
@@ -29,6 +27,6 @@ const styles = StyleSheet.create({
     // backgroundColor: 'rgba(0,0,0,1)',
   },
   image: {
-   flex:1,
+   flex: 1,
   },
 })

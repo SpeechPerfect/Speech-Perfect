@@ -3,7 +3,6 @@
 # dependencies
 node_modules
 
-secrets.js
 
 # testing
 /coverage
@@ -17,6 +16,7 @@ client/build/*
 .env.development.local
 .env.test.local
 .env.production.local
+secrets.js
 native-client/IP_addresses.js
 
 npm-debug.log*
@@ -27,5 +27,4 @@ yarn-error.log*
 
 # secrets
 secrets.js
-server/secrets.js
 server/api/s3_config.json
