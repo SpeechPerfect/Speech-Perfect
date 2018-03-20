@@ -14,6 +14,7 @@ router.post('/', (req, res, next) => {
     .catch(next)
 })
 
+// To be used in the future
 // router.get('/:id', (req, res, next) => {
 //   Speech.scope('populated').findById(req.params.id)
 //     .then(result => res.json(result))
