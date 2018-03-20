@@ -5,10 +5,18 @@ import { TabNavigator, TabBarBottom } from 'react-navigation'
 
 // import Colors from '../constants/Colors';
 
+<<<<<<< HEAD
 import HomeScreen from '../screens/HomeScreen';
 import RecordScreen from '../screens/RecordScreen';
 import ResultsScreen from '../screens/ResultsScreen';
 import Testing from '../components/TextToSpeech';
+=======
+import HomeScreen from '../screens/HomeScreen'
+import RecordScreen from '../screens/RecordScreen'
+import ResultsScreen from '../screens/ResultsScreen'
+import Testing from '../components/TextToSpeech'
+import Profile from '../screens/Profile'
+>>>>>>> 9eae312176db81a7d628837eb715463b4a3773a5
 
 export default TabNavigator (
   {
@@ -23,6 +31,12 @@ export default TabNavigator (
     },
     Audio: {
       screen: Testing,
+<<<<<<< HEAD
+=======
+    },
+    Profile: {
+      screen: Profile,
+>>>>>>> 9eae312176db81a7d628837eb715463b4a3773a5
     }
   },
   {
@@ -48,6 +62,13 @@ export default TabNavigator (
           case 'Audio':
             iconName =
               Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
+<<<<<<< HEAD
+=======
+            break
+            case 'Profile':
+            iconName =
+              Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
+>>>>>>> 9eae312176db81a7d628837eb715463b4a3773a5
         }
         return (
           <Ionicons

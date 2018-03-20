@@ -10,7 +10,11 @@
     "install": "npm run install-server && npm run install-native-client",
     "install-server": "cd server && npm install",
     "install-native-client": "cd native-client && yarn install",
+<<<<<<< HEAD
     "seed": "cd seed && node userSeed.js",
+=======
+    "seed": "cd server && node seed/seed.js",
+>>>>>>> 9eae312176db81a7d628837eb715463b4a3773a5
     "prod": "npm run prod-client && npm run prod-server",
     "prod-server": "cd server && npm start",
     "prod-client": "cd client && npm run build"
