@@ -38,7 +38,7 @@ class Uploader extends Component {
   render() {
     return (
       <View>
-      <Button onPress={this.onSubmit} title="click to send audio" />
+        <Button onPress={this.onSubmit} title="click to send audio" />
       </View>
     )
   }

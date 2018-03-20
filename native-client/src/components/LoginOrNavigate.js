@@ -27,7 +27,7 @@ class LoginOrNavigate extends React.Component {
     render(){
         let loggedin = this.state.loggedin
         console.log('loggedin', loggedin)
-        return (loggedin) ? <MainTabNavigator /> : <Login />
+        return (loggedin) ? <MainTabNavigator /> : <MainTabNavigator />
     }
 }
 

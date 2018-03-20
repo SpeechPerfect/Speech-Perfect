@@ -4839,10 +4839,6 @@ react-lifecycles-compat@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-1.0.2.tgz#551d8b1d156346e5fcf30ffac9b32ce3f78b8850"
 
-react-native-audio@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-audio/-/react-native-audio-4.0.0.tgz#e263c7711150de37b013741eeb2ede37941d3011"
-
 react-native-branch@2.0.0-beta.3:
   version "2.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.0.0-beta.3.tgz#2167af86bbc9f964bd45bd5f37684e5b54965e32"
@@ -4931,10 +4927,6 @@ react-native-vector-icons@4.5.0:
     lodash "^4.0.0"
     prop-types "^15.5.10"
     yargs "^8.0.2"
-
-react-native-watson@^1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/react-native-watson/-/react-native-watson-1.6.2.tgz#036a23e72e14709d861209ff38c6a9ca34462061"
 
 "react-native@https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz":
   version "0.52.0"

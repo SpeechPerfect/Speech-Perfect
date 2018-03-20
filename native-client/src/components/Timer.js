@@ -9,28 +9,35 @@ export default class Timer extends Component {
 
     _renderTitle() {
       return (
-        <View style={styles.header}>
+        <View style={styles.stopwatch}>
           <Text style={styles.title}>Stopwatch</Text>
         </View>
       )
     }
 
     _renderTimers() {
+        let { miliseconds, seconds, minutes, hours } = this.props
       return (
-        <View style={styles.timerWrapper}>
-          <Text>00:00.00</Text>
-          <Text>00:02.95</Text>
+        <View >
+
+          <Text style={styles.time}>
+        { minutes ? `${minutes}:`+`${seconds}`+':'+`${miliseconds}` : ''+`${seconds}:`+`${miliseconds}`
+        }</Text>
+
         </View>
       )
     }
 
 
   render() {
+      let miliseconds = this.props.miliseconds
+      console.log(this.props.seconds)
     return  (
-
-        <View>
+        <View style={styles.stopwatch}>
             {this._renderTitle()}
-            {this._renderTimers()}
+            <View style={styles.timer}>
+                {this._renderTimers()}
+            </View>
         </View>
 
     )
@@ -38,18 +45,37 @@ export default class Timer extends Component {
 }
 
 const styles = StyleSheet.create({
-    header: {
-        borderBottomWidth: 0.5,
-        paddingTop: 20,
-        paddingBottom: 10,
-        backgroundColor: '#F9F9F9'
+    stopwatch: {
+        flex: 1,
+        // borderBottomWidth: 0.5,
+        alignItems: 'center',
+        width: '100%',
+        // justifyContent: 'flex-end',
+        // paddingTop: 20,
+        // paddingBottom: 10,
+        // backgroundColor: '#F9F9F9'
     },
-    timerWrapper: {
-        backgroundColor: '#FFFFFF'
+    // timerWrapper: {
+    //     backgroundColor: '#FFFFFF'
+    // },
+    timer: {
+        width: '100%',
+        flex: 1,
+        backgroundColor: '#202020',
+        borderWidth: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+    time: {
+        fontSize: 50,
+        color: 'white',
+        paddingTop: 5,
+        paddingBottom: 5,
     },
     title: {
         alignSelf: 'center',
-        fontWeight: '600'
+        fontWeight: '600',
+        color: 'white',
     },
     mainTimer: {
         fontSize: 60,
@@ -62,10 +88,10 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         alignSelf: 'center'
     },
-     top: {
-        flex: 1
-      },
-});
+    //  top: {
+    //     flex: 1
+    //   },
+})
 
 
 
