@@ -30,8 +30,8 @@ class LoginOrNavigate extends React.Component {
         let loggedin = this.state.loggedin
         console.log('loggedin', loggedin)
         return (
-            <View style={{flex:1, backgroundColor:'blue'}}>
-                {(loggedin) ? <MainTabNavigator /> : <MainTabNavigator /> }
+            <View style={{flex:1, backgroundColor:'lightgrey'}}>
+                {(loggedin) ? <MainTabNavigator /> : <Login /> }
             </View>
         )
     }
