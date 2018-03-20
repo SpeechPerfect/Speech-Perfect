@@ -27,4 +27,4 @@ yarn-error.log*
 
 # secrets
 secrets.js
-server/api/s3_config.json
+IP_addresses.js

@@ -11,6 +11,9 @@ const WatsonReport = db.define('watsonReport', {
   },
   likeCount: {
     type: Sequelize.INTEGER
+  },
+  transcript: {
+    type: Sequelize.TEXT
   }
 })
 

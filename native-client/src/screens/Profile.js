@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Text, ScrollView, View, AsyncStorage as store, Button, TextInput, StyleSheet} from 'react-native'
+import { Text, ScrollView, View, AsyncStorage as store, StyleSheet} from 'react-native'
+import axios from 'axios'
+import API_ROOT from '../../IP_addresses'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -14,23 +16,51 @@ export default class Profile extends Component {
     title: 'Profile',
   };
 
-  componentDidMount() {
+  getUserAndSpeeches() {
     store.getItem('user')
     .then(userData => JSON.parse(userData))
     .then((data) => {
-      console.log('data is', data)
       this.setState({
       email: data.email,
-      id: data.id
+      id: data.id,
+      speeches: []
+      })
     })
-    })
+    .then(() => this.getSpeeches())
+    .catch(err => console.log(err))
   }
 
+  getSpeeches() {
+    axios.get(`${API_ROOT}/api/watson/${this.state.id}`)
+    .then(res => res.data)
+    .then((data) => this.setState({
+      speeches: data
+    }))
+    .then(err => console.log(err))
+  }
+
+  componentDidMount() {
+    this.getUserAndSpeeches()
+  }
+
+
   render() {
-    console.log(this.state)
+    const { id, speeches } = this.state
     return (
       <ScrollView style={styles.container}>
-      <Text></Text>
+      {id === null &&
+      <Text>Loading...</Text>}
+      {id &&
+        speeches.map(speech => {
+          return (
+            <View key={speech.id}>
+            <Text>
+            {speech.title}
+            </Text>
+            </View>
+          )
+        }
+      )}
       </ScrollView>
     )
   }

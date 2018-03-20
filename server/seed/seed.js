@@ -17,10 +17,10 @@ async function seed () {
 
   // Speeches Seed
   const speeches = await Promise.all([
-    Speech.create({userId: 1}),
-    Speech.create({userId: 1}),
-    Speech.create({userId: 2}),
-    Speech.create({userId: 3})
+    Speech.create({title: "Test Speech One", userId: 1}),
+    Speech.create({title: "Test Speech Two", userId: 1}),
+    Speech.create({title: "Test Speech Three", userId: 2}),
+    Speech.create({title: "Test Speech Four", userId: 3})
   ])
 
   console.log(`seeded ${speeches.length} speeches`)
@@ -39,10 +39,10 @@ async function seed () {
 
   // Watson Reports Seed
   const watsonReports = await Promise.all([
-    WatsonReport.create({duration: 100000, umCount: 10, likeCount: 10, speechId: 1}),
-    WatsonReport.create({duration: 200000, umCount: 20, likeCount: 20, speechId: 2}),
-    WatsonReport.create({duration: 300000, umCount: 30, likeCount: 30, speechId: 3}),
-    WatsonReport.create({duration: 400000, umCount: 40, likeCount: 40, speechId: 4}),
+    WatsonReport.create({duration: 100000, umCount: 10, likeCount: 10, speechId: 1, transcript: "Test transcript number 1"}),
+    WatsonReport.create({duration: 200000, umCount: 20, likeCount: 20, speechId: 2, transcript: "Test transcript number 2"}),
+    WatsonReport.create({duration: 300000, umCount: 30, likeCount: 30, speechId: 3, transcript: "Test transcript number 3"}),
+    WatsonReport.create({duration: 400000, umCount: 40, likeCount: 40, speechId: 4, transcript: "Test transcript number 4"}),
   ])
 
   console.log(`seeded ${watsonReports.length} Watson reports`)
