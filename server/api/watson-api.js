@@ -53,6 +53,12 @@ router.post('/', upload.single('soundFile'), (req, res, next) => {
           umCount: speechData.umCount,
           duration: 0
         })
+        .then((watson) => {
+          speech.update({
+            WatsonReportId: watson.id
+          }) 
+        })
+       
       })
       res.json(results)
     })

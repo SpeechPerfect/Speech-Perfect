@@ -5,6 +5,8 @@ const BvReport = require('./bv-report')
 const WatsonReport = require('./watson-report.js')
 
 Speech.belongsTo(User)
+Speech.hasOne(AwsReport)
+Speech.hasOne(WatsonReport)
 AwsReport.belongsTo(Speech)
 BvReport.belongsTo(Speech)
 WatsonReport.belongsTo(Speech)

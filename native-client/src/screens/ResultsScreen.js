@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Text, ScrollView, StyleSheet } from 'react-native'
+import axios from 'axios'
+import API_ROOT from '../../IP_addresses.js'
 
 
 export default class ResultsScreen extends Component {
@@ -7,10 +9,22 @@ export default class ResultsScreen extends Component {
     title: 'Results',
   };
 
+  thesaurorize(data){
+
+  }
+
+  componentWillMount(){
+    axios.get(`http://localhost:5000/api/watson-api/2`)
+    .then(res =>{
+      console.log(res.data)
+      // thesaurorize(res.data)
+    })
+  }
+
   render() {
     return (
     <ScrollView style={styles.container}>
-      <Text> Will put results here </Text>
+     
     </ScrollView>
     )
   }
