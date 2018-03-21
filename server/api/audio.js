@@ -25,7 +25,7 @@ const upload = multer({
     bucket: creds.bucket,
     acl: 'public-read',
     contentType: (req, file, cb) => {
-      return cb(null, 'audio/flac')
+      return cb(null, 'audio/x-wav')
     }, // multerS3.AUTO_CONTENT_TYPE,
     metadata: function (req, file, cb) {
       cb(null, {fieldName: file.fieldname})
@@ -34,11 +34,14 @@ const upload = multer({
       cb(null, Date.now().toString())
     }
   })
+
+
 })
 
 
 
 router.post('/upload', upload.single('soundFile'), (req, res, next) => {
+  console.log('called')
   Speech.create({
     //userId: req.user.id
   })
@@ -48,7 +51,7 @@ router.post('/upload', upload.single('soundFile'), (req, res, next) => {
       url: req.file.location
     })
     .then(aws => {
-      
+      console.log('called')
         stt(aws.url)
     })
     .then(data => console.log(data))

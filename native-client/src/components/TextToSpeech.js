@@ -24,11 +24,7 @@ export default class Testing extends React.Component {
       console.log('front', results)
       return results
     })
-<<<<<<< HEAD
-    .then(result => result)
-=======
     .then(result => console.log(result[0]))
->>>>>>> 9eae312176db81a7d628837eb715463b4a3773a5
   }
 
   render() {

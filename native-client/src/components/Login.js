@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, AsyncStorage as store, Button, TextInput} from 'react-native'
 import MainTabNavigator from '../navigation/MainTabNavigator.js'
 import axios from 'axios'
-import API_ROOT from '../../IP_addresses.js'
+// import API_ROOT from '../../IP_addresses.js'
 
 const styles = {
     errorTextStyle: {
