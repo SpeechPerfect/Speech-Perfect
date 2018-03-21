@@ -36,7 +36,6 @@ class Uploader extends Component {
 
       // SEND TO WATSON
 
-    const watsonData = new FormData()
 
     data.append('soundFile', {
       audio: this.props.uri,
