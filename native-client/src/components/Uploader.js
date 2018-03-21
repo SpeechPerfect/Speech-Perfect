@@ -19,7 +19,6 @@ class Uploader extends Component {
       type: "audio/vnd.wav",
       name: "testAudio"
     })
-
     //SEND TO BACK-END
     fetch(`${API_ROOT}/api/audio/upload`, {
       method: "post",
@@ -33,6 +32,24 @@ class Uploader extends Component {
         console.log(res)
       })
       .catch(err => console.log(err))
+
+      fetch('http://localhost:5000/api/watson', {
+        method: 'POST',
+        body: this.props.uri,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+        // body: JSON.stringify({
+        //   firstParam: 'yourValue',
+        // }),
+      })
+      .then(result => {
+        let results = result._bodyText
+        console.log('front end', this.props.uri, result, 'the end')
+        return this.props.uri
+      })
+      .then(result => console.log(result[0]))
   }
 
   render() {

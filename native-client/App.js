@@ -19,7 +19,7 @@ export default class App extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         if (Platform.OS === 'android'){
             Font.loadAsync({
                 Arial: require('./fonts/Arial.ttf')

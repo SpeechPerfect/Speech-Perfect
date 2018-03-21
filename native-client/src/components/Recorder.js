@@ -48,14 +48,6 @@ export default class Recorder extends Component {
       )
     }
 
-    _renderTitle() {
-      return (
-        <View style={styles.header}>
-          <Text style={styles.title}>Stopwatch</Text>
-        </View>
-      )
-    }
-
     async startRecording() {
       this.startTimer()
       const recording = new Expo.Audio.Recording()
@@ -67,6 +59,7 @@ export default class Recorder extends Component {
         shouldDuckAndroid: true,
         interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
       })
+      recording.setOnRecordingStatusUpdate(status => this.setState(status))
       try {
         await this.state.recording.prepareToRecordAsync(this.recordingSettings)
         await this.state.recording.startAsync()
@@ -114,7 +107,8 @@ export default class Recorder extends Component {
         sec = this.state.seconds,
         min = this.state.minutes,
         hour = this.state.hours
-
+// request Animation Frame - callback, gets called with a timestamp
+// call on expo's audio timestamp onRecordingStatusUpdate.duration
         if( Number(this.state.miliseconds) == 99 ) {
             sec = (Number(this.state.seconds) + 1).toString()
             mili = '00'
@@ -145,7 +139,7 @@ export default class Recorder extends Component {
     return  (
       <View style={styles.container}>
         <View style={styles.top}>
-          <Timer hours={this.state.hours} minutes={this.state.minutes} seconds={this.state.seconds} miliseconds={this.state.miliseconds} />
+          <Text style={{color:'white', fontSize:20}}>{Math.floor(this.state.durationMillis/1000)}</Text>
         </View>
         <View style={styles.bottom}>
           <Uploader uri={this.state.recording._uri} />

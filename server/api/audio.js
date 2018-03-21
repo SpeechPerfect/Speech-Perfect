@@ -1,4 +1,4 @@
-const router = require('express').Router()
+const audioRouter = require('express').Router()
 const { awsReport } = require('../db/models')
 const multer  = require('multer')
 const fs = require('fs')
@@ -30,9 +30,12 @@ const upload = multer({
   })
 })
 
-router.post('/upload', upload.single('soundFile'), (req, res, next) => {
+let file
+audioRouter.post('/upload', upload.single('soundFile'), (req, res, next) => {
   console.log('in post route, file is ', req.file)
   res.send('Successfully uploaded ' + req.file.fieldName + ' file!')
+  file = req.file
+  // console.log(file, req.buffer)
 })
 
-module.exports = router
+module.exports = { audioRouter, file }
