@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Button, View, StyleSheet, Text, AsyncStorage } from 'react-native'
-import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
+import { Button, View, AsyncStorage } from 'react-native'
 import API_ROOT from '../../IP_addresses'
 
 class Uploader extends Component {
@@ -36,24 +35,18 @@ class Uploader extends Component {
 
       // SEND TO WATSON
 
-
-    data.append('soundFile', {
-      audio: this.props.uri,
-      content_type: 'audio/wav'
+    fetch(`${API_ROOT}/api/watson-api`, {
+      method: "post",
+      body: data,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
     })
-
-      fetch(`${API_ROOT}/api/watson-api`, {
-        method: "post",
-        body: data,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data',
-        },
+      .then(res => {
+        console.log(res)
       })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => console.log(err))
+      .catch(err => console.log(err))
   }
 
   render() {
