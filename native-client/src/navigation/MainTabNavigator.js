@@ -5,11 +5,11 @@ import { TabNavigator, TabBarBottom } from 'react-navigation'
 
 // import Colors from '../constants/Colors';
 
-import HomeScreen from '../screens/HomeScreen'
 import RecordScreen from '../screens/RecordScreen'
 import ResultsScreen from '../screens/ResultsScreen'
 import Testing from '../components/TextToSpeech'
 import Profile from '../screens/Profile'
+import Interval from '../components/Interval'
 
 export default TabNavigator (
   {
@@ -24,6 +24,9 @@ export default TabNavigator (
     },
     Profile: {
       screen: Profile,
+    },
+    Interval: {
+      screen: Interval,
     }
   },
   {
@@ -34,12 +37,6 @@ export default TabNavigator (
 
         let iconName
         switch (routeName) {
-          case 'Home':
-            iconName =
-              Platform.OS === 'ios'
-                ? `ios-information-circle${focused ? '' : '-outline'}`
-                : 'md-home'
-            break
           case 'Record':
             iconName = Platform.OS === 'ios' ? `ios-microphone${focused ? '' : '-outline'}` : 'md-microphone'
             break
