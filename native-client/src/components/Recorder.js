@@ -173,12 +173,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: 'flex',
-    // height: 600,
     backgroundColor: 'black'
   },
   top: {
     flex: 1,
-    // height: 200,
     backgroundColor: 'black',
         // borderBottom: 15,
     // borderBottomWidth: 3,
