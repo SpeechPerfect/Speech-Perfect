@@ -31,7 +31,7 @@ export default class Profile extends Component {
   }
 
   getSpeeches() {
-    axios.get(`${API_ROOT}/api/watson/${this.state.id}`)
+    axios.get(`${API_ROOT}/api/speech/${this.state.id}`)
     .then(res => res.data)
     .then((data) => this.setState({
       speeches: data

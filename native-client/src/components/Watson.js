@@ -1,3 +1,5 @@
+// What is this file doing?
+
 var SpeechToTextV1 = require('watson-developer-cloud/speech-to-text/v1')
 var fs = require('fs')
 
