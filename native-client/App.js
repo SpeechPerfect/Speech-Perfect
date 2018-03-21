@@ -15,7 +15,8 @@ export default class App extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            fontLoaded: false
+            fontLoaded: false,
+            isReady: false,
         }
     }
 
@@ -26,8 +27,13 @@ export default class App extends React.Component {
             })
                 .then(() => this.setState({ fontLoaded: true }))
         }
-        else this.setState({ fontLoaded: true })
-    }
+        else {
+        setTimeout(() => this.setState({ fontLoaded: true }), 300)
+            }
+        }
+    // async function _loadAssetsAsync() {
+
+
 
     _onPressButton() {
         fetch(`${API_ROOT}/users`)
@@ -35,10 +41,18 @@ export default class App extends React.Component {
             .then((data) => Alert.alert(data))
         // Alert.alert('You tapped the button!');
     }
+
     render() {
-        if (!this.state.fontLoaded){
-            return <AppLoading />
-        }
+        if (!this.state.fontLoaded) {
+            return (
+              <AppLoading
+            //   startAsync={_loadAssetsAsync}
+            //   onFinish={() => this.setState({ isReady: true })}
+            //   onError={console.warn}
+              />
+            )
+          }
+
       return (
       <View style={styles.container}>
         {/* <Text style={styles.title}>fetch</Text>

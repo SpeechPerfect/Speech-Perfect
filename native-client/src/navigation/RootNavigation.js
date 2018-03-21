@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
   },
   smallContainer: {
     flexGrow: 10,
-    backgroundColor: 'yellow',
+    backgroundColor: 'black',
   },
 })

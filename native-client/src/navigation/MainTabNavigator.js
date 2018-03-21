@@ -13,9 +13,6 @@ import Profile from '../screens/Profile'
 
 export default TabNavigator (
   {
-    Home: {
-      screen: HomeScreen,
-    },
     Record: {
       screen: RecordScreen,
     },
