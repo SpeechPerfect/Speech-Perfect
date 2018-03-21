@@ -8,7 +8,7 @@ import { TabNavigator, TabBarBottom } from 'react-navigation'
 import RecordScreen from '../screens/RecordScreen'
 import ResultsScreen from '../screens/ResultsScreen'
 import Profile from '../screens/Profile'
-import Interval from '../components/Interval'
+// import Interval from '../components/Interval'
 
 export default TabNavigator (
   {
@@ -21,9 +21,9 @@ export default TabNavigator (
     Profile: {
       screen: Profile,
     },
-    Interval: {
-      screen: Interval,
-    }
+//     Interval: {
+//       screen: Interval,
+//     }
   },
   {
     navigationOptions: ({ navigation }) => ({
