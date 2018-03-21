@@ -7,7 +7,6 @@ var fs = require('fs')
 let result
 
 let dataAnalysis = async (file) => {
-  console.log('here:', file)
   var speechToText = new SpeechToTextV1({
     username: process.env.WATSON_USERNAME,
     password: process.env.WATSON_PASSWORD,
@@ -16,7 +15,7 @@ let dataAnalysis = async (file) => {
 
   var params = {
     // From file
-    audio: fs.createReadStream(file),
+    audio: fs.createReadStream('/Users/micahfriedland/Desktop/Fullstack Academy/Senior-Phase/Speech-Perfect/assets/audio-file.flac'),
     content_type: 'audio/wav rate=44100'
   }
 

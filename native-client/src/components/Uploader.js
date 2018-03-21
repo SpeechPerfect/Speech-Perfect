@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Button, View, StyleSheet, Text, AsyncStorage } from 'react-native'
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
 import API_ROOT from '../../IP_addresses'
@@ -19,37 +19,41 @@ class Uploader extends Component {
       type: "audio/vnd.wav",
       name: "testAudio"
     })
-    //SEND TO BACK-END
-    fetch(`${API_ROOT}/api/audio/upload`, {
-      method: "post",
-      body: data,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => console.log(err))
 
-      fetch('http://localhost:5000/api/watson', {
-        method: 'POST',
-        body: this.props.uri,
+    //SEND TO AWS
+    // fetch(`${API_ROOT}/api/audio/upload`, {
+    //   method: "post",
+    //   body: data,
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'multipart/form-data',
+    //   },
+    // })
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+    //   .catch(err => console.log(err))
+
+      // SEND TO WATSON
+
+
+    data.append('soundFile', {
+      audio: this.props.uri,
+      content_type: 'audio/wav'
+    })
+
+      fetch(`${API_ROOT}/api/watson-api`, {
+        method: "post",
+        body: data,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'multipart/form-data',
         },
-        // body: JSON.stringify({
-        //   firstParam: 'yourValue',
-        // }),
       })
-      .then(result => {
-        let results = result._bodyText
-        console.log('front end', this.props.uri, result, 'the end')
-        return this.props.uri
-      })
-      .then(result => console.log(result[0]))
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => console.log(err))
   }
 
   render() {
