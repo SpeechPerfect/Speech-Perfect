@@ -3,9 +3,10 @@
 const { promisify } = require('util')
 var SpeechToTextV1 = require('watson-developer-cloud/speech-to-text/v1')
 var fs = require('fs')
+// const file = require('../api/audio')
 let result
 
-let dataAnalysis = async () => {
+let dataAnalysis = async (file) => {
   var speechToText = new SpeechToTextV1({
     username: process.env.WATSON_USERNAME,
     password: process.env.WATSON_PASSWORD,
@@ -15,7 +16,7 @@ let dataAnalysis = async () => {
   var params = {
     // From file
     audio: fs.createReadStream('/Users/micahfriedland/Desktop/Fullstack Academy/Senior-Phase/Speech-Perfect/assets/audio-file.flac'),
-    content_type: 'audio/flac rate=44100'
+    content_type: 'audio/wav rate=44100'
   }
 
  const speechToTextPromisified = promisify(speechToText.recognize.bind(speechToText))
