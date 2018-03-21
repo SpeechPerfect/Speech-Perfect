@@ -39,7 +39,7 @@ export default class RootNavigator extends React.Component {
   render() {
     return (
     <View style={styles.container}>
-        <RootStackNavigator />
+        <LoginOrNavigate />
     </View>
     )
   }

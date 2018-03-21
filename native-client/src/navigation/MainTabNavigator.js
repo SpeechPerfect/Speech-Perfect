@@ -1,7 +1,7 @@
 import React from 'react'
-import { Platform } from 'react-native'
+import { Platform, Button } from 'react-native'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
-import { TabNavigator, TabBarBottom } from 'react-navigation'
+import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 
 // import Colors from '../constants/Colors';
 
@@ -9,22 +9,32 @@ import RecordScreen from '../screens/RecordScreen'
 import ResultsScreen from '../screens/ResultsScreen'
 import Profile from '../screens/Profile'
 import SingleReport from '../screens/SingleReport'
-// import Interval from '../components/Interval'
 
 export default TabNavigator (
   {
     Record: {
       screen: RecordScreen,
     },
-    Results: {
-      screen: ResultsScreen,
-    },
     Profile: {
-      screen: Profile,
+      screen: StackNavigator({
+        profile: { screen: Profile, path: 'profile/:name',
+        navigationOptions: ({ navigation }) => ({
+          title: 'Profile',
+          headerStyle: {
+            backgroundColor: 'white',
+            // tintColor:'rgb(252,197,76)',
+          },
+          headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('Results')} />,
+          // headerLeft: <Button title='Edit' color='white' onPress={() => navigation.navigate('share')} />,
+          headerTintColor: '#12092f',
+        }),
+        },
+        Results: {
+          screen: ResultsScreen,
+        },
+      })
     },
-//     Interval: {
-//       screen: Interval,
-//     }
+
   },
   {
     navigationOptions: ({ navigation }) => ({
