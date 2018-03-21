@@ -167,11 +167,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: 'flex',
-    backgroundColor: 'black'
+    backgroundColor: 'white'
   },
   top: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
         // borderBottom: 15,
     // borderBottomWidth: 3,
     borderColor: 'white',
@@ -184,26 +184,8 @@ const styles = StyleSheet.create({
   },
   bottom: {
     flex: 2,
-    backgroundColor: 'black',
+    backgroundColor: '#202020',
     display: 'flex',
     justifyContent: 'flex-end',
   },
-  backgroundCircle: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 55,
-    width: 55,
-    borderColor: 'white',
-    borderWidth: 7,
-    borderRadius: 27.5,
-  },
-  innerBackgroundCicrcle: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 45,
-    width: 45,
-    borderColor: 'black',
-    borderWidth: 3,
-    borderRadius: 25,
-  }
 })

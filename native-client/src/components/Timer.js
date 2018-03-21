@@ -71,14 +71,15 @@ const styles = StyleSheet.create({
     timer: {
         width: '100%',
         flex: 1,
-        backgroundColor: '#202020',
+        // backgroundColor: '#202020',
+        backgroundColor: 'white',
         borderWidth: 1,
         justifyContent: 'center',
         alignItems: 'center'
       },
     time: {
         fontSize: 50,
-        color: 'white',
+        color: 'black',
         paddingTop: 5,
         paddingBottom: 5,
     },

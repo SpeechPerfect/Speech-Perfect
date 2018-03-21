@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import {Button, View, StyleSheet, Text, ImageBackground, TouchableWithoutFeedback} from 'react-native'
-import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
-import { Ionicons, MaterialCommunityIcons, Foundation } from '@expo/vector-icons'
-import Timer  from './Timer'
-import {Uploader} from './'
+import React from 'react'
+import { View, StyleSheet, TouchableWithoutFeedback} from 'react-native'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+// import Timer  from './Timer'
+// import {Uploader} from './'
 
 
 const recordButton = (props) => {
@@ -17,7 +16,6 @@ const recordButton = (props) => {
             name={'record'}
             size={67}
             color={'red'}
-            // style={{borderColor:'yellow', borderWidth:3, borderRadius:40 }}
             />
         </View>
       </View>
@@ -32,30 +30,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: 'flex',
-    backgroundColor: 'black'
-  },
-  top: {
-    flex: 1,
-    backgroundColor: 'black',
-        // borderBottom: 15,
-    // borderBottomWidth: 3,
-    borderColor: 'white',
-  },
-  startRecording: {
-    flexDirection: 'row',
-    marginBottom: 13,
-    // height: 40,
-    // borderRadius: 15,
-    // borderColor: '#d6d7da',
-    // borderWidth: 0.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  bottom: {
-    flex: 2,
-    backgroundColor: 'black',
-    display: 'flex',
-    justifyContent: 'flex-end',
+    backgroundColor: 'white'
   },
   backgroundCircle: {
     justifyContent: 'center',
@@ -65,7 +40,6 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderWidth: 7,
     borderRadius: 27.5,
-    // marginRight: 10, paddingRight: 10
   },
   innerBackgroundCicrcle: {
     justifyContent: 'center',
@@ -77,4 +51,3 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   }
 })
-// #F0EFF5

@@ -21,15 +21,26 @@ export default TabNavigator (
           title: 'Profile',
           headerStyle: {
             backgroundColor: 'white',
+            height: 20,
             // tintColor:'rgb(252,197,76)',
           },
           headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('Results')} />,
-          // headerLeft: <Button title='Edit' color='white' onPress={() => navigation.navigate('share')} />,
+          headerLeft: <Button title='' color='white' onPress={() => navigation.navigate('profile')} />,
           headerTintColor: '#12092f',
         }),
         },
-        Results: {
-          screen: ResultsScreen,
+        Results: { screen: ResultsScreen, path: 'profile/results',
+        navigationOptions: ({ navigation }) => ({
+          title: 'Results',
+          headerStyle: {
+            backgroundColor: 'white',
+            height: 20
+            // tintColor:'rgb(252,197,76)',
+          },
+          // headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('Results')} />,
+          headerLeft: <Button title='Profile' color='#12092f' onPress={() => navigation.navigate('profile')} />,
+          headerTintColor: '#12092f',
+        }),
         },
       })
     },
