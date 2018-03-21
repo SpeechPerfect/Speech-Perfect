@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Text, ScrollView, View, AsyncStorage as store, StyleSheet} from 'react-native'
+import { Text, ScrollView, View, AsyncStorage as store, StyleSheet, Button} from 'react-native'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
+import Login from '../components/Login'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -30,8 +31,13 @@ export default class Profile extends Component {
     .catch(err => console.log(err))
   }
 
+  logout(){
+    store.setItem('user', '')
+    this.props.navigation.navigate('page')
+  }
+
   getSpeeches() {
-    axios.get(`${API_ROOT}/api/watson/${this.state.id}`)
+    axios.get(`http://localhost:5000/api/speech/${this.state.id}`)
     .then(res => res.data)
     .then((data) => this.setState({
       speeches: data
@@ -61,6 +67,7 @@ export default class Profile extends Component {
           )
         }
       )}
+      <Button  title='logout' onPress={this.logout}/>
       </ScrollView>
     )
   }

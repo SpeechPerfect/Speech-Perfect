@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, AsyncStorage as store, Button, TextInput} from 'react-native'
 import MainTabNavigator from '../navigation/MainTabNavigator.js'
 import axios from 'axios'
-// import API_ROOT from '../../IP_addresses.js'
+import API_ROOT from '../../IP_addresses.js'
 
 const styles = {
     errorTextStyle: {
@@ -17,6 +17,7 @@ const styles = {
 
 export default class LoginForm extends Component {
     state = { email: '', password: '', error: false, loggedin: false };
+    
 
     onEmailChange(email) {
         this.setState({email})
@@ -31,7 +32,6 @@ export default class LoginForm extends Component {
         axios.post(`${API_ROOT}/auth/login`, {email, password})
             .then(res => {
                 console.log(res)
-                store.setItem('user', JSON.stringify(res.data))
                 this.setState({error: false, loggedin: true})
             })
             .catch(() => {

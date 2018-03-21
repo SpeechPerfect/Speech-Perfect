@@ -11,7 +11,7 @@ export default class RecordScreen extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
            <Recorder />
       </View>
 
@@ -22,7 +22,7 @@ export default class RecordScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
+    // paddingTop: 15,
     backgroundColor: 'black',
   },
 })

@@ -1,9 +1,12 @@
 import React from 'react'
 import MainTabNavigator from '../navigation/MainTabNavigator.js'
 import { AsyncStorage as store } from 'react-native'
+import {  View, StyleSheet } from 'react-native'
+
 import Login from './Login'
 
 const getLogin = async () => {
+    store.setItem('user', JSON.stringify(''))
     let login = await store.getItem('user')
     login = JSON.parse(login)
     return login
@@ -27,7 +30,11 @@ class LoginOrNavigate extends React.Component {
     render(){
         let loggedin = this.state.loggedin
         console.log('loggedin', loggedin)
-        return (loggedin) ? <MainTabNavigator /> : <Login />
+        return (
+            <View style={{flex:1, backgroundColor:'lightgrey'}}>
+                {(loggedin) ? <MainTabNavigator /> : <Login /> }
+            </View>
+        )
     }
 }
 

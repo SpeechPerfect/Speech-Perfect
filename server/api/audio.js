@@ -39,7 +39,6 @@ const upload = multer({
 })
 
 
-
 router.post('/upload', upload.single('soundFile'), (req, res, next) => {
   console.log('called')
   Speech.create({
