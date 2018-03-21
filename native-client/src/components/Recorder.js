@@ -4,6 +4,7 @@ import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
 import { Ionicons, MaterialCommunityIcons, Foundation } from '@expo/vector-icons'
 import Timer  from './Timer'
 import {Uploader} from './'
+import RecordButton from './RecordButton'
 
 export default class Recorder extends Component {
     constructor(){
@@ -147,33 +148,13 @@ export default class Recorder extends Component {
       <View style={styles.container}>
         <View style={styles.top}>
           <Timer duration={this.state.duration} />
-          <Text style={{color: 'white', fontSize: 64, marginLeft: -10}}>
-            { !this.state.begin ?
-                0.0 :
-                (this.state.duration / 1000).toFixed(1)
-            }
-          </Text>
         </View>
         <View style={styles.bottom}>
           <Uploader uri={this.state.recording._uri} />
           <View style={styles.startRecording}>
             <Button onPress={buttonMethod} title={text}/>
-            <View style={styles.backgroundCircle}>
-              <TouchableWithoutFeedback onPress={buttonMethod}>
-                  <View style={styles.innerBackgroundCicrcle}>
-                    <View style={{ flex: 1, marginLeft: -14, marginTop: -14}}>
-                      <MaterialCommunityIcons
-                      name={'record'}
-                      size={67}
-                      color={'red'}
-                      // style={{borderColor:'yellow', borderWidth:3, borderRadius:40 }}
-                      />
-                  </View>
-                </View>
-              </TouchableWithoutFeedback>
-            </View>
-            <Button onPress={this.onButtonClear} title="Reset"/>
-
+            <RecordButton press={buttonMethod} />
+            <Button onPress={this.onButtonClear} title="Reset" />
           </View>
         </View>
       </View>
@@ -198,10 +179,6 @@ const styles = StyleSheet.create({
   startRecording: {
     flexDirection: 'row',
     marginBottom: 13,
-    // height: 40,
-    // borderRadius: 15,
-    // borderColor: '#d6d7da',
-    // borderWidth: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -219,7 +196,6 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderWidth: 7,
     borderRadius: 27.5,
-    // marginRight: 10, paddingRight: 10
   },
   innerBackgroundCicrcle: {
     justifyContent: 'center',
@@ -231,4 +207,3 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   }
 })
-// #F0EFF5

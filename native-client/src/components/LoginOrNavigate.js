@@ -1,8 +1,8 @@
 import React from 'react'
-import MainTabNavigator from '../navigation/MainTabNavigator.js'
 import { AsyncStorage as store } from 'react-native'
-import {  View, StyleSheet } from 'react-native'
-
+import {  View } from 'react-native'
+import styles from '../../assets/stylesheet'
+import MainTabNavigator from '../navigation/MainTabNavigator.js'
 import Login from './Login'
 
 const getLogin = async () => {
@@ -30,7 +30,7 @@ class LoginOrNavigate extends React.Component {
         let loggedin = this.state.loggedin
         console.log('loggedin', loggedin)
         return (
-            <View style={{flex:1, backgroundColor:'black'}}>
+            <View style={styles.container}>
                 {(loggedin) ? <MainTabNavigator /> : <Login /> }
             </View>
         )

@@ -50,8 +50,9 @@ export default class Timer extends Component {
 
   render() {
     return  (
-        <View style={styles.stopwatch}>
-            {this._renderTitle()}
+        <View style={{flex: 1}}>
+            <View style={styles.stopwatch}>
+             </View>
             <View style={styles.timer}>
                 {this._renderTimers()}
             </View>
@@ -63,18 +64,10 @@ export default class Timer extends Component {
 
 const styles = StyleSheet.create({
     stopwatch: {
-        flex: 1,
-        // borderBottomWidth: 0.5,
+        flex: 2,
         alignItems: 'center',
         width: '100%',
-        // justifyContent: 'flex-end',
-        // paddingTop: 20,
-        // paddingBottom: 10,
-        // backgroundColor: '#F9F9F9'
     },
-    // timerWrapper: {
-    //     backgroundColor: '#FFFFFF'
-    // },
     timer: {
         width: '100%',
         flex: 1,
