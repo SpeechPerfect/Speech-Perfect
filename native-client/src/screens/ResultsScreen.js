@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Text, ScrollView, StyleSheet } from 'react-native'
+import { Text, ScrollView } from 'react-native'
+import styles from '../../assets/stylesheet'
 
 
 export default class ResultsScreen extends Component {
@@ -9,21 +10,12 @@ export default class ResultsScreen extends Component {
 
   render() {
     return (
-    <ScrollView style={styles.container}>
-      <Text> Will put results here </Text>
+    <ScrollView style={styles.resultsContainer}>
+      <Text style={styles.text}> Will put results here </Text>
     </ScrollView>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: 'lightgrey',
-  },
-})
-
 
 // import React, {Component} from 'react';
 // import { BarChart } from 'react-native-svg-charts'

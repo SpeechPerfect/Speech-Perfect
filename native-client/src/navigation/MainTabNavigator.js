@@ -7,7 +7,6 @@ import { TabNavigator, TabBarBottom } from 'react-navigation'
 
 import RecordScreen from '../screens/RecordScreen'
 import ResultsScreen from '../screens/ResultsScreen'
-import Testing from '../components/TextToSpeech'
 import Profile from '../screens/Profile'
 import Interval from '../components/Interval'
 
@@ -18,9 +17,6 @@ export default TabNavigator (
     },
     Results: {
       screen: ResultsScreen,
-    },
-    Audio: {
-      screen: Testing,
     },
     Profile: {
       screen: Profile,
@@ -43,10 +39,6 @@ export default TabNavigator (
           case 'Results':
             iconName =
               Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
-          case 'Audio':
-            iconName =
-              Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
-            break
             case 'Profile':
             iconName =
               Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
