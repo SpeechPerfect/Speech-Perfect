@@ -9,6 +9,17 @@ const { promisify } = require('util')
 var SpeechToTextV1 = require('watson-developer-cloud/speech-to-text/v1')
 var fs = require('fs')
 
+let analyzeTranscript = (str) => {
+  let obj = {}
+  obj.umCount = 0
+  obj.likeCount = 0
+  let strArr = str.split(' ')
+  for (let i = 0; i < strArr.length; i++) {
+    if (strArr[i] === 'um' || strArr[i] === '%HESITATION') obj.umCount++
+    if (strArr[i] === 'like') obj.likeCount++
+  }
+  return obj
+}
 
 let dataAnalysis = async (params) => {
   var speechToText = new SpeechToTextV1({
@@ -18,9 +29,8 @@ let dataAnalysis = async (params) => {
   })
 
  const speechToTextPromisified = promisify(speechToText.recognize.bind(speechToText))
- const { results } = await speechToTextPromisified(params)
- return results
-
+  const { results } = await speechToTextPromisified(params)
+  return results
 }
 
 router.post('/', upload.single('soundFile'), (req, res, next) => {
@@ -31,17 +41,29 @@ router.post('/', upload.single('soundFile'), (req, res, next) => {
     }
     dataAnalysis(params)
     .then(results => {
-      console.log('RESULTS ARE ***', results[0])
+      let speechData = analyzeTranscript(results[0].alternatives[0].transcript)
+      Speech.create({
+        //userId: req.user.id
+      })
+      .then((speech) => {
+        WatsonReport.create({
+          speechId: speech.id,
+          transcript: results[0].alternatives[0].transcript,
+          likeCount: speechData.likeCount,
+          umCount: speechData.umCount,
+          duration: 0
+        })
+      })
       res.json(results)
     })
     .catch(next)
 })
 
-// To be used in the future
-// router.get('/:id', (req, res, next) => {
-//   Speech.scope('populated').findById(req.params.id)
-//     .then(result => res.json(result))
-// })
+
+router.get('/:id', (req, res, next) => {
+  Speech.scope('populated').findById(req.params.id)
+    .then(result => res.json(result))
+})
 
 
 module.exports = router

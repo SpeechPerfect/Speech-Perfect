@@ -16,13 +16,13 @@ export default class Timer extends Component {
     }
 
     _renderTimers() {
-        let { miliseconds, seconds, minutes, hours } = this.props
+        let { duration } = this.props
       return (
         <View >
 
           <Text style={styles.time}>
-        { minutes ? `${minutes}:`+`${seconds}`+':'+`${miliseconds}` : ''+`${seconds}:`+`${miliseconds}`
-        }</Text>
+        { minutes ? `${minutes}:` + `${seconds}` : '' }
+        </Text>
 
         </View>
       )

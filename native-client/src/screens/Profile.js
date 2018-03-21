@@ -11,6 +11,8 @@ export default class Profile extends Component {
       email: null,
       id: null
     }
+
+    this.logout = this.logout.bind(this)
   }
 
   static navigationOptions = {
@@ -33,7 +35,7 @@ export default class Profile extends Component {
 
   logout(){
     store.setItem('user', '')
-    this.props.navigation.navigate('page')
+    this.props.navigation.navigate('login')
   }
 
   getSpeeches() {

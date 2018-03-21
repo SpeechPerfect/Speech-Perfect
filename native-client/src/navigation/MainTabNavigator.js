@@ -13,9 +13,6 @@ import Profile from '../screens/Profile'
 
 export default TabNavigator (
   {
-    Home: {
-      screen: HomeScreen,
-    },
     Record: {
       screen: RecordScreen,
     },
@@ -56,6 +53,7 @@ export default TabNavigator (
             case 'Profile':
             iconName =
               Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
+              
         }
         return (
           <Ionicons

@@ -3,15 +3,10 @@
 const { promisify } = require('util')
 var SpeechToTextV1 = require('watson-developer-cloud/speech-to-text/v1')
 var fs = require('fs')
-const http = require('http');
-const axios = require('axios')
-const request = require('request')
-var hyperquest = require('hyperquest')
+// const file = require('../api/audio')
+let result
 
-
-
-
-let dataAnalysis = async (audioFile) => {
+let dataAnalysis = async (file) => {
   var speechToText = new SpeechToTextV1({
     username: '5f91240c-763e-4810-a807-a284fab5e895',
     password: 'a2izVkdaw1ox',
@@ -35,8 +30,8 @@ let dataAnalysis = async (audioFile) => {
 
   var params = {
     // From file
-    audio: hyperquest(audioFile),
-    content_type: 'audio/flac rate=44100'
+    audio: fs.createReadStream('/Users/micahfriedland/Desktop/Fullstack Academy/Senior-Phase/Speech-Perfect/assets/audio-file.flac'),
+    content_type: 'audio/wav rate=44100'
   }
 
   console.log('audio',audioFile)
