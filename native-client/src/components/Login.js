@@ -51,11 +51,11 @@ export default class LoginForm extends Component {
               <Text style={{color: 'white'}}>
                 Email:
               </Text>
-              <TextInput style={{color: 'white'}} placeholder="username here" onChangeText={ this.onEmailChange.bind(this) } />
+              <TextInput placeholder="username here" onChangeText={ this.onEmailChange.bind(this) } />
               <Text style={{color: 'white'}}>
                 Password:
               </Text>
-              <TextInput style={{color: 'white'}}
+              <TextInput
               placeholder="password here" onChangeText={ this.onPasswordChange.bind(this) } />
               {this.renderButton()}
               {( err ) && <Text>Something's gone wrong, maybe an invalid username/password combination</Text>}
