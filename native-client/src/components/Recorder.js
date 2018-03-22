@@ -149,11 +149,22 @@ export default class Recorder extends Component {
           <Timer duration={this.state.duration} />
         </View>
         <View style={styles.bottom}>
+          {!this.state.begin &&
+          <View style={styles.bottom}>
+          <Text style={styles.introText} > Press Record and start speaking </Text>
+          <Text> </Text>
+          <Text style={styles.text}> We will analyze your speech and </Text>
+          <Text style={styles.text}> provide you with suggestions how to improve </Text>
+          <Text> </Text>
+          </View>
+          }
+          {this.state.begin &&
           <Uploader uri={this.state.recording._uri} />
+          }
           <View style={styles.startRecording}>
-            <Button onPress={buttonMethod} title={text}/>
+            <Button style={styles.button} color="white" onPress={buttonMethod} title={text}/>
             <RecordButton press={buttonMethod} />
-            <Button onPress={this.onButtonClear} title="Reset" />
+            <Button style={styles.button} color="white" onPress={this.onButtonClear} title="Reset" />
           </View>
         </View>
       </View>
@@ -170,7 +181,7 @@ const styles = StyleSheet.create({
   },
   top: {
     flex: 1,
-    backgroundColor: '#202020',
+    backgroundColor: '#12092f',
         // borderBottom: 15,
     // borderBottomWidth: 3,
     borderColor: 'white',
@@ -183,8 +194,24 @@ const styles = StyleSheet.create({
   },
   bottom: {
     flex: 2,
-    backgroundColor: '#202020',
+    backgroundColor: '#12092f',
     display: 'flex',
     justifyContent: 'flex-end',
+    alignItems: 'center'
   },
+  button: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  introText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  text: {
+    color: 'white',
+    fontSize: 14,
+    // fontWeight: "bold",
+  }
 })
