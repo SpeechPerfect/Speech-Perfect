@@ -18,7 +18,9 @@ export default class SingleReport extends Component {
   }
 
   componentDidMount = () => {
-    fetch(`${API_ROOT}/api/watson-api/1`, {
+    console.log('params', this.props.navigation.state.params)
+    let speechId = this.props.navigation.state.params.speechId
+    fetch(`${API_ROOT}/api/watson-api/${speechId}`, {
       method: "get",
     })
       .then(speech => {
@@ -32,7 +34,6 @@ export default class SingleReport extends Component {
 
   render() {
     console.log(this.props.navigation.state.params)
-    console.log('im not', this.state.speech)
     speech = this.state.speech
     duration = speech ? speech.watsonReport.duration/1000 : ''
     wordCount = speech ? speech.watsonReport.transcript.split(" ").length : ''
