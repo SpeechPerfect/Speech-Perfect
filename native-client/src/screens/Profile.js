@@ -4,6 +4,7 @@ import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
 import SingleSpeechThumbnail from '../components/SingleSpeechThumbnail'
+import SpeechList from '../components/Speeches'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -49,19 +50,7 @@ export default class Profile extends Component {
   render() {
     const { id, speeches } = this.state
     return (
-      <ScrollView style={styles.resultsContainer}>
-      {id === null &&
-      <Text style={styles.text}>Loading...</Text>}
-      {id &&
-        speeches.map(speech => {
-          return (
-            <View key={speech.id}>
-            <SingleSpeechThumbnail navigation={this.props.navigation} speech={speech} />
-            </View>
-          )
-        }
-      )}
-      </ScrollView>
+      <SpeechList id={id} speeches={speeches} navigation={this.props.navigation} />
     )
   }
 }

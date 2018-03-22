@@ -36,10 +36,10 @@ router.post('/', upload.single('soundFile'), (req, res, next) => {
 })
 
 // To be used in the future
-// router.get('/:id', (req, res, next) => {
-//   Speech.scope('populated').findById(req.params.id)
-//     .then(result => res.json(result))
-// })
+router.get('/:id', (req, res, next) => {
+  Speech.scope('populated').findById(req.params.id)
+    .then(result => res.json(result))
+})
 
 
 module.exports = router
