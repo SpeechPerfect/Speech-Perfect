@@ -26,8 +26,6 @@ class Uploader extends Component {
         type: "audio/vnd.wav",
         name: "testAudio",
         })
-      data.append('userId', this.state.userId)
-
 
       fetch(`${API_ROOT}/api/watson-api/upload/${this.state.userId}`, {
         method: "post",
@@ -38,21 +36,24 @@ class Uploader extends Component {
         },
       })
       .then(res => res.json())
-      .then((newData) => console.log(newData, 'is NEW response from server !!!'))
+      .then(foundId => this.sendToAws(data, foundId))
     }
     //SEND TO AWS
-    // fetch(`${API_ROOT}/api/audio/upload`, {
-    //   method: "post",
-    //   body: data,
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'multipart/form-data',
-    //   },
-    // })
-    //   .then(res => {
-    //     console.log(res)
-    //   })
-    //   .catch(err => console.log(err))
+  sendToAws(data, id) {
+    fetch(`${API_ROOT}/api/audio/upload/${id}`, {
+      method: "post",
+      body: data,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log(err))
+  }
+
 
 
 
