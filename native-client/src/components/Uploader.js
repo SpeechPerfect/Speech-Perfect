@@ -29,7 +29,7 @@ class Uploader extends Component {
       data.append('userId', this.state.userId)
 
 
-      fetch(`${API_ROOT}/api/watson-api/upload`, {
+      fetch(`${API_ROOT}/api/watson-api/upload/${this.state.userId}`, {
         method: "post",
         body: data,
         headers: {

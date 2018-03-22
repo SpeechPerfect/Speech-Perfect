@@ -33,8 +33,7 @@ let analyzeTranscript = (str) => {
   return obj
 }
 
-router.post('/upload', upload.single('soundFile'), (req, res, next) => {
-    console.log('REQ BODY IS', req.file)
+router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     const params = {
       audio: fs.createReadStream(req.file.path),
       content_type: 'audio/wav rate=44100'
@@ -43,7 +42,7 @@ router.post('/upload', upload.single('soundFile'), (req, res, next) => {
     .then(results => {
       let speechData = analyzeTranscript(results[0].alternatives[0].transcript)
       Speech.create({
-        //userId: req.user.id
+        userId: req.params.userId
       })
       .then((speech) => {
         speechId = speech.id
