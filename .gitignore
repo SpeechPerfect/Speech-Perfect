@@ -28,3 +28,5 @@ yarn-error.log*
 # secrets
 secrets.js
 IP_addresses.js
+
+notes.org
