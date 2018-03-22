@@ -11,12 +11,14 @@ const styles = {
         color: 'red'
     },
     container: {
-        marginTop: 125
+        marginTop: 125,
+        backgroundColor: 'white'
     }
 }
 
 export default class LoginForm extends Component {
     state = { email: '', password: '', error: false, loggedin: false };
+    
 
     onEmailChange(email) {
         this.setState({email})
@@ -62,3 +64,5 @@ export default class LoginForm extends Component {
         )
     }
 }
+
+

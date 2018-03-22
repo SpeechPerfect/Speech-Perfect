@@ -12,6 +12,8 @@ export default class Profile extends Component {
       email: null,
       id: null
     }
+
+    this.logout = this.logout.bind(this)
   }
 
   static navigationOptions = {
@@ -32,11 +34,16 @@ export default class Profile extends Component {
     .catch(err => console.log(err))
   }
 
+  logout(){
+    store.setItem('user', '')
+    this.props.navigation.navigate('login')
+  }
+
   getSpeeches() {
-    axios.get(`${API_ROOT}/api/speech/${this.state.id}`)
+    axios.get(`http://localhost:5000/api/speech/${this.state.id}`)
     .then(res => res.data)
     .then((data) => this.setState({
-      speeches: data
+      speeches: datas
     }))
     .then(err => console.log(err))
   }
@@ -61,6 +68,7 @@ export default class Profile extends Component {
           )
         }
       )}
+      <Button  title='logout' onPress={this.logout}/>
       </ScrollView>
     )
   }

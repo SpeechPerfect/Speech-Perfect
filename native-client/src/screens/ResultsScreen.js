@@ -8,6 +8,18 @@ export default class ResultsScreen extends Component {
     title: 'Results',
   };
 
+  thesaurorize(data){
+
+  }
+
+  componentWillMount(){
+    axios.get(`http://localhost:5000/api/watson-api/2`)
+    .then(res =>{
+      console.log(res.data)
+      // thesaurorize(res.data)
+    })
+  }
+
   render() {
     return (
     <ScrollView style={styles.resultsContainer}>
