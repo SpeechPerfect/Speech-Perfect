@@ -7,7 +7,6 @@ import styles from '../../assets/stylesheet'
 export default class RecordScreen extends Component {
   static navigationOptions = {
     title: 'Record',
-    header: null
   };
 
   render() {

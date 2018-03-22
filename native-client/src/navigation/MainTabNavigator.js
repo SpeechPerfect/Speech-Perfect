@@ -3,7 +3,6 @@ import { Platform, Button } from 'react-native'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 
-// import Colors from '../constants/Colors';
 
 import RecordScreen from '../screens/RecordScreen'
 import ResultsScreen from '../screens/ResultsScreen'
@@ -26,7 +25,6 @@ export default TabNavigator (
             // tintColor:'rgb(252,197,76)',
           },
           headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('results')} />,
-          headerLeft: <Button title='' color='white' onPress={() => navigation.navigate('profile')} />,
           headerTintColor: '#12092f',
         }),
         },
@@ -39,7 +37,6 @@ export default TabNavigator (
                 backgroundColor: 'white',
                 height: 20
               },
-              // headerRight: <Button title='Report' color='#12092f' onPress={() => navigation.navigate('singleReport')} />,
               headerLeft: <Button title='Profile' color='#12092f' onPress={() => navigation.navigate('profile')} />,
               headerTintColor: '#12092f',
             }),
@@ -50,10 +47,8 @@ export default TabNavigator (
               headerStyle: {
                 backgroundColor: 'white',
                 height: 20
-                // tintColor:'rgb(252,197,76)',
               },
-              // headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('Results')} />,
-              headerLeft: <Button title='Results' color='#12092f' onPress={() => navigation.goBack()} />,
+              headerLeft: <Button title='Profile' color='#12092f' onPress={() => navigation.navigate('profile')} />,
               headerTintColor: '#12092f',
             }),
             },

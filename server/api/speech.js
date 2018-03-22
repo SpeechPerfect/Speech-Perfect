@@ -10,7 +10,16 @@ router.get('/:userId', (req, res, next) => {
   .then(foundSpeeches => res.json(foundSpeeches))
 })
 
-router.delete('/:speechId', (req, res, next) => {
+router.delete('/:userId', (req, res, next) => {
+  Speech.destroy({
+    where: {
+      userId: req.params.userId
+    },
+  })
+  .then(deletedSpeeches => res.json(deletedSpeeches))
+})
+
+router.delete('/userId:/speechId', (req, res, next) => {
   Speech.destroy({
     where: {
       id: req.params.speechId

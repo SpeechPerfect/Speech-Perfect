@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, ScrollView, View, AsyncStorage as store} from 'react-native'
+import { Text, ScrollView, View, Button, AsyncStorage as store} from 'react-native'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
@@ -17,7 +17,9 @@ export default class Profile extends Component {
 
   static navigationOptions = {
     title: 'Profile',
-  };
+    headerLeft: <Button title='' color='white' onPress={() => {}} />,
+    // headerTintColor: 'rgb(252,197,76)',
+  }
 
   getUserAndSpeeches() {
     store.getItem('user')
@@ -34,7 +36,14 @@ export default class Profile extends Component {
   }
 
   deleteSpeech = (speech) => {
-    axios.delete(`${API_ROOT}/api/speech/${speech.id}`)
+    axios.delete(`${API_ROOT}/api/speech/${speech.userId}/${speech.id}`)
+    // .then(res => res.data)
+    .then(() => this.getSpeeches())
+    .then(err => console.log(err))
+  }
+
+  deleteUsersSpeeches = (userId) => {
+    axios.delete(`${API_ROOT}/api/speech/${userId}`)
     // .then(res => res.data)
     .then(() => this.getSpeeches())
     .then(err => console.log(err))
@@ -57,7 +66,9 @@ export default class Profile extends Component {
   render() {
     const { id, speeches } = this.state
     return (
-      <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} />
+      <View style={styles.container}>
+        <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)}/>
+      </View>
     )
   }
 }

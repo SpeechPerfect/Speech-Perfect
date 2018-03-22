@@ -35,6 +35,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#12092f',
     fontWeight: 'bold',
+  },
+  createdText: {
+    fontFamily: 'Arial',
+    fontSize: 13,
+    color: '#12092f',
+    fontWeight: 'bold',
   }
 })
 
