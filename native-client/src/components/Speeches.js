@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { View, Text, FlatList, Alert, ActivityIndicator, TouchableWithoutFeedback } from "react-native"
 import { List, ListItem, SearchBar } from "react-native-elements"
+import Swipeout from 'react-native-swipeout'
 import SingleSpeechThumbnail from './SingleSpeechThumbnail'
 import styles from '../../assets/stylesheet'
 
@@ -23,41 +24,9 @@ class Speeches extends Component {
   }
 
   makeRemoteRequest = () => {
-        this.setState({ data: [
-          "Speech1",
-          "Speech2",
-          "BestSpeechYet",
-          "Speech3",
-          "Speech1",
-          "Speech2",
-          "BestSpeechYet",
-          "Speech3",
-        ] })
+        this.setState({ data: this.props.speeches})
   }
 
-  handleRefresh = () => {
-  //   this.setState(
-  //     {
-  //       page: 1,
-  //       seed: this.state.seed + 1,
-  //       refreshing: true
-  //     },
-  //     () => {
-  //       this.makeRemoteRequest()
-  //     }
-  //   )
-  }
-
-  handleLoadMore = () => {
-  //   this.setState(
-  //     {
-  //       page: this.state.page + 1
-  //     },
-  //     () => {
-  //       this.makeRemoteRequest()
-  //     }
-  //   )
-  }
 
   renderSeparator = () => {
     return (
@@ -91,18 +60,31 @@ class Speeches extends Component {
     )
   }
 
+
+
   _renderItem = ({ item }) => (
-    <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id })} >
-      <View>
-      {this.props.id === null &&
-        <Text style={styles.text}>Loading...</Text>}
-        {this.props.id &&
-              <View key={item.id}>
-                <SingleSpeechThumbnail speech={item} />
-              </View>
-        }
-       </View>
-     </TouchableWithoutFeedback>
+    <Swipeout
+    right={[{
+      text: 'Delete',
+      backgroundColor: '#12092f',
+      underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+      onPress: () => this.props.deleteSpeech(item)
+    }]}
+    autoClose='true'
+    backgroundColor= 'transparent'>
+      <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id })} >
+        <View>
+        {this.props.id === null &&
+          <Text style={styles.text}>Loading...</Text>}
+          {this.props.id &&
+                <View key={item.id}>
+                  <SingleSpeechThumbnail speech={item} />
+                </View>
+          }
+        </View>
+      </TouchableWithoutFeedback>
+     </Swipeout>
+
   )
 
   render() {

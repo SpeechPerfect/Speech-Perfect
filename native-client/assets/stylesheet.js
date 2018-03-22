@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'Arial',
     fontSize: 20,
-    color: 'purple',
+    color: '#12092f',
     fontWeight: 'bold',
   }
 })

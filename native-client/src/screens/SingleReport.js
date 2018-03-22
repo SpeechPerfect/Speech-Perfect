@@ -39,7 +39,7 @@ export default class SingleReport extends Component {
     wordCount = speech ? speech.watsonReport.transcript.split(" ").length : ''
     pace = speech ? Math.floor(wordCount / (duration*60)) : ''
     clarity = speech ? Math.floor(wordCount / (duration*60)) : ''
-
+    console.log('erer', speech)
     return (
     <View style={styles.resultsContainer}>
       {speech &&

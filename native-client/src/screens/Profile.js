@@ -4,7 +4,7 @@ import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
 import SingleSpeechThumbnail from '../components/SingleSpeechThumbnail'
-import SpeechList from '../components/Speeches'
+import Speeches from '../components/Speeches'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -33,6 +33,13 @@ export default class Profile extends Component {
     .catch(err => console.log(err))
   }
 
+  deleteSpeech = (speech) => {
+    axios.delete(`${API_ROOT}/api/speech/${speech.id}`)
+    // .then(res => res.data)
+    .then(() => this.getSpeeches())
+    .then(err => console.log(err))
+  }
+
   getSpeeches() {
     axios.get(`${API_ROOT}/api/speech/${this.state.id}`)
     .then(res => res.data)
@@ -50,7 +57,7 @@ export default class Profile extends Component {
   render() {
     const { id, speeches } = this.state
     return (
-      <SpeechList id={id} speeches={speeches} navigation={this.props.navigation} />
+      <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} />
     )
   }
 }
