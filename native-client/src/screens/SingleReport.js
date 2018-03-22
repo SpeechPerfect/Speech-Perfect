@@ -32,17 +32,23 @@ export default class SingleReport extends Component {
 
   render() {
     console.log(this.props.navigation.state.params)
+    console.log('im not', this.state.speech)
     speech = this.state.speech
-    console.log('speech', speech)
+    duration = speech ? speech.watsonReport.duration/1000 : ''
+    wordCount = speech ? speech.watsonReport.transcript.split(" ").length : ''
+    pace = speech ? Math.floor(wordCount / (duration*60)) : ''
+    clarity = speech ? Math.floor(wordCount / (duration*60)) : ''
 
     return (
     <View style={styles.resultsContainer}>
-      {/* <ScrollView style={styles.resultsTopContainer}> */}
       {speech &&
         <View style={styles.resultsTopContainer}>
-            <Text style={{color: 'purple', fontSize:30}}> Duration: {speech.watsonReport.duration/1000} </Text>
-            <Text style={{color: 'purple', fontSize:30}}> Um's: {speech.watsonReport.umCount} </Text>
-            <Text style={{color: 'purple', fontSize:30}}> Like's: {speech.watsonReport.likeCount} </Text>
+            <Text style={{color: '#12092f', fontSize:30}}> Duration: {duration} </Text>
+            <Text style={{color: '#12092f', fontSize:30}}> Word Count: {wordCount} </Text>
+            <Text style={{color: '#12092f', fontSize:30}}> Pace: {pace} words/minute</Text>
+            <Text style={{color: '#12092f', fontSize:30}}> Clarity: {pace} words/minute</Text>
+            <Text style={{color: '#12092f', fontSize:30}}> Um's: {speech.watsonReport.umCount} </Text>
+            <Text style={{color: '#12092f', fontSize:30}}> Like's: {speech.watsonReport.likeCount} </Text>
         </View>
         }
 
@@ -51,7 +57,7 @@ export default class SingleReport extends Component {
           <MaterialCommunityIcons
             name={'play-circle-outline'}
             size={67}
-            color={'purple'}
+            color={'#12092f'}
             />
         </View>
         <View style={styles.transcript}>

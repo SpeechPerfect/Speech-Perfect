@@ -20,19 +20,21 @@ const styles = StyleSheet.create({
   },
   resultsBottomContainer: {
     flex: 1,
-    paddingTop: 15,
+    backgroundColor: '#12092f',
   },
   audioFeedback: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'white',
   },
   transcript: {
-    backgroundColor: 'purple',
+    backgroundColor: '#12092f',
   },
   text: {
     fontFamily: 'Arial',
     fontSize: 20,
-    color: 'purple'
+    color: 'purple',
+    fontWeight: 'bold',
   }
 })
 

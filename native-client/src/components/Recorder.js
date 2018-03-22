@@ -182,8 +182,6 @@ const styles = StyleSheet.create({
   top: {
     flex: 1,
     backgroundColor: '#12092f',
-        // borderBottom: 15,
-    // borderBottomWidth: 3,
     borderColor: 'white',
   },
   startRecording: {
