@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, FlatList, TouchableHighlight, Alert } from 'react-native'
-import styles from '../../assets/stylesheet'
+import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
+
 import { List, ListItem } from "react-native-elements"
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import axios from 'axios'
+import styles from '../../assets/stylesheet'
 import API_ROOT from '../../IP_addresses.js'
 let speech
-import axios from 'axios'
+
 export default class SingleReport extends Component {
   static navigationOptions = {
     title: 'SingleReport',
@@ -44,6 +47,17 @@ export default class SingleReport extends Component {
       </TouchableHighlight>
   )
 
+  _playAudio = async () => {
+    const soundObject = new Expo.Audio.Sound()
+    try {
+      await soundObject.loadAsync({ uri: `${this.state.speech.awsReport.url}`})
+      await soundObject.playAsync()
+      // Your sound is playing!
+    } catch (error) {
+      // An error occurred!
+    }
+  }
+
   render() {
     console.log(this.props.navigation.state.params)
     console.log(this.state.speech)
@@ -58,7 +72,6 @@ export default class SingleReport extends Component {
     return (
     <View style={styles.resultsContainer}>
       {speech &&
-        //  <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
          <FlatList
            style={{marginLeft: 20}}
            keyExtractor= {(speech, index) => index }
@@ -72,24 +85,17 @@ export default class SingleReport extends Component {
            onEndReached={this.handleLoadMore}
            onEndReachedThreshold={50}
          />
-      //  </List>
-        // <View style={styles.resultsTopContainer}>
-        //     <Text style={{color: '#12092f', fontSize:30}}> Duration: {duration} </Text>
-        //     <Text style={{color: '#12092f', fontSize:30}}> Word Count: {wordCount} </Text>
-        //     <Text style={{color: '#12092f', fontSize:30}}> Pace: {pace} words/minute</Text>
-        //     <Text style={{color: '#12092f', fontSize:30}}> Clarity: {pace} words/minute</Text>
-        //     <Text style={{color: '#12092f', fontSize:30}}> Um's: {speech.watsonReport.umCount} </Text>
-        //     <Text style={{color: '#12092f', fontSize:30}}> Like's: {speech.watsonReport.likeCount} </Text>
-        // </View>
         }
 
       <View style={styles.resultsBottomContainer}>
         <View style={styles.audioFeedback}>
-          <MaterialCommunityIcons
-            name={'play-circle-outline'}
-            size={67}
-            color={'#12092f'}
-            />
+          <TouchableHighlight onPress={this._playAudio}>
+              <MaterialCommunityIcons
+              name={'play-circle-outline'}
+              size={67}
+              color={'#12092f'}
+              />
+            </TouchableHighlight>
         </View>
         <View style={styles.transcript}>
         {speech &&

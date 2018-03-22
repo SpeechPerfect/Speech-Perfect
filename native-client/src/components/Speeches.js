@@ -41,18 +41,14 @@ class Speeches extends Component {
   }
 
   renderHeader = () => {
-    return <View style={{flexDirection: 'row', alignItems:'flex-end', justifyContent:'flex-end', margin:3}} >
-            {/* <View style={{width: '95%'}}>
-              <SearchBar placeholder="Type Here..." lightTheme round />
-            </View>
-            <View> */}
+    return <View style={{flexDirection: 'row', alignItems:'flex-end', justifyContent:'flex-end', backgroundColor:'lightgrey', width:'100%'}} >
               <TouchableOpacity onPress={() => this.props.  deleteUsersSpeeches(this.props.id)}>
                 <Ionicons
                   name="ios-trash"
+                  style={{marginTop:5, marginRight:5}}
                   size={26}
                   color="#12092f" />
               </TouchableOpacity>
-            {/* </View> */}
           </View>
   }
 
@@ -82,6 +78,7 @@ class Speeches extends Component {
       underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
       onPress: () => this.props.deleteSpeech(item)
     }]}
+    style={{marginLeft:8, marginTop: 8, marginBottom: 3}}
     autoClose={true}
     backgroundColor= 'transparent'>
       <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id, userId: item.userId })} >
