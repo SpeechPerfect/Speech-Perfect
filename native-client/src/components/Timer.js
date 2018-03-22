@@ -16,12 +16,31 @@ export default class Timer extends Component {
     }
 
     _renderTimers() {
+        // let { miliseconds, seconds, minutes, hours } = this.props
         let { duration } = this.props
+        let seconds, minutes, hours
+
+            miliseconds = Math.floor(duration / 100) % 10 || 0
+            seconds = Math.floor(duration / 1000) % 60 || 0
+            minutes = Math.floor(duration / 60000) % 60
+            hours = Math.floor(duration / 360000) % 60
+
+            miliseconds = miliseconds.toString().slice(0,1)
+            if (minutes > 0) seconds = seconds.toString().length === 1 ? `0${seconds}` : seconds
+            if (hours > 0) minutes = minutes.length === 1 ? '0'+minutes : minutes
+
       return (
         <View >
 
           <Text style={styles.time}>
-        { minutes ? `${minutes}:` + `${seconds}` : '' }
+        { hours ?
+            `${hours}:${minutes}:${seconds}`
+            :
+            minutes ?
+                `${minutes}:${seconds}`
+                :
+                `${seconds}:${miliseconds}`
+        }
         </Text>
 
         </View>
@@ -31,8 +50,9 @@ export default class Timer extends Component {
 
   render() {
     return  (
-        <View style={styles.stopwatch}>
-            {this._renderTitle()}
+        <View style={{flex: 1}}>
+            <View style={styles.stopwatch}>
+             </View>
             <View style={styles.timer}>
                 {this._renderTimers()}
             </View>
@@ -44,18 +64,10 @@ export default class Timer extends Component {
 
 const styles = StyleSheet.create({
     stopwatch: {
-        flex: 1,
-        // borderBottomWidth: 0.5,
+        flex: 2,
         alignItems: 'center',
         width: '100%',
-        // justifyContent: 'flex-end',
-        // paddingTop: 20,
-        // paddingBottom: 10,
-        // backgroundColor: '#F9F9F9'
     },
-    // timerWrapper: {
-    //     backgroundColor: '#FFFFFF'
-    // },
     timer: {
         width: '100%',
         flex: 1,

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { ExpoLinksView } from '@expo/samples'
 import  {Recorder}  from '../components'
+import styles from '../../assets/stylesheet'
 
 export default class RecordScreen extends Component {
   static navigationOptions = {
@@ -19,10 +20,3 @@ export default class RecordScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // paddingTop: 15,
-    backgroundColor: 'black',
-  },
-})

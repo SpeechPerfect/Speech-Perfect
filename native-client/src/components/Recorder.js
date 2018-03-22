@@ -4,6 +4,7 @@ import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
 import { Ionicons, MaterialCommunityIcons, Foundation } from '@expo/vector-icons'
 import Timer  from './Timer'
 import {Uploader} from './'
+import RecordButton from './RecordButton'
 
 export default class Recorder extends Component {
     constructor(){
@@ -14,10 +15,13 @@ export default class Recorder extends Component {
           recordingDuration: null,
           recording: {},
           timer: null,
+          durationMillis: '',
           seconds: '00',
           miliseconds: '00',
           minutes: '',
           hours: '',
+          isClicked: false,
+          // intervals: 0
         }
         this.startRecording = this.startRecording.bind(this)
         this.stopRecording = this.stopRecording.bind(this)
@@ -87,6 +91,10 @@ export default class Recorder extends Component {
     } catch (error) {
       console.log(error)
     }
+    this.setState({
+      isClicked: !this.state.isClicked,
+
+    })
   }
 
   onButtonClear() {
@@ -96,71 +104,57 @@ export default class Recorder extends Component {
         seconds: '00',
         minutes: '',
         hours: '',
+        isClicked: false,
+        duration: 0,
+        intervals: 0,
+        begin: false,
     })
-
+    this.setState({
+      isClicked: false,
+      begin: false,
+    })
     this.stopRecording()
 }
+
   startTimer() {
-    let self = this
-    let timer = setInterval(() => {
-        let mili = (Number(this.state.miliseconds) + 1).toString(),
-        sec = this.state.seconds,
-        min = this.state.minutes,
-        hour = this.state.hours
-// request Animation Frame - callback, gets called with a timestamp
-// call on expo's audio timestamp onRecordingStatusUpdate.duration
-        if( Number(this.state.miliseconds) == 99 ) {
-            sec = (Number(this.state.seconds) + 1).toString()
-            mili = '00'
-        }
+    this.setState({begin: true, isClicked: true})
+    let start = (new Date()).getTime()
+    this.startFrame(start)
+  }
 
-        // let sec = (Number(this.state.seconds) + 1).toString(),
-        // count = this.state.seconds
+  startFrame = (startTime) => {
+    this.startTime = startTime
+    requestAnimationFrame(this.frame)
+  }
 
-        if( Number(this.state.seconds) == 4 ) {
-          min = (Number(this.state.minutes) + 1).toString()
-          sec = '00'
+  frame = (time) => {
+
+      if (this.state.isClicked) {
+        const duration = new Date().getTime() - this.startTime
+        this.setState({duration})
       }
-
-        self.setState({
-            miliseconds: mili.length == 1 ? '0'+mili : mili,
-            seconds: sec.length == 1 ? '0'+sec : sec,
-            minutes: min.length == 1 ? '0'+min : min
-        })
-    }, 0)
-    this.setState({timer})
-}
+      if (this.state.duration > 0 && this.state.isClicked) {
+        requestAnimationFrame(this.frame)
+      }
+  }
 
   render() {
     let text
     let buttonMethod
     this.state.isRecording ? text = 'Stop' : text = 'Record'
     this.state.isRecording ? buttonMethod = this.stopRecording : buttonMethod = this.startRecording
+    seconds = this.state.seconds
     return  (
       <View style={styles.container}>
         <View style={styles.top}>
-          <Text style={{color:'white', fontSize:20}}>{Math.floor(this.state.durationMillis/1000)}</Text>
+          <Timer duration={this.state.duration} />
         </View>
         <View style={styles.bottom}>
           <Uploader uri={this.state.recording._uri} />
           <View style={styles.startRecording}>
             <Button onPress={buttonMethod} title={text}/>
-            <View style={styles.backgroundCircle}>
-              <TouchableWithoutFeedback onPress={buttonMethod}>
-                  <View style={styles.innerBackgroundCicrcle}>
-                    <View style={{ flex: 1, marginLeft: -14, marginTop: -14}}>
-                      <MaterialCommunityIcons
-                      name={'record'}
-                      size={67}
-                      color={'red'}
-                      // style={{borderColor:'yellow', borderWidth:3, borderRadius:40 }}
-                      />
-                  </View>
-                </View>
-              </TouchableWithoutFeedback>
-            </View>
-            <Button onPress={this.onButtonClear} title="Reset"/>
-
+            <RecordButton press={buttonMethod} />
+            <Button onPress={this.onButtonClear} title="Reset" />
           </View>
         </View>
       </View>
@@ -173,12 +167,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: 'flex',
-    // height: 600,
     backgroundColor: 'black'
   },
   top: {
     flex: 1,
-    // height: 200,
     backgroundColor: 'black',
         // borderBottom: 15,
     // borderBottomWidth: 3,
@@ -187,10 +179,6 @@ const styles = StyleSheet.create({
   startRecording: {
     flexDirection: 'row',
     marginBottom: 13,
-    // height: 40,
-    // borderRadius: 15,
-    // borderColor: '#d6d7da',
-    // borderWidth: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -208,7 +196,6 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderWidth: 7,
     borderRadius: 27.5,
-    // marginRight: 10, paddingRight: 10
   },
   innerBackgroundCicrcle: {
     justifyContent: 'center',
@@ -220,4 +207,3 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   }
 })
-// #F0EFF5

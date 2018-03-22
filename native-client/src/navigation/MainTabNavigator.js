@@ -1,30 +1,40 @@
 import React from 'react'
-import { Platform } from 'react-native'
+import { Platform, Button } from 'react-native'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
-import { TabNavigator, TabBarBottom } from 'react-navigation'
+import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 
 // import Colors from '../constants/Colors';
 
-import HomeScreen from '../screens/HomeScreen'
 import RecordScreen from '../screens/RecordScreen'
 import ResultsScreen from '../screens/ResultsScreen'
-import Testing from '../components/TextToSpeech'
 import Profile from '../screens/Profile'
+import SingleReport from '../screens/SingleReport'
 
 export default TabNavigator (
   {
     Record: {
       screen: RecordScreen,
     },
-    Results: {
-      screen: ResultsScreen,
-    },
-    Audio: {
-      screen: Testing,
-    },
     Profile: {
-      screen: Profile,
-    }
+      screen: StackNavigator({
+        profile: { screen: Profile, path: 'profile/:name',
+        navigationOptions: ({ navigation }) => ({
+          title: 'Profile',
+          headerStyle: {
+            backgroundColor: 'white',
+            // tintColor:'rgb(252,197,76)',
+          },
+          headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('Results')} />,
+          // headerLeft: <Button title='Edit' color='white' onPress={() => navigation.navigate('share')} />,
+          headerTintColor: '#12092f',
+        }),
+        },
+        Results: {
+          screen: ResultsScreen,
+        },
+      })
+    },
+
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -34,22 +44,12 @@ export default TabNavigator (
 
         let iconName
         switch (routeName) {
-          case 'Home':
-            iconName =
-              Platform.OS === 'ios'
-                ? `ios-information-circle${focused ? '' : '-outline'}`
-                : 'md-home'
-            break
           case 'Record':
             iconName = Platform.OS === 'ios' ? `ios-microphone${focused ? '' : '-outline'}` : 'md-microphone'
             break
           case 'Results':
             iconName =
               Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
-          case 'Audio':
-            iconName =
-              Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
-            break
             case 'Profile':
             iconName =
               Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'

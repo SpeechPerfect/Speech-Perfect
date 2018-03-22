@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Text, ScrollView, View, AsyncStorage as store, StyleSheet, Button} from 'react-native'
+import { Text, ScrollView, View, AsyncStorage as store} from 'react-native'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
-import Login from '../components/Login'
+import styles from '../../assets/stylesheet'
+import SingleSpeechThumbnail from '../components/SingleSpeechThumbnail'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -55,16 +56,14 @@ export default class Profile extends Component {
   render() {
     const { id, speeches } = this.state
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.resultsContainer}>
       {id === null &&
-      <Text>Loading...</Text>}
+      <Text style={styles.text}>Loading...</Text>}
       {id &&
         speeches.map(speech => {
           return (
             <View key={speech.id}>
-            <Text>
-            {speech.title}
-            </Text>
+            <SingleSpeechThumbnail navigation={this.props.navigation} speech={speech} />
             </View>
           )
         }
@@ -74,11 +73,3 @@ export default class Profile extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: 'lightgrey',
-  },
-})

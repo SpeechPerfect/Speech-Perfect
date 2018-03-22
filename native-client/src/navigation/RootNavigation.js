@@ -2,7 +2,8 @@ import { Notifications } from 'expo'
 import React from 'react'
 import { StackNavigator } from 'react-navigation'
 import MainTabNavigator from './MainTabNavigator'
-import LoginOrNavigate from '../components/LoginOrNavigate.js'
+import LoginOrNavigate from '../components/LoginOrNavigate'
+import SingleReport from '../screens/SingleReport'
 import {  View, StyleSheet } from 'react-native'
 
 // import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
@@ -12,6 +13,10 @@ const RootStackNavigator = StackNavigator(
     Main: {
       screen: LoginOrNavigate,
     },
+    SingleReport: {
+      screen: SingleReport
+    },
+    initialRouteName: 'Main'
   },
   // {
   //   navigationOptions: () => ({
@@ -34,7 +39,7 @@ export default class RootNavigator extends React.Component {
   render() {
     return (
     <View style={styles.container}>
-        <RootStackNavigator />
+        <LoginOrNavigate />
     </View>
     )
   }

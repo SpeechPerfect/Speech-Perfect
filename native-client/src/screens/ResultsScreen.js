@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Text, ScrollView, StyleSheet } from 'react-native'
-import axios from 'axios'
-import API_ROOT from '../../IP_addresses.js'
+import { Text, ScrollView } from 'react-native'
+import styles from '../../assets/stylesheet'
 
 
 export default class ResultsScreen extends Component {
@@ -23,21 +22,12 @@ export default class ResultsScreen extends Component {
 
   render() {
     return (
-    <ScrollView style={styles.container}>
-     
+    <ScrollView style={styles.resultsContainer}>
+      <Text style={styles.text}> Will put results here </Text>
     </ScrollView>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: 'lightgrey',
-  },
-})
-
 
 // import React, {Component} from 'react';
 // import { BarChart } from 'react-native-svg-charts'
