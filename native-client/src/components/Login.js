@@ -16,7 +16,7 @@ const styles = {
 }
 
 export default class LoginForm extends Component {
-    state = { email: '', password: '', error: false, loggedin: false };
+    state = { email: '', password: '', error: false, loggedin: false, user: {} };
 
     onEmailChange(email) {
         this.setState({email})
@@ -30,9 +30,8 @@ export default class LoginForm extends Component {
         const { email, password } = this.state
         axios.post(`${API_ROOT}/auth/login`, {email, password})
             .then(res => {
-                console.log(res)
                 store.setItem('user', JSON.stringify(res.data))
-                this.setState({error: false, loggedin: true})
+                this.setState({error: false, loggedin: true, user: res.data })
             })
             .catch(() => {
                 this.setState({error: true})
