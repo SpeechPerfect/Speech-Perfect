@@ -42,7 +42,7 @@ export default class Profile extends Component {
     axios.get(`http://localhost:5000/api/speech/${this.state.id}`)
     .then(res => res.data)
     .then((data) => this.setState({
-      speeches: data
+      speeches: datas
     }))
     .then(err => console.log(err))
   }

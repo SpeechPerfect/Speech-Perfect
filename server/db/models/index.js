@@ -4,6 +4,7 @@ const AwsReport = require('./aws-report')
 const BvReport = require('./bv-report')
 const WatsonReport = require('./watson-report.js')
 
+User.hasMany(Speech)
 Speech.belongsTo(User)
 Speech.hasOne(AwsReport)
 Speech.hasOne(WatsonReport)

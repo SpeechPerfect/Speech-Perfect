@@ -33,6 +33,7 @@ export default class LoginForm extends Component {
         axios.post(`${API_ROOT}/auth/login`, {email, password})
             .then(res => {
                 console.log(res)
+                store.setItem('user', JSON.stringify(res.data))
                 this.setState({error: false, loggedin: true})
             })
             .catch(() => {
