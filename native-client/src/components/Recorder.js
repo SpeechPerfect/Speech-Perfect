@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Button, View, StyleSheet, Text, ImageBackground, TouchableWithoutFeedback} from 'react-native'
+import {Button, View, StyleSheet, Text } from 'react-native'
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
 import Timer  from './Timer'
 import {Uploader} from './'
@@ -20,6 +20,7 @@ export default class Recorder extends Component {
           minutes: '',
           hours: '',
           isClicked: false,
+          userId: ''
           // intervals: 0
         }
         this.startRecording = this.startRecording.bind(this)
@@ -37,7 +38,7 @@ export default class Recorder extends Component {
         this.setState({
           haveRecordingPermissions: response.status === 'granted',
         })
-      }
+  }
 
     componentWillUnmount() {
         clearInterval(this.state.timer)
@@ -81,12 +82,9 @@ export default class Recorder extends Component {
   async stopRecording(){
     clearInterval(this.state.timer)
     this.setState({isRecording: false})
-    console.log('recording object', this.state.recording)
     try {
       console.log('recording has stopped')
       await this.state.recording.stopAndUnloadAsync()
-      console.log('our recording')
-      console.log(this.state.recording._uri)
     } catch (error) {
       console.log(error)
     }

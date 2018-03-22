@@ -2,10 +2,10 @@ const router = require('express').Router()
 const { Speech, WatsonReport } = require('../db/models')
 let multer = require('multer')
 const upload = multer({dest: '/tmp'})
-
 const { promisify } = require('util')
 var SpeechToTextV1 = require('watson-developer-cloud/speech-to-text/v1')
 var fs = require('fs')
+let speechId = ''
 
 let dataAnalysis = async (params) => {
   var speechToText = new SpeechToTextV1({
@@ -33,8 +33,7 @@ let analyzeTranscript = (str) => {
   return obj
 }
 
-router.post('/', upload.single('soundFile'), (req, res, next) => {
-    console.log('REQ BODY IS', req.file)
+router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     const params = {
       audio: fs.createReadStream(req.file.path),
       content_type: 'audio/wav rate=44100'
@@ -43,10 +42,12 @@ router.post('/', upload.single('soundFile'), (req, res, next) => {
     .then(results => {
       let speechData = analyzeTranscript(results[0].alternatives[0].transcript)
       Speech.create({
-        //userId: req.user.id
+        userId: req.params.userId
       })
       .then((speech) => {
-        WatsonReport.create({
+        speechId = speech.id
+        console.log(speechId, 'is the speech id')
+        return WatsonReport.create({
           speechId: speech.id,
           transcript: results[0].alternatives[0].transcript,
           likeCount: speechData.likeCount,
@@ -55,14 +56,17 @@ router.post('/', upload.single('soundFile'), (req, res, next) => {
           duration: 0
         })
         .then((createdWReport) => {
-          speech.update({
+          return speech.update({
             WatsonReportId: createdWReport.id
           })
         })
-
+        .then(() => {
+          console.log('speech id is', speechId)
+          res.json(speechId)
+        })
       })
-      res.json(results)
     })
+    // .then((results) => res.status(200).send(results))
     .catch(next)
 })
 
