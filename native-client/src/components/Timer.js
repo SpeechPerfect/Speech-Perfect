@@ -39,7 +39,7 @@ export default class Timer extends Component {
             minutes ?
                 `${minutes}:${seconds}`
                 :
-                `${seconds}:${miliseconds}`
+                `${seconds}.${miliseconds}`
         }
         </Text>
 

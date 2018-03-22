@@ -33,8 +33,6 @@ class Uploader extends Component {
     //   })
     //   .catch(err => console.log(err))
 
-      // SEND TO WATSON
-
     fetch(`${API_ROOT}/api/watson-api`, {
       method: "post",
       body: data,
@@ -52,7 +50,7 @@ class Uploader extends Component {
   render() {
     return (
       <View>
-        <Button onPress={this.onSubmit} title="click to send audio" />
+        <Button onPress={this.onSubmit} color="white" title="click to send audio" />
       </View>
     )
   }
