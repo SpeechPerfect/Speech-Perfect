@@ -67,7 +67,15 @@ router.post('/', upload.single('soundFile'), (req, res, next) => {
 })
 
 router.get('/:id', (req, res, next) => {
+  console.log('params', req.params)
   Speech.scope('populated').findById(req.params.id)
+    .then(result => res.json(result))
+})
+
+
+router.get('/:userId/:speechId', (req, res, next) => {
+  console.log('params')
+  Speech.scope('populated').findById(req.params.speechId)
     .then(result => res.json(result))
 })
 

@@ -1,7 +1,9 @@
 import React, { Component } from "react"
-import { View, Text, FlatList, Alert, ActivityIndicator, TouchableWithoutFeedback } from "react-native"
+import { View, Text, FlatList, Alert, ActivityIndicator, TouchableOpacity, TouchableWithoutFeedback } from "react-native"
 import { List, ListItem, SearchBar } from "react-native-elements"
+import Swipeout from 'react-native-swipeout'
 import SingleSpeechThumbnail from './SingleSpeechThumbnail'
+import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import styles from '../../assets/stylesheet'
 
 class Speeches extends Component {
@@ -23,40 +25,7 @@ class Speeches extends Component {
   }
 
   makeRemoteRequest = () => {
-        this.setState({ data: [
-          "Speech1",
-          "Speech2",
-          "BestSpeechYet",
-          "Speech3",
-          "Speech1",
-          "Speech2",
-          "BestSpeechYet",
-          "Speech3",
-        ] })
-  }
-
-  handleRefresh = () => {
-  //   this.setState(
-  //     {
-  //       page: 1,
-  //       seed: this.state.seed + 1,
-  //       refreshing: true
-  //     },
-  //     () => {
-  //       this.makeRemoteRequest()
-  //     }
-  //   )
-  }
-
-  handleLoadMore = () => {
-  //   this.setState(
-  //     {
-  //       page: this.state.page + 1
-  //     },
-  //     () => {
-  //       this.makeRemoteRequest()
-  //     }
-  //   )
+        this.setState({ data: this.props.speeches})
   }
 
   renderSeparator = () => {
@@ -72,7 +41,19 @@ class Speeches extends Component {
   }
 
   renderHeader = () => {
-    return <SearchBar placeholder="Type Here..." lightTheme round />
+    return <View style={{flexDirection: 'row', alignItems:'flex-end', justifyContent:'flex-end', margin:3}} >
+            {/* <View style={{width: '95%'}}>
+              <SearchBar placeholder="Type Here..." lightTheme round />
+            </View>
+            <View> */}
+              <TouchableOpacity onPress={() => this.props.  deleteUsersSpeeches(this.props.id)}>
+                <Ionicons
+                  name="ios-trash"
+                  size={26}
+                  color="#12092f" />
+              </TouchableOpacity>
+            {/* </View> */}
+          </View>
   }
 
   renderFooter = () => {
@@ -81,7 +62,7 @@ class Speeches extends Component {
     return (
       <View
         style={{
-          paddingVertical: 20,
+          // paddingVertical: 5,
           borderTopWidth: 1,
           borderColor: "#CED0CE"
         }}
@@ -91,23 +72,35 @@ class Speeches extends Component {
     )
   }
 
+
+
   _renderItem = ({ item }) => (
-    <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id })} >
-      <View>
-      {this.props.id === null &&
-        <Text style={styles.text}>Loading...</Text>}
-        {this.props.id &&
-              <View key={item.id}>
-                <SingleSpeechThumbnail speech={item} />
-              </View>
-        }
-       </View>
-     </TouchableWithoutFeedback>
+    <Swipeout
+    right={[{
+      text: 'Delete',
+      backgroundColor: '#12092f',
+      underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+      onPress: () => this.props.deleteSpeech(item)
+    }]}
+    autoClose={true}
+    backgroundColor= 'transparent'>
+      <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id, userId: item.userId })} >
+        <View>
+        {this.props.id === null &&
+          <Text style={styles.text}>Loading...</Text>}
+          {this.props.id &&
+                <View key={item.id}>
+                  <SingleSpeechThumbnail speech={item} />
+                </View>
+          }
+        </View>
+      </TouchableWithoutFeedback>
+     </Swipeout>
   )
 
   render() {
     return (
-      <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+      <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, marginTop: -2 }}>
         <FlatList
           keyExtractor= {(speech, index) => index }
           data={this.props.speeches}

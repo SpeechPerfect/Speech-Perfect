@@ -8,9 +8,9 @@ Speech.belongsTo(User)
 AwsReport.belongsTo(Speech)
 BvReport.belongsTo(Speech)
 WatsonReport.belongsTo(Speech)
-Speech.hasOne(AwsReport)
-Speech.hasOne(BvReport)
-Speech.hasOne(WatsonReport)
+Speech.hasOne(AwsReport, { onDelete: 'cascade' })
+Speech.hasOne(BvReport, { onDelete: 'cascade' })
+Speech.hasOne(WatsonReport, { onDelete: 'cascade' })
 
 module.exports = {
   User,
