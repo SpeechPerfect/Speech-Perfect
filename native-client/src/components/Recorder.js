@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {Button, View, StyleSheet, Text, ImageBackground, TouchableWithoutFeedback} from 'react-native'
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
-import { Ionicons, MaterialCommunityIcons, Foundation } from '@expo/vector-icons'
 import Timer  from './Timer'
 import {Uploader} from './'
 import RecordButton from './RecordButton'
@@ -171,7 +170,7 @@ const styles = StyleSheet.create({
   },
   top: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#202020',
         // borderBottom: 15,
     // borderBottomWidth: 3,
     borderColor: 'white',

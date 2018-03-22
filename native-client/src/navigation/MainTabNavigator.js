@@ -25,24 +25,43 @@ export default TabNavigator (
             height: 20,
             // tintColor:'rgb(252,197,76)',
           },
-          headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('Results')} />,
+          headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('results')} />,
           headerLeft: <Button title='' color='white' onPress={() => navigation.navigate('profile')} />,
           headerTintColor: '#12092f',
         }),
         },
-        Results: { screen: ResultsScreen, path: 'profile/results',
-        navigationOptions: ({ navigation }) => ({
-          title: 'Results',
-          headerStyle: {
-            backgroundColor: 'white',
-            height: 20
-            // tintColor:'rgb(252,197,76)',
-          },
-          // headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('Results')} />,
-          headerLeft: <Button title='Profile' color='#12092f' onPress={() => navigation.navigate('profile')} />,
-          headerTintColor: '#12092f',
-        }),
+        Results: {
+          screen: TabNavigator({
+            results: { screen: ResultsScreen, path: 'profile/results',
+            navigationOptions: ({ navigation }) => ({
+              title: 'Results',
+              headerStyle: {
+                backgroundColor: 'white',
+                height: 20
+              },
+              // headerRight: <Button title='Report' color='#12092f' onPress={() => navigation.navigate('singleReport')} />,
+              headerLeft: <Button title='Profile' color='#12092f' onPress={() => navigation.navigate('profile')} />,
+              headerTintColor: '#12092f',
+            }),
+            },
+            singleReport: { screen: SingleReport, path: 'profile/report',
+            navigationOptions: ({ navigation }) => ({
+              title: 'Report',
+              headerStyle: {
+                backgroundColor: 'white',
+                height: 20
+                // tintColor:'rgb(252,197,76)',
+              },
+              // headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('Results')} />,
+              headerLeft: <Button title='Results' color='#12092f' onPress={() => navigation.goBack()} />,
+              headerTintColor: '#12092f',
+            }),
+            },
         },
+        {
+          navigationOptions: { tabBarVisible: false }
+          }
+      )}
       })
     },
 

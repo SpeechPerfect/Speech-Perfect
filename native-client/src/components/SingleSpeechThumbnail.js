@@ -24,13 +24,13 @@ export function SingleSpeechThumbnail (props) {
 
   const { speech, navigation } = props
 
-  console.log(speech.createdAt)
+  // console.log(speech.createdAt)
 
     return (
       <ScrollView style={styles.resultsContainer}>
-        <TouchableHighlight onPress= {() => navigation.navigate('SingleReport')}>
+        {/* <TouchableHighlight onPress= {() => navigation.navigate('SingleReport')}> */}
         <Text style={styles.text}>{speech.title}</Text>
-        </TouchableHighlight>
+        {/* </TouchableHighlight> */}
         <Text style={styles.text}>Created {readableDate(speech.createdAt)}</Text>
       </ScrollView>
     )
