@@ -9,8 +9,8 @@ AwsReport.belongsTo(Speech)
 BvReport.belongsTo(Speech)
 WatsonReport.belongsTo(Speech)
 Speech.hasOne(AwsReport)
-Speech.hasOne(WatsonReport)
 Speech.hasOne(BvReport)
+Speech.hasOne(WatsonReport)
 
 module.exports = {
   User,

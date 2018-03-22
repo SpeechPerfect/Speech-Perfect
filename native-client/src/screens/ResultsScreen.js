@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, ScrollView } from 'react-native'
 import styles from '../../assets/stylesheet'
+import SpeechList from '../components/Speeches'
 
 
 export default class ResultsScreen extends Component {
@@ -10,9 +11,10 @@ export default class ResultsScreen extends Component {
 
   render() {
     return (
-    <ScrollView style={styles.resultsContainer}>
-      <Text style={styles.text}> Will put results here </Text>
-    </ScrollView>
+    // <ScrollView style={styles.resultsContainer}>
+      // <Text style={styles.text}> Will put results here </Text>
+      <SpeechList navigation={this.props.navigation} />
+    // </ScrollView>
     )
   }
 }

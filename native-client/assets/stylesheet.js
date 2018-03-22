@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
   title: {
     fontFamily: 'Arial',
@@ -12,13 +12,21 @@ const styles = StyleSheet.create({
   },
   resultsContainer: {
     flex: 1,
+    backgroundColor: 'white',
+  },
+  resultsTopContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  resultsBottomContainer: {
+    flex: 1,
     paddingTop: 15,
-    backgroundColor: 'black',
+    backgroundColor: 'purple',
   },
   text: {
     fontFamily: 'Arial',
     fontSize: 20,
-    color: 'white'
+    color: 'purple'
   }
 })
 
