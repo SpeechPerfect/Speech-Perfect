@@ -13,41 +13,33 @@ class Uploader extends Component {
 
   componentDidMount() {
     store.getItem('user')
-    .then((user) => this.setState({
-      userId: user.id
+    .then(user => JSON.parse(user))
+    .then((userData) => this.setState({
+      userId: userData.id
     }))
   }
 
   onSubmit() {
-    store.getItem('user')
-    .then(user => JSON.parse(user))
-    .then(userData =>
-      {
-      let data = new FormData()
+      const data = new FormData()
       data.append("soundFile", {
         uri: this.props.uri,
         type: "audio/vnd.wav",
         name: "testAudio",
         })
-      data.append('userId', userData.id)
-      return data
-    })
-    .then((returnedData) => {
-      console.log('RETURNED DATA IS ', returnedData)
-      fetch(`${API_ROOT}/api/audio/upload`, {
+      data.append('userId', this.state.userId)
+
+
+      fetch(`${API_ROOT}/api/watson-api/upload`, {
         method: "post",
-        body: returnedData,
+        body: data,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'multipart/form-data',
         },
       })
-    })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => console.log(err))
-  }
+      .then(res => res.json())
+      .then((newData) => console.log(newData, 'is NEW response from server !!!'))
+    }
     //SEND TO AWS
     // fetch(`${API_ROOT}/api/audio/upload`, {
     //   method: "post",
