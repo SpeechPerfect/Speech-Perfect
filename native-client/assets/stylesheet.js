@@ -21,6 +21,12 @@ const styles = StyleSheet.create({
   resultsBottomContainer: {
     flex: 1,
     paddingTop: 15,
+  },
+  audioFeedback: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  transcript: {
     backgroundColor: 'purple',
   },
   text: {
