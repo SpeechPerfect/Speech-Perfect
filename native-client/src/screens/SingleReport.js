@@ -79,6 +79,25 @@ export default class SingleReport extends Component {
       await soundObject.playAsync()
     }
   }
+  _replayAudio = async () => {
+    let playing = this.state.playing
+
+    if (playing) {
+      this.setState({playing: false})
+      try {
+        await soundObject.replayAsync()
+        soundObject.playAsync()
+        // Your sound is playing!
+      } catch (error) {
+        // An error occurred!
+      }
+    } else {
+      this.setState({playing: true})
+      await soundObject.replayAsync()
+      await soundObject.playAsync()
+    }
+  }
+
 
   render() {
     console.log(this.props.navigation.state.params)
@@ -111,6 +130,16 @@ export default class SingleReport extends Component {
 
       <View style={styles.resultsBottomContainer}>
         <View style={styles.audioFeedback}>
+        {this.state.started &&
+          <TouchableHighlight onPress={this._replayAudio}>
+              <MaterialCommunityIcons
+              name={'replay'}
+              size={30}
+              color={'#12092f'}
+              style={{marginTop:5}}
+              />
+            </TouchableHighlight>
+          }
           {!this.state.started &&
           <TouchableHighlight onPress={this._playAudio}>
               <MaterialCommunityIcons

@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+    flexDirection: 'row',
   },
   transcript: {
     backgroundColor: '#12092f',
