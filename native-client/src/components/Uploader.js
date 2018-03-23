@@ -35,7 +35,14 @@ class Uploader extends Component {
           'Content-Type': 'multipart/form-data',
         },
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 500) {
+          Alert.alert('No audio detected', 'Please re-record')
+          throw new Error('No audio found')
+        } else {
+          return res.json()
+        }
+      })
       .then(idOrError => {
         if (idOrError === 'Low confidence') {
           console.log('Front end detects low confidence')
@@ -45,6 +52,7 @@ class Uploader extends Component {
         }
 
       })
+      .catch(err => console.log(err))
     }
     //SEND TO AWS
   sendToAws(data, id) {
