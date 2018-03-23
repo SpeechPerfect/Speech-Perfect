@@ -16,6 +16,7 @@
     "prod-client": "cd client && npm run build"
   },
   "dependencies": {
-    "concurrently": "^3.5.1"
+    "concurrently": "^3.5.1",
+    "react-native-elements": "^0.19.0"
   }
 }

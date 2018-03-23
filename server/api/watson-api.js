@@ -33,6 +33,36 @@ let analyzeTranscript = (str) => {
   return obj
 }
 
+let getConfidence = (dataArr, transcriptLength) => {
+  let totalConfidence = dataArr.map((x , i) => {
+    return dataArr[i].confidence * (x.sectionLength / transcriptLength )
+  }).reduce((a, b) => a + b)
+  return totalConfidence
+
+}
+
+let getLengthAndConfidence = (arr) => {
+  let transcriptLength  = 0
+  let sectionInfo = []
+  let transcript = arr.map(result => {
+    let obj = {}
+    const sectionLength = result.alternatives[0].transcript.trim().split(' ').length
+    obj.sectionLength = sectionLength
+    obj.confidence = result.alternatives[0].confidence
+    sectionInfo.push(obj)
+    transcriptLength += sectionLength
+    return result.alternatives[0].transcript
+  })
+  let totalConfidence = getConfidence(sectionInfo, transcriptLength)
+  console.log('TOTAL CONFIDENCE',totalConfidence)
+  console.log('RETURNED VALUE',[transcriptLength, totalConfidence])
+  return [transcriptLength, totalConfidence]
+}
+
+let getTranscript = (arr) => {
+  return arr.map(result => result.alternatives[0].transcript.trim()).join(' ')
+}
+
 router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     const params = {
       audio: fs.createReadStream(req.file.path),
@@ -40,18 +70,20 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     }
     dataAnalysis(params)
     .then(results => {
-      let speechData = analyzeTranscript(results[0].alternatives[0].transcript)
+      console.log('GET LENGTH AND CONFIDENCE', getLengthAndConfidence(results)[1])
+      let speechTranscript = analyzeTranscript(results[0].alternatives[0].transcript)
       Speech.create({
         userId: req.params.userId
       })
       .then((speech) => {
         speechId = speech.id
-        console.log(speechId, 'is the speech id')
         return WatsonReport.create({
           speechId: speech.id,
-          transcript: results[0].alternatives[0].transcript,
-          likeCount: speechData.likeCount,
-          umCount: speechData.umCount,
+          transcript: getTranscript(results),
+          likeCount: speechTranscript.likeCount,
+          umCount: speechTranscript.umCount,
+          wordCount: getLengthAndConfidence(results)[0],
+          confidence: getLengthAndConfidence(results)[1].toFixed(2),
           // get from AWS or front-end
           duration: 0
         })
