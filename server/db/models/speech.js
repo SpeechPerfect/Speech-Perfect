@@ -3,8 +3,9 @@ const db = require('../db')
 
 const Speech = db.define('speech', {
   title: {
-    type: Sequelize.STRING
-  }
+    type: Sequelize.STRING,
+    defaultValue: 'Test Speech'
+    }
 }, {
     scopes: {
       populated: () => ({
