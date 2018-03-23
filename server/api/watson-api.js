@@ -40,7 +40,9 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     }
     dataAnalysis(params)
     .then(results => {
-      let speechData = analyzeTranscript(results[0].alternatives[0].transcript)
+      console.log(results)
+      let speechTranscript = analyzeTranscript(results[0].alternatives[0].transcript)
+      let confidence =  results[0].alternatives[0].confidence
       Speech.create({
         userId: req.params.userId
       })
@@ -50,8 +52,9 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
         return WatsonReport.create({
           speechId: speech.id,
           transcript: results[0].alternatives[0].transcript,
-          likeCount: speechData.likeCount,
-          umCount: speechData.umCount,
+          likeCount: speechTranscript.likeCount,
+          umCount: speechTranscript.umCount,
+          confidence: confidence,
           // get from AWS or front-end
           duration: 0
         })

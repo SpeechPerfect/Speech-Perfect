@@ -14,6 +14,9 @@ const WatsonReport = db.define('watsonReport', {
   },
   transcript: {
     type: Sequelize.TEXT
+  },
+  confidence:{
+    type: Sequelize.DECIMAL
   }
 })
 
