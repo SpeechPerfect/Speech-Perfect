@@ -37,10 +37,11 @@ let getConfidence = (dataArr, transcriptLength) => {
   let totalConfidence = dataArr.map((x , i) => {
     return dataArr[i].confidence * (x.sectionLength / transcriptLength )
   }).reduce((a, b) => a + b)
-  console.log(totalConfidence)
+  return totalConfidence
+
 }
 
-let getLength = (arr) => {
+let getLengthAndConfidence = (arr) => {
   let transcriptLength  = 0
   let sectionInfo = []
   let transcript = arr.map(result => {
@@ -52,20 +53,15 @@ let getLength = (arr) => {
     transcriptLength += sectionLength
     return result.alternatives[0].transcript
   })
-  console.log('INFO', { transcriptLength, sectionInfo})
-  getConfidence(sectionInfo, transcriptLength)
+  let totalConfidence = getConfidence(sectionInfo, transcriptLength)
+  console.log('TOTAL CONFIDENCE',totalConfidence)
+  console.log('RETURNED VALUE',[transcriptLength, totalConfidence])
+  return [transcriptLength, totalConfidence]
 }
 
 let getTranscript = (arr) => {
   return arr.map(result => result.alternatives[0].transcript.trim()).join(' ')
 }
-
- 
-  // console.log(totalConfidence)
-  //   // return sectionArr.map((length,i) => {
-  //   //   return confidenceArr[i] * (length / transcriptLength )
-  //   // }).reduce((a, b) => a + b)
-  // }
 
 router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     const params = {
@@ -74,25 +70,20 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     }
     dataAnalysis(params)
     .then(results => {
-      console.log(results)
-      // console.log('version', results[0])
-      // console.log('version 2', results[1])
-      console.log(getTranscript(results))
-      getLength(results)
+      console.log('GET LENGTH AND CONFIDENCE', getLengthAndConfidence(results)[1])
       let speechTranscript = analyzeTranscript(results[0].alternatives[0].transcript)
-      let confidence =  results[0].alternatives[0].confidence
       Speech.create({
         userId: req.params.userId
       })
       .then((speech) => {
         speechId = speech.id
-        console.log(speechId, 'is the speech id')
         return WatsonReport.create({
           speechId: speech.id,
           transcript: getTranscript(results),
           likeCount: speechTranscript.likeCount,
           umCount: speechTranscript.umCount,
-          confidence: confidence,
+          wordCount: getLengthAndConfidence(results)[0],
+          confidence: getLengthAndConfidence(results)[1].toFixed(2),
           // get from AWS or front-end
           duration: 0
         })
