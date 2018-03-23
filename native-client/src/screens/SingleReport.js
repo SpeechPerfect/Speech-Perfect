@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, ScrollView, FlatList, TouchableHighlight, Alert } from 'react-native'
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
 
-import { List, ListItem } from "react-native-elements"
+import { List, ListItem } from 'react-native-elements'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import axios from 'axios'
 import styles from '../../assets/stylesheet'
@@ -28,8 +28,8 @@ export default class SingleReport extends Component {
     console.log('params', this.props.navigation.state.params)
     let speechId = this.props.navigation.state.params.speechId
     let userId = this.props.navigation.state.params.userId
-    fetch(`${API_ROOT}/api/watson-api/${userId}/${speechId}`, {
-      method: "get",
+    fetch(`${API_ROOT}/api/speech/${userId}/${speechId}`, {
+      method: 'get',
     })
       .then(speech => {
         console.log(speech)
@@ -42,16 +42,17 @@ export default class SingleReport extends Component {
   }
 
   _renderItem = ({ item }) => (
-      <TouchableHighlight id={item.id} onPress={() => {
+      <TouchableHighlight
+id={item.id} onPress={() => {
         Alert.alert('The appropriate pace for public speaking is between 140 - 160 words per minute')
         this.props.navigation.navigate('profile', { speechId: item.id })}
         } >
-          <Text style={{fontSize: 24, color:'black'}}>{item[0]} {item[1]}</Text>
+          <Text style={{fontSize: 24, color: 'black'}}>{item[0]} {item[1]}</Text>
       </TouchableHighlight>
   )
 
   _playAudio = async () => {
-    soundObject= new Expo.Audio.Sound()
+    soundObject = new Expo.Audio.Sound()
 
     this.setState({playing: true, started: true})
     try {
@@ -84,13 +85,14 @@ export default class SingleReport extends Component {
     console.log(this.props.navigation.state.params)
     console.log(this.state.speech)
     speech = this.state.speech
-    duration = speech ? speech.watsonReport.duration/1000 : ''
-    wordCount = speech ? (speech.watsonReport.transcript.split(" ").length)*100 : ''
-    pace = speech ? Math.floor(wordCount / (duration/60)) : ''
-    clarity = speech ? Math.floor(wordCount / (duration*60)) : ''
-    umCount = speech? speech.watsonReport.umCount : ''
-    likeCount = speech? speech.watsonReport.likeCount : ''
-    let data = [['Duration: ', duration], ['Word Count: ', wordCount], ['Pace: ',pace], ['Um Count: ', umCount], ['Like Count: ',likeCount]]
+    duration = speech ? speech.watsonReport.duration / 1000 : ''
+    wordCount = speech ? (speech.watsonReport.transcript.split(' ').length) : ''
+    pace = speech ? Math.floor(wordCount / (duration / 60)) : ''
+    clarity = speech ? Math.floor(wordCount / (duration * 60)) : ''
+    umCount = speech ? speech.watsonReport.umCount : ''
+    likeCount = speech ? speech.watsonReport.likeCount : ''
+    let data = [['Duration: ', duration], ['Word Count: ', wordCount], ['Pace: ', pace], ['Um Count: ', umCount], ['Like Count: ', likeCount]]
+
     return (
     <View style={styles.resultsContainer}>
       {speech &&
@@ -141,7 +143,7 @@ export default class SingleReport extends Component {
         </View>
         <View style={styles.transcript}>
         {speech &&
-          <Text style={{color: 'white', fontSize:30}}> {speech.watsonReport.transcript} </Text>
+          <Text style={{color: 'white', fontSize: 30}}> {speech.watsonReport.transcript} </Text>
         }
         </View>
       </View>

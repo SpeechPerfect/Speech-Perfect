@@ -110,10 +110,4 @@ router.get('/:id', (req, res, next) => {
 })
 
 
-router.get('/:userId/:speechId', (req, res, next) => {
-  console.log('params')
-  Speech.scope('populated').findById(req.params.speechId)
-    .then(result => res.json(result))
-})
-
 module.exports = router

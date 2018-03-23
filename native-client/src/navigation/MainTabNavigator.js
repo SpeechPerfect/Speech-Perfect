@@ -24,7 +24,8 @@ export default TabNavigator (
             height: 20,
             // tintColor:'rgb(252,197,76)',
           },
-          headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('results')} />,
+          // Why do we need this?
+          // headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('results')} />,
           headerTintColor: '#12092f',
         }),
         },
@@ -48,7 +49,7 @@ export default TabNavigator (
                 backgroundColor: 'white',
                 height: 20
               },
-              headerLeft: <Button title='Profile' color='#12092f' onPress={() => navigation.navigate('profile')} />,
+              headerLeft: <Button title='Back to Profile' color='#12092f' onPress={() => navigation.navigate('profile')} />,
               headerTintColor: '#12092f',
             }),
             },

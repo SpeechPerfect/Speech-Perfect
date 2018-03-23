@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, View, AsyncStorage as store } from 'react-native'
+import { Alert, Button, View, AsyncStorage as store } from 'react-native'
 import API_ROOT from '../../IP_addresses'
 
 class Uploader extends Component {
@@ -39,6 +39,7 @@ class Uploader extends Component {
       .then(idOrError => {
         if (idOrError === 'Low confidence') {
           console.log('Front end detects low confidence')
+          return Alert.alert('Poor recording quality', 'Please re-record your message for best accuracy.')
         } else {
           this.sendToAws(data, idOrError)
         }
