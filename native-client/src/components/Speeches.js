@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { View, Text, FlatList, Alert, ActivityIndicator, TouchableOpacity, TouchableWithoutFeedback } from "react-native"
-import { List, ListItem, SearchBar } from "react-native-elements"
+import { List, ListItem, SearchBar, Card } from "react-native-elements"
 import Swipeout from 'react-native-swipeout'
 import SingleSpeechThumbnail from './SingleSpeechThumbnail'
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
@@ -41,14 +41,18 @@ class Speeches extends Component {
   }
 
   renderHeader = () => {
-    return <View style={{flexDirection: 'row', alignItems:'flex-end', justifyContent:'flex-end', backgroundColor:'lightgrey', width:'100%'}} >
+    return <View style={{flexDirection: 'row', alignItems:'flex-end', justifyContent:'flex-end', margin:3}} >
+            {/* <View style={{width: '95%'}}>
+              <SearchBar placeholder="Type Here..." lightTheme round />
+            </View>
+            <View> */}
               <TouchableOpacity onPress={() => this.props.  deleteUsersSpeeches(this.props.id)}>
                 <Ionicons
                   name="ios-trash"
-                  style={{marginTop:5, marginRight:5}}
                   size={26}
                   color="#12092f" />
               </TouchableOpacity>
+            {/* </View> */}
           </View>
   }
 
@@ -78,7 +82,6 @@ class Speeches extends Component {
       underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
       onPress: () => this.props.deleteSpeech(item)
     }]}
-    style={{marginLeft:8, marginTop: 8, marginBottom: 3}}
     autoClose={true}
     backgroundColor= 'transparent'>
       <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id, userId: item.userId })} >
@@ -97,7 +100,7 @@ class Speeches extends Component {
 
   render() {
     return (
-      <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, marginTop: -2 }}>
+      <Card>
         <FlatList
           keyExtractor= {(speech, index) => index }
           data={this.props.speeches}
@@ -110,7 +113,8 @@ class Speeches extends Component {
           onEndReached={this.handleLoadMore}
           onEndReachedThreshold={50}
         />
-      </List>
+  
+    </Card>
     )
   }
 }
