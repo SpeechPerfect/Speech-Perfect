@@ -33,6 +33,31 @@ let analyzeTranscript = (str) => {
   return obj
 }
 
+
+let getLength = (arr) => {
+  let transcriptLength  = 0
+  let sectionLengths = []
+  let sectionConfidences = []
+  let transcript = arr.map(result => {
+    const sectionLength = result.alternatives[0].transcript.split(' ').length
+    sectionLengths.push(sectionLength)
+    sectionConfidences.push(result.alternatives[0].confidence)
+    transcriptLength += sectionLength
+    return result.alternatives[0].transcript
+  })
+ console.log({ transcriptLength, sectionConfidences, sectionLengths })
+}
+
+let getTranscript = (arr) => {
+  return arr.map(result => result.alternatives[0].transcript.trim()).join(' ')
+}
+
+ let getConfidence = (sectionArr, confidenceArr, transcriptLength) => {
+    return sectionArr.map((length,i) => {
+      return confidenceArr[i] * (length / transcriptLength )
+    }).reduce((a, b) => a + b)
+  }
+
 router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     const params = {
       audio: fs.createReadStream(req.file.path),
@@ -41,6 +66,10 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     dataAnalysis(params)
     .then(results => {
       console.log(results)
+      // console.log('version', results[0])
+      // console.log('version 2', results[1])
+      getTranscript(results)
+      getLength(results)
       let speechTranscript = analyzeTranscript(results[0].alternatives[0].transcript)
       let confidence =  results[0].alternatives[0].confidence
       Speech.create({
@@ -51,7 +80,7 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
         console.log(speechId, 'is the speech id')
         return WatsonReport.create({
           speechId: speech.id,
-          transcript: results[0].alternatives[0].transcript,
+          transcript: getTranscript(results),
           likeCount: speechTranscript.likeCount,
           umCount: speechTranscript.umCount,
           confidence: confidence,
