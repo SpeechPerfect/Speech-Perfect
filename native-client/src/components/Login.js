@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { Text, View, AsyncStorage as store, Button, TextInput} from 'react-native'
-import MainTabNavigator from '../navigation/MainTabNavigator.js'
+import Expo, { Facebook } from 'expo'
 import axios from 'axios'
+
+import MainTabNavigator from '../navigation/MainTabNavigator.js'
+import FacebookLogin from './FacebookLogin'
 import API_ROOT from '../../IP_addresses.js'
 
 const styles = {
@@ -42,11 +45,32 @@ export default class LoginForm extends Component {
         return <Button title="Login" onPress={this.onButtonPress.bind(this)} />
     }
 
+    loginWithFacebook() {
+        console.log('wtf')
+        return async function logIn() {
+            const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('2003101366682775', {
+                permissions: ['public_profile']
+              })
+              console.log('why not')
+            if (type === 'success') {
+              // Get the user's name using Facebook's Graph API
+              console.log('wtf')
+              const response = await fetch(
+                `https://graph.facebook.com/me?access_token=${token}`);
+              Alert.alert(
+                'Logged in!',
+                `Hi ${(await response.json()).name}!`,
+              );
+            }
+          }
+    }
+
     render() {
         const err = this.state.error
         if (this.state.loggedin) return <MainTabNavigator />
         return (
             <View style={styles.container}>
+            {/* <Button title="Facebook" onPress={this.loginWithFacebook.bind(this)} /> */}
               <Text style={{color: 'white'}}>
                 Email:
               </Text>
@@ -58,6 +82,8 @@ export default class LoginForm extends Component {
               placeholder="password here" onChangeText={ this.onPasswordChange.bind(this) } />
               {this.renderButton()}
               {( err ) && <Text>Something's gone wrong, maybe an invalid username/password combination</Text>}
+              <Text> or </Text>
+              <FacebookLogin />
             </View>
         )
     }

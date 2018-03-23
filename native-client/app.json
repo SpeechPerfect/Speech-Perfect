@@ -2,9 +2,11 @@
   "expo": {
     "sdkVersion": "25.0.0",
     "splash": {
-      "image": "./assets/splashscreen.png",
-      "resizeMode": "cover",
-      // "backgroundColor": "#FEF9B0"
+      "image": "./assets/Drawing.png",
+      "resizeMode": "cover"
     }
-  }
+  },
+  "facebookScheme": "fb2003101366682775",
+  "facebookDisplayName": "Pitch Perfect",
+  "facebookAppID": "2003101366682775"
 }
