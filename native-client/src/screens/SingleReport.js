@@ -8,6 +8,7 @@ import axios from 'axios'
 import styles from '../../assets/stylesheet'
 import API_ROOT from '../../IP_addresses.js'
 let speech
+let soundObject
 
 export default class SingleReport extends Component {
   static navigationOptions = {
@@ -17,7 +18,9 @@ export default class SingleReport extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        speech: null
+        speech: null,
+        playing: false,
+        started: false,
     }
   }
 
@@ -48,13 +51,32 @@ export default class SingleReport extends Component {
   )
 
   _playAudio = async () => {
-    const soundObject = new Expo.Audio.Sound()
+    soundObject= new Expo.Audio.Sound()
+
+    this.setState({playing: true, started: true})
     try {
       await soundObject.loadAsync({ uri: `${this.state.speech.awsReport.url}`})
       await soundObject.playAsync()
       // Your sound is playing!
     } catch (error) {
       // An error occurred!
+    }
+  }
+
+  _pauseAudio = async () => {
+    let playing = this.state.playing
+
+    if (playing) {
+      this.setState({playing: false})
+      try {
+        await soundObject.pauseAsync()
+        // Your sound is playing!
+      } catch (error) {
+        // An error occurred!
+      }
+    } else {
+      this.setState({playing: true})
+      await soundObject.playAsync()
     }
   }
 
@@ -89,6 +111,7 @@ export default class SingleReport extends Component {
 
       <View style={styles.resultsBottomContainer}>
         <View style={styles.audioFeedback}>
+          {!this.state.started &&
           <TouchableHighlight onPress={this._playAudio}>
               <MaterialCommunityIcons
               name={'play-circle-outline'}
@@ -96,6 +119,25 @@ export default class SingleReport extends Component {
               color={'#12092f'}
               />
             </TouchableHighlight>
+          }
+          {this.state.started && this.state.playing &&
+            <TouchableHighlight onPress={this._pauseAudio}>
+              <MaterialCommunityIcons
+              name={'pause-circle-outline'}
+              size={67}
+              color={'#12092f'}
+              />
+            </TouchableHighlight>
+          }
+           {this.state.started && !this.state.playing &&
+          <TouchableHighlight onPress={this._pauseAudio}>
+              <MaterialCommunityIcons
+              name={'play-circle-outline'}
+              size={67}
+              color={'#12092f'}
+              />
+            </TouchableHighlight>
+          }
         </View>
         <View style={styles.transcript}>
         {speech &&
