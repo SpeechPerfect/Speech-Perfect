@@ -70,7 +70,10 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     }
     dataAnalysis(params)
     .then(results => {
-      console.log('GET LENGTH AND CONFIDENCE', getLengthAndConfidence(results)[1])
+      let speechConfidence = getLengthAndConfidence(results)[1]
+      if (speechConfidence < 0.85) {
+        return res.status(400).json('Low confidence')
+      }
       let speechTranscript = analyzeTranscript(results[0].alternatives[0].transcript)
       Speech.create({
         userId: req.params.userId
@@ -83,7 +86,7 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
           likeCount: speechTranscript.likeCount,
           umCount: speechTranscript.umCount,
           wordCount: getLengthAndConfidence(results)[0],
-          confidence: getLengthAndConfidence(results)[1].toFixed(2),
+          confidence: speechConfidence.toFixed(2),
           // get from AWS or front-end
           duration: 0
         })
@@ -93,12 +96,10 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
           })
         })
         .then(() => {
-          console.log('speech id is', speechId)
           res.json(speechId)
         })
       })
     })
-    // .then((results) => res.status(200).send(results))
     .catch(next)
 })
 

@@ -36,7 +36,14 @@ class Uploader extends Component {
         },
       })
       .then(res => res.json())
-      .then(foundId => this.sendToAws(data, foundId))
+      .then(idOrError => {
+        if (idOrError === 'Low confidence') {
+          console.log('Front end detects low confidence')
+        } else {
+          this.sendToAws(data, foundId)
+        }
+
+      })
     }
     //SEND TO AWS
   sendToAws(data, id) {
