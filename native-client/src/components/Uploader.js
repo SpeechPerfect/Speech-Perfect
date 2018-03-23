@@ -27,20 +27,6 @@ class Uploader extends Component {
         name: "testAudio",
         })
 
-<<<<<<< HEAD
-    fetch(`${API_ROOT}/api/audio/upload`, {
-      method: "post",
-      body: data,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-      .then(res => {
-        console.log(res)
-      })
-    .then( () => fetch(`${API_ROOT}/api/watson-api`, {
-=======
       fetch(`${API_ROOT}/api/watson-api/upload/${this.state.userId}`, {
         method: "post",
         body: data,
@@ -55,7 +41,6 @@ class Uploader extends Component {
     //SEND TO AWS
   sendToAws(data, id) {
     fetch(`${API_ROOT}/api/audio/upload/${id}`, {
->>>>>>> master
       method: "post",
       body: data,
       headers: {
@@ -67,7 +52,6 @@ class Uploader extends Component {
         console.log(res)
       })
       .catch(err => console.log(err))
-    )
   }
 
 

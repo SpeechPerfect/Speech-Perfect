@@ -24,7 +24,7 @@ export default class App extends React.Component {
                 .then(() => this.setState({ fontLoaded: true }))
         }
         else {
-        setTimeout(() => this.setState({ fontLoaded: true }), 1900)
+        setTimeout(() => this.setState({ fontLoaded: true }), 1100)
             }
         }
 

@@ -5,5 +5,8 @@
       "image": "./assets/Drawing.png",
       "resizeMode": "cover"
     }
-  }
+  },
+  "facebookScheme": "fb2003101366682775",
+  "facebookDisplayName": "Pitch Perfect",
+  "facebookAppID": "2003101366682775"
 }

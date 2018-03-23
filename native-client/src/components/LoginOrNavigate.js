@@ -31,7 +31,7 @@ class LoginOrNavigate extends React.Component {
         console.log('loggedin', loggedin)
         return (
             <View style={styles.container}>
-                {(loggedin) ? <MainTabNavigator /> : <Login /> }
+                {(loggedin) ? <Login /> : <Login /> }
             </View>
         )
     }
