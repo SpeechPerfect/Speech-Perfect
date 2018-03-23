@@ -42,7 +42,7 @@ export default class LoginForm extends Component {
     }
 
     renderButton() {
-        return <Button title="Login" onPress={this.onButtonPress.bind(this)} />
+        return <Button className="login" title="Login" onPress={this.onButtonPress.bind(this)} />
     }
 
 
