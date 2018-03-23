@@ -7,7 +7,7 @@ class Uploader extends Component {
     super(props)
     this.state = {
       userId: '',
-      haveResults: false
+      speechId: null
     }
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -47,14 +47,18 @@ class Uploader extends Component {
       .then(idOrError => {
         if (idOrError === 'Low confidence') {
           console.log('Front end detects low confidence')
-          return Alert.alert('Poor recording quality', 'Please re-record your message for best accuracy.')
-        } else {
-          this.sendToAws(data, idOrError)
+          Alert.alert('Poor recording quality', 'Please re-record your message for best accuracy.')
+          throw new Error('Poor recording quality')
         }
+          this.setState({
+            speechId: idOrError
+          })
+          this.sendToAws(data, idOrError)
       })
-      .then(() => this.setState({
-        haveResults: true
-      }))
+      .then(() => {
+        // navigate to profile page
+      this.props.navigation.navigate('singleReport', { speechId: this.state.speechId, userId: this.state.userId })
+      })
       .catch(err => console.log(err))
     }
     //SEND TO AWS
@@ -74,7 +78,7 @@ class Uploader extends Component {
   }
 
   render() {
-    console.log('state is ', this.state)
+    console.log('state is ', this.props.hasResults)
     return (
       <View>
         <Button onPress={this.onSubmit} color="white" title="click to send audio" />
