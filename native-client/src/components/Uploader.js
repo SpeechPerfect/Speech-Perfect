@@ -6,7 +6,8 @@ class Uploader extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: ''
+      userId: '',
+      haveResults: false
     }
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -50,8 +51,10 @@ class Uploader extends Component {
         } else {
           this.sendToAws(data, idOrError)
         }
-
       })
+      .then(() => this.setState({
+        haveResults: true
+      }))
       .catch(err => console.log(err))
     }
     //SEND TO AWS
@@ -70,10 +73,8 @@ class Uploader extends Component {
       .catch(err => console.log(err))
   }
 
-
-
-
   render() {
+    console.log('state is ', this.state)
     return (
       <View>
         <Button onPress={this.onSubmit} color="white" title="click to send audio" />
