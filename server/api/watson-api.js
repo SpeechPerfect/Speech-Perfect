@@ -33,30 +33,39 @@ let analyzeTranscript = (str) => {
   return obj
 }
 
+let getConfidence = (dataArr, transcriptLength) => {
+  let totalConfidence = dataArr.map((x , i) => {
+    return dataArr[i].confidence * (x.sectionLength / transcriptLength )
+  }).reduce((a, b) => a + b)
+  console.log(totalConfidence)
+}
 
 let getLength = (arr) => {
   let transcriptLength  = 0
-  let sectionLengths = []
-  let sectionConfidences = []
+  let sectionInfo = []
   let transcript = arr.map(result => {
-    const sectionLength = result.alternatives[0].transcript.split(' ').length
-    sectionLengths.push(sectionLength)
-    sectionConfidences.push(result.alternatives[0].confidence)
+    let obj = {}
+    const sectionLength = result.alternatives[0].transcript.trim().split(' ').length
+    obj.sectionLength = sectionLength
+    obj.confidence = result.alternatives[0].confidence
+    sectionInfo.push(obj)
     transcriptLength += sectionLength
     return result.alternatives[0].transcript
   })
- console.log({ transcriptLength, sectionConfidences, sectionLengths })
+  console.log('INFO', { transcriptLength, sectionInfo})
+  getConfidence(sectionInfo, transcriptLength)
 }
 
 let getTranscript = (arr) => {
   return arr.map(result => result.alternatives[0].transcript.trim()).join(' ')
 }
 
- let getConfidence = (sectionArr, confidenceArr, transcriptLength) => {
-    return sectionArr.map((length,i) => {
-      return confidenceArr[i] * (length / transcriptLength )
-    }).reduce((a, b) => a + b)
-  }
+ 
+  // console.log(totalConfidence)
+  //   // return sectionArr.map((length,i) => {
+  //   //   return confidenceArr[i] * (length / transcriptLength )
+  //   // }).reduce((a, b) => a + b)
+  // }
 
 router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     const params = {
@@ -68,7 +77,7 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
       console.log(results)
       // console.log('version', results[0])
       // console.log('version 2', results[1])
-      getTranscript(results)
+      console.log(getTranscript(results))
       getLength(results)
       let speechTranscript = analyzeTranscript(results[0].alternatives[0].transcript)
       let confidence =  results[0].alternatives[0].confidence
