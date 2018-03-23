@@ -45,32 +45,12 @@ export default class LoginForm extends Component {
         return <Button title="Login" onPress={this.onButtonPress.bind(this)} />
     }
 
-    loginWithFacebook() {
-        console.log('wtf')
-        return async function logIn() {
-            const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('2003101366682775', {
-                permissions: ['public_profile']
-              })
-              console.log('why not')
-            if (type === 'success') {
-              // Get the user's name using Facebook's Graph API
-              console.log('wtf')
-              const response = await fetch(
-                `https://graph.facebook.com/me?access_token=${token}`);
-              Alert.alert(
-                'Logged in!',
-                `Hi ${(await response.json()).name}!`,
-              );
-            }
-          }
-    }
 
     render() {
         const err = this.state.error
         if (this.state.loggedin) return <MainTabNavigator />
         return (
             <View style={styles.container}>
-            {/* <Button title="Facebook" onPress={this.loginWithFacebook.bind(this)} /> */}
               <Text style={{color: 'white'}}>
                 Email:
               </Text>
