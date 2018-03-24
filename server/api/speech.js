@@ -1,14 +1,12 @@
 const router = require('express').Router()
-const { Speech, WatsonReport } = require('../db/models')
+const { WatsonReport, Speech, AwsReport } = require('../db/models')
 
-
-router.get('/:userId', (req, res, next) => {
-  Speech.findAll({
+router.get('/watson-data/:speechId', (req, res, next) => {
+  WatsonReport.findOne({
     where: {
-      userId: req.params.userId
-    }
-  })
-  .then(foundSpeeches => res.json(foundSpeeches))
+    speechId: req.params.speechId
+  }})
+  .then(result => res.json(result))
 })
 router.get('/watson-data/:speechId', (req, res, next) => {
   WatsonReport.findOne({
@@ -18,10 +16,13 @@ router.get('/watson-data/:speechId', (req, res, next) => {
   .then(result => res.json(result))
 })
 
-router.get('/:userId/:speechId', (req, res, next) => {
-  console.log('params')
-  Speech.scope('populated').findById(req.params.speechId)
-    .then(result => res.json(result))
+router.get('/aws-data/:speechId', (req, res, next) => {
+  AwsReport.findOne({
+    where: {
+      speechId: req.params.speechId
+    }
+  })
+  .then(result => res.json(result))
 })
 
 router.delete('/:userId/:speechId', (req, res, next) => {
@@ -43,7 +44,5 @@ router.delete('/:userId', (req, res, next) => {
   })
   .then(deletedSpeeches => res.json(deletedSpeeches))
 })
-
-
 
 module.exports = router

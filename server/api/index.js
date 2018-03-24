@@ -1,7 +1,7 @@
 const router = require('express').Router()
 module.exports = router
 
-router.use('/users', require('./users'))
+router.use('/user', require('./user'))
 router.use('/watson-api', require('./watson-api'))
 router.use('/audio', require('./audio'))
 router.use('/speech', require('./speech'))

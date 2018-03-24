@@ -34,7 +34,7 @@ let analyzeTranscript = (str) => {
 }
 
 let getConfidence = (dataArr, transcriptLength) => {
-  let totalConfidence = dataArr.map((x , i) => {
+  let totalConfidence = dataArr.map((x, i) => {
     return dataArr[i].confidence * (x.sectionLength / transcriptLength )
   }).reduce((a, b) => a + b)
   return totalConfidence
@@ -44,7 +44,7 @@ let getConfidence = (dataArr, transcriptLength) => {
 let getLengthAndConfidence = (arr) => {
   let transcriptLength  = 0
   let sectionInfo = []
-  let transcript = arr.map(result => {
+  arr.map(result => {
     let obj = {}
     const sectionLength = result.alternatives[0].transcript.trim().split(' ').length
     obj.sectionLength = sectionLength
@@ -54,8 +54,8 @@ let getLengthAndConfidence = (arr) => {
     return result.alternatives[0].transcript
   })
   let totalConfidence = getConfidence(sectionInfo, transcriptLength)
-  console.log('TOTAL CONFIDENCE',totalConfidence)
-  console.log('RETURNED VALUE',[transcriptLength, totalConfidence])
+  console.log('TOTAL CONFIDENCE', totalConfidence)
+  console.log('RETURNED VALUE', [transcriptLength, totalConfidence])
   return [transcriptLength, totalConfidence]
 }
 
@@ -64,6 +64,7 @@ let getTranscript = (arr) => {
 }
 
 router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
+    console.log('req body is', req.body)
     const params = {
       audio: fs.createReadStream(req.file.path),
       content_type: 'audio/wav rate=44100'
@@ -88,7 +89,7 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
           wordCount: getLengthAndConfidence(results)[0],
           confidence: speechConfidence.toFixed(2),
           // get from AWS or front-end
-          duration: 0
+          duration: (req.body.duration / 1000)
         })
         .then((createdWReport) => {
           return speech.update({
@@ -102,12 +103,5 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     })
     .catch(next)
 })
-
-router.get('/:id', (req, res, next) => {
-  console.log('params', req.params)
-  Speech.scope('populated').findById(req.params.id)
-    .then(result => res.json(result))
-})
-
 
 module.exports = router
