@@ -46,7 +46,9 @@ class Speeches extends Component {
               <SearchBar placeholder="Type Here..." lightTheme round />
             </View>
             <View> */}
-              <TouchableOpacity onPress={() => this.props.  deleteUsersSpeeches(this.props.id)}>
+              <TouchableOpacity onPress={() => {
+                console.log('DELETING')
+                this.props.deleteUsersSpeeches(this.props.id)}}>
                 <Ionicons
                   name="ios-trash"
                   size={26}
@@ -79,17 +81,19 @@ class Speeches extends Component {
     right={[{
       text: 'Delete',
       backgroundColor: '#12092f',
-      underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-      onPress: () => this.props.deleteSpeech(item)
-    }]}
+      // underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+      onPress: () => {
+        console.log('deleting one')
+        this.props.deleteSpeech(item)
+    }}]}
     autoClose={true}
     backgroundColor= 'transparent'>
       <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id, userId: item.userId })} >
         <View>
-        {this.props.id === null &&
+        {!this.props.speeches.length === null &&
           <Text style={styles.text}>Loading...</Text>}
-          {this.props.id &&
-                <View key={item.id}>
+          {this.props.speeches.length &&
+                <View key={item.id} style={{height: 60}}>
                   <SingleSpeechThumbnail speech={item} />
                 </View>
           }
@@ -99,9 +103,10 @@ class Speeches extends Component {
   )
 
   render() {
+    console.log('speeches are ', this.props.speeches)
     return (
       <Card>
-        <FlatList
+        {this.props.id && <FlatList
           keyExtractor= {(speech, index) => index }
           data={this.props.speeches}
           renderItem={this._renderItem}
@@ -112,8 +117,7 @@ class Speeches extends Component {
           refreshing={this.state.refreshing}
           onEndReached={this.handleLoadMore}
           onEndReachedThreshold={50}
-        />
-
+        />}
     </Card>
     )
   }
