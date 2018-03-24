@@ -110,8 +110,8 @@ export default class SingleReport extends Component {
               />
             </TouchableHighlight>
           }
+          <TouchableHighlight onPress={this._navigateTranscript}><Text style={{fontSize: 25,fontWeight: 'bold'}}>View Transcript</Text></TouchableHighlight>
 
-          <TouchableHighlight onPress={this._navigateTranscript}><Text>View Word repetition</Text></TouchableHighlight>
         </View>
         <View style={styles.transcript}>
         {/* {this.state.speechId &&
