@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, FlatList, TouchableHighlight, Alert } from 'react-native'
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
+import {SpeechList} from '../components'
 
 import { List, ListItem } from 'react-native-elements'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import axios from 'axios'
-import styles from '../../assets/stylesheet'
-import API_ROOT from '../../IP_addresses.js'
 let speech
 let soundObject
 
@@ -18,27 +16,10 @@ export default class SingleReport extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        speech: null,
+        speechId: this.props.navigation.state.params.speechId,
         playing: false,
         started: false,
     }
-  }
-
-  componentDidMount = () => {
-    console.log('params', this.props.navigation.state.params)
-    let speechId = this.props.navigation.state.params.speechId
-    let userId = this.props.navigation.state.params.userId
-    fetch(`${API_ROOT}/api/speech/${userId}/${speechId}`, {
-      method: 'get',
-    })
-      .then(speech => {
-        console.log(speech)
-        const speechResult = JSON.parse(speech._bodyText)
-        this.setState({
-          speech: speechResult
-          })
-      })
-      .catch(err => console.log(err))
   }
 
   _renderItem = ({ item }) => (
@@ -82,36 +63,26 @@ id={item.id} onPress={() => {
   }
 
   render() {
-    console.log(this.props.navigation.state.params)
-    console.log(this.state.speech)
-    speech = this.state.speech
-    duration = speech ? speech.watsonReport.duration / 1000 : ''
-    wordCount = speech ? (speech.watsonReport.transcript.split(' ').length) : ''
-    pace = speech ? Math.floor(wordCount / (duration / 60)) : ''
-    clarity = speech ? Math.floor(wordCount / (duration * 60)) : ''
-    umCount = speech ? speech.watsonReport.umCount : ''
-    likeCount = speech ? speech.watsonReport.likeCount : ''
-    let data = [['Duration: ', duration], ['Word Count: ', wordCount], ['Pace: ', pace], ['Um Count: ', umCount], ['Like Count: ', likeCount]]
+    console.log('STATE IS', this.state)
+    // speech = this.state.speechId
+    // duration = speech ? speech.watsonReport.duration : ''
+    // wordCount = speech ? (speech.watsonReport.transcript.split(' ').length) : ''
+    // pace = speech ? Math.floor(wordCount / (duration/60)) : ''
+    // clarity = speech ? Math.floor(wordCount / (duration * 60)) : ''
+    // umCount = speech ? speech.watsonReport.umCount : ''
+    // likeCount = speech ? speech.watsonReport.likeCount : ''
+    // let data = [['Duration: ', duration], ['Word Count: ', wordCount], ['Pace: ', pace], ['Um Count: ', umCount], ['Like Count: ', likeCount]]
 
     return (
     <View style={styles.resultsContainer}>
       {speech &&
-         <FlatList
-           style={{marginLeft: 20}}
-           keyExtractor= {(speech, index) => index }
-           data={data}
-           renderItem={this._renderItem}
-           ItemSeparatorComponent={this.renderSeparator}
-           ListHeaderComponent={this.renderHeader}
-           ListFooterComponent={this.renderFooter}
-           onRefresh={this.handleRefresh}
-           refreshing={this.state.refreshing}
-           onEndReached={this.handleLoadMore}
-           onEndReachedThreshold={50}
-         />
-        }
+        <View>
+          <SpeechList speechId={this.state.speechId} />
+        <Text>Hello</Text>
+        </View>
+      }
 
-      <View style={styles.resultsBottomContainer}>
+      {/* <View style={styles.resultsBottomContainer}>
         <View style={styles.audioFeedback}>
           {!this.state.started &&
           <TouchableHighlight onPress={this._playAudio}>
@@ -146,7 +117,7 @@ id={item.id} onPress={() => {
           <Text style={{color: 'white', fontSize: 30}}> {speech.watsonReport.transcript} </Text>
         }
         </View>
-      </View>
+      </View> */}
 
     </View>
     )
