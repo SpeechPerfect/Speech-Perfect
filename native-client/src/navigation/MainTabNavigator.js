@@ -1,19 +1,20 @@
+/* eslint-disable new-cap */
 import React from 'react'
 import { Platform, Button } from 'react-native'
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 
 
-import RecordScreen from '../screens/RecordScreen'
-import ResultsScreen from '../screens/ResultsScreen'
-import Profile from '../screens/Profile'
-import SingleReport from '../screens/SingleReport'
+import { RecordScreen, ResultsScreen, Profile, SingleReport, Login } from '../screens'
 
-export default TabNavigator (
+export default TabNavigator(
   {
     Record: {
-      screen: RecordScreen,
+      screen: RecordScreen
     },
+      Login: {
+          screen: Login
+      },
     Profile: {
       screen: StackNavigator({
         profile: { screen: Profile, path: 'profile/:name',
@@ -38,7 +39,7 @@ export default TabNavigator (
                 backgroundColor: 'white',
                 height: 20
               },
-              headerLeft: <Button title='Profile' color='#12092f' onPress={() => navigation.navigate('profile')} />,
+              headerLeft: <Button title="Profile" color="#12092f" onPress={() => navigation.navigate('profile')} />,
               headerTintColor: '#12092f',
             }),
             },
@@ -49,7 +50,7 @@ export default TabNavigator (
                 backgroundColor: 'white',
                 height: 20
               },
-              headerLeft: <Button title='Back to Profile' color='#12092f' onPress={() => navigation.navigate('profile')} />,
+              headerLeft: <Button title="Back to Profile" color="#12092f" onPress={() => navigation.navigate('profile')} />,
               headerTintColor: '#12092f',
             }),
             },
@@ -64,21 +65,21 @@ export default TabNavigator (
   },
   {
     navigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused }) => {
+      tabBarIcon: ({ focused }) => { //eslint-disable-line
 
         const { routeName } = navigation.state
 
         let iconName
-        switch (routeName) {
-          case 'Record':
+        switch (routeName) { //eslint-disable-line default-case
+        case 'Record':
             iconName = Platform.OS === 'ios' ? `ios-microphone${focused ? '' : '-outline'}` : 'md-microphone'
             break
-          case 'Results':
+        case 'Results':
             iconName =
-              Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
-            case 'Profile':
+                Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
+        case 'Profile':
             iconName =
-              Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
+                Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
         }
         return (
           <Ionicons
