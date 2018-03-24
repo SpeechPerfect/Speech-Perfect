@@ -98,9 +98,12 @@ class Speeches extends Component {
      </Swipeout>
   )
 
+ 
+
   render() {
     return (
       <Card>
+        {/* {this.props.speeches ? this.renderSpeeches : <Text></Text>} */}
         <FlatList
           keyExtractor= {(speech, index) => index }
           data={this.props.speeches}

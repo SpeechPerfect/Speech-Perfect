@@ -36,7 +36,6 @@ router.delete('/:userId/:speechId', (req, res, next) => {
 })
 
 router.delete('/:userId', (req, res, next) => {
-  console.log("hmm", req.params)
   Speech.destroy({
     where: {
       userId: req.params.userId
