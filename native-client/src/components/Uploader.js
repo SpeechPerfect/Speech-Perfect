@@ -22,17 +22,18 @@ class Uploader extends Component {
 
   onSubmit() {
       const data = new FormData()
-      data.append("soundFile", {
+      data.append('soundFile', {
         uri: this.props.uri,
-        type: "audio/vnd.wav",
-        name: "testAudio",
+        type: 'audio/vnd.wav',
+        name: 'testAudio',
         })
+      data.append('duration', this.props.duration)
 
       fetch(`${API_ROOT}/api/watson-api/upload/${this.state.userId}`, {
-        method: "post",
+        method: 'post',
         body: data,
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
         },
       })
@@ -64,10 +65,10 @@ class Uploader extends Component {
     //SEND TO AWS
   sendToAws(data, id) {
     fetch(`${API_ROOT}/api/audio/upload/${id}`, {
-      method: "post",
+      method: 'post',
       body: data,
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
       },
     })
@@ -78,7 +79,7 @@ class Uploader extends Component {
   }
 
   render() {
-    console.log('state is ', this.props.hasResults)
+    console.log('DURATION IS', this.props.duration)
     return (
       <View>
         <Button onPress={this.onSubmit} color="white" title="click to send audio" />
