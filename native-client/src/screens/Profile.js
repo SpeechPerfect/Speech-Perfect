@@ -36,7 +36,7 @@ export default class Profile extends Component {
   }
 
   deleteSpeech = (speech) => {
-    axios.delete(`${API_ROOT}/api/speech/${speech.userId}/${speech.id}`)
+    axios.delete(`${API_ROOT}/api/speech/${speech.id}`)
     // .then(res => res.data)
     .then(() => this.getSpeeches())
     .then(err => console.log(err))
