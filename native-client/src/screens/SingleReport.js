@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, FlatList, TouchableHighlight, Alert } from 'react-native'
-import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
+import { Text, View, TouchableHighlight, Alert } from 'react-native'
+import Expo from 'expo'
+import {SpeechList} from '../components'
+import styles from '../../assets/stylesheet'
+import axios from 'axios'
+import API_ROOT from '../../IP_addresses'
 
 import { List, ListItem } from 'react-native-elements'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import axios from 'axios'
-import styles from '../../assets/stylesheet'
-import API_ROOT from '../../IP_addresses.js'
-let speech
 let soundObject
 
 export default class SingleReport extends Component {
@@ -18,45 +18,29 @@ export default class SingleReport extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        speech: null,
+        speechId: this.props.navigation.state.params.speechId,
+        awsData: null,
         playing: false,
         started: false,
     }
   }
 
-  componentDidMount = () => {
-    console.log('params', this.props.navigation.state.params)
-    let speechId = this.props.navigation.state.params.speechId
-    let userId = this.props.navigation.state.params.userId
-    fetch(`${API_ROOT}/api/speech/${userId}/${speechId}`, {
-      method: 'get',
-    })
-      .then(speech => {
-        console.log(speech)
-        const speechResult = JSON.parse(speech._bodyText)
-        this.setState({
-          speech: speechResult
-          })
+  componentDidMount() {
+    axios.get(`${API_ROOT}/api/speech/aws-data/${this.state.speechId}`)
+    .then(res => res.data)
+    .then((awsData) => {
+      this.setState({
+        awsData
       })
-      .catch(err => console.log(err))
+    })
   }
-
-  _renderItem = ({ item }) => (
-      <TouchableHighlight
-id={item.id} onPress={() => {
-        Alert.alert('The appropriate pace for public speaking is between 140 - 160 words per minute')
-        this.props.navigation.navigate('profile', { speechId: item.id })}
-        } >
-          <Text style={{fontSize: 24, color: 'black'}}>{item[0]} {item[1]}</Text>
-      </TouchableHighlight>
-  )
 
   _playAudio = async () => {
     soundObject = new Expo.Audio.Sound()
 
     this.setState({playing: true, started: true})
     try {
-      await soundObject.loadAsync({ uri: `${this.state.speech.awsReport.url}`})
+      await soundObject.loadAsync({ uri: `${this.state.awsData.url}`})
       await soundObject.playAsync()
       // Your sound is playing!
     } catch (error) {
@@ -82,34 +66,15 @@ id={item.id} onPress={() => {
   }
 
   render() {
-    console.log(this.props.navigation.state.params)
-    console.log(this.state.speech)
-    speech = this.state.speech
-    duration = speech ? speech.watsonReport.duration / 1000 : ''
-    wordCount = speech ? (speech.watsonReport.transcript.split(' ').length) : ''
-    pace = speech ? Math.floor(wordCount / (duration / 60)) : ''
-    clarity = speech ? Math.floor(wordCount / (duration * 60)) : ''
-    umCount = speech ? speech.watsonReport.umCount : ''
-    likeCount = speech ? speech.watsonReport.likeCount : ''
-    let data = [['Duration: ', duration], ['Word Count: ', wordCount], ['Pace: ', pace], ['Um Count: ', umCount], ['Like Count: ', likeCount]]
+    console.log('DATA IS', this.state.awsData)
 
     return (
     <View style={styles.resultsContainer}>
-      {speech &&
-         <FlatList
-           style={{marginLeft: 20}}
-           keyExtractor= {(speech, index) => index }
-           data={data}
-           renderItem={this._renderItem}
-           ItemSeparatorComponent={this.renderSeparator}
-           ListHeaderComponent={this.renderHeader}
-           ListFooterComponent={this.renderFooter}
-           onRefresh={this.handleRefresh}
-           refreshing={this.state.refreshing}
-           onEndReached={this.handleLoadMore}
-           onEndReachedThreshold={50}
-         />
-        }
+      {this.state.speechId &&
+        <View style={styles.resultsContainer}>
+          <SpeechList speechId={this.state.speechId} />
+        </View>
+      }
 
       <View style={styles.resultsBottomContainer}>
         <View style={styles.audioFeedback}>
@@ -142,9 +107,9 @@ id={item.id} onPress={() => {
           }
         </View>
         <View style={styles.transcript}>
-        {speech &&
+        {/* {this.state.speechId &&
           <Text style={{color: 'white', fontSize: 30}}> {speech.watsonReport.transcript} </Text>
-        }
+        } */}
         </View>
       </View>
 

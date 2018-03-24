@@ -75,7 +75,12 @@ export default class Recorder extends Component {
         console.log('recording has begun')
         setTimeout(async () => {
            await this.state.recording.getStatusAsync()
-            .then(data => console.log(data))
+            .then(data => {
+              console.log('DATA IS', data)
+              this.setState({
+                durationMillis: data.durationMillis
+              })
+            })
         }, 2000)
         // You are now recording!
       } catch (error) {
@@ -107,7 +112,7 @@ export default class Recorder extends Component {
         minutes: '',
         hours: '',
         isClicked: false,
-        duration: 0,
+        durationMillis: 0,
         intervals: 0,
         begin: false,
     })
@@ -162,7 +167,7 @@ export default class Recorder extends Component {
           </View>
           }
           {this.state.begin &&
-          <Uploader navigation={this.props.navigation} uri={this.state.recording._uri} />
+          <Uploader navigation={this.props.navigation} uri={this.state.recording._uri} duration={this.state.durationMillis} />
           }
           <View style={styles.startRecording}>
             <Button style={styles.button} color="white" onPress={buttonMethod} title={text}/>

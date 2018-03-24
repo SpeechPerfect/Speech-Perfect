@@ -3,7 +3,7 @@ import { View, Text, FlatList, Alert, ActivityIndicator, TouchableOpacity, Touch
 import { List, ListItem, SearchBar, Card } from "react-native-elements"
 import Swipeout from 'react-native-swipeout'
 import SingleSpeechThumbnail from './SingleSpeechThumbnail'
-import { MaterialIcons, Ionicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 import styles from '../../assets/stylesheet'
 
 class Speeches extends Component {
@@ -113,7 +113,7 @@ class Speeches extends Component {
           onEndReached={this.handleLoadMore}
           onEndReachedThreshold={50}
         />
-  
+
     </Card>
     )
   }
