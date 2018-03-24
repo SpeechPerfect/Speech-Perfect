@@ -47,6 +47,8 @@ export default class LoginForm extends Component {
 
     render() {
         const err = this.state.error
+        console.log(this.props.navigation)
+        if ( this.state.loggedin ) this.props.navigation.navigate('Record')
         return (
             <View style={styles.container}>
               <Text style={{color: 'white'}}>
