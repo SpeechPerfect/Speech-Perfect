@@ -33,7 +33,6 @@ export default class Recorder extends Component {
     }
 
     componentWillMount = async () => {
-        // store.clear()
         let user = await store.getItem('user')
         if (!user) this.props.navigation.navigate('Login')
     }
