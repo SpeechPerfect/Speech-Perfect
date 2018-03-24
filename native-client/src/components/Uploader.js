@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Button, View, AsyncStorage as store } from 'react-native'
+import { Alert, Button, View, AsyncStorage as store } from 'react-native'
 import API_ROOT from '../../IP_addresses'
 
 class Uploader extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: ''
+      userId: '',
+      speechId: null
     }
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -35,8 +36,30 @@ class Uploader extends Component {
           'Content-Type': 'multipart/form-data',
         },
       })
-      .then(res => res.json())
-      .then(foundId => this.sendToAws(data, foundId))
+      .then(res => {
+        if (res.status === 500) {
+          Alert.alert('No audio detected', 'Please re-record')
+          throw new Error('No audio found')
+        } else {
+          return res.json()
+        }
+      })
+      .then(idOrError => {
+        if (idOrError === 'Low confidence') {
+          console.log('Front end detects low confidence')
+          Alert.alert('Poor recording quality', 'Please re-record your message for best accuracy.')
+          throw new Error('Poor recording quality')
+        }
+          this.setState({
+            speechId: idOrError
+          })
+          this.sendToAws(data, idOrError)
+      })
+      .then(() => {
+        // navigate to profile page
+      this.props.navigation.navigate('singleReport', { speechId: this.state.speechId, userId: this.state.userId })
+      })
+      .catch(err => console.log(err))
     }
     //SEND TO AWS
   sendToAws(data, id) {
@@ -54,10 +77,8 @@ class Uploader extends Component {
       .catch(err => console.log(err))
   }
 
-
-
-
   render() {
+    console.log('state is ', this.props.hasResults)
     return (
       <View>
         <Button onPress={this.onSubmit} color="white" title="click to send audio" />

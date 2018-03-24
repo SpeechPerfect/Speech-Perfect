@@ -157,7 +157,7 @@ export default class Recorder extends Component {
           </View>
           }
           {this.state.begin &&
-          <Uploader uri={this.state.recording._uri} />
+          <Uploader navigation={this.props.navigation} uri={this.state.recording._uri} />
           }
           <View style={styles.startRecording}>
             <Button style={styles.button} color="white" onPress={buttonMethod} title={text}/>

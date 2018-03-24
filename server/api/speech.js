@@ -10,6 +10,12 @@ router.get('/:userId', (req, res, next) => {
   .then(foundSpeeches => res.json(foundSpeeches))
 })
 
+router.get('/:userId/:speechId', (req, res, next) => {
+  console.log('params')
+  Speech.scope('populated').findById(req.params.speechId)
+    .then(result => res.json(result))
+})
+
 router.delete('/:userId/:speechId', (req, res, next) => {
   console.log("params", req.params)
   Speech.destroy({
