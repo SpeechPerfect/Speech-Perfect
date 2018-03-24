@@ -8,6 +8,7 @@ import RecordScreen from '../screens/RecordScreen'
 import ResultsScreen from '../screens/ResultsScreen'
 import Profile from '../screens/Profile'
 import SingleReport from '../screens/SingleReport'
+import WordRepetition from '../screens/WordRepetition'
 
 export default TabNavigator (
   {
@@ -53,6 +54,18 @@ export default TabNavigator (
               headerTintColor: '#12092f',
             }),
             },
+            WordRepetition: {
+              screen: WordRepetition, path: 'profile/report/trascript',
+              navigationOptions: ({ navigation }) => ({
+                title: 'Transcript',
+                headerStyle: {
+                  backgroundColor: 'white',
+                  height: 20
+                },
+                headerLeft: <Button title='Back to Report' color='#12092f' onPress={() => navigation.navigate('report')} />,
+                headerTintColor: '#12092f',
+              }),
+            }
         },
         {
           navigationOptions: { tabBarVisible: false }

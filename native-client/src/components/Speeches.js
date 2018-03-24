@@ -25,7 +25,7 @@ class Speeches extends Component {
   }
 
   makeRemoteRequest = () => {
-        this.setState({ data: this.props.speeches})
+    this.setState({ data: this.props.speeches})
   }
 
   renderSeparator = () => {

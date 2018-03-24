@@ -22,6 +22,7 @@ export default class SingleReport extends Component {
         playing: false,
         started: false,
     }
+    this._navigateTranscript = this.navigateTranscript.bind(this)
   }
 
   componentDidMount = () => {
@@ -62,6 +63,10 @@ id={item.id} onPress={() => {
     } catch (error) {
       // An error occurred!
     }
+  }
+
+  navigateTranscript(){
+    this.props.navigation.navigate('WordRepetition', { speechId: this.props.navigation.state.params.speechId, userId: this.props.navigation.state.params.userId})
   }
 
   _pauseAudio = async () => {
@@ -140,6 +145,8 @@ id={item.id} onPress={() => {
               />
             </TouchableHighlight>
           }
+
+          <TouchableHighlight onPress={this._navigateTranscript}><Text>View Word repetition</Text></TouchableHighlight>
         </View>
         <View style={styles.transcript}>
         {speech &&
@@ -147,7 +154,6 @@ id={item.id} onPress={() => {
         }
         </View>
       </View>
-
     </View>
     )
   }

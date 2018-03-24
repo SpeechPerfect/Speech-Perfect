@@ -30,6 +30,7 @@
     "react-native-facebook-login": "^1.6.1",
     "react-native-fbsdk": "^0.7.0",
     "react-native-swipeout": "^2.3.3",
-    "react-navigation": "^1.5.8"
+    "react-navigation": "^1.5.8",
+    "thesaurus": "^0.0.0"
   }
 }

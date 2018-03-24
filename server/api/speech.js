@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const { Speech } = require('../db/models')
+const { Speech, WatsonReport } = require('../db/models')
+
 
 router.get('/:userId', (req, res, next) => {
   Speech.findAll({
@@ -8,6 +9,13 @@ router.get('/:userId', (req, res, next) => {
     }
   })
   .then(foundSpeeches => res.json(foundSpeeches))
+})
+router.get('/watson-data/:speechId', (req, res, next) => {
+  WatsonReport.findOne({
+    where: {
+    speechId: req.params.speechId
+  }})
+  .then(result => res.json(result))
 })
 
 router.get('/:userId/:speechId', (req, res, next) => {
