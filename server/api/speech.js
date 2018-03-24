@@ -19,7 +19,6 @@ router.get('/aws-data/:speechId', (req, res, next) => {
 })
 
 router.delete('/:speechId', (req, res, next) => {
-  console.log("DELETING ONE", req.params)
   Speech.destroy({
     where: {
       id: req.params.speechId
@@ -29,7 +28,6 @@ router.delete('/:speechId', (req, res, next) => {
 })
 
 router.delete('/all/:userId', (req, res, next) => {
-  console.log("DELETING ALL", req.params)
   Speech.destroy({
     where: {
       userId: req.params.userId
