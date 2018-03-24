@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Button, View, StyleSheet, Text } from 'react-native'
+import {Button, View, StyleSheet, Text, AsyncStorage as store } from 'react-native'
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
 import Timer  from './Timer'
 import {Uploader} from './'
@@ -30,6 +30,11 @@ export default class Recorder extends Component {
         this.recordingSettings = JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY))
         this.recordingSettings.ios.outputFormat = Expo.Audio.RECORDING_OPTION_IOS_OUTPUT_FORMAT_LINEARPCM
         this.recordingSettings.ios.extension = '.wav'
+    }
+
+    componentWillMount = async () => {
+        let user = await store.getItem('user')
+        if (!user) this.props.navigation.navigate('Login')
     }
 
     componentDidMount = async () => {
