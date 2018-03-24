@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, FlatList, TouchableHighlight, Alert } from 'react-native'
-import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
+import { Text, View, TouchableHighlight, Alert } from 'react-native'
+import Expo from 'expo'
 import {SpeechList} from '../components'
+import styles from '../../assets/stylesheet'
+import axios from 'axios'
+import API_ROOT from '../../IP_addresses'
 
 import { List, ListItem } from 'react-native-elements'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -17,27 +20,28 @@ export default class SingleReport extends Component {
     super(props)
     this.state = {
         speechId: this.props.navigation.state.params.speechId,
+        awsData: null,
         playing: false,
         started: false,
     }
   }
 
-  _renderItem = ({ item }) => (
-      <TouchableHighlight
-id={item.id} onPress={() => {
-        Alert.alert('The appropriate pace for public speaking is between 140 - 160 words per minute')
-        this.props.navigation.navigate('profile', { speechId: item.id })}
-        } >
-          <Text style={{fontSize: 24, color: 'black'}}>{item[0]} {item[1]}</Text>
-      </TouchableHighlight>
-  )
+  componentDidMount() {
+    axios.get(`${API_ROOT}/api/speech/aws-data/${this.state.speechId}`)
+    .then(res => res.data)
+    .then((awsData) => {
+      this.setState({
+        awsData
+      })
+    })
+  }
 
   _playAudio = async () => {
     soundObject = new Expo.Audio.Sound()
 
     this.setState({playing: true, started: true})
     try {
-      await soundObject.loadAsync({ uri: `${this.state.speech.awsReport.url}`})
+      await soundObject.loadAsync({ uri: `${this.state.awsData.url}`})
       await soundObject.playAsync()
       // Your sound is playing!
     } catch (error) {
@@ -63,26 +67,17 @@ id={item.id} onPress={() => {
   }
 
   render() {
-    console.log('STATE IS', this.state)
-    // speech = this.state.speechId
-    // duration = speech ? speech.watsonReport.duration : ''
-    // wordCount = speech ? (speech.watsonReport.transcript.split(' ').length) : ''
-    // pace = speech ? Math.floor(wordCount / (duration/60)) : ''
-    // clarity = speech ? Math.floor(wordCount / (duration * 60)) : ''
-    // umCount = speech ? speech.watsonReport.umCount : ''
-    // likeCount = speech ? speech.watsonReport.likeCount : ''
-    // let data = [['Duration: ', duration], ['Word Count: ', wordCount], ['Pace: ', pace], ['Um Count: ', umCount], ['Like Count: ', likeCount]]
+    console.log('DATA IS', this.state.awsData)
 
     return (
     <View style={styles.resultsContainer}>
       {speech &&
         <View>
           <SpeechList speechId={this.state.speechId} />
-        <Text>Hello</Text>
         </View>
       }
 
-      {/* <View style={styles.resultsBottomContainer}>
+      <View style={styles.resultsBottomContainer}>
         <View style={styles.audioFeedback}>
           {!this.state.started &&
           <TouchableHighlight onPress={this._playAudio}>
@@ -117,7 +112,7 @@ id={item.id} onPress={() => {
           <Text style={{color: 'white', fontSize: 30}}> {speech.watsonReport.transcript} </Text>
         }
         </View>
-      </View> */}
+      </View>
 
     </View>
     )
