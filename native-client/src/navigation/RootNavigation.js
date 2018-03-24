@@ -11,7 +11,7 @@ import axios from 'axios'
 const RootStackNavigator = StackNavigator(
   {
     Main: {
-      screen: LoginOrNavigate,
+      screen: MainTabNavigator
     },
     SingleReport: {
       screen: SingleReport
@@ -32,7 +32,7 @@ export default class RootNavigator extends React.Component {
   render() {
     return (
     <View style={styles.container}>
-        <LoginOrNavigate />
+        <MainTabNavigator />
     </View>
     )
   }

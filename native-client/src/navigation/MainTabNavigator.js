@@ -5,16 +5,16 @@ import { Ionicons } from '@expo/vector-icons'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 
 
-import RecordScreen from '../screens/RecordScreen'
-import ResultsScreen from '../screens/ResultsScreen'
-import Profile from '../screens/Profile'
-import SingleReport from '../screens/SingleReport'
+import { RecordScreen, ResultsScreen, Profile, SingleReport, Login } from '../screens'
 
 export default TabNavigator(
   {
     Record: {
       screen: RecordScreen
     },
+      Login: {
+          screen: Login
+      },
     Profile: {
       screen: StackNavigator({
         profile: { screen: Profile, path: 'profile/:name',
