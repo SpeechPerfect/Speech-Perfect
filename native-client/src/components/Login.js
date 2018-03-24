@@ -3,7 +3,6 @@ import { Text, View, AsyncStorage as store, Button, TextInput} from 'react-nativ
 import Expo, { Facebook } from 'expo'
 import axios from 'axios'
 
-import MainTabNavigator from '../navigation/MainTabNavigator.js'
 import FacebookLogin from './FacebookLogin'
 import API_ROOT from '../../IP_addresses.js'
 
@@ -48,7 +47,6 @@ export default class LoginForm extends Component {
 
     render() {
         const err = this.state.error
-        if (this.state.loggedin) return <MainTabNavigator />
         return (
             <View style={styles.container}>
               <Text style={{color: 'white'}}>
