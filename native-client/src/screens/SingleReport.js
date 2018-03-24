@@ -8,7 +8,6 @@ import API_ROOT from '../../IP_addresses'
 
 import { List, ListItem } from 'react-native-elements'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-let speech
 let soundObject
 
 export default class SingleReport extends Component {
@@ -71,8 +70,8 @@ export default class SingleReport extends Component {
 
     return (
     <View style={styles.resultsContainer}>
-      {speech &&
-        <View>
+      {this.state.speechId &&
+        <View style={styles.resultsContainer}>
           <SpeechList speechId={this.state.speechId} />
         </View>
       }
@@ -108,9 +107,9 @@ export default class SingleReport extends Component {
           }
         </View>
         <View style={styles.transcript}>
-        {speech &&
+        {/* {this.state.speechId &&
           <Text style={{color: 'white', fontSize: 30}}> {speech.watsonReport.transcript} </Text>
-        }
+        } */}
         </View>
       </View>
 
