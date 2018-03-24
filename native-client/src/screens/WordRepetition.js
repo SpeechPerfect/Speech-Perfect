@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import thesaurus from 'thesaurus'
+// import thesaurus from 'thesaurus'
 import { Text, ScrollView, View, Button, AsyncStorage as store} from 'react-native'
 import { Card } from 'react-native-elements'
 import axios from 'axios'
