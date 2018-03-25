@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Button, View, StyleSheet, Text} from 'react-native';
-import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo';
+import { View, StyleSheet, Text} from 'react-native';
 
 export default class Timer extends Component {
     constructor(){

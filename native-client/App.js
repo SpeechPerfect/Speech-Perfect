@@ -1,8 +1,6 @@
 import React from 'react'
-import { Platform, StyleSheet, StatusBar, View, AsyncStorage as store } from 'react-native'
+import { Platform, StatusBar, View, AsyncStorage as store } from 'react-native'
 import createRootNavigator from './src/navigation/RootNavigation'
-import {SignedOutNav} from './src/navigation/SignedOutNavigator'
-import {SignedInNav} from './src/navigation/MainTabNavigator'
 import { Font, AppLoading } from 'expo'
 import styles from './assets/stylesheet'
 console.disableYellowBox = true

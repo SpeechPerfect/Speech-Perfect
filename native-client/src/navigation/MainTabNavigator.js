@@ -4,7 +4,7 @@ import { Platform, Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 
-import { RecordScreen, ResultsScreen, Profile, SingleReport, WordRepetition, LoginScreen, SignupScreen } from '../screens'
+import { RecordScreen, ResultsScreen, Profile, SingleReport, WordRepetition } from '../screens'
 
 export const SignedInNav = TabNavigator(
   {
