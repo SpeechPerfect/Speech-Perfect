@@ -54,7 +54,7 @@ export default TabNavigator(
             }),
             },
             WordRepetition: {
-              screen: WordRepetition, path: 'profile/report/trascript',
+              screen: WordRepetition,
               navigationOptions: ({ navigation }) => ({
                 title: 'Transcript',
                 headerStyle: {
