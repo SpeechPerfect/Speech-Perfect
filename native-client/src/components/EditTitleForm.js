@@ -9,17 +9,18 @@ export class EditTitleForm extends Component {
     constructor(props) {
       super(props)
       this.state = {
-
+        title: '',
       }
     }
 
     onButtonPress() {
-      id = this.props.id
-      console.log('speech', this.props.speech)
-      // title = this.state.title
-      // axios.put(`${API_ROOT}/api/speech/{id}`, speech)
-      //   .then(updatedTitle => updatedTitle.data)
-      //   .then(() => this.setState({title: this.state.title}))
+      id = this.props.speech.id
+      title=this.state.title
+      console.log('speech', { ...this.props.speech, title })
+      updatedSpeech = { ...this.props.speech, title }
+      axios.put(`${API_ROOT}/api/speech/${id}`, updatedSpeech)
+        .then(updatedTitle => this.props.setModalVisible(false, updatedTitle))
+        .then(() => this.setState(this.state))
     }
 
   render() {

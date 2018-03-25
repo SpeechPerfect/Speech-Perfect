@@ -88,7 +88,7 @@ export default class Profile extends Component {
         {this.state.modalVisible &&
         <EditModal
             modalVisible={ this.state.modalVisible }
-            setModalVisible={ (vis) => { this._setModalVisible(false) }}
+            setModalVisible={ (vis,speech) => { this._setModalVisible(false,speech) }}
             id={this.state.id}
             speech={this.state.selectedSpeech}
             getUserAndSpeeches={this.getUserAndSpeeches.bind(this)}
