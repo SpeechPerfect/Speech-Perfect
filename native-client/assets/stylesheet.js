@@ -26,22 +26,44 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+    flexDirection: 'row',
   },
   transcript: {
-    backgroundColor: '#12092f',
+    backgroundColor: 'white',
   },
   text: {
-    fontFamily: 'Arial',
+    fontFamily:'Avenir-Book',
     fontSize: 20,
     color: '#12092f',
     fontWeight: 'bold',
   },
-  createdText: {
-    fontFamily: 'Arial',
+  resultsText: {
+    fontFamily:'Avenir-Book',
+    fontSize: 20,
+    color: '#12092f',
+  },
+  resultsCreatedText: {
+    fontFamily: 'Avenir-Book',
     fontSize: 13,
     color: '#12092f',
-    fontWeight: 'bold',
-  }
+  },
+  modalContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    height: 500,
+    width: 500,
+    flex: 1,
+  },
+  modal: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'lightgrey',
+    height: 300,
+    width: 300,
+  },
 })
 
 export default styles

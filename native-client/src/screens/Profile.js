@@ -5,13 +5,15 @@ import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
 import SingleSpeechThumbnail from '../components/SingleSpeechThumbnail'
 import Speeches from '../components/Speeches'
+import EditModal from '../components/EditModal'
 
 export default class Profile extends Component {
   constructor(props) {
     super(props)
     this.state = {
       email: null,
-      id: null
+      id: null,
+      modalVisible: false,
     }
   }
 
@@ -28,7 +30,8 @@ export default class Profile extends Component {
       this.setState({
       email: data.email,
       id: data.id,
-      speeches: []
+      selectedSpeech: null,
+      speeches: [],
       })
     })
     .then(() => this.getSpeeches())
@@ -42,11 +45,26 @@ export default class Profile extends Component {
     .then(err => console.log(err))
   }
 
+  editSpeech = (speech) => {
+    axios.put(`${API_ROOT}/api/speech/${speech.id}`)
+    // .then(res => res.data)
+    .then(() => this.getSpeeches())
+    .then(err => console.log(err))
+  }
+
   deleteUsersSpeeches = (userId) => {
     axios.delete(`${API_ROOT}/api/speech/all/${userId}`)
     // .then(res => res.data)
     .then(() => this.getSpeeches())
     .then(err => console.log(err))
+  }
+
+  _setModalVisible(visible, item) {
+    console.log('speech', item)
+    if (item) {
+      this.setState({ modalVisible: visible, selectedSpeech: item, id: item.id})
+    } else this.setState({ modalVisible: visible, id: item.id })
+    // this.props.editSpeech(item)
   }
 
   getSpeeches() {
@@ -66,7 +84,17 @@ export default class Profile extends Component {
     const { id, speeches } = this.state
     return (
       <View style={styles.container}>
-        <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} />
+        <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} editSpeech={this.editSpeech.bind(this)} setModalVisible={this._setModalVisible.bind(this)} getUserAndSpeeches={this.getUserAndSpeeches.bind(this)}/>
+        {this.state.modalVisible &&
+        <EditModal
+            modalVisible={ this.state.modalVisible }
+            setModalVisible={ (vis) => { this._setModalVisible(false) }}
+            id={this.state.id}
+            speech={this.state.selectedSpeech}
+            getUserAndSpeeches={this.getUserAndSpeeches.bind(this)}
+            style={{display:'flex',height:800, width:800, alignItems: 'center', justifyContent: 'center'}}
+          />
+        }
       </View>
     )
   }

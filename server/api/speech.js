@@ -45,4 +45,15 @@ router.delete('/all/:userId', (req, res, next) => {
   .then(deletedSpeeches => res.json(deletedSpeeches))
 })
 
+router.put('/:speechId', (req, res, next) => {
+  console.log('hit', req.params.speechId, req.body)
+  Speech.update(req.body, {
+    where: {
+      userId: req.params.speechId
+    },
+    returning: true
+  })
+  .then(updatedSpeech => res.json(updatedSpeech))
+})
+
 module.exports = router
