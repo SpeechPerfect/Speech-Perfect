@@ -33,27 +33,63 @@ let analyzeTranscript = (str) => {
   return obj
 }
 
+let getConfidence = (dataArr, transcriptLength) => {
+  let totalConfidence = dataArr.map((x, i) => {
+    return dataArr[i].confidence * (x.sectionLength / transcriptLength )
+  }).reduce((a, b) => a + b)
+  return totalConfidence
+
+}
+
+let getLengthAndConfidence = (arr) => {
+  let transcriptLength  = 0
+  let sectionInfo = []
+  arr.map(result => {
+    let obj = {}
+    const sectionLength = result.alternatives[0].transcript.trim().split(' ').length
+    obj.sectionLength = sectionLength
+    obj.confidence = result.alternatives[0].confidence
+    sectionInfo.push(obj)
+    transcriptLength += sectionLength
+    return result.alternatives[0].transcript
+  })
+  let totalConfidence = getConfidence(sectionInfo, transcriptLength)
+  console.log('TOTAL CONFIDENCE', totalConfidence)
+  console.log('RETURNED VALUE', [transcriptLength, totalConfidence])
+  return [transcriptLength, totalConfidence]
+}
+
+let getTranscript = (arr) => {
+  return arr.map(result => result.alternatives[0].transcript.trim()).join(' ')
+}
+
 router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
+    console.log('req body is', req.body)
     const params = {
       audio: fs.createReadStream(req.file.path),
       content_type: 'audio/wav rate=44100'
     }
     dataAnalysis(params)
     .then(results => {
-      let speechData = analyzeTranscript(results[0].alternatives[0].transcript)
+      let speechConfidence = getLengthAndConfidence(results)[1]
+      if (speechConfidence < 0.85) {
+        return res.status(400).json('Low confidence')
+      }
+      let speechTranscript = analyzeTranscript(results[0].alternatives[0].transcript)
       Speech.create({
         userId: req.params.userId
       })
       .then((speech) => {
         speechId = speech.id
-        console.log(speechId, 'is the speech id')
         return WatsonReport.create({
           speechId: speech.id,
-          transcript: results[0].alternatives[0].transcript,
-          likeCount: speechData.likeCount,
-          umCount: speechData.umCount,
+          transcript: getTranscript(results),
+          likeCount: speechTranscript.likeCount,
+          umCount: speechTranscript.umCount,
+          wordCount: getLengthAndConfidence(results)[0],
+          confidence: speechConfidence.toFixed(2),
           // get from AWS or front-end
-          duration: 0
+          duration: (req.body.duration / 1000)
         })
         .then((createdWReport) => {
           return speech.update({
@@ -61,26 +97,11 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
           })
         })
         .then(() => {
-          console.log('speech id is', speechId)
           res.json(speechId)
         })
       })
     })
-    // .then((results) => res.status(200).send(results))
     .catch(next)
-})
-
-router.get('/:id', (req, res, next) => {
-  console.log('params', req.params)
-  Speech.scope('populated').findById(req.params.id)
-    .then(result => res.json(result))
-})
-
-
-router.get('/:userId/:speechId', (req, res, next) => {
-  console.log('params')
-  Speech.scope('populated').findById(req.params.speechId)
-    .then(result => res.json(result))
 })
 
 module.exports = router

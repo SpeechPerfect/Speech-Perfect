@@ -13,7 +13,7 @@ it('Can insert a user', async () => {
     let email
     const rendered = Enzyme.shallow(<Login />)
     rendered.setState( {email: 'Hello@hello.hello', password: '123'} )
-    let button = rendered.find('Button')
+    let button = rendered.find('.login')
     button.simulate('press')
     //wait to give the button time to work
     await sleep(2000)
