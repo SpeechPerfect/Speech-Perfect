@@ -30,7 +30,8 @@ export default class Profile extends Component {
       this.setState({
       email: data.email,
       id: data.id,
-      speeches: []
+      selectedSpeech: null,
+      speeches: [],
       })
     })
     .then(() => this.getSpeeches())
@@ -61,8 +62,8 @@ export default class Profile extends Component {
   _setModalVisible(visible, item) {
     console.log('speech', item)
     if (item) {
-      this.setState({ modalVisible: visible, id: item})
-    } else this.setState({ modalVisible: visible, id: item })
+      this.setState({ modalVisible: visible, selectedSpeech: item, id: item.id})
+    } else this.setState({ modalVisible: visible, id: item.id })
     // this.props.editSpeech(item)
   }
 
@@ -88,7 +89,8 @@ export default class Profile extends Component {
         <EditModal
             modalVisible={ this.state.modalVisible }
             setModalVisible={ (vis) => { this._setModalVisible(false) }}
-            id={ this.state.id }
+            id={this.state.id}
+            speech={this.state.selectedSpeech}
             getUserAndSpeeches={this.getUserAndSpeeches.bind(this)}
             style={{display:'flex',height:800, width:800, alignItems: 'center', justifyContent: 'center'}}
           />

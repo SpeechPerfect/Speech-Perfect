@@ -37,9 +37,10 @@ router.delete('/all/:userId', (req, res, next) => {
 })
 
 router.put('/:speechId', (req, res, next) => {
+  console.log('hit', req.params.speechId, req.body)
   Speech.update(req.body, {
     where: {
-      userId: req.params.userId
+      userId: req.params.speechId
     },
     returning: true
   })

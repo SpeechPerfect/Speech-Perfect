@@ -19,7 +19,7 @@ const EditModal = (props) =>  {
             >
             <View style={styles.modal}>
               <Text> Edit Speech Title </Text>
-              <EditTitleForm />
+              <EditTitleForm speech={props.speech} />
             </View>
             </TouchableHighlight>
          </View>

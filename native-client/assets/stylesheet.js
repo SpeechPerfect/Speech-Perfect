@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   resultsContainer: {
     flex: 1,
-    backgroundColor: '#12092f',
+    backgroundColor: 'white',
   },
   resultsTopContainer: {
     flex: 1,
@@ -40,12 +40,12 @@ const styles = StyleSheet.create({
   resultsText: {
     fontFamily:'Avenir-Book',
     fontSize: 20,
-    color: 'white',
+    color: '#12092f',
   },
   resultsCreatedText: {
     fontFamily: 'Avenir-Book',
     fontSize: 13,
-    color: 'white',
+    color: '#12092f',
   },
   modalContainer: {
     display: 'flex',

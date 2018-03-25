@@ -1,53 +1,51 @@
 import React, { Component } from 'react'
 import { StyleSheet, Button, Text, View, Image, TextInput, TouchableOpacity} from 'react-native'
-// import { Spinner } from './Spinner'
+import axios from 'axios'
+import API_ROOT from '../../IP_addresses.js'
 
 
 export class EditTitleForm extends Component {
 
     constructor(props) {
       super(props)
-      // const { firstName, lastName, email, password } = this.props.user
-
       this.state = {
 
       }
     }
 
     onButtonPress() {
-      // let { title } = this.state
-
-      // title = title.length ? title : this.props.title
-
-      // this.props.updateTitle({ title })
+      id = this.props.id
+      console.log('speech', this.props.speech)
+      // title = this.state.title
+      // axios.put(`${API_ROOT}/api/speech/{id}`, speech)
+      //   .then(updatedTitle => updatedTitle.data)
+      //   .then(() => this.setState({title: this.state.title}))
     }
 
   render() {
-    // let title = this.props.title
+    console.log('edit title form', this.props)
     return (
       <View style={styles.container}>
           <View>
             <Text style={styles.title}> Update Profile </Text>
           </View>
-          <TextInput style={styles.inputBox}
-          placeholder= {"Test Speech"}
-          placeholderTextColor='lightgrey'
-          // onChangeText={text => this.setState({ firstName : text })}
-          />
+          <View style={{backgroundColor: 'purple'}} >
+            <TextInput style={styles.inputBox}
+            placeholder= {"Test Speech"}
+            placeholderTextColor='white'
+            onChangeText={text => this.setState({ title : text })}
+            />
+          </View>
 
-          {/* {this.renderButton()} */}
-          {/* {this.renderError()} */}
+          {this.renderButton()}
 
       </View>
     )
   }
 
   renderButton() {
-    if (this.props.loading) {
-      return <Spinner size="large" />
-    }
     return (
-      <TouchableOpacity onPress={this.onButtonPress.bind(this)}>
+      <TouchableOpacity style={{backgroundColor: '#12092f', borderRadius: 20, paddingVertical: 1, paddingHorizontal: 10, margin:10}} onPress={this.onButtonPress.bind(this)}>
             <Text style={styles.buttonText} > UPDATE </Text>
       </TouchableOpacity>
     )
@@ -91,7 +89,7 @@ const styles = StyleSheet.create({
 
   buttonText: {
     fontSize: 16,
-    color: 'rgb(252,197,76)',
+    color: 'white',
     fontWeight: '700',
     marginVertical: 20,
   },

@@ -5,7 +5,6 @@ import Swipeout from 'react-native-swipeout'
 import SingleSpeechThumbnail from './SingleSpeechThumbnail'
 import { Ionicons } from '@expo/vector-icons'
 import styles from '../../assets/stylesheet'
-import EditModal from './EditModal'
 
 class Speeches extends Component {
   constructor(props) {
@@ -18,8 +17,6 @@ class Speeches extends Component {
       seed: 1,
       error: null,
       refreshing: false,
-      // modalVisible: false,
-      // id: 0,
     }
   }
 
@@ -36,16 +33,18 @@ class Speeches extends Component {
       <View
         style={{
           height: 1,
-          width: '100%',
-          backgroundColor: '#CED0CE',
+          width: '85%',
+          backgroundColor: '#12092f',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       />
     )
   }
 
   renderHeader = () => {
-    return (<View style={{flexDirection: 'row', alignItems:'flex-end', justifyContent:'center'}} >
-              <View style={{flex: 1, justifyContent: 'flex-start', alignItems: 'center', marginLeft: 25}}>
+    return (<View style={{flexDirection: 'row', marginTop: 10, alignItems:'flex-end', justifyContent:'center'}} >
+              <View style={{flex: 1, justifyContent: 'flex-start', alignItems: 'center'}}>
               <Text style={{color: '#12092f', fontSize:32, fontFamily:'Geeza Pro' }}> Your Speeches </Text>
               </View>
               <View style={{justifyContent: 'flex-start', alignItems: 'flex-end', marginBottom: 8, marginRight: 5}}>
@@ -95,15 +94,15 @@ class Speeches extends Component {
       color: '#12092f',
       backgroundColor: 'white',
       // underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-      onPress: () => this.props.setModalVisible(true, item.id)
+      onPress: () => this.props.setModalVisible(true, item)
     }
     ]}
     autoClose={true}
     backgroundColor= "transparent">
       <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id, userId: item.userId })} >
-        <View style={{flex:1,flexDirection: 'column', backgroundColor: '#12092f',borderBottomWidth: 0.5, borderColor: 'white', paddingTop:10, alignItems:'center'}}>
+        <View style={{flex:1,flexDirection: 'column', backgroundColor: 'white',borderBottomWidth: 0.5, borderColor: 'white', paddingTop:10, alignItems:'flex-start'}}>
           {this.props.speeches.length &&
-                <View key={item.id} style={{height: 50}}>
+                <View key={item.id} style={{height: 50, marginLeft: 20}}>
                   <SingleSpeechThumbnail speech={item} />
                 </View>
           }
@@ -114,11 +113,11 @@ class Speeches extends Component {
 
   render() {
     return (
-      <View style={{flex:1,flexDirection: 'column', backgroundColor: '#12092f'}}>
-        <View style={{height:35, backgroundColor:'lightgrey'}}>
+      <View style={{flex:1,flexDirection: 'column', backgroundColor: 'white'}}>
+        <View style={{height:55, backgroundColor:'lightgrey'}}>
           {this.renderHeader()}
         </View>
-        <View style={{backgroundColor: '#3a3d72'}}>
+        <View style={{backgroundColor: 'white'}}>
           <FlatList
             keyExtractor= {(speech, index) => index }
             data={this.props.speeches}
