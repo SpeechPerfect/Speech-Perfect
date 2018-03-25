@@ -65,9 +65,6 @@ export default class App extends React.Component {
          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
         </View>
-        {/* {!signedIn &&
-        <SignedOutNav />}
-        {signedIn && <SignedInNav />} */}
         <Layout />
       </View>
     )}
