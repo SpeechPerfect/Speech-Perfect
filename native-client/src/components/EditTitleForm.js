@@ -27,10 +27,11 @@ export class EditTitleForm extends Component {
             <Text style={styles.title}> Update Profile </Text>
           </View>
           <View style={{backgroundColor: 'purple'}} >
-            <TextInput style={styles.inputBox}
-            placeholder= {"Test Speech"}
-            placeholderTextColor='white'
-            onChangeText={text => this.setState({ title : text })}
+            <TextInput
+style={styles.inputBox}
+            placeholder= {'Test Speech'}
+            placeholderTextColor="white"
+            onChangeText={text => this.setState({ title: text })}
             />
           </View>
 
@@ -42,7 +43,7 @@ export class EditTitleForm extends Component {
 
   renderButton() {
     return (
-      <TouchableOpacity style={{backgroundColor: '#12092f', borderRadius: 20, paddingVertical: 1, paddingHorizontal: 10, margin:10}} onPress={this.onButtonPress.bind(this)}>
+      <TouchableOpacity style={{backgroundColor: '#12092f', borderRadius: 20, paddingVertical: 1, paddingHorizontal: 10, margin: 10}} onPress={this.onButtonPress.bind(this)}>
             <Text style={styles.buttonText} > UPDATE </Text>
       </TouchableOpacity>
     )
@@ -76,12 +77,12 @@ const styles = StyleSheet.create({
     height: 15.3,
     // fontFamily: "WorkSans",
     fontSize: 20.7,
-    fontWeight: "normal",
-    fontStyle: "normal",
+    fontWeight: 'normal',
+    fontStyle: 'normal',
     letterSpacing: 0,
-    textAlign: "left",
+    textAlign: 'left',
     marginVertical: 20,
-    color: "#ffffff"
+    color: '#ffffff'
   },
 
   buttonText: {

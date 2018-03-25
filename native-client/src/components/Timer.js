@@ -1,11 +1,7 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, Text} from 'react-native';
+import React, { Component } from 'react'
+import { View, StyleSheet, Text} from 'react-native'
 
 export default class Timer extends Component {
-    constructor(){
-        super()
-    }
-
     _renderTitle() {
       return (
         <View style={styles.stopwatch}>
@@ -24,9 +20,9 @@ export default class Timer extends Component {
             minutes = Math.floor(duration / 60000) % 60
             hours = Math.floor(duration / 360000) % 60
 
-            miliseconds = miliseconds.toString().slice(0,1)
+            miliseconds = miliseconds.toString().slice(0, 1)
             if (minutes > 0) seconds = seconds.toString().length === 1 ? `0${seconds}` : seconds
-            if (hours > 0) minutes = minutes.length === 1 ? '0'+minutes : minutes
+            if (hours > 0) minutes = minutes.length === 1 ? '0' + minutes : minutes
 
       return (
         <View >
@@ -50,8 +46,7 @@ export default class Timer extends Component {
   render() {
     return  (
         <View style={{flex: 1}}>
-            <View style={styles.stopwatch}>
-             </View>
+            <View style={styles.stopwatch} />
             <View style={styles.timer}>
                 {this._renderTimers()}
             </View>
@@ -65,7 +60,7 @@ const styles = StyleSheet.create({
     stopwatch: {
         flex: 2,
         alignItems: 'center',
-        width: '100%',
+        width: '100%'
     },
     timer: {
         width: '100%',
@@ -80,12 +75,12 @@ const styles = StyleSheet.create({
         fontSize: 50,
         color: 'black',
         paddingTop: 5,
-        paddingBottom: 5,
+        paddingBottom: 5
     },
     title: {
         alignSelf: 'center',
         fontWeight: '600',
-        color: 'white',
+        color: 'white'
     },
     mainTimer: {
         fontSize: 60,
@@ -97,12 +92,9 @@ const styles = StyleSheet.create({
         fontSize: 18,
         borderWidth: 0.5,
         alignSelf: 'center'
-    },
+    }
     //  top: {
     //     flex: 1
     //   },
 })
-
-
-
 

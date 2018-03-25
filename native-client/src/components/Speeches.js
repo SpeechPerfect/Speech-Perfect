@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, TouchableWithoutFeedback } from "react-native"
+import React, { Component } from 'react'
+import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import Swipeout from 'react-native-swipeout'
 import SingleSpeechThumbnail from './SingleSpeechThumbnail'
 import { Ionicons } from '@expo/vector-icons'
@@ -14,7 +14,7 @@ class Speeches extends Component {
       page: 1,
       seed: 1,
       error: null,
-      refreshing: false,
+      refreshing: false
     }
   }
 
@@ -34,16 +34,16 @@ class Speeches extends Component {
           width: '85%',
           backgroundColor: '#12092f',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'center'
         }}
       />
     )
   }
 
   renderHeader = () => {
-    return (<View style={{flexDirection: 'row', marginTop: 10, alignItems:'flex-end', justifyContent:'center'}} >
+    return (<View style={{flexDirection: 'row', marginTop: 10, alignItems: 'flex-end', justifyContent: 'center'}} >
               <View style={{flex: 1, justifyContent: 'flex-start', alignItems: 'center'}}>
-              <Text style={{color: '#12092f', fontSize:32, fontFamily:'Geeza Pro' }}> Your Speeches </Text>
+              <Text style={{color: '#12092f', fontSize: 32, fontFamily: 'Geeza Pro' }}> Your Speeches </Text>
               </View>
               <View style={{justifyContent: 'flex-start', alignItems: 'flex-end', marginBottom: 8, marginRight: 5}}>
               <TouchableOpacity onPress={() => {
@@ -75,7 +75,6 @@ class Speeches extends Component {
   }
 
 
-
   _renderItem = ({ item }) => (
     <Swipeout
     right={[{
@@ -98,7 +97,7 @@ class Speeches extends Component {
     autoClose={true}
     backgroundColor= "transparent">
       <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id, userId: item.userId })} >
-        <View style={{flex:1,flexDirection: 'column', backgroundColor: 'white',borderBottomWidth: 0.5, borderColor: 'white', paddingTop:10, alignItems:'flex-start'}}>
+        <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'white', borderBottomWidth: 0.5, borderColor: 'white', paddingTop: 10, alignItems: 'flex-start'}}>
           {this.props.speeches.length &&
                 <View key={item.id} style={{height: 50, marginLeft: 20}}>
                   <SingleSpeechThumbnail speech={item} />
@@ -111,8 +110,8 @@ class Speeches extends Component {
 
   render() {
     return (
-      <View style={{flex:1,flexDirection: 'column', backgroundColor: 'white'}}>
-        <View style={{height:55, backgroundColor:'lightgrey'}}>
+      <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'white'}}>
+        <View style={{height: 55, backgroundColor: 'lightgrey'}}>
           {this.renderHeader()}
         </View>
         <View style={{backgroundColor: 'white'}}>

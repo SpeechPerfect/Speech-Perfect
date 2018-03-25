@@ -25,7 +25,7 @@ class Uploader extends Component {
       data.append('soundFile', {
         uri: this.props.uri,
         type: 'audio/vnd.wav',
-        name: 'testAudio',
+        name: 'testAudio'
         })
       data.append('duration', this.props.duration)
 
@@ -34,7 +34,7 @@ class Uploader extends Component {
         body: data,
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data'
         },
       })
       .then(res => {
@@ -69,7 +69,7 @@ class Uploader extends Component {
       body: data,
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'multipart/form-data'
       },
     })
       .then(res => {

@@ -41,7 +41,7 @@ export default class Recorder extends Component {
         // this.startTimer()
         const response = await Permissions.askAsync(Permissions.AUDIO_RECORDING)
         this.setState({
-          haveRecordingPermissions: response.status === 'granted',
+          haveRecordingPermissions: response.status === 'granted'
         })
   }
 
@@ -60,13 +60,13 @@ export default class Recorder extends Component {
     async startRecording() {
       this.startTimer()
       const recording = new Expo.Audio.Recording()
-      this.setState({recording:recording, isRecording: true})
+      this.setState({recording: recording, isRecording: true})
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
         playsInSilentModeIOS: true,
         shouldDuckAndroid: true,
-        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX
       })
       recording.setOnRecordingStatusUpdate(status => this.setState(status))
       try {
@@ -99,8 +99,7 @@ export default class Recorder extends Component {
       console.log(error)
     }
     this.setState({
-      isClicked: !this.state.isClicked,
-
+      isClicked: !this.state.isClicked
     })
   }
 
@@ -115,7 +114,7 @@ export default class Recorder extends Component {
         durationMillis: 0,
         intervals: 0,
         duration: 0,
-        begin: false,
+        begin: false
     })
     this.stopRecording()
 }
@@ -157,17 +156,17 @@ export default class Recorder extends Component {
           {!this.state.begin &&
           <View style={styles.bottom}>
           <Text style={styles.introText} > Press Record and start speaking </Text>
-          <Text> </Text>
+          <Text />
           <Text style={styles.text}> We will analyze your speech and </Text>
           <Text style={styles.text}> provide you with suggestions how to improve </Text>
-          <Text> </Text>
+          <Text />
           </View>
           }
           {this.state.begin &&
           <Uploader navigation={this.props.navigation} uri={this.state.recording._uri} duration={this.state.durationMillis} />
           }
           <View style={styles.startRecording}>
-            <Button style={styles.button} color="white" onPress={buttonMethod} title={text}/>
+            <Button style={styles.button} color="white" onPress={buttonMethod} title={text} />
             <RecordButton press={buttonMethod} />
             <Button style={styles.button} color="white" onPress={this.onButtonClear} title="Reset" />
           </View>
@@ -187,13 +186,13 @@ const styles = StyleSheet.create({
   top: {
     flex: 1,
     backgroundColor: '#12092f',
-    borderColor: 'white',
+    borderColor: 'white'
   },
   startRecording: {
     flexDirection: 'row',
     marginBottom: 13,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   bottom: {
     flex: 2,
@@ -205,16 +204,16 @@ const styles = StyleSheet.create({
   button: {
     color: 'white',
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
   introText: {
     color: 'white',
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
   text: {
     color: 'white',
-    fontSize: 14,
+    fontSize: 14
     // fontWeight: "bold",
   }
 })

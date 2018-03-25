@@ -10,7 +10,7 @@ let soundObject
 
 export default class ReplayAudio extends Component {
   static navigationOptions = {
-    title: 'SingleReport',
+    title: 'SingleReport'
   };
 
   constructor(props) {
@@ -19,7 +19,7 @@ export default class ReplayAudio extends Component {
         speechId: this.props.speechId,
         awsData: null,
         playing: false,
-        started: false,
+        started: false
     }
     this.navigateToTranscript = this.navigateToTranscript.bind(this)
   }
@@ -135,7 +135,7 @@ export default class ReplayAudio extends Component {
   }
 }
 
-{/* <BarChart
+/* <BarChart
 data={{
   labels: ['January', 'February', 'March', 'April', 'May', 'June'],
   datasets: [{
@@ -168,7 +168,7 @@ style={{
   paddingRight:20,
   // marginLeft:-5,
   // paddingLeft:-5,
-}}        /> */}
+}}        /> */
 
 // import React, { Component } from 'react'
 // import { StyleSheet, Button, Text, View, Image, TextInput, TouchableHighlight} from 'react-native'

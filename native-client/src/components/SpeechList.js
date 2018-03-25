@@ -7,7 +7,7 @@ import API_ROOT from '../../IP_addresses.js'
 
 export default class SpeechList extends Component {
   static navigationOptions = {
-    title: 'SingleReport',
+    title: 'SingleReport'
   };
 
   constructor(props) {

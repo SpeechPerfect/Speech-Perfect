@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     width: 55,
     borderColor: 'white',
     borderWidth: 7,
-    borderRadius: 27.5,
+    borderRadius: 27.5
   },
   innerBackgroundCicrcle: {
     justifyContent: 'center',
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
     width: 45,
     borderColor: 'black',
     borderWidth: 3,
-    borderRadius: 25,
+    borderRadius: 25
   }
 })

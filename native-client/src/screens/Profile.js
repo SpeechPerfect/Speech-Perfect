@@ -18,7 +18,7 @@ export default class Profile extends Component {
 
   static navigationOptions = {
     title: 'Profile',
-    headerLeft: <Button title='' color='white' onPress={() => {}} />,
+    headerLeft: <Button title="" color="white" onPress={() => {}} />,
     // headerTintColor: 'rgb(252,197,76)',
   }
 
@@ -62,7 +62,7 @@ export default class Profile extends Component {
     console.log('speech', item)
     if (item) {
       this.setState({ modalVisible: visible, selectedSpeech: item, id: item.id})
-    } else this.setState({ modalVisible: visible, id: item.id })
+    } else {this.setState({ modalVisible: visible, id: item.id })}
     // this.props.editSpeech(item)
   }
 
@@ -83,7 +83,7 @@ export default class Profile extends Component {
     const { id, speeches } = this.state
     return (
       <View style={styles.container}>
-        <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} editSpeech={this.editSpeech.bind(this)} setModalVisible={this._setModalVisible.bind(this)} getUserAndSpeeches={this.getUserAndSpeeches.bind(this)}/>
+        <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} editSpeech={this.editSpeech.bind(this)} setModalVisible={this._setModalVisible.bind(this)} getUserAndSpeeches={this.getUserAndSpeeches.bind(this)} />
         {this.state.modalVisible &&
         <EditModal
             modalVisible={ this.state.modalVisible }
@@ -91,7 +91,7 @@ export default class Profile extends Component {
             id={this.state.id}
             speech={this.state.selectedSpeech}
             getUserAndSpeeches={this.getUserAndSpeeches.bind(this)}
-            style={{display:'flex',height:800, width:800, alignItems: 'center', justifyContent: 'center'}}
+            style={{display: 'flex', height: 800, width: 800, alignItems: 'center', justifyContent: 'center'}}
           />
         }
         {speeches && <View>
