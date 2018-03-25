@@ -39,10 +39,12 @@ render() {
 
 
   return (
-  <Card style={{flexDirection:'row', flex:1}}>
-   <View style={{flexDirection:'row', flex:1}}>
-    <Text>Duration: {duration}</Text>
-    <Text>Pace: {umCount}</Text>
+  <View>
+   <View style={{flex:1,height:200,  borderColor:'black', borderWidth:0.5, borderRadius:5, padding:5}}>
+   <View>
+      <Text>Duration: {duration}</Text>
+      <Text>Pace: {umCount}</Text>
+    </View>
    </View>
 
    <View>
@@ -63,7 +65,7 @@ render() {
   {/* <FlatList style={{flex: 1}}
         data={this.speechData}
       renderItem={({item}) =>  <Text style={{fontSize: 24, color: 'black'}}>{item[0]} {item[1]}</Text>} /> */}
-  </Card>
+  </View>
   )}
 }
 
