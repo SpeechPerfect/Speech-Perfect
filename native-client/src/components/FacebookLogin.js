@@ -1,8 +1,5 @@
 import React from "react"
 import {
-  Image,
-  Platform,
-  ScrollView,
   StyleSheet,
   Alert,
   Text,
@@ -11,7 +8,6 @@ import {
 } from "react-native"
 
 import Expo from "expo"
-import { Facebook } from "expo"
 
 
 export default class FacebookLogin extends React.Component {
