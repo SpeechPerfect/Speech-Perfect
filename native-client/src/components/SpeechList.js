@@ -3,6 +3,7 @@ import { Text, View, ScrollView, FlatList, TouchableHighlight, Alert } from 'rea
 import styles from '../../assets/stylesheet'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses.js'
+import { List, ListItem, SearchBar, Card, } from "react-native-elements"
 
 
 export default class SpeechList extends Component {
@@ -38,16 +39,31 @@ render() {
 
 
   return (
-  <View style={styles.resultsContainer}>
-  <Text>Duration: {duration}</Text>
-  <Text>Word count: {wordCount}</Text>
-  <Text>"Um" count: {umCount}</Text>
-  <Text>"Like" count: {umCount}</Text>
-  <Text>Pace: {umCount}</Text>
+  <Card style={{flexDirection:'row', flex:1}}>
+   <View style={{flexDirection:'row', flex:1}}>
+    <Text>Duration: {duration}</Text>
+    <Text>Pace: {umCount}</Text>
+   </View>
+
+   <View>
+    <Text>Word count: {wordCount}</Text>
+   </View>
+
+   <View>
+   <Text>"Um" count: {umCount}</Text>
+    <Text>"Like" count: {umCount}</Text>
+   </View>
+
+   <View>
+    <Text>Tone</Text>
+   </View>
+
+
+ 
   {/* <FlatList style={{flex: 1}}
         data={this.speechData}
       renderItem={({item}) =>  <Text style={{fontSize: 24, color: 'black'}}>{item[0]} {item[1]}</Text>} /> */}
-       </View>
+  </Card>
   )}
 }
 

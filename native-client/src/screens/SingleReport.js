@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableHighlight, Alert } from 'react-native'
+import { Card, Divider } from 'react-native-elements'
 import Expo from 'expo'
 import {SpeechList} from '../components'
 import styles from '../../assets/stylesheet'
@@ -23,7 +24,7 @@ export default class SingleReport extends Component {
         playing: false,
         started: false,
     }
-    this._navigateTranscript = this.navigateTranscript.bind(this)
+    this.navigateTranscript = this.navigateTranscript.bind(this)
   }
 
   componentDidMount() {
@@ -74,15 +75,17 @@ export default class SingleReport extends Component {
     console.log('DATA IS', this.state.awsData)
 
     return (
-    <View style={styles.resultsContainer}>
-      {this.state.speechId &&
-        <View style={styles.resultsContainer}>
+      <View>
+      <View>
+        {this.state.speechId &&
           <SpeechList speechId={this.state.speechId} />
-        </View>
-      }
-
-      <View style={styles.resultsBottomContainer}>
-        <View style={styles.audioFeedback}>
+        }
+      </View>
+  <Card>
+    <TouchableHighlight onPress={this.navigateTranscript}><Text style={{fontSize: 25,fontWeight: 'bold'}}>View Transcript</Text></TouchableHighlight>
+  </Card>
+  <Card>
+    <View style={styles.audioFeedback}>
           {!this.state.started &&
           <TouchableHighlight onPress={this._playAudio}>
               <MaterialCommunityIcons
@@ -109,16 +112,10 @@ export default class SingleReport extends Component {
               color={'#12092f'}
               />
             </TouchableHighlight>
-          }
-          <TouchableHighlight onPress={this._navigateTranscript}><Text style={{fontSize: 25,fontWeight: 'bold'}}>View Transcript</Text></TouchableHighlight>
-
+           }
         </View>
-        <View style={styles.transcript}>
-        {/* {this.state.speechId &&
-          <Text style={{color: 'white', fontSize: 30}}> {speech.watsonReport.transcript} </Text>
-        } */}
-        </View>
-      </View>
+        <Text style={{fontSize: 25,fontWeight: 'bold'}}>Play Audio</Text>
+      </Card>
     </View>
     )
   }
