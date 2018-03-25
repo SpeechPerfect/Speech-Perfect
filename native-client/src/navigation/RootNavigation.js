@@ -2,10 +2,8 @@ import { Notifications } from 'expo'
 import React from 'react'
 import { StackNavigator } from 'react-navigation'
 import MainTabNavigator from './MainTabNavigator'
-import SingleReport from '../screens/SingleReport'
-import WordRepetition from '../screens/WordRepetition'
+import {SingleReport, WordRepetition, AuthScreen, LoginScreen, SignupScreen} from '../screens'
 import {  View, StyleSheet, AsyncStorage as store } from 'react-native'
-import axios from 'axios'
 
 
 const RootStackNavigator = StackNavigator(
@@ -18,6 +16,15 @@ const RootStackNavigator = StackNavigator(
     },
     WordRepetition: {
       screen: WordRepetition
+    },
+    AuthScreen: {
+      screen: AuthScreen
+    },
+    Login: {
+      screen: LoginScreen
+    },
+    Signup: {
+      screen: SignupScreen
     },
     initialRouteName: 'Main'
   },
