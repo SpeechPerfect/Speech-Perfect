@@ -18,8 +18,8 @@ class Speeches extends Component {
       seed: 1,
       error: null,
       refreshing: false,
-      modalVisible: false,
-      id: 0,
+      // modalVisible: false,
+      // id: 0,
     }
   }
 
@@ -77,12 +77,7 @@ class Speeches extends Component {
     )
   }
 
-  _setModalVisible(visible, item) {
-    if (item) {
-      id = item - 1
-      this.setState({ modalVisible: visible, id: id});
-    } else  this.setState({ modalVisible: visible })
-  }
+
 
   _renderItem = ({ item }) => (
     <Swipeout
@@ -100,11 +95,7 @@ class Speeches extends Component {
       color: '#12092f',
       backgroundColor: 'white',
       // underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-      onPress: () => {
-        this._setModalVisible(true, item.id)
-        // console.log('deleting one')
-        // this.props.editSpeech(item)
-      }
+      onPress: () => this.props.setModalVisible(true, item.id)
     }
     ]}
     autoClose={true}
@@ -141,7 +132,7 @@ class Speeches extends Component {
             onEndReachedThreshold={50}
           />
           </View>
-          {this.state.modalVisible && <EditModal /> }
+
       </View>
     )
   }

@@ -39,14 +39,31 @@ const styles = StyleSheet.create({
   },
   resultsText: {
     fontFamily:'Avenir-Book',
-      fontSize: 20,
+    fontSize: 20,
     color: 'white',
   },
   resultsCreatedText: {
     fontFamily: 'Avenir-Book',
     fontSize: 13,
     color: 'white',
-  }
+  },
+  modalContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    height: 500,
+    width: 500,
+    flex: 1,
+  },
+  modal: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'lightgrey',
+    height: 300,
+    width: 300,
+  },
 })
 
 export default styles

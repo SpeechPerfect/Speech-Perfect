@@ -15,6 +15,7 @@ import axios from 'axios'
 import {SpeechList} from '../components'
 import styles from '../../assets/stylesheet'
 import API_ROOT from '../../IP_addresses'
+import ReplayAudio from '../components/ReplayAudio'
 
 // import { List, ListItem } from 'react-native-elements'
 let soundObject
@@ -47,16 +48,19 @@ export default class SingleReport extends Component {
   _playAudio = async () => {
     soundObject = new Expo.Audio.Sound()
 
-    this.setState({playing: true, started: true})
     try {
       await soundObject.loadAsync({ uri: `${this.state.awsData.url}`})
       await soundObject.playAsync()
-      // Your sound is playing!
     } catch (error) {
-      // An error occurred!
+        console.log(error)
     }
+    this.setState({playing: true, started: true})
+    this.setState(this.state)
   }
 
+  forceChange(){
+    this.setState({working: !this.state.working})
+ }
   _pauseAudio = async () => {
     let playing = this.state.playing
 
@@ -64,9 +68,8 @@ export default class SingleReport extends Component {
       this.setState({playing: false})
       try {
         await soundObject.pauseAsync()
-        // Your sound is playing!
       } catch (error) {
-        // An error occurred!
+        console.log(error)
       }
     } else {
       this.setState({playing: true})
@@ -81,9 +84,8 @@ export default class SingleReport extends Component {
       try {
         await soundObject.replayAsync()
         soundObject.playAsync()
-        // Your sound is playing!
       } catch (error) {
-        // An error occurred!
+        console.log(error)
       }
     } else {
       this.setState({playing: true})
@@ -94,8 +96,8 @@ export default class SingleReport extends Component {
 
 
   render() {
-    console.log('DATA IS', this.state.awsData)
-    console.log('asfdasfas', this.props.navigation.state.params)
+    // console.log('DATA IS', this.state.awsData)
+    // console.log('asfdasfas', this.props.navigation.state.params)
     return (
     <View style={styles.resultsContainer}>
       {this.state.speechId &&
@@ -105,80 +107,7 @@ export default class SingleReport extends Component {
       }
 
       <View style={styles.resultsBottomContainer}>
-      <BarChart
-        data={{
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-          datasets: [{
-            data: [ 20, 45, 28, 80, 99, 43 ]
-          }]
-        }}
-        width={Dimensions.get('window').width}
-        height={220}
-        chartConfig={{
-          backgroundColor: 'red',
-          backgroundGradientFrom: 'white',
-          backgroundGradientTo: 'lightgrey',
-          marginRight:20,
-          paddingRight:20,
-          marginLeft:-20,
-          paddingLeft:-20,
-          color: (opacity = 1) => `#12092f`,
-          style: {
-            borderRadius: 16,
-            marginRight:20,
-            marginLeft:-20,
-          paddingLeft:-20,
-          paddingRight:20,
-          }
-        }}
-        style={{
-          marginVertical: 8,
-          borderRadius: 16,
-          marginRight:20,
-          paddingRight:20,
-          // marginLeft:-5,
-          // paddingLeft:-5,
-        }}        />
-
-        <View style={styles.audioFeedback}>
-        {this.state.started &&
-          <TouchableHighlight onPress={this._replayAudio}>
-              <MaterialCommunityIcons
-              name={'replay'}
-              size={30}
-              color={'#12092f'}
-              style={{marginTop:5}}
-              />
-            </TouchableHighlight>
-          }
-          {!this.state.started &&
-          <TouchableHighlight onPress={this._playAudio}>
-              <MaterialCommunityIcons
-              name={'play-circle-outline'}
-              size={67}
-              color={'#12092f'}
-              />
-            </TouchableHighlight>
-          }
-          {this.state.started && this.state.playing &&
-            <TouchableHighlight onPress={this._pauseAudio}>
-              <MaterialCommunityIcons
-              name={'pause-circle-outline'}
-              size={67}
-              color={'#12092f'}
-              />
-            </TouchableHighlight>
-          }
-           {this.state.started && !this.state.playing &&
-          <TouchableHighlight onPress={this._pauseAudio}>
-              <MaterialCommunityIcons
-              name={'play-circle-outline'}
-              size={67}
-              color={'#12092f'}
-              />
-            </TouchableHighlight>
-          }
-        </View>
+        <ReplayAudio start={this.state.start} playing={this.state.playing} replayAudio={this._replayAudio.bind(this)} pauseAudio={this._pauseAudio.bind(this)} playAudio={this._playAudio.bind(this)} />
         <View style={{flex: 1}}>
         {/* { this.state.speechId &&
           // <Text style={{color: 'white', fontSize: 30}}> {this.props.navigation.state.params.speech.transcript} </Text>
@@ -190,3 +119,37 @@ export default class SingleReport extends Component {
   }
 }
 
+{/* <BarChart
+data={{
+  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+  datasets: [{
+    data: [ 20, 45, 28, 80, 99, 43 ]
+  }]
+}}
+width={Dimensions.get('window').width}
+height={220}
+chartConfig={{
+  backgroundColor: 'red',
+  backgroundGradientFrom: 'white',
+  backgroundGradientTo: 'lightgrey',
+  marginRight:20,
+  paddingRight:20,
+  marginLeft:-20,
+  paddingLeft:-20,
+  color: (opacity = 1) => `#12092f`,
+  style: {
+    borderRadius: 16,
+    marginRight:20,
+    marginLeft:-20,
+  paddingLeft:-20,
+  paddingRight:20,
+  }
+}}
+style={{
+  marginVertical: 8,
+  borderRadius: 16,
+  marginRight:20,
+  paddingRight:20,
+  // marginLeft:-5,
+  // paddingLeft:-5,
+}}        /> */}
