@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import { View, TouchableHighlight, Text } from 'react-native'
+<<<<<<< HEAD
+=======
+import Expo from 'expo'
+>>>>>>> feat: password now hidden on login page
 import {SpeechList} from '../components'
 import styles from '../../assets/stylesheet'
 import ReplayAudio from '../components/ReplayAudio'

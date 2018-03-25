@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, AsyncStorage as store, Button, TextInput} from 'react-native'
 import Expo, { Facebook } from 'expo'
 import axios from 'axios'
-
+import PasswordInputText from 'react-native-hide-show-password-input'
 import FacebookLogin from './FacebookLogin'
 import API_ROOT from '../../IP_addresses.js'
 
@@ -58,10 +58,10 @@ export default class LoginForm extends Component {
               <Text style={{color: 'white'}}>
                 Password:
               </Text>
-              <TextInput
+              <PasswordInputText
               placeholder="password here" onChangeText={ this.onPasswordChange.bind(this) } />
               {this.renderButton()}
-              {( err ) && <Text>Something's gone wrong, maybe an invalid username/password combination</Text>}
+              {( err ) && <Text>Invalid username or password, please try again</Text>}
               <Text> or </Text>
               <FacebookLogin />
             </View>
