@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const { WatsonReport, Speech, AwsReport } = require('../db/models')
+var thesaurus = require('thesaurus')
 
 router.get('/watson-data/:speechId', (req, res, next) => {
   WatsonReport.findOne({
@@ -17,6 +18,14 @@ router.get('/aws-data/:speechId', (req, res, next) => {
   })
   .then(result => res.json(result))
 })
+
+
+router.get('/thesaurus/:word', (req, res, next) => {
+  let word = req.params.word
+  let wordList = thesaurus.find(word)
+  res.json(wordList)
+})
+
 
 router.delete('/:speechId', (req, res, next) => {
   Speech.destroy({
