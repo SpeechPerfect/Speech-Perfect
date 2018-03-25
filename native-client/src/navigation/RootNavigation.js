@@ -11,21 +11,21 @@ const RootStackNavigator = StackNavigator(
     Main: {
       screen: MainTabNavigator
     },
-    SingleReport: {
-      screen: SingleReport,
-    },
-    WordRepetition: {
-      screen: WordRepetition
-    },
-    AuthScreen: {
-      screen: AuthScreen
-    },
-    Login: {
-      screen: LoginScreen
-    },
-    Signup: {
-      screen: SignupScreen
-    },
+    // SingleReport: {
+    //   screen: SingleReport,
+    // },
+    // WordRepetition: {
+    //   screen: WordRepetition
+    // },
+    // AuthScreen: {
+    //   screen: AuthScreen
+    // },
+    // Login: {
+    //   screen: LoginScreen
+    // },
+    // Signup: {
+    //   screen: SignupScreen
+    // },
     initialRouteName: 'Main'
   },
   // {

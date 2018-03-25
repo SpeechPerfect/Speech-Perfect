@@ -84,7 +84,6 @@ export default class Profile extends Component {
     const { id, speeches } = this.state
     return (
       <View style={styles.container}>
-<<<<<<< HEAD
         <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} editSpeech={this.editSpeech.bind(this)} setModalVisible={this._setModalVisible.bind(this)} getUserAndSpeeches={this.getUserAndSpeeches.bind(this)}/>
         {this.state.modalVisible &&
         <EditModal
@@ -96,10 +95,9 @@ export default class Profile extends Component {
             style={{display:'flex',height:800, width:800, alignItems: 'center', justifyContent: 'center'}}
           />
         }
-=======
-        <Logout navigation={this.props.navigation}/>
-        <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} />
->>>>>>> feat: working logout button
+        {speeches && <View>
+          <Logout navigation={this.props.navigation} />
+        </View>}
       </View>
     )
   }

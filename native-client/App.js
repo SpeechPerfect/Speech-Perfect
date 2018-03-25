@@ -1,9 +1,10 @@
 import React from 'react'
 import { Platform, StyleSheet, StatusBar, View } from 'react-native'
 import RootNavigation from './src/navigation/RootNavigation'
+import {SignedOut} from './src/navigation/SignedOutNavigator'
 import { Font, AppLoading } from 'expo'
 import styles from './assets/stylesheet'
-console.disableYellowBox = true;
+console.disableYellowBox = true
 
 
 export default class App extends React.Component {
@@ -42,7 +43,8 @@ export default class App extends React.Component {
          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
         </View>
-        <RootNavigation />
+        {/* <RootNavigation /> */}
+        <SignedOut />
       </View>
     )}
 }

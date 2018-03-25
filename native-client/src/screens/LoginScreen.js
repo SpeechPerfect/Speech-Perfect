@@ -1,14 +1,24 @@
-import React, { Component } from 'react'
-import { View, Text, Button } from 'react-native'
-// import { ExpoLinksView } from '@expo/samples'
-import  {Login, Signup}  from '../components'
-import styles from '../../assets/stylesheet'
+import React from "react"
+import { View } from "react-native"
+import { Card, Button, FormLabel, FormInput } from "react-native-elements"
+// import { onSignIn } from "../auth";
 
-function LoginScreen (props) {
+export default ({ navigation }) => (
+  <View style={{ paddingVertical: 20 }}>
+    <Card>
+      <FormLabel>Email</FormLabel>
+      <FormInput placeholder="Email address..." />
+      <FormLabel>Password</FormLabel>
+      <FormInput secureTextEntry placeholder="Password..." />
 
-  return (
-    <Login navigation={props.navigation} />
-  )
-}
-
-export default LoginScreen
+      <Button
+        buttonStyle={{ marginTop: 20 }}
+        backgroundColor="#03A9F4"
+        title="SIGN IN"
+        onPress={() => {
+          onSignIn().then(() => navigation.navigate("SignedIn"))
+        }}
+      />
+    </Card>
+  </View>
+)
