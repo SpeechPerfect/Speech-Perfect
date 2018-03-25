@@ -4,8 +4,7 @@ import { Platform, Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 
-
-import { RecordScreen, ResultsScreen, Profile, SingleReport, Login } from '../screens'
+import { RecordScreen, ResultsScreen, Profile, SingleReport, Login, WordRepetition } from '../screens'
 
 export default TabNavigator(
   {
@@ -54,6 +53,18 @@ export default TabNavigator(
               headerTintColor: '#12092f',
             }),
             },
+            WordRepetition: {
+              screen: WordRepetition,
+              navigationOptions: ({ navigation }) => ({
+                title: 'Transcript',
+                headerStyle: {
+                  backgroundColor: 'white',
+                  height: 20
+                },
+                headerLeft: <Button title='Back to Report' color='#12092f' onPress={() => navigation.navigate('report')} />,
+                headerTintColor: '#12092f',
+              }),
+            }
         },
         {
           navigationOptions: { tabBarVisible: false }

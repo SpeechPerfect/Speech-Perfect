@@ -48,6 +48,7 @@
     "redux-thunk": "^2.2.0",
     "sequelize": "^4.3.1",
     "socket.io": "^2.0.3",
+    "thesaurus": "0.0.0",
     "watson-developer-cloud": "^3.2.1"
   },
   "devDependencies": {
