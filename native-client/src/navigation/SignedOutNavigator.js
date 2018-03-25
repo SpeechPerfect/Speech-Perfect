@@ -2,7 +2,7 @@ import { StackNavigator } from "react-navigation"
 
 import {SignupScreen, LoginScreen} from "../screens"
 
-export const SignedOut = StackNavigator({
+export const SignedOutNav = StackNavigator({
   SignUp: {
     screen: SignupScreen,
     navigationOptions: {
