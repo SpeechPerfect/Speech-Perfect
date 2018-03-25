@@ -56,7 +56,7 @@ export default class LoginForm extends Component {
                 Email:
               </Text>
               <TextInput placeholder="username here" onChangeText={ this.onEmailChange.bind(this) } />
-              <PasswordInputText style={styles.inputFields}
+              <PasswordInputText
               placeholder="password here" onChangeText={ this.onPasswordChange.bind(this) } />
               {this.renderButton()}
               {( err ) && <Text>Invalid username or password, please try again</Text>}

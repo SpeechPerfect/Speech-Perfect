@@ -4,8 +4,8 @@ import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
 import SingleSpeechThumbnail from '../components/SingleSpeechThumbnail'
-import Speeches from '../components/Speeches'
 import EditModal from '../components/EditModal'
+import {Speeches, Logout} from '../components'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -84,6 +84,7 @@ export default class Profile extends Component {
     const { id, speeches } = this.state
     return (
       <View style={styles.container}>
+<<<<<<< HEAD
         <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} editSpeech={this.editSpeech.bind(this)} setModalVisible={this._setModalVisible.bind(this)} getUserAndSpeeches={this.getUserAndSpeeches.bind(this)}/>
         {this.state.modalVisible &&
         <EditModal
@@ -95,6 +96,10 @@ export default class Profile extends Component {
             style={{display:'flex',height:800, width:800, alignItems: 'center', justifyContent: 'center'}}
           />
         }
+=======
+        <Logout navigation={this.props.navigation}/>
+        <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} />
+>>>>>>> feat: working logout button
       </View>
     )
   }

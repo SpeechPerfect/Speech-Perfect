@@ -4,10 +4,10 @@ import { View, Text, Button } from 'react-native'
 import  {Login, Signup}  from '../components'
 import styles from '../../assets/stylesheet'
 
-function LoginScreen () {
+function LoginScreen (props) {
 
   return (
-    <Login />
+    <Login navigation={props.navigation} />
   )
 }
 

@@ -60,8 +60,6 @@ export default class SignupForm extends Component {
               placeholder="password here" onChangeText={ this.onPasswordChange.bind(this) } />
               {this.renderButton()}
               {( err ) && <Text>An error occurred, please try again.</Text>}
-              <Text> or </Text>
-              <FacebookLogin />
             </View>
         )
     }

@@ -10,13 +10,14 @@ export default class AuthScreen extends Component {
 
     render() {
         console.log(this.state, 'IS THE STATE')
+        const { navigation } = this.props
         return (
             <View style={styles.inputFieldContainer}>
                 <View>
                 <Text>Welcome to Speech Perfect!</Text>
                 <Text>Please </Text>
-                <Button title="Login" onPress={() => this.props.navigation.navigate('Login')} />
-                <Button title="Signup" onPress={() => this.props.navigation.navigate('Signup')} />
+                <Button title="Login" onPress={() => navigation.navigate('Login', { navigation })} />
+                <Button title="Signup" onPress={() => navigation.navigate('Signup', { navigation })} />
                 </View>
             </View>
         )

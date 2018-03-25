@@ -69,9 +69,7 @@ const styles = StyleSheet.create({
   },
   inputFieldContainer: {
     flex: 1,
-    justifyContent: 'center',
     marginTop: 200,
-    alignItems: 'center'
   },
   inputFields: {
     width: 200
