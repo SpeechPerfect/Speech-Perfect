@@ -3,7 +3,7 @@ import {SignedInNav} from './MainTabNavigator'
 import {SignedOutNav} from './SignedOutNavigator'
 
 const createRootNavigator = (signedIn = false) => {
-  return StackNavigator(
+  return StackNavigator( //eslint-disable-line new-cap
     {
       SignedIn: {
         screen: SignedInNav,

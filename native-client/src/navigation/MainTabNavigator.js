@@ -18,12 +18,12 @@ export const SignedInNav = TabNavigator(
           title: 'Profile',
           headerStyle: {
             backgroundColor: 'white',
-            height: 20,
+            height: 20
             // tintColor:'rgb(252,197,76)',
           },
           // Why do we need this?
           // headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('results')} />,
-          headerTintColor: '#12092f',
+          headerTintColor: '#12092f'
         }),
         },
         Results: {
@@ -36,8 +36,8 @@ export const SignedInNav = TabNavigator(
                 height: 20
               },
               headerLeft: <Button title="Profile" color="#12092f" onPress={() => navigation.navigate('results')} />,
-              headerTintColor: '#12092f',
-            }),
+              headerTintColor: '#12092f'
+            })
             },
             singleReport: { screen: SingleReport, path: 'profile/report',
             navigationOptions: ({ navigation }) => ({
@@ -47,7 +47,7 @@ export const SignedInNav = TabNavigator(
                 height: 20
               },
               headerLeft: <Button title="Back to Profile" color="#12092f" onPress={() => navigation.navigate('profile')} />,
-              headerTintColor: '#12092f',
+              headerTintColor: '#12092f'
             }),
             },
             WordRepetition: {
@@ -58,9 +58,9 @@ export const SignedInNav = TabNavigator(
                   backgroundColor: 'white',
                   height: 20
                 },
-                headerLeft: <Button title='Back to Report' color='#12092f' onPress={() => navigation.navigate('singleReport')} />,
-                headerTintColor: '#12092f',
-              }),
+                headerLeft: <Button title="Back to Report" color="#12092f" onPress={() => navigation.navigate('singleReport')} />,
+                headerTintColor: '#12092f'
+              })
             }
         },
         {
@@ -98,20 +98,20 @@ export const SignedInNav = TabNavigator(
             // color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
           />
         )
-      },
+      }
     }),
     tabBarOptions: {
       activeTintColor: 'tomato',
       inactiveTintColor: 'gray',
       style: {
         // backgroundColor: '#12092f',
-        height: 45,
-          },
+        height: 45
+          }
         },
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     animationEnabled: false,
-    swipeEnabled: false,
+    swipeEnabled: false
   },
 )
 
