@@ -26,8 +26,8 @@ router.get('/thesaurus/:word', (req, res, next) => {
   res.json(wordList)
 })
 
-router.delete('/thesaurus/:word', (req, res, next) => {
-  console.log("params", req.params)
+
+router.delete('/:speechId', (req, res, next) => {
   Speech.destroy({
     where: {
       id: req.params.speechId
@@ -36,8 +36,7 @@ router.delete('/thesaurus/:word', (req, res, next) => {
   .then(deletedSpeech => res.json(deletedSpeech))
 })
 
-router.delete('/:userId', (req, res, next) => {
-  console.log("hmm", req.params)
+router.delete('/all/:userId', (req, res, next) => {
   Speech.destroy({
     where: {
       userId: req.params.userId
