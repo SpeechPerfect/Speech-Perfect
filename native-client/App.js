@@ -16,8 +16,12 @@ export default class App extends React.Component {
             fontLoaded: false,
             isReady: false,
             signedIn: false,
-            checkedSignedIn: false
+            checkedForUser: false
         }
+    }
+
+    componentWillMount() {
+
     }
 
     componentDidMount() {
@@ -31,25 +35,21 @@ export default class App extends React.Component {
         setTimeout(() => this.setState({ fontLoaded: true }), 1100)
             }
 
-            store.getItem('user')
+        store.getItem('user')
         .then((user) => JSON.parse(user))
         .then(userData => {
             console.log('user data is ', userData)
-        })
-        .then(userData => {
-            if (userData.id) {
-                this.setState({
-                    signedIn: true,
-                    checkedSignedIn: true
-                })
-            }
+            this.setState({
+                signedIn: !!userData.id,
+                checkedForUser: true
+            })
         })
         .catch(err => console.log(err))
         }
 
     render() {
         console.log('OH HAI', this.state)
-        const { checkedSignIn, signedIn } = this.state
+        const { checkedForUser, signedIn } = this.state
         const Layout = createRootNavigator(signedIn)
 
         if (!this.state.fontLoaded) {
@@ -58,6 +58,7 @@ export default class App extends React.Component {
             )
           }
 
+
       return (
       <View style={styles.container}>
         {/* what is this element? */}
@@ -65,7 +66,7 @@ export default class App extends React.Component {
          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
         </View>
-        <Layout />
+        {<Layout />}
       </View>
     )}
 }

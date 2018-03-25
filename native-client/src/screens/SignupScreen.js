@@ -71,7 +71,7 @@ export default class SignupScreen extends Component {
         backgroundColor="transparent"
         textStyle={{ color: "#bcbec1" }}
         title="Sign In"
-        onPress={() => navigation.navigate("SignIn")}
+        onPress={() => this.props.navigation.navigate("SignIn")}
       />
     </Card>
   </View>
