@@ -1,53 +1,30 @@
-import { Notifications } from 'expo'
 import React from 'react'
 import { StackNavigator } from 'react-navigation'
-import MainTabNavigator from './MainTabNavigator'
-import SingleReport from '../screens/SingleReport'
-import WordRepetition from '../screens/WordRepetition'
-import {  View, StyleSheet, AsyncStorage as store } from 'react-native'
-import axios from 'axios'
+import {SignedInNav} from './MainTabNavigator'
+import {SignedOutNav} from './SignedOutNavigator'
 
-
-const RootStackNavigator = StackNavigator(
-  {
-    Main: {
-      screen: MainTabNavigator
+const createRootNavigator = (signedIn = false) => {
+  return StackNavigator(
+    {
+      SignedIn: {
+        screen: SignedInNav,
+        navigationOptions: {
+          gesturesEnabled: false
+        }
+      },
+      SignedOut: {
+        screen: SignedOutNav,
+        navigationOptions: {
+          gesturesEnabled: false
+        }
+      }
     },
-    SingleReport: {
-      screen: SingleReport,
-    },
-    WordRepetition: {
-      screen: WordRepetition
-    },
-    initialRouteName: 'Main'
-  },
-  // {
-  //   navigationOptions: () => ({
-  //     headerTitleStyle: {
-  //       fontWeight: 'normal',
-  //     },
-  //   }),
-  // }
-)
-
-export default class RootNavigator extends React.Component {
-
-  render() {
-    return (
-    <View style={styles.container}>
-        <MainTabNavigator />
-    </View>
-    )
-  }
-
+    {
+      headerMode: "none",
+      mode: "modal",
+      initialRouteName: signedIn ? "SignedIn" : "SignedOut"
+    }
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  smallContainer: {
-    flexGrow: 10,
-    backgroundColor: 'black',
-  },
-})
+export default createRootNavigator

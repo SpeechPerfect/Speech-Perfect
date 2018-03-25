@@ -4,16 +4,13 @@ import { Platform, Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 
-import { RecordScreen, ResultsScreen, Profile, SingleReport, Login, WordRepetition } from '../screens'
+import { RecordScreen, ResultsScreen, Profile, SingleReport, WordRepetition, LoginScreen, SignupScreen } from '../screens'
 
-export default TabNavigator(
+export const SignedInNav = TabNavigator(
   {
     Record: {
       screen: RecordScreen
     },
-      // Login: {
-      //     screen: Login
-      // },
     Profile: {
       screen: StackNavigator({
         profile: { screen: Profile, path: 'profile/:name',
@@ -117,3 +114,5 @@ export default TabNavigator(
     swipeEnabled: false,
   },
 )
+
+export default SignedInNav

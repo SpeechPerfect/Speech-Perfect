@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, TouchableHighlight, Text } from 'react-native'
+import Expo from 'expo'
 import {SpeechList} from '../components'
 import styles from '../../assets/stylesheet'
 import ReplayAudio from '../components/ReplayAudio'
@@ -29,8 +30,6 @@ export default class SingleReport extends Component {
     )
   }
 }
-
-
 
 
 {/* <BarChart
