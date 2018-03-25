@@ -48,7 +48,6 @@ export default class SignupForm extends Component {
 
     render() {
         let err = this.state.error
-        console.log(this.props.navigation)
         if ( this.state.loggedin ) this.props.navigation.navigate('Record')
         return (
             <View style={styles.inputFieldContainer}>
