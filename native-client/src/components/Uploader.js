@@ -2,6 +2,21 @@ import React, { Component } from 'react'
 import { Alert, Button, View, AsyncStorage as store } from 'react-native'
 import API_ROOT from '../../IP_addresses'
 
+const sendToAws = (data, id) => {
+    fetch(`${API_ROOT}/api/audio/upload/${id}`, {
+        method: 'post',
+        body: data,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+        },
+    })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => console.log(err))
+}
+
 class Uploader extends Component {
   constructor(props) {
     super(props)
@@ -54,7 +69,7 @@ class Uploader extends Component {
           this.setState({
             speechId: idOrError
           })
-          this.sendToAws(data, idOrError)
+          sendToAws(data, idOrError)
       })
       .then(() => {
         // navigate to profile page
@@ -62,21 +77,6 @@ class Uploader extends Component {
       })
       .catch(err => console.log(err))
     }
-    //SEND TO AWS
-  sendToAws(data, id) {
-    fetch(`${API_ROOT}/api/audio/upload/${id}`, {
-      method: 'post',
-      body: data,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data'
-      },
-    })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => console.log(err))
-  }
 
   render() {
     console.log('DURATION IS', this.props.duration)
