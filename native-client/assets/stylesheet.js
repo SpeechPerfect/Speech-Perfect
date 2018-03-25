@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   resultsContainer: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#12092f',
   },
   resultsTopContainer: {
     flex: 1,
@@ -32,16 +32,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   text: {
-    fontFamily: 'Arial',
+    fontFamily:'Avenir-Book',
     fontSize: 20,
     color: '#12092f',
     fontWeight: 'bold',
   },
-  createdText: {
-    fontFamily: 'Arial',
+  resultsText: {
+    fontFamily:'Avenir-Book',
+      fontSize: 20,
+    color: 'white',
+  },
+  resultsCreatedText: {
+    fontFamily: 'Avenir-Book',
     fontSize: 13,
-    color: '#12092f',
-    fontWeight: 'bold',
+    color: 'white',
   }
 })
 

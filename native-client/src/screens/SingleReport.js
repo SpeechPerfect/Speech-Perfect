@@ -17,7 +17,6 @@ import styles from '../../assets/stylesheet'
 import API_ROOT from '../../IP_addresses'
 
 // import { List, ListItem } from 'react-native-elements'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
 let soundObject
 
 export default class SingleReport extends Component {
@@ -181,9 +180,9 @@ export default class SingleReport extends Component {
           }
         </View>
         <View style={{flex: 1}}>
-        { this.state.speechId &&
-          <Text style={{color: 'white', fontSize: 30}}> {this.props.navigation.state.params.speech.transcript} </Text>
-        }
+        {/* { this.state.speechId &&
+          // <Text style={{color: 'white', fontSize: 30}}> {this.props.navigation.state.params.speech.transcript} </Text>
+        } */}
         </View>
       </View>
     </View>

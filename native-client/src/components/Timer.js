@@ -49,6 +49,7 @@ export default class Timer extends Component {
 
 
   render() {
+      console.log('timer', this.props)
     return  (
         <View style={{flex: 1}}>
             <View style={styles.stopwatch}>

@@ -42,6 +42,13 @@ export default class Profile extends Component {
     .then(err => console.log(err))
   }
 
+  editSpeech = (speech) => {
+    axios.put(`${API_ROOT}/api/speech/${speech.id}`)
+    // .then(res => res.data)
+    .then(() => this.getSpeeches())
+    .then(err => console.log(err))
+  }
+
   deleteUsersSpeeches = (userId) => {
     axios.delete(`${API_ROOT}/api/speech/all/${userId}`)
     // .then(res => res.data)
@@ -66,7 +73,7 @@ export default class Profile extends Component {
     const { id, speeches } = this.state
     return (
       <View style={styles.container}>
-        <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} />
+        <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} editSpeech={this.editSpeech.bind(this)} />
       </View>
     )
   }

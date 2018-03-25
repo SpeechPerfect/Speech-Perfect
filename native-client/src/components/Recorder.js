@@ -114,11 +114,8 @@ export default class Recorder extends Component {
         isClicked: false,
         durationMillis: 0,
         intervals: 0,
+        duration: 0,
         begin: false,
-    })
-    this.setState({
-      isClicked: false,
-      begin: false,
     })
     this.stopRecording()
 }
