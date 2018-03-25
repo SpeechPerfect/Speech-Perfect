@@ -38,16 +38,7 @@ render() {
 
 
   return (
-  <View style={styles.resultsContainer}>
-  <Text>Duration: {duration}</Text>
-  <Text>Word count: {wordCount}</Text>
-  <Text>"Um" count: {umCount}</Text>
-  <Text>"Like" count: {umCount}</Text>
-  <Text>Pace: {umCount}</Text>
-  {/* <FlatList style={{flex: 1}}
-        data={this.speechData}
-      renderItem={({item}) =>  <Text style={{fontSize: 24, color: 'black'}}>{item[0]} {item[1]}</Text>} /> */}
-       </View>
+
   )}
 }
 

@@ -36,14 +36,14 @@ export default class Profile extends Component {
   }
 
   deleteSpeech = (speech) => {
-    axios.delete(`${API_ROOT}/api/speech/${speech.userId}/${speech.id}`)
+    axios.delete(`${API_ROOT}/api/speech/${speech.id}`)
     // .then(res => res.data)
     .then(() => this.getSpeeches())
     .then(err => console.log(err))
   }
 
   deleteUsersSpeeches = (userId) => {
-    axios.delete(`${API_ROOT}/api/speech/${userId}`)
+    axios.delete(`${API_ROOT}/api/speech/all/${userId}`)
     // .then(res => res.data)
     .then(() => this.getSpeeches())
     .then(err => console.log(err))
@@ -62,12 +62,11 @@ export default class Profile extends Component {
     this.getUserAndSpeeches()
   }
 
-
   render() {
     const { id, speeches } = this.state
     return (
       <View style={styles.container}>
-        <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)}/>
+        <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} />
       </View>
     )
   }
