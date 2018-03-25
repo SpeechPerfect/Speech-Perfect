@@ -15,6 +15,9 @@ import axios from 'axios'
 import {SpeechList} from '../components'
 import styles from '../../assets/stylesheet'
 import API_ROOT from '../../IP_addresses'
+
+// import { List, ListItem } from 'react-native-elements'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 let soundObject
 
 export default class SingleReport extends Component {

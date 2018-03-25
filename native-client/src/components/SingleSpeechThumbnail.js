@@ -21,6 +21,9 @@ const readableDate = (str) => {
 
 export function SingleSpeechThumbnail (props) {
   const { speech } = props
+
+  console.log('speech in thumbnail is', speech)
+
     return (
       <ScrollView style={styles.resultsContainer}>
         <Text style={styles.text}>{speech.title}</Text>

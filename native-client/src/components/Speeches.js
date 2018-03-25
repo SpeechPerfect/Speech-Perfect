@@ -1,6 +1,6 @@
-import React, { Component } from "react"
-import { View, Text, FlatList, Alert, ActivityIndicator, TouchableOpacity, TouchableWithoutFeedback } from "react-native"
-import { List, ListItem, SearchBar, Card } from "react-native-elements"
+import React, { Component } from 'react'
+import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { Card } from 'react-native-elements'
 import Swipeout from 'react-native-swipeout'
 import SingleSpeechThumbnail from './SingleSpeechThumbnail'
 import { Ionicons } from '@expo/vector-icons'
@@ -33,27 +33,29 @@ class Speeches extends Component {
       <View
         style={{
           height: 1,
-          width: "100%",
-          backgroundColor: "#CED0CE",
+          width: '100%',
+          backgroundColor: '#CED0CE',
         }}
       />
     )
   }
 
   renderHeader = () => {
-    return <View style={{flexDirection: 'row', alignItems:'flex-end', justifyContent:'flex-end', margin:3 }} >
+    return (<View style={{flexDirection: 'row', alignItems:'flex-end', justifyContent:'flex-end', margin:3}} >
             {/* <View style={{width: '95%'}}>
               <SearchBar placeholder="Type Here..." lightTheme round />
             </View>
             <View> */}
-              <TouchableOpacity onPress={() => this.props.  deleteUsersSpeeches(this.props.id)}>
+              <TouchableOpacity onPress={() => {
+                console.log('DELETING')
+                this.props.deleteUsersSpeeches(this.props.id)}}>
                 <Ionicons
                   name="ios-trash"
                   size={26}
                   color="#12092f" />
               </TouchableOpacity>
             {/* </View> */}
-          </View>
+          </View>)
   }
 
   renderFooter = () => {
@@ -64,7 +66,7 @@ class Speeches extends Component {
         style={{
           // paddingVertical: 5,
           borderTopWidth: 1,
-          borderColor: "#CED0CE"
+          borderColor: '#CED0CE'
         }}
       >
         <ActivityIndicator animating size="large" />
@@ -73,23 +75,24 @@ class Speeches extends Component {
   }
 
 
-
   _renderItem = ({ item }) => (
     <Swipeout
     right={[{
       text: 'Delete',
       backgroundColor: '#12092f',
-      underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-      onPress: () => this.props.deleteSpeech(item)
-    }]}
+      // underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+      onPress: () => {
+        console.log('deleting one')
+        this.props.deleteSpeech(item)
+    }}]}
     autoClose={true}
-    backgroundColor= 'transparent'>
-      <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speech: item, speechId: item.id, userId: item.userId })} >
-        <View style={{margin: 10, paddingLeft: 15, paddingRight: 10, borderColor: 'lightgrey', borderWidth: 3, borderStyle: 'solid', borderRadius: 35}}>
-        {this.props.id === null &&
+    backgroundColor= "transparent">
+      <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id, userId: item.userId })} >
+        <View>
+        {!this.props.speeches.length === null &&
           <Text style={styles.text}>Loading...</Text>}
-          {this.props.id &&
-                <View key={item.id}>
+          {this.props.speeches.length &&
+                <View key={item.id} style={{height: 50}}>
                   <SingleSpeechThumbnail speech={item} />
                 </View>
           }
