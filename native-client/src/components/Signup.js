@@ -18,7 +18,7 @@ import API_ROOT from '../../IP_addresses.js'
 //     }
 // }
 
-export default class LoginForm extends Component {
+export default class SignupForm extends Component {
     state = { email: '', password: '', error: false, loggedin: false, user: {} };
 
     onEmailChange(email) {
@@ -31,7 +31,7 @@ export default class LoginForm extends Component {
 
     onButtonPress() {
         const { email, password } = this.state
-        axios.post(`${API_ROOT}/auth/login`, {email, password})
+        axios.post(`${API_ROOT}/auth/signup`, {email, password})
             .then(res => {
                 store.setItem('user', JSON.stringify(res.data))
                 this.setState({error: false, loggedin: true, user: res.data })
@@ -42,12 +42,12 @@ export default class LoginForm extends Component {
     }
 
     renderButton() {
-        return <Button className="login" title="Login" onPress={this.onButtonPress.bind(this)} />
+        return <Button className="Sign Up" title="Sign Up" onPress={this.onButtonPress.bind(this)} />
     }
 
 
     render() {
-        const err = this.state.error
+        let err = this.state.error
         console.log(this.props.navigation)
         if ( this.state.loggedin ) this.props.navigation.navigate('Record')
         return (
@@ -59,7 +59,7 @@ export default class LoginForm extends Component {
               <PasswordInputText style={styles.inputFields}
               placeholder="password here" onChangeText={ this.onPasswordChange.bind(this) } />
               {this.renderButton()}
-              {( err ) && <Text>Invalid username or password, please try again</Text>}
+              {( err ) && <Text>An error occurred, please try again.</Text>}
               <Text> or </Text>
               <FacebookLogin />
             </View>

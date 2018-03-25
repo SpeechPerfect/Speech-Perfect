@@ -4,6 +4,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    // justifyContent: 'center',
+    // alignItems: 'center'
   },
   title: {
     fontFamily: 'Arial',
@@ -46,6 +48,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir-Book',
     fontSize: 13,
     color: '#12092f',
+    fontWeight: 'bold',
   },
   modalContainer: {
     display: 'flex',
@@ -64,6 +67,14 @@ const styles = StyleSheet.create({
     height: 300,
     width: 300,
   },
+  inputFieldContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: 200
+  },
+  inputFields: {
+    width: 200
+  }
 })
 
 export default styles
