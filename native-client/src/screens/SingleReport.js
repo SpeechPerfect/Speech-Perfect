@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableHighlight, Alert } from 'react-native'
+import { Text, View, TouchableHighlight, Alert, Dimensions } from 'react-native'
 import Expo from 'expo'
-import {SpeechList} from '../components'
-import styles from '../../assets/stylesheet'
-import axios from 'axios'
-import API_ROOT from '../../IP_addresses'
-
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph
+} from 'react-native-chart-kit'
 import { List, ListItem } from 'react-native-elements'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import axios from 'axios'
+
+import {SpeechList} from '../components'
+import styles from '../../assets/stylesheet'
+import API_ROOT from '../../IP_addresses'
 let soundObject
 
 export default class SingleReport extends Component {
@@ -86,7 +93,7 @@ export default class SingleReport extends Component {
 
   render() {
     console.log('DATA IS', this.state.awsData)
-
+    console.log('asfdasfas', this.props.navigation.state.params)
     return (
     <View style={styles.resultsContainer}>
       {this.state.speechId &&
@@ -96,6 +103,41 @@ export default class SingleReport extends Component {
       }
 
       <View style={styles.resultsBottomContainer}>
+      <BarChart
+        data={{
+          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          datasets: [{
+            data: [ 20, 45, 28, 80, 99, 43 ]
+          }]
+        }}
+        width={Dimensions.get('window').width}
+        height={220}
+        chartConfig={{
+          backgroundColor: 'red',
+          backgroundGradientFrom: 'white',
+          backgroundGradientTo: 'lightgrey',
+          marginRight:20,
+          paddingRight:20,
+          marginLeft:-20,
+          paddingLeft:-20,
+          color: (opacity = 1) => `#12092f`,
+          style: {
+            borderRadius: 16,
+            marginRight:20,
+            marginLeft:-20,
+          paddingLeft:-20,
+          paddingRight:20,
+          }
+        }}
+        style={{
+          marginVertical: 8,
+          borderRadius: 16,
+          marginRight:20,
+          paddingRight:20,
+          // marginLeft:-5,
+          // paddingLeft:-5,
+        }}        />
+
         <View style={styles.audioFeedback}>
         {this.state.started &&
           <TouchableHighlight onPress={this._replayAudio}>
@@ -135,13 +177,12 @@ export default class SingleReport extends Component {
             </TouchableHighlight>
           }
         </View>
-        <View style={styles.transcript}>
-        {/* {this.state.speechId &&
-          <Text style={{color: 'white', fontSize: 30}}> {speech.watsonReport.transcript} </Text>
-        } */}
+        <View style={{flex: 1}}>
+        { this.state.speechId &&
+          <Text style={{color: 'white', fontSize: 30}}> {this.props.navigation.state.params.speech.transcript} </Text>
+        }
         </View>
       </View>
-
     </View>
     )
   }

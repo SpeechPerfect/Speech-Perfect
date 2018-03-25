@@ -12,9 +12,9 @@ export default TabNavigator(
     Record: {
       screen: RecordScreen
     },
-      Login: {
-          screen: Login
-      },
+      // Login: {
+      //     screen: Login
+      // },
     Profile: {
       screen: StackNavigator({
         profile: { screen: Profile, path: 'profile/:name',

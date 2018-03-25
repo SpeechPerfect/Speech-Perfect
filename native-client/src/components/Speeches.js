@@ -41,7 +41,7 @@ class Speeches extends Component {
   }
 
   renderHeader = () => {
-    return <View style={{flexDirection: 'row', alignItems:'flex-end', justifyContent:'flex-end', margin:3}} >
+    return <View style={{flexDirection: 'row', alignItems:'flex-end', justifyContent:'flex-end', margin:3 }} >
             {/* <View style={{width: '95%'}}>
               <SearchBar placeholder="Type Here..." lightTheme round />
             </View>
@@ -84,8 +84,8 @@ class Speeches extends Component {
     }]}
     autoClose={true}
     backgroundColor= 'transparent'>
-      <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id, userId: item.userId })} >
-        <View>
+      <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speech: item, speechId: item.id, userId: item.userId })} >
+        <View style={{margin: 10, paddingLeft: 15, paddingRight: 10, borderColor: 'lightgrey', borderWidth: 3, borderStyle: 'solid', borderRadius: 35}}>
         {this.props.id === null &&
           <Text style={styles.text}>Loading...</Text>}
           {this.props.id &&
@@ -100,21 +100,25 @@ class Speeches extends Component {
 
   render() {
     return (
-      <Card>
-        <FlatList
-          keyExtractor= {(speech, index) => index }
-          data={this.props.speeches}
-          renderItem={this._renderItem}
-          ItemSeparatorComponent={this.renderSeparator}
-          ListHeaderComponent={this.renderHeader}
-          ListFooterComponent={this.renderFooter}
-          onRefresh={this.handleRefresh}
-          refreshing={this.state.refreshing}
-          onEndReached={this.handleLoadMore}
-          onEndReachedThreshold={50}
-        />
-
-    </Card>
+      <View style={styles.container}>
+        <View style={{height:35, backgroundColor:'lightgrey'}}>
+          {this.renderHeader()}
+        </View>
+        {/* <Card> */}
+          <FlatList
+            keyExtractor= {(speech, index) => index }
+            data={this.props.speeches}
+            renderItem={this._renderItem}
+            ItemSeparatorComponent={this.renderSeparator}
+            // ListHeaderComponent={this.renderHeader}
+            ListFooterComponent={this.renderFooter}
+            onRefresh={this.handleRefresh}
+            refreshing={this.state.refreshing}
+            onEndReached={this.handleLoadMore}
+            onEndReachedThreshold={50}
+          />
+        {/* </Card> */}
+      </View>
     )
   }
 }

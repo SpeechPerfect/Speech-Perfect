@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   transcript: {
-    backgroundColor: '#12092f',
+    backgroundColor: 'white',
   },
   text: {
     fontFamily: 'Arial',

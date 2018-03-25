@@ -72,7 +72,7 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     dataAnalysis(params)
     .then(results => {
       let speechConfidence = getLengthAndConfidence(results)[1]
-      if (speechConfidence < 0.85) {
+      if (speechConfidence < 0.75) {
         return res.status(400).json('Low confidence')
       }
       let speechTranscript = analyzeTranscript(results[0].alternatives[0].transcript)

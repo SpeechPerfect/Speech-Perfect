@@ -32,7 +32,7 @@ render() {
 
   const { duration, likeCount, umCount, wordCount } = this.state.speechData
 
-  let pace = null
+  let pace = wordCount / (duration / 60)
 
   let speechData = [['Duration: ', duration], ['Word Count: ', wordCount], ['Pace: ', pace], ['Um Count: ', umCount], ['Like Count: ', likeCount]]
 
@@ -42,7 +42,7 @@ render() {
   <Text>Duration: {duration}</Text>
   <Text>Word count: {wordCount}</Text>
   <Text>"Um" count: {umCount}</Text>
-  <Text>"Like" count: {umCount}</Text>
+  <Text>"Like" count: {likeCount}</Text>
   <Text>Pace: {umCount}</Text>
   {/* <FlatList style={{flex: 1}}
         data={this.speechData}
