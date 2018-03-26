@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Button, Text, View, Image, TextInput, TouchableOpacity} from 'react-native'
-import axios from 'axios'
-import API_ROOT from '../../IP_addresses.js'
-
+import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native'
 
 export class EditTitleForm extends Component {
 
