@@ -1,8 +1,44 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native'
 
-export class EditTitleForm extends Component {
+const styles = StyleSheet.create({
+    container: {
+        flexGrow: 1,
+        // justifyContent: 'center',
+        alignItems: 'center',
+        // marginTop: 100,
+    },
+    inputBox: {
+        width: 300.3,
+        height: 15.3,
+        // fontFamily: "WorkSans",
+        fontSize: 20.7,
+        fontWeight: 'normal',
+        fontStyle: 'normal',
+        letterSpacing: 0,
+        textAlign: 'left',
+        marginVertical: 20,
+        color: '#ffffff'
+    },
 
+    buttonText: {
+        fontSize: 16,
+        color: 'white',
+        fontWeight: '700',
+        marginVertical: 20,
+    },
+    title: {
+        // flex: 1,
+        fontSize: 20,
+        color: 'rgb(252,197,76)',
+        fontWeight: '500',
+        marginVertical: 50,
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+    }
+})
+
+export class EditTitleForm extends Component {
     constructor(props) {
       super(props)
       this.state = {
@@ -65,42 +101,6 @@ style={styles.inputBox}
 
 export default EditTitleForm
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    // justifyContent: 'center',
-    alignItems: 'center',
-    // marginTop: 100,
-  },
-  inputBox: {
-    width: 300.3,
-    height: 15.3,
-    // fontFamily: "WorkSans",
-    fontSize: 20.7,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    letterSpacing: 0,
-    textAlign: 'left',
-    marginVertical: 20,
-    color: '#ffffff'
-  },
-
-  buttonText: {
-    fontSize: 16,
-    color: 'white',
-    fontWeight: '700',
-    marginVertical: 20,
-  },
-  title: {
-    // flex: 1,
-    fontSize: 20,
-    color: 'rgb(252,197,76)',
-    fontWeight: '500',
-    marginVertical: 50,
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-  }
-})
 
   // onFirstNameChange(text) {
   //     this.props.firstNameChanged(text)
