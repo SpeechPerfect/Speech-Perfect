@@ -6,7 +6,7 @@ import styles from '../../assets/stylesheet'
 import EditModal from '../components/EditModal'
 import {Speeches, Logout} from '../components'
 
-export default class Profile extends Component {
+export default class ProfileScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
