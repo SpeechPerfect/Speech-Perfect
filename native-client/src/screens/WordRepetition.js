@@ -4,6 +4,7 @@ import { Card } from 'react-native-elements'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 
+
 export default class WordRepetition extends Component {
   constructor(props) {
     super(props)
@@ -18,7 +19,7 @@ export default class WordRepetition extends Component {
   static navigationOptions = {
     title: 'Profile',
     headerLeft: <Button title="" color="white" onPress={() => {}} />,
-    // headerTintColor: "rgb(252,197,76)',
+    // headerTintColor: 'rgb(252,197,76)',
   }
 
   componentDidMount(){
@@ -37,7 +38,7 @@ export default class WordRepetition extends Component {
     axios.get(`${API_ROOT}/api/speech/thesaurus/${word}`)
       .then(res => {
         //set state to first ten words returnd from the backend
-        alternatives = res.data.slice(0,10).map(word => <Text style={{fontSize: 20, fontWeight: 'bold', fontFamily: 'Cochin'}}>{word}, </Text>)
+        alternatives = res.data.slice(0, 10).map(word => <Text style={{fontSize: 20, fontWeight: 'bold', fontFamily: 'Cochin'}}>{word}, </Text>)
         this.setState({selectedWord: word, alternatives: alternatives})
       })
       .catch(err => console.log(err))
@@ -70,7 +71,7 @@ export default class WordRepetition extends Component {
   render() {
     return (
       <View>
-        {this.state.alternatives.length ? <Card><Button title='Exit' onPress={() => this.setState({alternatives: []}) }/><Text style={{fontSize: 25,fontWeight: 'bold'}}>Synonyms for {this.state.selectedWord}</Text><View style={{flexDirection: 'row',flexWrap: 'wrap'}}>{this.state.alternatives}</View></Card> : <Text></Text>}
+        {this.state.alternatives.length ? <Card><Button title='Exit' onPress={() => this.setState({alternatives: []}) }/><Text style={{fontSize: 25,fontWeight: 'bold'}}>Synonoms for {this.state.selectedWord}</Text><View style={{flexDirection: 'row',flexWrap: 'wrap'}}>{this.state.alternatives}</View></Card> : <Text></Text>}
 
         <Card containerStyle={{padding: 5}} >
         <ScrollView>

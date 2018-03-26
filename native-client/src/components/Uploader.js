@@ -82,7 +82,7 @@ class Uploader extends Component {
     console.log('DURATION IS', this.props.duration)
     return (
       <View>
-        <Button onPress={this.onSubmit} color="white" title="analyze" />
+        <Button onPress={this.onSubmit} color="white" title="click to send audio" />
       </View>
     )
   }

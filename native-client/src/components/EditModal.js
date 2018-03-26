@@ -5,22 +5,21 @@ import EditTitleForm from './EditTitleForm'
 
 const EditModal = (props) =>  {
     console.log('EDIT MODAL', props)
-    speech = props.speech
     return (
        <Modal
         // animationType="slide"
         transparent={ true }
         visible={ props.modalVisible }
-        onRequestClose={() => { props.setModalVisible(false, speech) }}
+        onRequestClose={() => { props.setModalVisible(false, 0) }}
         style={styles.modalContainer}
        >
          <View style={styles.modalContainer}>
             <TouchableHighlight
-              onPress={() => { props.setModalVisible(false, speech) }}
+              onPress={() => { props.setModalVisible(false, 0) }}
             >
             <View style={styles.modal}>
               <Text> Edit Speech Title </Text>
-              <EditTitleForm speech={props.speech} setModalVisible={props.setModalVisible} />
+              <EditTitleForm speech={props.speech} />
             </View>
             </TouchableHighlight>
          </View>
