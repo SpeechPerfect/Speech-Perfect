@@ -4,7 +4,7 @@ import {SpeechList} from '../components'
 import styles from '../../assets/stylesheet'
 import ReplayAudio from '../components/ReplayAudio'
 
-export default class SingleReport extends Component {
+export default class SingleReportScreen extends Component {
   static navigationOptions = {
     title: 'SingleReport',
   };

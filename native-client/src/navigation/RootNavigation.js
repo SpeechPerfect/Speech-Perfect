@@ -1,5 +1,5 @@
 import { StackNavigator } from 'react-navigation'
-import {SignedInNav} from './MainTabNavigator'
+import {SignedInNav} from './SignedInNavigator'
 import {SignedOutNav} from './SignedOutNavigator'
 
 const createRootNavigator = (signedIn = false) => {
