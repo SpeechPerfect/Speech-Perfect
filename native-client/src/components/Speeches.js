@@ -14,7 +14,7 @@ class Speeches extends Component {
       page: 1,
       seed: 1,
       error: null,
-      refreshing: false,
+      refreshing: false
     }
   }
 
@@ -34,7 +34,7 @@ class Speeches extends Component {
           width: '85%',
           backgroundColor: '#12092f',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'center'
         }}
       />
     )

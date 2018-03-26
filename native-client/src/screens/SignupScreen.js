@@ -4,7 +4,6 @@ import { Card, Button, FormLabel, FormInput } from 'react-native-elements'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 
-
 export default class SignupScreen extends Component {
   constructor(props) {
     super(props)

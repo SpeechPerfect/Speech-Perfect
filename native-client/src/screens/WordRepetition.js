@@ -49,19 +49,19 @@ export default class WordRepetition extends Component {
     let result = []
     let excludedWords = []
     //add words to an object that keeps track of their count
-    for(let i = 0; i < speechArr.length; i++){
-        if(speechObj[speechArr[i]] >= 0){
+    for (let i = 0; i < speechArr.length; i++){
+        if (speechObj[speechArr[i]] >= 0){
             speechObj[speechArr[i]]++
-        }else{
+        } else {
             speechObj[speechArr[i]] = 1
         }
     }
     //if word is used more than 5 times suggest alternatives
-    for(let i = 0; i < speechArr.length; i++){
-       if(speechObj[speechArr[i]] > 5) {
-           result.push(<TouchableOpacity onPress={() => {this.thesaurus(speechArr[i])}}><Text style={{fontSize: 21,color:'red',fontFamily: 'Avenir-Roman'}}>{speechArr[i]} </Text></TouchableOpacity>)
-       }else{
-        result.push(<TouchableOpacity onPress={() => {this.thesaurus(speechArr[i])}}><Text style={{fontSize: 22,fontFamily: 'Avenir-Roman'}}>{speechArr[i]} </Text></TouchableOpacity>)
+    for (let i = 0; i < speechArr.length; i++){
+       if (speechObj[speechArr[i]] > 5) {
+           result.push(<TouchableOpacity onPress={() => {this.thesaurus(speechArr[i])}}><Text style={{fontSize: 21, color: 'red', fontFamily: 'Avenir-Roman'}}>{speechArr[i]} </Text></TouchableOpacity>)
+       } else {
+        result.push(<TouchableOpacity onPress={() => {this.thesaurus(speechArr[i])}}><Text style={{fontSize: 22, fontFamily: 'Avenir-Roman'}}>{speechArr[i]} </Text></TouchableOpacity>)
        }
     }
    return result

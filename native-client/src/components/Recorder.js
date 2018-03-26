@@ -52,7 +52,7 @@ export default class Recorder extends Component {
 
     renderHeader() {
       return (
-        <View style={{flex: 1,alignItems: 'center', justifyContent: 'flex-end'}}>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}>
           <Text style={styles.text}>Record</Text>
         </View>
       )

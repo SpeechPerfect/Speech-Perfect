@@ -3,7 +3,7 @@ const db = require('../db')
 
 const BvReport = db.define('bvReport', {
   tone: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
     // possibly enum
   },
   pace: {
