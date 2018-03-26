@@ -26,21 +26,22 @@ export default class ReplayAudio extends Component {
   }
 
   componentDidMount() {
-    // axios.get(`${API_ROOT}/api/speech/aws-data/${this.state.speechId}`)
-    // .then(res => res.data)
-    // .then((awsData) => {
-    //   this.setState({
-    //     awsData
-    //   })
-    // })
+    axios.get(`${API_ROOT}/api/speech/aws-data/${this.state.speechId}`)
+    .then(res => res.data)
+    .then((awsData) => {
+      this.setState({
+        awsData
+      })
+    })
   }
 
   _playAudio = async () => {
+    let soundUrl = this.state.url ? this.state.url : this.state.awsData.url
     soundObject = new Expo.Audio.Sound()
 
     this.setState({playing: true, started: true})
     try {
-      await soundObject.loadAsync({ uri: `${this.props.url}`})
+      await soundObject.loadAsync({ uri: soundUrl})
       await soundObject.playAsync()
       // Your sound is playing!
     } catch (error) {
