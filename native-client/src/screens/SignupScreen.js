@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import { View, AsyncStorage as store } from "react-native"
-import { Card, Button, FormLabel, FormInput } from "react-native-elements"
+import { View, AsyncStorage as store, Alert } from "react-native"
+import { Card, Button, FormLabel, FormInput, Text } from "react-native-elements"
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 // import { onSignIn } from "../auth"
@@ -13,6 +13,7 @@ export default class SignupScreen extends Component {
     this.state = {
       email: '',
       password: '',
+      confirmPassword: '',
       error: false,
       loggedin: false,
       user: {}
@@ -28,37 +29,50 @@ export default class SignupScreen extends Component {
     this.setState({password})
   }
 
+  onConfirmChange(confirmPassword) {
+    this.setState({
+      confirmPassword
+    })
+  }
+
   onButtonPress () {
     const { navigation } = this.props
     const { email, password } = this.state
     axios.post(`${API_ROOT}/auth/signup`, {email, password})
         .then(res => {
-            console.log('GOT A RESPONSE FROM SERVER')
             store.setItem('user', JSON.stringify(res.data))
             this.setState({error: false, loggedin: true, user: res.data })
         })
+        .then(() => navigation.navigate("SignedIn"))
         .catch(() => {
-            this.setState({error: true})
+            this.setState({error: true, email: '', password: '', confirmPassword: ''
+          })
+            Alert.alert('Error', 'Something went wrong. Please try again.')
         })
-      .then(() => console.log('SIGNED IN NOW'))
-      .then(() => navigation.navigate("SignedIn"))
+
     }
 
   render() {
+    console.log(this.state, 'is the state')
     return (
       <View style={{ paddingVertical: 20 }}>
     <Card>
       <FormLabel>Email</FormLabel>
       <FormInput
       placeholder="Email address..."
+      value={this.state.email}
       onChangeText={ this.onEmailChange.bind(this) } />
       <FormLabel>Password</FormLabel>
-      <FormInput secureTextEntry placeholder="Password..." />
+      <FormInput
+      secureTextEntry
+      onChangeText = { this.onPasswordChange.bind(this) }
+      value={this.state.password}
+       placeholder="Password..." />
       <FormLabel>Confirm Password</FormLabel>
       <FormInput
       secureTextEntry
-      placeholder="Confirm Password..."
-      onChangeText = { this.onPasswordChange.bind(this) } />
+      value={this.state.confirmPassword}
+      placeholder="Confirm Password..." />
 
       <Button
         buttonStyle={{ marginTop: 20 }}
@@ -73,6 +87,7 @@ export default class SignupScreen extends Component {
         title="Sign In"
         onPress={() => this.props.navigation.navigate("SignIn")}
       />
+      {/* {this.state.error && } */}
     </Card>
   </View>
     )
