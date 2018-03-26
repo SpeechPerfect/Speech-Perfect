@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import {SpeechList} from '../components'
+import { SpeechList, ReplayAudio } from '../components'
 import styles from '../../assets/stylesheet'
-import ReplayAudio from '../components/ReplayAudio'
 
 export default class SingleReportScreen extends Component {
   static navigationOptions = {
