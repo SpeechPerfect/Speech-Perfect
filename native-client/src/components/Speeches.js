@@ -3,6 +3,7 @@ import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, TouchableWit
 import Swipeout from 'react-native-swipeout'
 import SingleSpeechThumbnail from './SingleSpeechThumbnail'
 import { Ionicons } from '@expo/vector-icons'
+import styles from '../../assets/stylesheet'
 
 class Speeches extends Component {
   constructor(props) {
@@ -29,23 +30,17 @@ class Speeches extends Component {
   renderSeparator = () => {
     return (
       <View
-        style={{
-          height: 1,
-          width: '85%',
-          backgroundColor: '#12092f',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
+        style={styles.speechesSeparator}
       />
     )
   }
 
   renderHeader = () => {
-    return (<View style={{flexDirection: 'row', marginTop: 10, alignItems: 'flex-end', justifyContent: 'center'}} >
-              <View style={{flex: 1, justifyContent: 'flex-start', alignItems: 'center'}}>
-              <Text style={{color: '#12092f', fontSize: 32, fontFamily: 'Geeza Pro' }}> Your Speeches </Text>
+    return (<View style={styles.speechesHeaderContainer}>
+              <View style={styles.speechesHeaderTextContainer}>
+              <Text style={styles.speechesHeaderText}> Your Speeches </Text>
               </View>
-              <View style={{justifyContent: 'flex-start', alignItems: 'flex-end', marginBottom: 8, marginRight: 5}}>
+              <View style={styles.speechesHeaderDeleteButtonCOntainer}>
               <TouchableOpacity onPress={() => {
                 console.log('DELETING')
                 this.props.deleteUsersSpeeches(this.props.id)}}>
@@ -58,21 +53,6 @@ class Speeches extends Component {
           </View>)
   }
 
-  renderFooter = () => {
-    if (!this.state.loading) return null
-
-    return (
-      <View
-        style={{
-          // paddingVertical: 5,
-          borderTopWidth: 1,
-          borderColor: '#CED0CE'
-        }}
-      >
-        <ActivityIndicator animating size= "large" />
-      </View>
-    )
-  }
 
   _renderItem = ({ item }) => (
     <Swipeout
@@ -96,9 +76,9 @@ class Speeches extends Component {
     autoClose={true}
     backgroundColor= "transparent">
       <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id, userId: item.userId })} >
-        <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'white', borderBottomWidth: 0.5, borderColor: 'white', paddingTop: 10, alignItems: 'flex-start'}}>
+        <View style={styles.speechesListItemContainer}>
           {this.props.speeches.length &&
-                <View key={item.id} style={{height: 50, marginLeft: 20}}>
+                <View key={item.id} style={styles.speechesListItem}>
                   <SingleSpeechThumbnail speech={item} />
                 </View>
           }
@@ -109,18 +89,16 @@ class Speeches extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'white'}}>
-        <View style={{height: 55, backgroundColor: 'lightgrey'}}>
+      <View style={styles.container}>
+        {/* <View style={styles.speechesHeader}>
           {this.renderHeader()}
-        </View>
-        <View style={{backgroundColor: 'white'}}>
+        </View> */}
+        <View>
           <FlatList
             keyExtractor= {(speech, index) => index }
             data={this.props.speeches}
             renderItem={this._renderItem}
             ItemSeparatorComponent={this.renderSeparator}
-            // ListHeaderComponent={this.renderHeader}
-            ListFooterComponent={this.renderFooter}
             onRefresh={this.handleRefresh}
             refreshing={this.state.refreshing}
             onEndReached={this.handleLoadMore}

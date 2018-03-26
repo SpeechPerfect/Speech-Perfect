@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Text, ScrollView, Button, View, TouchableOpacity } from 'react-native'
+import { Text, ScrollView, Button, View, TouchableHighlight, TouchableOpacity } from 'react-native'
 import { Card } from 'react-native-elements'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
+import styles from '../../assets/stylesheet'
 
 export default class WordRepetition extends Component {
   constructor(props) {
@@ -16,9 +17,22 @@ export default class WordRepetition extends Component {
   }
 
   static navigationOptions = {
-    title: 'Profile',
-    headerLeft: <Button title="" color="white" onPress={() => {}} />,
-    // headerTintColor: "rgb(252,197,76)',
+      header: null,
+  }
+
+  renderHeader() {
+    return (
+      <View style={styles.profileHeader}>
+        <View style={styles.profileHeaderLogoutContainer}>
+        <TouchableHighlight onPress={() => this.props.navigation.navigate('singleReport')}>
+          <Text> Report </Text>
+        </TouchableHighlight>
+        </View>
+        <View style={styles.singleReportHeader}>
+        <Text style={styles.text}>Transcript</Text>
+        </View>
+      </View>
+    )
   }
 
   componentDidMount(){
@@ -70,6 +84,9 @@ export default class WordRepetition extends Component {
   render() {
     return (
       <View>
+       <View>
+          {this.renderHeader()}
+      </View>
         {this.state.alternatives.length ? <Card><Button title='Exit' onPress={() => this.setState({alternatives: []}) }/><Text style={{fontSize: 25,fontWeight: 'bold'}}>Synonyms for {this.state.selectedWord}</Text><View style={{flexDirection: 'row',flexWrap: 'wrap'}}>{this.state.alternatives}</View></Card> : <Text></Text>}
 
         <Card containerStyle={{padding: 5}} >

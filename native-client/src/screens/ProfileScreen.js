@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { View, Button, AsyncStorage as store} from 'react-native'
+import { View, Text, Button, TouchableHighlight, AsyncStorage as store} from 'react-native'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
 import { Speeches, Logout, EditModal } from '../components'
 
 export default class ProfileScreen extends Component {
+  static navigationOptions = {
+    header: null,
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -13,12 +17,6 @@ export default class ProfileScreen extends Component {
       id: null,
       modalVisible: false,
     }
-  }
-
-  static navigationOptions = {
-    title: 'Profile',
-    headerLeft: <Button title="" color="white" onPress={() => {}} />,
-    // headerTintColor: 'rgb(252,197,76)',
   }
 
   getUserAndSpeeches() {
@@ -38,9 +36,28 @@ export default class ProfileScreen extends Component {
 
   deleteSpeech = (speech) => {
     axios.delete(`${API_ROOT}/api/speech/${speech.id}`)
-    // .then(res => res.data)
     .then(() => this.getSpeeches())
     .then(err => console.log(err))
+  }
+
+  renderHeader() {
+    return (
+      <View style={styles.profileHeader}>
+        <View style={styles.profileHeaderTitle}>
+        <Text style={styles.text}>Speeches</Text>
+        </View>
+        <View style={styles.profileHeaderLogoutContainer}>
+        <TouchableHighlight onPress={() => this.logout()}>
+          <Text> Logout </Text>
+        </TouchableHighlight>
+        </View>
+      </View>
+    )
+  }
+
+  logout() {
+    store.removeItem('user')
+    this.props.navigation.navigate('SignedOut')
   }
 
   editSpeech = (speech) => {
@@ -82,6 +99,9 @@ export default class ProfileScreen extends Component {
     const { id, speeches } = this.state
     return (
       <View style={styles.container}>
+       <View>
+          {this.renderHeader()}
+        </View>
         <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} editSpeech={this.editSpeech.bind(this)} setModalVisible={this._setModalVisible.bind(this)} getUserAndSpeeches={this.getUserAndSpeeches.bind(this)} />
         {this.state.modalVisible &&
         <EditModal
@@ -90,12 +110,9 @@ export default class ProfileScreen extends Component {
             id={this.state.id}
             speech={this.state.selectedSpeech}
             getUserAndSpeeches={this.getUserAndSpeeches.bind(this)}
-            style={{display: 'flex', height: 800, width: 800, alignItems: 'center', justifyContent: 'center'}}
+            style={styles.editModalContainer}
           />
         }
-        {speeches && <View>
-          <Logout navigation={this.props.navigation} />
-        </View>}
       </View>
     )
   }

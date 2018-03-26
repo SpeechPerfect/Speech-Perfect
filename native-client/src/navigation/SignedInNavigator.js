@@ -15,7 +15,7 @@ export const SignedInNav = TabNavigator(
       screen: StackNavigator({
         profile: { screen: ProfileScreen, path: 'profile/:name',
         navigationOptions: ({ navigation }) => ({
-          title: 'Profile',
+          title: 'History',
           headerStyle: {
             backgroundColor: 'white',
             height: 20
@@ -88,7 +88,7 @@ export const SignedInNav = TabNavigator(
                 Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
         case 'Profile':
             iconName =
-                Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
+                Platform.OS === 'ios' ? `ios-bookmark${focused ? '' : '-outline'}` : 'md-bookmark'
         }
         return (
           <Ionicons
