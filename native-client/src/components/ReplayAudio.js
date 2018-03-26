@@ -91,8 +91,7 @@ export default class ReplayAudio extends Component {
   render() {
     console.log('DATA IS', this.props.url)
     return (
-    <View style={styles.resultsContainer}>
-     <View style={styles.resultsBottomContainer}>
+      <View style={styles.resultsBottomContainer}>
         <View style={styles.audioFeedback}>
           {!this.state.started &&
           <TouchableHighlight onPress={this._playAudio}>
@@ -121,16 +120,12 @@ export default class ReplayAudio extends Component {
               />
             </TouchableHighlight>
           }
-          <TouchableHighlight onPress={this.navigateToTranscript}><Text style={{fontSize: 25,fontWeight: 'bold'}}>View Transcript</Text></TouchableHighlight>
+          <TouchableHighlight onPress={this.navigateToTranscript}><Text style={styles.transcriptButtonText}>View Transcript</Text></TouchableHighlight>
 
         </View>
         <View style={styles.transcript}>
-        {/* {this.state.speechId &&
-          <Text style={{color: 'white', fontSize: 30}}> {speech.watsonReport.transcript} </Text>
-        } */}
         </View>
       </View>
-    </View>
     )
   }
 }

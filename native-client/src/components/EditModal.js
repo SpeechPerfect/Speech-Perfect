@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, TouchableHighlight, Modal } from 'react-native'
 import styles from '../../assets/stylesheet'
-import EditTitleForm from './EditTitleForm'
+import { EditTitleForm } from './'
 
 const EditModal = (props) =>  {
     console.log('EDIT MODAL', props)
@@ -28,4 +28,3 @@ const EditModal = (props) =>  {
     )
 }
 export default EditModal
-export { EditModal }

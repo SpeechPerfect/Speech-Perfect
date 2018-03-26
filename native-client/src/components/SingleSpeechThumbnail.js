@@ -10,13 +10,13 @@ const readableDate = (str) => {
   let finalStr = formattedDate.slice(0, 6) + ',' + formattedDate.slice(6, 11) + ' at '
 
   let time = formattedDate.split(' ')[3]
-  let hoursAndMins = time.split(':')
-  let hours = Number(hoursAndMins[0])
+  let [hoursStr, minsStr] = time.split(':')
+  let hours = Number(hoursStr)
   if (hours > 12) {
     hours = hours % 12
     amPm = 'PM'
   }
-  return finalStr + hours + ':' + hoursAndMins[1] + amPm
+  return finalStr + hours + ':' + minsStr + amPm
 }
 
 export function SingleSpeechThumbnail (props) {
