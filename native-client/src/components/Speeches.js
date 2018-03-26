@@ -82,8 +82,8 @@ class Speeches extends Component {
     <Swipeout
     right={[{
       text: 'Delete',
-      backgroundColor: 'lightgrey',
-      color: '#12092f',
+      backgroundColor: '#12092f',
+      color: 'white',
       // underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
       onPress: () => {
         console.log('deleting one')
@@ -92,7 +92,7 @@ class Speeches extends Component {
     {
       text: 'Edit',
       color: '#12092f',
-      backgroundColor: 'white',
+      backgroundColor: 'lightgrey',
       // underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
       onPress: () => this.props.setModalVisible(true, item)
     }
@@ -114,7 +114,7 @@ class Speeches extends Component {
   render() {
     return (
       <View style={{flex:1,flexDirection: 'column', backgroundColor: 'white'}}>
-        <View style={{height:55, backgroundColor:'lightgrey'}}>
+        <View style={{height:55, backgroundColor:'white', borderBottomColor:'grey', borderBottomWidth: 2}}>
           {this.renderHeader()}
         </View>
         <View style={{backgroundColor: 'white'}}>
