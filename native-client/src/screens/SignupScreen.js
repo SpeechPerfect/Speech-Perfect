@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import { View, AsyncStorage as store, Alert } from "react-native"
-import { Card, Button, FormLabel, FormInput, Text } from "react-native-elements"
+import { View, AsyncStorage as store, Alert, Text } from "react-native"
+import { Card, Button, FormLabel, FormInput } from "react-native-elements"
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 // import { onSignIn } from "../auth"
@@ -49,7 +49,6 @@ export default class SignupScreen extends Component {
           })
             Alert.alert('Error', 'Something went wrong. Please try again.')
         })
-
     }
 
   render() {
