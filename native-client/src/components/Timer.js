@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text} from 'react-native'
+import RenderTimers from './TimerRender.js'
 
 const styles = StyleSheet.create({
     stopwatch: {
@@ -15,12 +16,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    time: {
-        fontSize: 50,
-        color: 'black',
-        paddingTop: 5,
-        paddingBottom: 5
     },
     title: {
         alignSelf: 'center',
@@ -43,6 +38,7 @@ const styles = StyleSheet.create({
     //   },
 })
 
+
 export default class Timer extends Component {
     _renderTitle() { //eslint-disable-line class-methods-use-this
       return (
@@ -52,45 +48,13 @@ export default class Timer extends Component {
       )
     }
 
-    _renderTimers() {
-        // let { miliseconds, seconds, minutes, hours } = this.props
-        let { duration } = this.props
-        let seconds, minutes, hours
-
-            miliseconds = Math.floor(duration / 100) % 10 || 0
-            seconds = Math.floor(duration / 1000) % 60 || 0
-            minutes = Math.floor(duration / 60000) % 60
-            hours = Math.floor(duration / 360000) % 60
-
-            miliseconds = miliseconds.toString().slice(0, 1)
-            if (minutes > 0) seconds = seconds.toString().length === 1 ? `0${seconds}` : seconds
-            if (hours > 0) minutes = minutes.length === 1 ? '0' + minutes : minutes
-
-      return (
-        <View >
-
-          <Text style={styles.time}>
-        { hours ?
-            `${hours}:${minutes}:${seconds}`
-            :
-            minutes ?
-                `${minutes}:${seconds}`
-                :
-                `${seconds}.${miliseconds}`
-        }
-        </Text>
-
-        </View>
-      )
-    }
-
-
   render() {
+      let duration = this.props.duration
     return  (
         <View style={{flex: 1}}>
             <View style={styles.stopwatch} />
             <View style={styles.timer}>
-                {this._renderTimers()}
+              <RenderTimers duration={duration} />
             </View>
         </View>
 
