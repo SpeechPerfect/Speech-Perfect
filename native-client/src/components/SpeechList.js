@@ -18,9 +18,11 @@ export default class SpeechList extends Component {
   }
 
   componentDidMount = () => {
+    console.log('SPEECH ID IS ', this.props.speechId)
     axios.get(`${API_ROOT}/api/speech/watson-data/${this.props.speechId}`)
     .then((res) => res.data)
     .then((speechData) => {
+      console.log('speech data is', speechData)
       this.setState({
         speechData
       })
@@ -38,17 +40,17 @@ render() {
 
 
   return (
-  <View style={styles.resultsContainer}>
+    <View>
+  {speechData && <View style={styles.resultsContainer}>
   <Text style={styles.resultsText}>Duration: {duration}</Text>
   <Text style={styles.resultsText}>Word count: {wordCount}</Text>
   <Text style={styles.resultsText}>"Um" count: {umCount}</Text>
   <Text style={styles.resultsText}>"Like" count: {likeCount}</Text>
   <Text style={styles.resultsText}>Pace: {umCount}</Text>
-  {/* <FlatList style={{flex: 1}}
-        data={this.speechData}
-      renderItem={({item}) =>  <Text style={{fontSize: 24, color: 'black'}}>{item[0]} {item[1]}</Text>} /> */}
-       </View>
-  )}
+       </View>}
+      </View>
+  )
+}
 }
 
 

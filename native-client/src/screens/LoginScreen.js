@@ -3,7 +3,6 @@ import { View, AsyncStorage as store, Alert } from "react-native"
 import { Card, Button, FormLabel, FormInput } from "react-native-elements"
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
-// import { onSignIn } from "../auth";
 
 export default class LoginScreen extends Component {
   constructor(props) {

@@ -1,10 +1,8 @@
-import React, { Component } from "react"
-import { View, AsyncStorage as store, Alert, Text } from "react-native"
-import { Card, Button, FormLabel, FormInput } from "react-native-elements"
+import React, { Component } from 'react'
+import { View, AsyncStorage as store, Alert } from 'react-native'
+import { Card, Button, FormLabel, FormInput } from 'react-native-elements'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
-// import { onSignIn } from "../auth"
-
 
 
 export default class SignupScreen extends Component {
@@ -43,7 +41,7 @@ export default class SignupScreen extends Component {
             store.setItem('user', JSON.stringify(res.data))
             this.setState({error: false, loggedin: true, user: res.data })
         })
-        .then(() => navigation.navigate("SignedIn"))
+        .then(() => navigation.navigate('SignedIn'))
         .catch(() => {
             this.setState({error: true, email: '', password: '', confirmPassword: ''
           })
@@ -83,11 +81,10 @@ export default class SignupScreen extends Component {
       <Button
         buttonStyle={{ marginTop: 20 }}
         backgroundColor="transparent"
-        textStyle={{ color: "#bcbec1" }}
+        textStyle={{ color: '#bcbec1' }}
         title="Sign In"
-        onPress={() => this.props.navigation.navigate("SignIn")}
+        onPress={() => this.props.navigation.navigate('SignIn')}
       />
-      {/* {this.state.error && } */}
     </Card>
   </View>
     )
