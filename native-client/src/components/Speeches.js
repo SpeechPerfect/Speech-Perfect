@@ -1,10 +1,8 @@
 import React, { Component } from "react"
-import { View, Text, FlatList, Alert, ActivityIndicator, TouchableOpacity, TouchableWithoutFeedback } from "react-native"
-import { List, ListItem, SearchBar, Card, Avatar } from "react-native-elements"
+import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, TouchableWithoutFeedback } from "react-native"
 import Swipeout from 'react-native-swipeout'
 import SingleSpeechThumbnail from './SingleSpeechThumbnail'
 import { Ionicons } from '@expo/vector-icons'
-import styles from '../../assets/stylesheet'
 
 class Speeches extends Component {
   constructor(props) {

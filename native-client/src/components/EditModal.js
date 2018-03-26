@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { FlatList, View, StyleSheet, Button, Dimensions, Image, Text, TouchableHighlight, Modal } from 'react-native'
+import React from 'react'
+import { View, Text, TouchableHighlight, Modal } from 'react-native'
 import styles from '../../assets/stylesheet'
 import EditTitleForm from './EditTitleForm'
 

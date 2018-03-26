@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { ExpoLinksView } from '@expo/samples'
 import  {Recorder}  from '../components'
 import styles from '../../assets/stylesheet'
 

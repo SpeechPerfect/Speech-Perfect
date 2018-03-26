@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableHighlight, Text } from 'react-native'
+import { View } from 'react-native'
 import {SpeechList} from '../components'
 import styles from '../../assets/stylesheet'
 import ReplayAudio from '../components/ReplayAudio'
@@ -24,13 +24,11 @@ export default class SingleReport extends Component {
           <SpeechList speechId={this.state.speechId} />
         </View>
       }
-     <ReplayAudio speechId={this.state.speechId}/>
+     <ReplayAudio speechId={this.state.speechId} navigation={this.props.navigation} />
     </View>
     )
   }
 }
-
-
 
 
 {/* <BarChart

@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Text, ScrollView, View, Button, AsyncStorage as store} from 'react-native'
+import { View, Button, AsyncStorage as store} from 'react-native'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
-import SingleSpeechThumbnail from '../components/SingleSpeechThumbnail'
-import Speeches from '../components/Speeches'
 import EditModal from '../components/EditModal'
+import {Speeches, Logout} from '../components'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -95,6 +94,9 @@ export default class Profile extends Component {
             style={{display:'flex',height:800, width:800, alignItems: 'center', justifyContent: 'center'}}
           />
         }
+        {speeches && <View>
+          <Logout navigation={this.props.navigation} />
+        </View>}
       </View>
     )
   }
