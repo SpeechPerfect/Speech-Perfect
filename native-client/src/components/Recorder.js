@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Button, View, StyleSheet, Text, AsyncStorage as store } from 'react-native'
+import {Button, View, Text, AsyncStorage as store } from 'react-native'
 import Expo, { Audio, Permissions } from 'expo'
 import Timer  from './Timer'
 import {Uploader} from './'

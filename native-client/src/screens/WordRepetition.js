@@ -4,8 +4,6 @@ import { Card } from 'react-native-elements'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 
-
-
 export default class WordRepetition extends Component {
   constructor(props) {
     super(props)
@@ -19,8 +17,8 @@ export default class WordRepetition extends Component {
 
   static navigationOptions = {
     title: 'Profile',
-    headerLeft: <Button title='' color='white' onPress={() => {}} />,
-    // headerTintColor: 'rgb(252,197,76)',
+    headerLeft: <Button title="" color="white" onPress={() => {}} />,
+    // headerTintColor: "rgb(252,197,76)',
   }
 
   componentDidMount(){
@@ -37,9 +35,9 @@ export default class WordRepetition extends Component {
 
   thesaurus(word){
     axios.get(`${API_ROOT}/api/speech/thesaurus/${word}`)
-      .then(res =>{
+      .then(res => {
         //set state to first ten words returnd from the backend
-        alternatives = res.data.slice(0,10).map(word => <Text style={{fontSize: 20,fontWeight: 'bold',fontFamily: 'Cochin'}}>{word}, </Text>)
+        alternatives = res.data.slice(0,10).map(word => <Text style={{fontSize: 20, fontWeight: 'bold', fontFamily: 'Cochin'}}>{word}, </Text>)
         this.setState({selectedWord: word, alternatives: alternatives})
       })
       .catch(err => console.log(err))

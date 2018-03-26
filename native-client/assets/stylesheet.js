@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   text: {
-    fontFamily:'Avenir-Book',
+    fontFamily: 'Avenir-Book',
     fontSize: 20,
     color: '#12092f',
     fontWeight: 'bold',
   },
   resultsText: {
-    fontFamily:'Avenir-Book',
+    fontFamily: 'Avenir-Book',
     fontSize: 20,
     color: '#12092f',
   },
@@ -95,14 +95,14 @@ const styles = StyleSheet.create({
   editTitleInput: {
     width: 300.3,
     height: 15.3,
-    // fontFamily: "WorkSans",
+    // fontFamily: 'WorkSans',
     fontSize: 20.7,
-    fontWeight: "normal",
-    fontStyle: "normal",
+    fontWeight: 'normal',
+    fontStyle: 'normal',
     letterSpacing: 0,
-    textAlign: "left",
+    textAlign: 'left',
     marginVertical: 20,
-    color: "#ffffff"
+    color: '#ffffff'
   },
   editTitleButtonText: {
     fontSize: 16,
@@ -163,12 +163,12 @@ const styles = StyleSheet.create({
   recorderButton: {
     color: 'white',
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   recorderIntroText: {
     color: 'white',
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   recorderText: {
     color: 'white',
@@ -176,16 +176,16 @@ const styles = StyleSheet.create({
   },
   facebookHelpContainer: {
     marginTop: 15,
-    alignItems: "center"
+    alignItems: 'center'
   },
   facebookHelpLink: {
     paddingVertical: 15
   },
   facebookHelpLinkText: {
     fontSize: 20,
-    color: "white",
+    color: 'white',
     padding: 10,
-    backgroundColor: "#3b5998"
+    backgroundColor: '#3b5998'
   }
 })
 
