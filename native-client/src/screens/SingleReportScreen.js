@@ -24,7 +24,7 @@ export default class SingleReportScreen extends Component {
           <SpeechList speechId={this.state.speechId} />
         </View>
       }
-     <ReplayAudio speechId={this.state.speechId} navigation={this.props.navigation} />
+     <ReplayAudio speechId={this.state.speechId} navigation={this.props.navigation} audioURL={this.props.url} />
     </View>
     )
   }
