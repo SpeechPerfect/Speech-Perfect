@@ -7,17 +7,6 @@ import PasswordInputText from 'react-native-hide-show-password-input'
 import FacebookLogin from './FacebookLogin'
 import API_ROOT from '../../IP_addresses.js'
 
-// const styles = {
-//     errorTextStyle: {
-//         fontSize: 20,
-//         alignSelf: 'center',
-//         color: 'red'
-//     },
-//     container: {
-//         marginTop: 125
-//     }
-// }
-
 export default class LoginForm extends Component {
     state = { email: '', password: '', error: false, loggedin: false, user: {} };
 
