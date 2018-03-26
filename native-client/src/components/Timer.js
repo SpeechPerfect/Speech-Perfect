@@ -1,21 +1,13 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, Text} from 'react-native';
+import React, { Component } from 'react'
+import { View, StyleSheet, Text} from 'react-native'
+import styles from '../../assets/stylesheet'
 
 export default class Timer extends Component {
     constructor(){
         super()
     }
 
-    _renderTitle() {
-      return (
-        <View style={styles.stopwatch}>
-          <Text style={styles.title}>Stopwatch</Text>
-        </View>
-      )
-    }
-
     _renderTimers() {
-        // let { miliseconds, seconds, minutes, hours } = this.props
         let { duration } = this.props
         let seconds, minutes, hours
 
@@ -31,7 +23,7 @@ export default class Timer extends Component {
       return (
         <View >
 
-          <Text style={styles.time}>
+          <Text style={styles.timerDuration}>
         { hours ?
             `${hours}:${minutes}:${seconds}`
             :
@@ -52,7 +44,7 @@ export default class Timer extends Component {
         <View style={{flex: 1}}>
             <View style={styles.stopwatch}>
              </View>
-            <View style={styles.timer}>
+            <View style={styles.timerContainer}>
                 {this._renderTimers()}
             </View>
         </View>
@@ -60,49 +52,3 @@ export default class Timer extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-    stopwatch: {
-        flex: 2,
-        alignItems: 'center',
-        width: '100%',
-    },
-    timer: {
-        width: '100%',
-        flex: 1,
-        // backgroundColor: '#202020',
-        backgroundColor: 'white',
-        borderWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-      },
-    time: {
-        fontSize: 50,
-        color: 'black',
-        paddingTop: 5,
-        paddingBottom: 5,
-    },
-    title: {
-        alignSelf: 'center',
-        fontWeight: '600',
-        color: 'white',
-    },
-    mainTimer: {
-        fontSize: 60,
-        fontWeight: '100',
-        borderWidth: 0.5,
-        alignSelf: 'center'
-    },
-    lapTimer: {
-        fontSize: 18,
-        borderWidth: 0.5,
-        alignSelf: 'center'
-    },
-    //  top: {
-    //     flex: 1
-    //   },
-})
-
-
-
-

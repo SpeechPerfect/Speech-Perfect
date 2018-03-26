@@ -4,6 +4,7 @@ import Expo, { Audio, Permissions } from 'expo'
 import Timer  from './Timer'
 import {Uploader} from './'
 import RecordButton from './RecordButton'
+import styles from '../../assets/stylesheet'
 
 export default class Recorder extends Component {
     constructor(){
@@ -150,71 +151,29 @@ export default class Recorder extends Component {
     seconds = this.state.seconds
     return  (
       <View style={styles.container}>
-        <View style={styles.top}>
+        <View style={styles.recorderTopContainer}>
           <Timer duration={this.state.duration} />
         </View>
-        <View style={styles.bottom}>
+        <View style={styles.recorderBottomContainer}>
           {!this.state.begin &&
-          <View style={styles.bottom}>
-          <Text style={styles.introText} > Press Record and start speaking </Text>
-          <Text> </Text>
-          <Text style={styles.text}> We will analyze your speech and </Text>
-          <Text style={styles.text}> provide you with suggestions how to improve </Text>
-          <Text> </Text>
+          <View style={styles.recorderBottomContainer}>
+          <Text style={styles.recorderIntroText} > Press Record and start speaking </Text>
+          <Text>''</Text>
+          <Text style={styles.recorderText}> We will analyze your speech and </Text>
+          <Text style={styles.recorderText}> provide you with suggestions how to improve </Text>
+          <Text>''</Text>
           </View>
           }
           {this.state.begin &&
           <Uploader navigation={this.props.navigation} uri={this.state.recording._uri} duration={this.state.durationMillis} />
           }
-          <View style={styles.startRecording}>
-            <Button style={styles.button} color="white" onPress={buttonMethod} title={text}/>
+          <View style={styles.startRecordingContainer}>
+            <Button style={styles.recorderButton} color="white" onPress={buttonMethod} title={text}/>
             <RecordButton press={buttonMethod} />
-            <Button style={styles.button} color="white" onPress={this.onButtonClear} title="Reset" />
+            <Button style={styles.recorderButton} color="white" onPress={this.onButtonClear} title="Reset" />
           </View>
         </View>
       </View>
     )
   }
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    display: 'flex',
-    backgroundColor: 'white'
-  },
-  top: {
-    flex: 1,
-    backgroundColor: '#12092f',
-    borderColor: 'white',
-  },
-  startRecording: {
-    flexDirection: 'row',
-    marginBottom: 13,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  bottom: {
-    flex: 2,
-    backgroundColor: '#12092f',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  },
-  button: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  introText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  text: {
-    color: 'white',
-    fontSize: 14,
-    // fontWeight: "bold",
-  }
-})

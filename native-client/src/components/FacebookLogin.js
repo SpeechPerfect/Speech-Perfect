@@ -1,14 +1,7 @@
 import React from "react"
-import {
-  StyleSheet,
-  Alert,
-  Text,
-  TouchableOpacity,
-  View
-} from "react-native"
-
+import { Alert, Text, TouchableOpacity, View } from "react-native"
 import Expo from "expo"
-
+import styles from '../../assets/stylesheet'
 
 export default class FacebookLogin extends React.Component {
   async logIn() {
@@ -28,9 +21,9 @@ export default class FacebookLogin extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={() => this.logIn()} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>
+          <View style={styles.facebookHelpContainer}>
+            <TouchableOpacity onPress={() => this.logIn()} style={styles.facebookHelpLink}>
+              <Text style={styles.facebookHelpLinkText}>
                 Login with Facebook
               </Text>
             </TouchableOpacity>
@@ -39,34 +32,3 @@ export default class FacebookLogin extends React.Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff"
-  },
-  homeScreenFilename: {
-    marginVertical: 7
-  },
-  codeHighlightText: {
-    color: "rgba(96,100,109, 0.8)"
-  },
-  codeHighlightContainer: {
-    backgroundColor: "rgba(0,0,0,0.05)",
-    borderRadius: 3,
-    paddingHorizontal: 4
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: "center"
-  },
-  helpLink: {
-    paddingVertical: 15
-  },
-  helpLinkText: {
-    fontSize: 20,
-    color: "white",
-    padding: 10,
-    backgroundColor: "#3b5998"
-  }
-})
