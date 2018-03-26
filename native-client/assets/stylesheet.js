@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   recorderButtons: {
     backgroundColor: 'white',
     flexDirection: 'row',
-    alignItems: 'space-between'
+      justifyContent: 'space-between'
   },
   recorderUpload: {
     backgroundColor: '#12092f',
