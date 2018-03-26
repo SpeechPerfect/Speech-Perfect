@@ -73,11 +73,11 @@ export default class WordRepetition extends Component {
     return (
       <View>
         {this.state.alternatives.length ? <Card><Button title='Exit' onPress={() => this.setState({alternatives: []}) }/><Text style={{fontSize: 25,fontWeight: 'bold'}}>Synonoms for {this.state.selectedWord}</Text><View style={{flexDirection: 'row',flexWrap: 'wrap'}}>{this.state.alternatives}</View></Card> : <Text></Text>}
-        
-        <Card containerStyle={{padding: 0 , padding: 5}} >
+
+        <Card containerStyle={{padding: 5}} >
         <ScrollView>
-        <View style={{flexDirection: 'row',flexWrap: 'wrap'}}>
-            {this.state.speech ? this.renderSpeech() : <Text></Text>}
+        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+            {this.state.speech ? this.renderSpeech() : <Text>''</Text>}
         </View>
         </ScrollView>
         </Card>
