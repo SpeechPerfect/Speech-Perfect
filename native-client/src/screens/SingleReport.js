@@ -24,7 +24,7 @@ export default class SingleReport extends Component {
           <SpeechList speechId={this.state.speechId} />
         </View>
       }
-     <ReplayAudio speechId={this.state.speechId}/>
+     <ReplayAudio speechId={this.state.speechId} navigation={this.props.navigation} />
     </View>
     )
   }

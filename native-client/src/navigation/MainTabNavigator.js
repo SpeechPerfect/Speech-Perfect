@@ -35,7 +35,7 @@ export const SignedInNav = TabNavigator(
                 backgroundColor: 'white',
                 height: 20
               },
-              headerLeft: <Button title="Profile" color="#12092f" onPress={() => navigation.navigate('profile')} />,
+              headerLeft: <Button title="Profile" color="#12092f" onPress={() => navigation.navigate('results')} />,
               headerTintColor: '#12092f',
             }),
             },
@@ -58,7 +58,7 @@ export const SignedInNav = TabNavigator(
                   backgroundColor: 'white',
                   height: 20
                 },
-                headerLeft: <Button title='Back to Report' color='#12092f' onPress={() => navigation.navigate('report')} />,
+                headerLeft: <Button title='Back to Report' color='#12092f' onPress={() => navigation.navigate('singleReport')} />,
                 headerTintColor: '#12092f',
               }),
             }

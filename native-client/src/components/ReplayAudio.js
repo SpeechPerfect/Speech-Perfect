@@ -21,7 +21,7 @@ export default class ReplayAudio extends Component {
         playing: false,
         started: false,
     }
-    this._navigateTranscript = this.navigateTranscript.bind(this)
+    this.navigateToTranscript = this.navigateToTranscript.bind(this)
   }
 
   componentDidMount() {
@@ -83,7 +83,7 @@ export default class ReplayAudio extends Component {
         }
       }
 
-    navigateTranscript(){
+    navigateToTranscript(){
       this.props.navigation.navigate('WordRepetition', { speechId: this.props.navigation.state.params.speechId, userId: this.props.navigation.state.params.userId})
     }
 
@@ -121,7 +121,7 @@ export default class ReplayAudio extends Component {
               />
             </TouchableHighlight>
           }
-          <TouchableHighlight onPress={this._navigateTranscript}><Text style={{fontSize: 25,fontWeight: 'bold'}}>View Transcript</Text></TouchableHighlight>
+          <TouchableHighlight onPress={this.navigateToTranscript}><Text style={{fontSize: 25,fontWeight: 'bold'}}>View Transcript</Text></TouchableHighlight>
 
         </View>
         <View style={styles.transcript}>

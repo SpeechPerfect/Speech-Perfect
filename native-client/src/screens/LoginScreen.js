@@ -1,9 +1,8 @@
 import React, {Component} from "react"
-import { View, AsyncStorage as store } from "react-native"
+import { View, AsyncStorage as store, Alert } from "react-native"
 import { Card, Button, FormLabel, FormInput } from "react-native-elements"
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
-// import { onSignIn } from "../auth";
 
 export default class LoginScreen extends Component {
   constructor(props) {
@@ -34,11 +33,13 @@ export default class LoginScreen extends Component {
             store.setItem('user', JSON.stringify(res.data))
             this.setState({error: false, loggedin: true, user: res.data })
         })
+        .then(() => console.log('SIGNED IN NOW'))
+        .then(() => navigation.navigate("SignedIn"))
         .catch(() => {
-            this.setState({error: true})
+          this.setState({error: true, email: '', password: '', confirmPassword: ''
         })
-      .then(() => console.log('SIGNED IN NOW'))
-      .then(() => navigation.navigate("SignedIn"))
+          Alert.alert('Error', 'Something went wrong. Please try again.')
+      })
     }
 
   render() {
@@ -49,10 +50,12 @@ export default class LoginScreen extends Component {
       <FormLabel>Email</FormLabel>
       <FormInput
       onChangeText={ this.onEmailChange.bind(this) }
+      value={this.state.email}
       placeholder="Email address..." />
       <FormLabel>Password</FormLabel>
       <FormInput
       onChangeText={ this.onPasswordChange.bind(this) }
+      value={this.state.password}
       secureTextEntry placeholder="Password..." />
 
       <Button
