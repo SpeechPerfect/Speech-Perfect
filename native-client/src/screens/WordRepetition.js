@@ -6,8 +6,6 @@ import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
 import SingleSpeechThumbnail from '../components/SingleSpeechThumbnail'
 
-
-
 export default class WordRepetition extends Component {
   constructor(props) {
     super(props)
@@ -48,69 +46,93 @@ export default class WordRepetition extends Component {
   }
 
 
-  renderSpeech(){
-    let speechObj = {}
-    let speech = this.state.speech.toLocaleLowerCase()
-    let speechArr = this.state.speech.split(' ')
+  renderSpeech() {
+    let wordCount = {}
+    let speech = this.state.speech.toLocaleLowerCase().split(/\s+/)
+    // let speechArr = this.state.speech.split(' ')
     let result = []
-    let badWords = ['A little bit', 'just', 'My topic is', "I've been asked to speak about", 'so', 'actually', 'basically', 'supposedly', 'totally','you know', 'like I said'  ]
+    let badWords = ['A little bit', 'just', 'My topic is', "I've been asked to speak about", 'so', 'actually', 'basically', 'supposedly', 'totally','you know', 'like I said']
+      .map(x => x.toLocaleLowerCase().split(/\s+/))
     let excludedWords = []
-    // for(let i = 0; i < speechArr.length; i++){
-    //   if(speech.includes(badWords[i].toLowerCase())){
-        
-    //   }else{
-    //       speechObj[speechArr[i]] = 1
-    //   }
-    // }
-    //add words to an object that keeps track of their count
-    for(let i = 0; i < speechArr.length; i++){
-        if(speechObj[speechArr[i]] >= 0){
-            speechObj[speechArr[i]]++
-        }else{
-            speechObj[speechArr[i]] = 1
-        }
+    for(let i = 0; i < speech.length; i++){
+      wordCount[speech[i]] = (wordCount[speech[i]] || 0) + 1
     }
-    //if word is used more than 5 times suggest alternatives
-    for(let i = 0; i < speechArr.length; i++){
-      let pushed = false
-      for(let x = 0; x < badWords.length; x++){
-        if(badWords[x].split(' ').length === 1) {
-          if (badWords[x] === speechArr[i]){
-            result.push(<TouchableOpacity onPress={() => {this.thesaurus(speechArr[x])}}><Text style={{fontSize: 21,color:'red',fontFamily: 'Avenir-Roman'}}>{speechArr[x]} </Text></TouchableOpacity>)
-            pushed = true
-          } 
-        }else if(badWords[x].split(' ')[0].toLowerCase() === 
-                speechArr[i].toLowerCase() && 
-                speechArr.slice(i, i + badWords[x].split(' ').length).join(' ') === 
-                badWords[x].toLowerCase()){
-                  for(let y = i; y <  i + badWords[x].split(' ').length ; y++){
-                    result.push(<TouchableOpacity onPress={() => {this.thesaurus(speechArr[i])}}><Text style={{fontSize: 21,color:'red',fontFamily: 'Avenir-Roman'}}>{speechArr[y]} </Text></TouchableOpacity>)
-                  }
-                  pushed = true
-                  i += badWords[x].split(' ').length - 1
-         }else if(!pushed && speechObj[speechArr[i]] > 5) {
-          pushed = true
-            result.push(<TouchableOpacity onPress={() => {this.thesaurus(speechArr[i])}}><Text style={{fontSize: 21,color:'orange',fontFamily: 'Avenir-Roman'}}>{speechArr[i]} </Text></TouchableOpacity>)
-         }else if(!pushed){
-          pushed = true
-            result.push(<TouchableOpacity onPress={() => {this.thesaurus(speechArr[i])}}><Text style={{fontSize: 22,fontFamily: 'Avenir-Roman'}}>{speechArr[i]} </Text></TouchableOpacity>)
+  
+    // Match pattern from value at i
+    const match = (pattern, value, start=0) => {
+      const end = pattern.length
+      const matched = []
+      for (let i = 0; i != end; ++i)
+        if (pattern[i] !== value[start + i])
+          return false
+        else
+          matched.push(pattern[i])
+      return matched
+    }
+
+    const push = (...args) => {
+      result.push(...args)
+    }
+
+    const styled = style => ({ text }) =>
+      text.map(
+        word =>
+          <TouchableOpacity
+            onPress={() => {this.thesaurus(word)}}>
+            <Text style={style}>{
+              word
+            } </Text>
+          </TouchableOpacity>
+      )
+
+    const red = styled({fontSize: 21,color:'red',fontFamily: 'Avenir-Roman'})
+    const orange = styled({fontSize: 21,style:'orange',fontFamily: 'Avenir-Roman'})
+    const black = styled({fontSize: 22,fontFamily: 'Avenir-Roman'})
+
+    let i
+    speech: for(i = 0; i < speech.length; i++) {
+      for(let x = 0; x < badWords.length; x++) {
+        const phrase = badWords[x]
+        const matched = match(phrase, speech, i)
+
+        // Bad phrase match
+        if (matched) {
+          push({ style: red, text: matched })
+          i += matched.length - 1
+          continue speech
         }
       }
+
+      const word = speech[i], text = [word]
+      // No bad words matched, check for a repeated word match
+      if (wordCount[word] > 5) {
+        push({ style: orange, text })
+        continue speech
+      }
+      // Otherwise, render the word in black.
+      push({ style: black, text })
     }
-   return result
+    return result.map(result => result.style(result))
   }
 
   render() {
     return (
       <View>
-        {this.state.alternatives.length ? <Card><Button style={{borderRadius: 4, borderWidth: 0.5, borderColor: '#d6d7da' }} title='X' onPress={() => this.setState({alternatives: []}) }/><Text style={{fontSize: 25,fontWeight: 'bold'}}>Synonoms for {this.state.selectedWord}</Text><View style={{flexDirection: 'row',flexWrap: 'wrap'}}>{this.state.alternatives}</View></Card> : <Text></Text>}
-        
+        {this.state.alternatives.length ? 
+        <Card>      
+            <TouchableOpacity style={{ width: 25, height: 25, borderRadius: 20}}  onPress={() => this.setState({alternatives: []}) }><Text>X</Text></TouchableOpacity>
+            <Text style={{fontSize: 25,fontWeight: 'bold'}}>Synonoms for {this.state.selectedWord}</Text>
+            <View style={{flexDirection: 'row',flexWrap: 'wrap'}}>{this.state.alternatives}</View>
+          </Card> 
+          : 
+          <Text></Text>}
+
         <Card containerStyle={{padding: 0 , padding: 5}} >
-        <ScrollView>
-        <View style={{flexDirection: 'row',flexWrap: 'wrap'}}>
-            {this.state.speech ? this.renderSpeech() : <Text></Text>}
-        </View>
-        </ScrollView>
+          <ScrollView>     
+            <View style={{flexDirection: 'row',flexWrap: 'wrap'}}>
+                {this.state.speech ? this.renderSpeech() : <Text></Text>}
+            </View>
+          </ScrollView>
         </Card>
       </View>
     )
