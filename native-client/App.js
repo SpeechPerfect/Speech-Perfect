@@ -21,7 +21,9 @@ export default class App extends React.Component {
     componentDidMount() {
         if (Platform.OS === 'android'){
             Font.loadAsync({
-                Arial: require('./fonts/Arial.ttf')
+                Arial: require('./fonts/Arial.ttf'),
+                'Geeza Pro': require('./fonts/Geeza_Pro_Regular.ttf'),
+                'Avenir-Book': require('./fonts/Avenir-Book.otf')
             })
                 .then(() => this.setState({ fontLoaded: true }))
         }

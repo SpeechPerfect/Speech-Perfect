@@ -4,7 +4,7 @@ import { Platform, Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 
-import { RecordScreen, ResultsScreen, Profile, SingleReport, WordRepetition } from '../screens'
+import { RecordScreen, ResultsScreen, ProfileScreen, SingleReportScreen, WordRepetition } from '../screens'
 
 export const SignedInNav = TabNavigator(
   {
@@ -13,7 +13,7 @@ export const SignedInNav = TabNavigator(
     },
     Profile: {
       screen: StackNavigator({
-        profile: { screen: Profile, path: 'profile/:name',
+        profile: { screen: ProfileScreen, path: 'profile/:name',
         navigationOptions: ({ navigation }) => ({
           title: 'Profile',
           headerStyle: {
@@ -39,7 +39,7 @@ export const SignedInNav = TabNavigator(
               headerTintColor: '#12092f'
             })
             },
-            singleReport: { screen: SingleReport, path: 'profile/report',
+            singleReport: { screen: SingleReportScreen, path: 'profile/report',
             navigationOptions: ({ navigation }) => ({
               title: 'Report',
               headerStyle: {
@@ -63,6 +63,7 @@ export const SignedInNav = TabNavigator(
               })
             }
         },
+
         {
           navigationOptions: { tabBarVisible: false }
           }
