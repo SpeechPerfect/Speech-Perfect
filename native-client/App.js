@@ -58,7 +58,7 @@ export default class App extends React.Component {
       return (
       <View style={styles.container}>
         {/* what is this element? */}
-        <View style={{backgroundColor: 'white', height: 18}} >
+        <View style={styles.statusBar} >
          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
         </View>
