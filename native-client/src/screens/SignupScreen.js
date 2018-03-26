@@ -72,6 +72,7 @@ export default class SignupScreen extends Component {
       <FormInput
       secureTextEntry
       value={this.state.confirmPassword}
+      onChangeText = {this.onConfirmChange.bind(this) }
       placeholder="Confirm Password..." />
 
       <Button
