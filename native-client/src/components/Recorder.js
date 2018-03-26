@@ -39,7 +39,7 @@ export default class Recorder extends Component {
 
     renderHeader() {
       return (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}>
+        <View >
           <Text style={styles.text}>Record</Text>
         </View>
       )
@@ -133,8 +133,8 @@ export default class Recorder extends Component {
         <View style={styles.recorderBottomContainer}>
           <RecordButton press={buttonMethod} />
           {this.state.begin ?
-          <View>
-          <Text style={{color: 'white'}}>''</Text>
+          <View style={{height: 2, marginBottom: -2}}>
+            <Text style={{color: 'white'}}>''</Text>
           </View>
           :
           <View style={styles.recorderBottomText}>
@@ -144,7 +144,7 @@ export default class Recorder extends Component {
           </View>
           }
           {(this.state.begin && this.state.isClicked) ?
-          <View style={styles.recorderBottomText}>
+          <View style={styles.recorderIntroText}>
             <Text style={styles.recorderStopText} > Press the mic to stop recording </Text>
           </View>
           :

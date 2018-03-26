@@ -4,8 +4,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    // justifyContent: 'center',
-    // alignItems: 'center'
+  },
+  statusBar: {
+    backgroundColor: 'white',
+    height: 18
   },
   title: {
     fontFamily: 'Arial',
@@ -32,6 +34,11 @@ const styles = StyleSheet.create({
   },
   transcript: {
     backgroundColor: 'white',
+  },
+  transcriptButtonText: {
+    paddingLeft: 20,
+    fontSize: 25,
+    fontWeight: 'bold',
   },
   text: {
     fontFamily: 'Avenir-Book',
@@ -142,30 +149,34 @@ const styles = StyleSheet.create({
     height: 40,
     borderBottomColor: '#12092f',
     borderBottomWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'flex-end'
   },
   recorderTopContainer: {
-    flex: 2,
+    flex: 1,
     backgroundColor: 'white',
     borderColor: 'white',
-  },
-  recordButtonContainer: {
-    flexDirection: 'column',
-    marginBottom: 10,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start'
   },
   recorderBottomContainer: {
-    flex: 2,
+    flex: 1,
     backgroundColor: 'white',
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    marginBottom: 20,
+    // marginBottom: 10,
+  },
+  recordButtonContainer: {
+    flexDirection: 'column',
+    // marginBottom: 10,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   recorderBottomText: {
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    marginBottom: 20,
+    // marginBottom: 20,
   },
   recorderButton: {
     color: '#12092f',
@@ -175,13 +186,13 @@ const styles = StyleSheet.create({
   recorderButtons: {
     backgroundColor: 'white',
     flexDirection: 'row',
-    alignItems: 'space-between'
+    justifyContent: 'space-between'
   },
   recorderUpload: {
     backgroundColor: '#12092f',
     borderRadius: 10,
     borderColor: 'white',
-    margin: 10,
+    margin: 5,
     padding: 5,
   },
   recorderIntroText: {
@@ -201,6 +212,84 @@ const styles = StyleSheet.create({
   recorderText: {
     color: '#12092f',
     fontSize: 14,
+  },
+  profileHeader: {
+    height: 40,
+    borderBottomColor: '#12092f',
+    borderBottomWidth: 2,
+    alignItems: 'flex-end',
+    flexDirection: 'row',
+    },
+  profileHeaderLogoutContainer: {
+    // flexDirection: 'column',
+    justifyContent: 'flex-end',
+  },
+  // profileHeaderLogoutText: {
+  //   // alignItems: 'flex-start',
+  //   justifyContent: 'flex-start',
+  // },
+  profileHeaderTitle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    // alignItems: 'center',
+    flex: 1,
+    marginLeft: 40,
+
+  },
+  singleReportHeader: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    // alignItems: 'center',
+    flex: 1,
+    marginRight: 40,
+
+  },
+  speechesHeader: {
+    height: 45,
+    backgroundColor: 'lightgrey',
+  },
+  speechesHeaderContainer: {
+    flexDirection: 'row', marginTop: 10,
+    alignItems: 'flex-end', justifyContent: 'center',
+  },
+  speechesHeaderTextContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  speechesHeaderText: {
+    color: '#12092f',
+    fontSize: 32,
+    fontFamily: 'Geeza Pro',
+  },
+  speechesHeaderDeleteButtonContainer: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+    marginBottom: 8,
+    marginRight: 5
+  },
+  speechesSeparator: {
+    height: 1,
+    width: '85%',
+    backgroundColor: '#12092f',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  speechesListItemContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'white',
+    borderBottomWidth: 0.5,
+    borderColor: 'white',
+    paddingTop: 10,
+    alignItems: 'flex-start',
+  },
+  speechesListItem: {
+    height: 50,
+    marginLeft: 20,
+  },
+  editModalContainer: {
+    display: 'flex', height: 800, width: 800, alignItems: 'center', justifyContent: 'center'
   },
   facebookHelpContainer: {
     marginTop: 15,

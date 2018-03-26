@@ -46,26 +46,26 @@ export default class LoginScreen extends Component {
 
     return (
       <View style={{ paddingVertical: 20 }}>
-    <Card>
-      <FormLabel>Email</FormLabel>
-      <FormInput
-      onChangeText={ this.onEmailChange.bind(this) }
-      value={this.state.email}
-      placeholder="Email address..." />
-      <FormLabel>Password</FormLabel>
-      <FormInput
-      onChangeText={ this.onPasswordChange.bind(this) }
-      value={this.state.password}
-      secureTextEntry placeholder="Password..." />
+        <Card>
+          <FormLabel>Email</FormLabel>
+          <FormInput
+          onChangeText={ this.onEmailChange.bind(this) }
+          value={this.state.email}
+          placeholder="Email address..." />
+          <FormLabel>Password</FormLabel>
+          <FormInput
+          onChangeText={ this.onPasswordChange.bind(this) }
+          value={this.state.password}
+          secureTextEntry placeholder="Password..." />
 
-      <Button
-        buttonStyle={{ marginTop: 20 }}
-        backgroundColor="#03A9F4"
-        title="SIGN IN"
-        onPress={() => this.onButtonPress()}
-      />
-    </Card>
-  </View>
+          <Button
+            buttonStyle={{ marginTop: 20 }}
+            backgroundColor="#03A9F4"
+            title="SIGN IN"
+            onPress={() => this.onButtonPress()}
+          />
+        </Card>
+      </View>
     )
   }
 }

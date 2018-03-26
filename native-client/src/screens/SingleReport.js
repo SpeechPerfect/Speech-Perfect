@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Text, TouchableHighlight } from 'react-native'
 import {SpeechList} from '../components'
 import styles from '../../assets/stylesheet'
 import ReplayAudio from '../components/ReplayAudio'
 
 export default class SingleReport extends Component {
   static navigationOptions = {
-    title: 'SingleReport',
+    header: null,
   };
 
   constructor(props) {
@@ -15,10 +15,27 @@ export default class SingleReport extends Component {
         speechId: this.props.navigation.state.params.speechId,
     }
   }
+  renderHeader() {
+    return (
+      <View style={styles.profileHeader}>
+        <View style={styles.profileHeaderLogoutContainer}>
+        <TouchableHighlight onPress={() => this.props.navigation.navigate('profile')}>
+          <Text> Profile </Text>
+        </TouchableHighlight>
+        </View>
+        <View style={styles.singleReportHeader}>
+        <Text style={styles.text}>Report</Text>
+        </View>
+      </View>
+    )
+  }
 
   render() {
     return (
     <View style={styles.resultsContainer}>
+      <View>
+          {this.renderHeader()}
+      </View>
       {this.state.speechId &&
         <View style={styles.resultsContainer}>
           <SpeechList speechId={this.state.speechId} />
