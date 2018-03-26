@@ -61,7 +61,7 @@ export default TabNavigator(
                   backgroundColor: 'white',
                   height: 20
                 },
-                headerLeft: <Button title='Back to Report' color='#12092f' onPress={() => navigation.navigate('report')} />,
+                headerLeft: <Button title='Back to Report' color='#12092f' onPress={() => navigation.navigate('profile')} />,
                 headerTintColor: '#12092f',
               }),
             }
