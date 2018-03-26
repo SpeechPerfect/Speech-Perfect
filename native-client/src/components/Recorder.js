@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import {Button, View, Text, AsyncStorage as store } from 'react-native'
 import Expo, { Audio, Permissions } from 'expo'
 import Timer  from './Timer'
-import {Uploader} from './'
-import RecordButton from './RecordButton'
+import {Uploader, RecordButton} from './'
 import styles from '../../assets/stylesheet'
 
 export default class Recorder extends Component {

@@ -4,9 +4,10 @@ import { View, StyleSheet, Text} from 'react-native'
 const styles = StyleSheet.create({
     time: {
         fontSize: 50,
-        color: 'black',
         paddingTop: 5,
-        paddingBottom: 5
+        paddingBottom: 5,
+        fontFamily: 'Helvetica Neue',
+        color: '#12092f'
     }
 })
 
