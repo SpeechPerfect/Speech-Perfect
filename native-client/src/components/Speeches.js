@@ -50,9 +50,9 @@ class Speeches extends Component {
                 console.log('DELETING')
                 this.props.deleteUsersSpeeches(this.props.id)}}>
                 <Ionicons
-                  name= "ios-trash"
+                  name="ios-trash"
                   size={26}
-                  color= "#12092f" />
+                  color="#12092f" />
               </TouchableOpacity>
             </View>
           </View>)
@@ -69,10 +69,11 @@ class Speeches extends Component {
           borderColor: '#CED0CE'
         }}
       >
-        <ActivityIndicator animating size= "large" />
+        <ActivityIndicator animating size="large" />
       </View>
     )
   }
+
 
   _renderItem = ({ item }) => (
     <Swipeout

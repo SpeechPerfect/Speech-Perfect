@@ -1,39 +1,73 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, TouchableOpacity} from 'react-native'
-import axios from 'axios'
-import API_ROOT from '../../IP_addresses'
-import styles from '../../assets/stylesheet'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native'
+
+const styles = StyleSheet.create({
+    container: {
+        flexGrow: 1,
+        // justifyContent: 'center',
+        alignItems: 'center',
+        // marginTop: 100,
+    },
+    inputBox: {
+        width: 300.3,
+        height: 15.3,
+        // fontFamily: "WorkSans",
+        fontSize: 20.7,
+        fontWeight: 'normal',
+        fontStyle: 'normal',
+        letterSpacing: 0,
+        textAlign: 'left',
+        marginVertical: 20,
+        color: '#ffffff'
+    },
+
+    buttonText: {
+        fontSize: 16,
+        color: 'white',
+        fontWeight: '700',
+        marginVertical: 20,
+    },
+    title: {
+        // flex: 1,
+        fontSize: 20,
+        color: 'rgb(252,197,76)',
+        fontWeight: '500',
+        marginVertical: 50,
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+    }
+})
 
 export class EditTitleForm extends Component {
     constructor(props) {
       super(props)
       this.state = {
-        title: '',
+
       }
     }
 
     onButtonPress() {
-      id = this.props.speech.id
-      title=this.state.title
-      console.log('speech', { ...this.props.speech, title })
-      updatedSpeech = { ...this.props.speech, title }
-      axios.put(`${API_ROOT}/api/speech/${id}`, updatedSpeech)
-        .then(updatedTitle => this.props.setModalVisible(false, updatedTitle))
-        .then(() => this.setState(this.state))
+      id = this.props.id
+      console.log('speech', this.props.speech)
+      // title = this.state.title
+      // axios.put(`${API_ROOT}/api/speech/{id}`, speech)
+      //   .then(updatedTitle => updatedTitle.data)
+      //   .then(() => this.setState({title: this.state.title}))
     }
 
   render() {
     console.log('edit title form', this.props)
     return (
-      <View style={styles.editTitleContainer}>
+      <View style={styles.container}>
           <View>
-            <Text style={styles.editTitleText}> Update Profile </Text>
+            <Text style={styles.title}> Update Profile </Text>
           </View>
           <View style={{backgroundColor: 'purple'}} >
-            <TextInput style={styles.editTitleInput}
-            placeholder= {"Test Speech"}
-            placeholderTextColor='white'
-            onChangeText={text => this.setState({ title : text })}
+            <TextInput
+style={styles.inputBox}
+            placeholder= {'Test Speech'}
+            placeholderTextColor="white"
+            onChangeText={text => this.setState({ title: text })}
             />
           </View>
 
@@ -45,8 +79,8 @@ export class EditTitleForm extends Component {
 
   renderButton() {
     return (
-      <TouchableOpacity style={{backgroundColor: '#12092f', borderRadius: 20, paddingVertical: 1, paddingHorizontal: 10, margin:10}} onPress={this.onButtonPress.bind(this)}>
-            <Text style={styles.editTitleButtonText} > UPDATE </Text>
+      <TouchableOpacity style={{backgroundColor: '#12092f', borderRadius: 20, paddingVertical: 1, paddingHorizontal: 10, margin: 10}} onPress={this.onButtonPress.bind(this)}>
+            <Text style={styles.buttonText} > UPDATE </Text>
       </TouchableOpacity>
     )
   }
@@ -66,3 +100,19 @@ export class EditTitleForm extends Component {
 
 
 export default EditTitleForm
+
+
+  // onFirstNameChange(text) {
+  //     this.props.firstNameChanged(text)
+  //   }
+
+  //   onLastNameChange(text) {
+  //     this.props.lastNameChanged(text)
+  //   }
+  //   onEmailChange(text) {
+  //     this.props.emailChanged(text)
+  //   }
+
+  //   onPasswordChange(text) {
+  //     this.props.passwordChanged(text)
+  //   }

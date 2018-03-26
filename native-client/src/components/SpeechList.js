@@ -52,3 +52,12 @@ render() {
   )
 }
 }
+
+
+// (<TouchableHighlight
+//   id={item.id} onPress={() => {
+//           Alert.alert('The appropriate pace for public speaking is between 140 - 160 words per minute')
+//           this.props.navigation.navigate('profile', { speechId: item.id })}
+//           } >
+//             <Text style={{fontSize: 24, color: 'black'}}>{item[0]} {item[1]}</Text>
+//   </TouchableHighlight>)

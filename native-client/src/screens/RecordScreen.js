@@ -13,6 +13,7 @@ export default class RecordScreen extends Component {
       <View style={styles.container}>
            <Recorder navigation={this.props.navigation} />
       </View>
+
     )
   }
 }

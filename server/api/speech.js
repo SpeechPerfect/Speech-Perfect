@@ -49,7 +49,7 @@ router.put('/:speechId', (req, res, next) => {
   console.log('hit', req.params.speechId, req.body)
   Speech.update(req.body, {
     where: {
-      id: req.params.speechId
+      userId: req.params.speechId
     },
     returning: true
   })

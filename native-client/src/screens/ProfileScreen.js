@@ -87,7 +87,7 @@ export default class ProfileScreen extends Component {
         {this.state.modalVisible &&
         <EditModal
             modalVisible={ this.state.modalVisible }
-            setModalVisible={ (vis,speech) => { this._setModalVisible(false,speech) }}
+            setModalVisible={ (vis) => { this._setModalVisible(false) }}
             id={this.state.id}
             speech={this.state.selectedSpeech}
             getUserAndSpeeches={this.getUserAndSpeeches.bind(this)}
