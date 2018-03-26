@@ -11,7 +11,7 @@ export default class Recorder extends Component {
           isRecording: false,
           recording: {},
           durationMillis: '',
-          isClicked: false,
+          isClicked: false
         }
         this.startRecording = this.startRecording.bind(this)
         this.stopRecording = this.stopRecording.bind(this)
@@ -30,7 +30,7 @@ export default class Recorder extends Component {
     componentDidMount = async () => {
         const response = await Permissions.askAsync(Permissions.AUDIO_RECORDING)
         this.setState({
-          haveRecordingPermissions: response.status === 'granted',
+          haveRecordingPermissions: response.status === 'granted'
         })
   }
 
@@ -44,7 +44,7 @@ export default class Recorder extends Component {
         interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
         playsInSilentModeIOS: true,
         shouldDuckAndroid: true,
-        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX
       })
       recording.setOnRecordingStatusUpdate(status => this.setState(status))
       try {
@@ -75,7 +75,7 @@ export default class Recorder extends Component {
       console.log(error)
     }
     this.setState({
-      isClicked: !this.state.isClicked,
+      isClicked: !this.state.isClicked
     })
   }
 
@@ -83,7 +83,7 @@ export default class Recorder extends Component {
     this.setState({
         durationMillis: 0,
         duration: null,
-        begin: false,
+        begin: false
     })
     this.stopRecording()
 }

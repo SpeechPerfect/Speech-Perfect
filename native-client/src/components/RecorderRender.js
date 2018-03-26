@@ -4,9 +4,9 @@ import Timer  from './Timer'
 import { Uploader, RecordButton } from './'
 import styles from '../../assets/stylesheet'
 
-const renderHeader = () => {
+const RenderHeader = () => {
     return (
-        <View >
+        <View>
           <Text style={styles.text}>Record</Text>
         </View>
     )
@@ -20,7 +20,7 @@ const RecorderRender = props => {
     return  (
         <View style={styles.container}>
           <View style={styles.recorderHeader}>
-            <renderHeader />
+            <RenderHeader />
           </View>
           <View style={styles.recorderTopContainer}>
             <Timer duration={state.duration} />
