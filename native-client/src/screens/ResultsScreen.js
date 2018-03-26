@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { Text, ScrollView } from 'react-native'
-import styles from '../../assets/stylesheet'
 import Speeches from '../components/Speeches'
 
 

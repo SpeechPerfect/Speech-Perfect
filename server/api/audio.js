@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const { AwsReport } = require('../db/models')
 const multer  = require('multer')
-const fs = require('fs')
 const multerS3 = require('multer-s3')
 const AWS = require('aws-sdk')
 const creds = require('../secrets')
@@ -30,8 +29,7 @@ const upload = multer({
   })
 })
 
-router.post('/upload/:speechId', upload.single('soundFile') , (req, res, next) => {
- 
+router.post('/upload/:speechId', upload.single('soundFile'), (req, res, next) => {
   console.log('in post route, file is ', req.file)
   AwsReport.create({
     url: req.file.location,
