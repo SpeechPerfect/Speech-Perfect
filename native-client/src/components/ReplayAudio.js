@@ -26,13 +26,13 @@ export default class ReplayAudio extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${API_ROOT}/api/speech/aws-data/${this.state.speechId}`)
-    .then(res => res.data)
-    .then((awsData) => {
-      this.setState({
-        awsData
-      })
-    })
+    // axios.get(`${API_ROOT}/api/speech/aws-data/${this.state.speechId}`)
+    // .then(res => res.data)
+    // .then((awsData) => {
+    //   this.setState({
+    //     awsData
+    //   })
+    // })
   }
 
   _playAudio = async () => {
@@ -40,7 +40,7 @@ export default class ReplayAudio extends Component {
 
     this.setState({playing: true, started: true})
     try {
-      await soundObject.loadAsync({ uri: `${this.state.url}`})
+      await soundObject.loadAsync({ uri: `${this.props.url}`})
       await soundObject.playAsync()
       // Your sound is playing!
     } catch (error) {
@@ -88,11 +88,11 @@ export default class ReplayAudio extends Component {
     }
 
   render() {
-    console.log('DATA IS', this.state.awsData)
+    console.log('DATA IS', this.props.url)
 
     return (
     <View style={styles.resultsContainer}>
-     {this.state.awsData && <View style={styles.resultsBottomContainer}>
+     <View style={styles.resultsBottomContainer}>
         <View style={styles.audioFeedback}>
           {!this.state.started &&
           <TouchableHighlight onPress={this._playAudio}>
@@ -129,7 +129,7 @@ export default class ReplayAudio extends Component {
           <Text style={{color: 'white', fontSize: 30}}> {speech.watsonReport.transcript} </Text>
         } */}
         </View>
-      </View>}
+      </View>
     </View>
     )
   }
