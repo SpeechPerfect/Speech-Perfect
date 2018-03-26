@@ -12,7 +12,7 @@ export const SignedOutNav = StackNavigator({ //eslint-disable-line new-cap
   SignIn: {
     screen: LoginScreen,
     navigationOptions: {
-      title: 'Log In'
+      title: "Sign In"
     }
   }
 })
