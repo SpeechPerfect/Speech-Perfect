@@ -40,6 +40,11 @@ export const SignedInNav = TabNavigator(
             })
             },
             singleReport: { screen: SingleReport, path: 'profile/report',
+            height: 20,
+          },
+          headerTintColor: '#12092f',
+        }),
+        singleReport: { screen: SingleReport, path: 'profile/report',
             navigationOptions: ({ navigation }) => ({
               title: 'Report',
               headerStyle: {
@@ -50,23 +55,48 @@ export const SignedInNav = TabNavigator(
               headerTintColor: '#12092f'
             }),
             },
-            WordRepetition: {
-              screen: WordRepetition,
-              navigationOptions: ({ navigation }) => ({
-                title: 'Transcript',
-                headerStyle: {
-                  backgroundColor: 'white',
-                  height: 20
-                },
-                headerLeft: <Button title="Back to Report" color="#12092f" onPress={() => navigation.navigate('singleReport')} />,
-                headerTintColor: '#12092f'
-              })
-            }
         },
-        {
-          navigationOptions: { tabBarVisible: false }
-          }
-      )}
+      //   Results: {
+      //     screen: TabNavigator({
+      //       results: { screen: ResultsScreen, path: 'profile/results',
+      //       navigationOptions: ({ navigation }) => ({
+      //         title: 'Results',
+      //         headerStyle: {
+      //           backgroundColor: 'white',
+      //           height: 20
+      //         },
+      //         headerLeft: <Button title="Profile" color="#12092f" onPress={() => navigation.navigate('results')} />,
+      //         headerTintColor: '#12092f',
+      //       }),
+      //       },
+      //       singleReport: { screen: SingleReport, path: 'profile/report',
+      //       navigationOptions: ({ navigation }) => ({
+      //         title: 'Report',
+      //         headerStyle: {
+      //           backgroundColor: 'white',
+      //           height: 20
+      //         },
+      //         headerLeft: <Button title="Back to Profile" color="#12092f" onPress={() => navigation.navigate('profile')} />,
+      //         headerTintColor: '#12092f',
+      //       }),
+      //       },
+      //       WordRepetition: {
+      //         screen: WordRepetition,
+      //         navigationOptions: ({ navigation }) => ({
+      //           title: 'Transcript',
+      //           headerStyle: {
+      //             backgroundColor: 'white',
+      //             height: 20
+      //           },
+      //           headerLeft: <Button title='Back to Report' color='#12092f' onPress={() => navigation.navigate('singleReport')} />,
+      //           headerTintColor: '#12092f',
+      //         }),
+      //       }
+      //   },
+      //   {
+      //     navigationOptions: { tabBarVisible: false }
+      //     }
+      // )}
       })
     },
 
