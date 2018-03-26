@@ -130,12 +130,12 @@ const styles = StyleSheet.create({
   timerContainer: {
       width: '100%',
       flex: 1,
-      justifyContent: 'center',
+      justifyContent: 'flex-end',
       alignItems: 'center'
     },
   timerDuration: {
     fontFamily: 'Avenir-Book',
-    fontSize: 70,
+    fontSize: 75,
     color: '#12092f',
   },
   recorderHeader: {
@@ -144,14 +144,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
   },
   recorderTopContainer: {
-    flex: 1,
+    flex: 2,
     backgroundColor: 'white',
     borderColor: 'white',
   },
-  startRecordingContainer: {
+  recordButtonContainer: {
     flexDirection: 'column',
-    marginBottom: 13,
-    justifyContent: 'center',
+    marginBottom: 10,
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   recorderBottomContainer: {
@@ -159,17 +159,44 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     display: 'flex',
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  recorderBottomText: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   recorderButton: {
     color: '#12092f',
     fontSize: 18,
     fontWeight: 'bold',
   },
+  recorderButtons: {
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    alignItems: 'space-between'
+  },
+  recorderUpload: {
+    backgroundColor: '#12092f',
+    borderRadius: 10,
+    borderColor: 'white',
+    margin: 10,
+    padding: 5,
+  },
   recorderIntroText: {
     color: '#12092f',
     fontSize: 18,
     fontWeight: 'bold',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  recorderStopText: {
+    color: '#12092f',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: -5,
   },
   recorderText: {
     color: '#12092f',
