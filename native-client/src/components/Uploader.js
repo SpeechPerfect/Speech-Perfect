@@ -28,8 +28,6 @@ class Uploader extends Component {
           this.setState({
             url: awsData.url
           })
-            // console.log(' DATA IS ', awsData)
-
         })
         .then(() => this.state.url)
         .catch(err => console.log(err))
@@ -80,8 +78,8 @@ class Uploader extends Component {
       })
       .then((id) => this.sendToAws(data, id))
       .then(() => {
-        // console.log('got data in promise chain', receivedData)
-        // navigate to profile page
+        console.log('URL IN STATE IS', this.state.url)
+
       this.props.navigation.navigate('singleReport', { speechId: this.state.speechId, userId: this.state.userId, url: this.state.url })
       })
       .catch(err => console.log(err))
