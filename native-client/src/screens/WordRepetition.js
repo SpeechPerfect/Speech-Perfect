@@ -5,7 +5,6 @@ import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 
 
-
 export default class WordRepetition extends Component {
   constructor(props) {
     super(props)
@@ -19,7 +18,7 @@ export default class WordRepetition extends Component {
 
   static navigationOptions = {
     title: 'Profile',
-    headerLeft: <Button title='' color='white' onPress={() => {}} />,
+    headerLeft: <Button title="" color="white" onPress={() => {}} />,
     // headerTintColor: 'rgb(252,197,76)',
   }
 
@@ -37,9 +36,9 @@ export default class WordRepetition extends Component {
 
   thesaurus(word){
     axios.get(`${API_ROOT}/api/speech/thesaurus/${word}`)
-      .then(res =>{
+      .then(res => {
         //set state to first ten words returnd from the backend
-        alternatives = res.data.slice(0,10).map(word => <Text style={{fontSize: 20,fontWeight: 'bold',fontFamily: 'Cochin'}}>{word}, </Text>)
+        alternatives = res.data.slice(0, 10).map(word => <Text style={{fontSize: 20, fontWeight: 'bold', fontFamily: 'Cochin'}}>{word}, </Text>)
         this.setState({selectedWord: word, alternatives: alternatives})
       })
       .catch(err => console.log(err))
@@ -51,19 +50,19 @@ export default class WordRepetition extends Component {
     let result = []
     let excludedWords = []
     //add words to an object that keeps track of their count
-    for(let i = 0; i < speechArr.length; i++){
-        if(speechObj[speechArr[i]] >= 0){
+    for (let i = 0; i < speechArr.length; i++){
+        if (speechObj[speechArr[i]] >= 0){
             speechObj[speechArr[i]]++
-        }else{
+        } else {
             speechObj[speechArr[i]] = 1
         }
     }
     //if word is used more than 5 times suggest alternatives
-    for(let i = 0; i < speechArr.length; i++){
-       if(speechObj[speechArr[i]] > 5) {
-           result.push(<TouchableOpacity onPress={() => {this.thesaurus(speechArr[i])}}><Text style={{fontSize: 21,color:'red',fontFamily: 'Avenir-Roman'}}>{speechArr[i]} </Text></TouchableOpacity>)
-       }else{
-        result.push(<TouchableOpacity onPress={() => {this.thesaurus(speechArr[i])}}><Text style={{fontSize: 22,fontFamily: 'Avenir-Roman'}}>{speechArr[i]} </Text></TouchableOpacity>)
+    for (let i = 0; i < speechArr.length; i++){
+       if (speechObj[speechArr[i]] > 5) {
+           result.push(<TouchableOpacity onPress={() => {this.thesaurus(speechArr[i])}}><Text style={{fontSize: 21, color: 'red', fontFamily: 'Avenir-Roman'}}>{speechArr[i]} </Text></TouchableOpacity>)
+       } else {
+        result.push(<TouchableOpacity onPress={() => {this.thesaurus(speechArr[i])}}><Text style={{fontSize: 22, fontFamily: 'Avenir-Roman'}}>{speechArr[i]} </Text></TouchableOpacity>)
        }
     }
    return result

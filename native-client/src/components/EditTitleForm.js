@@ -1,8 +1,44 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native'
 
-export class EditTitleForm extends Component {
+const styles = StyleSheet.create({
+    container: {
+        flexGrow: 1,
+        // justifyContent: 'center',
+        alignItems: 'center',
+        // marginTop: 100,
+    },
+    inputBox: {
+        width: 300.3,
+        height: 15.3,
+        // fontFamily: "WorkSans",
+        fontSize: 20.7,
+        fontWeight: 'normal',
+        fontStyle: 'normal',
+        letterSpacing: 0,
+        textAlign: 'left',
+        marginVertical: 20,
+        color: '#ffffff'
+    },
 
+    buttonText: {
+        fontSize: 16,
+        color: 'white',
+        fontWeight: '700',
+        marginVertical: 20,
+    },
+    title: {
+        // flex: 1,
+        fontSize: 20,
+        color: 'rgb(252,197,76)',
+        fontWeight: '500',
+        marginVertical: 50,
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+    }
+})
+
+export class EditTitleForm extends Component {
     constructor(props) {
       super(props)
       this.state = {
@@ -27,10 +63,11 @@ export class EditTitleForm extends Component {
             <Text style={styles.title}> Update Profile </Text>
           </View>
           <View style={{backgroundColor: 'purple'}} >
-            <TextInput style={styles.inputBox}
-            placeholder= {"Test Speech"}
-            placeholderTextColor='white'
-            onChangeText={text => this.setState({ title : text })}
+            <TextInput
+style={styles.inputBox}
+            placeholder= {'Test Speech'}
+            placeholderTextColor="white"
+            onChangeText={text => this.setState({ title: text })}
             />
           </View>
 
@@ -42,7 +79,7 @@ export class EditTitleForm extends Component {
 
   renderButton() {
     return (
-      <TouchableOpacity style={{backgroundColor: '#12092f', borderRadius: 20, paddingVertical: 1, paddingHorizontal: 10, margin:10}} onPress={this.onButtonPress.bind(this)}>
+      <TouchableOpacity style={{backgroundColor: '#12092f', borderRadius: 20, paddingVertical: 1, paddingHorizontal: 10, margin: 10}} onPress={this.onButtonPress.bind(this)}>
             <Text style={styles.buttonText} > UPDATE </Text>
       </TouchableOpacity>
     )
@@ -64,42 +101,6 @@ export class EditTitleForm extends Component {
 
 export default EditTitleForm
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    // justifyContent: 'center',
-    alignItems: 'center',
-    // marginTop: 100,
-  },
-  inputBox: {
-    width: 300.3,
-    height: 15.3,
-    // fontFamily: "WorkSans",
-    fontSize: 20.7,
-    fontWeight: "normal",
-    fontStyle: "normal",
-    letterSpacing: 0,
-    textAlign: "left",
-    marginVertical: 20,
-    color: "#ffffff"
-  },
-
-  buttonText: {
-    fontSize: 16,
-    color: 'white',
-    fontWeight: '700',
-    marginVertical: 20,
-  },
-  title: {
-    // flex: 1,
-    fontSize: 20,
-    color: 'rgb(252,197,76)',
-    fontWeight: '500',
-    marginVertical: 50,
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-  }
-})
 
   // onFirstNameChange(text) {
   //     this.props.firstNameChanged(text)

@@ -1,13 +1,13 @@
-import React from "react"
+import React from 'react'
 import {
   StyleSheet,
   Alert,
   Text,
   TouchableOpacity,
   View
-} from "react-native"
+} from 'react-native'
 
-import Expo from "expo"
+import Expo from 'expo'
 
 
 export default class FacebookLogin extends React.Component {
@@ -15,13 +15,13 @@ export default class FacebookLogin extends React.Component {
     const {
       type,
       token
-    } = await Expo.Facebook.logInWithReadPermissionsAsync("126975674509524", {
-      permissions: ["public_profile", "email"]
+    } = await Expo.Facebook.logInWithReadPermissionsAsync('126975674509524', {
+      permissions: ['public_profile', 'email']
     })
-    if (type === "success") {
+    if (type === 'success') {
       // Get the user's name using Facebook's Graph API
       const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`)
-      Alert.alert("Logged in!", `Hi ${(await response.json()).name}!`)
+      Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`)
     }
   }
 
@@ -43,30 +43,30 @@ export default class FacebookLogin extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff'
   },
   homeScreenFilename: {
     marginVertical: 7
   },
   codeHighlightText: {
-    color: "rgba(96,100,109, 0.8)"
+    color: 'rgba(96,100,109, 0.8)'
   },
   codeHighlightContainer: {
-    backgroundColor: "rgba(0,0,0,0.05)",
+    backgroundColor: 'rgba(0,0,0,0.05)',
     borderRadius: 3,
     paddingHorizontal: 4
   },
   helpContainer: {
     marginTop: 15,
-    alignItems: "center"
+    alignItems: 'center'
   },
   helpLink: {
     paddingVertical: 15
   },
   helpLinkText: {
     fontSize: 20,
-    color: "white",
+    color: 'white',
     padding: 10,
-    backgroundColor: "#3b5998"
+    backgroundColor: '#3b5998'
   }
 })

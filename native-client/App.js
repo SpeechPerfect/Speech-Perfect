@@ -18,10 +18,6 @@ export default class App extends React.Component {
         }
     }
 
-    componentWillMount() {
-
-    }
-
     componentDidMount() {
         if (Platform.OS === 'android'){
             Font.loadAsync({
@@ -47,7 +43,7 @@ export default class App extends React.Component {
 
     render() {
         console.log('OH HAI', this.state)
-        const { checkedForUser, signedIn } = this.state
+        const { signedIn } = this.state
         const Layout = createRootNavigator(signedIn)
 
         if (!this.state.fontLoaded) {
