@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const TimeRender = props => {
+const DigitsRender = props => {
     let { minutes, hours, seconds, milliseconds } = props.time
     milliseconds = milliseconds.toString().slice(0, 1) + '0'
     if (minutes > 0) seconds = seconds.toString().length === 1 ? `0${seconds}` : seconds
@@ -32,7 +32,7 @@ const TimeRender = props => {
 }
 
 
-const TimerLogic = props => {
+const TimerRender = props => {
     let { duration } = props
     let seconds, minutes, hours, milliseconds
 
@@ -44,8 +44,8 @@ const TimerLogic = props => {
     let time = {hours, minutes, seconds, milliseconds}
 
     return (
-        <TimeRender time={time} />
+        <DigitsRender time={time} />
     )
 }
 
-export default TimerLogic
+export default TimerRender
