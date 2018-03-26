@@ -50,10 +50,10 @@ export default class Recorder extends Component {
         clearInterval(this.state.timer)
     }
 
-    _renderTitle() {
+    renderHeader() {
       return (
-        <View style={styles.header}>
-          <Text style={styles.title}>Stopwatch</Text>
+        <View style={{flex: 1,alignItems: 'center', justifyContent: 'flex-end'}}>
+          <Text style={styles.text}>Record</Text>
         </View>
       )
     }
@@ -61,7 +61,7 @@ export default class Recorder extends Component {
     async startRecording() {
       this.startTimer()
       const recording = new Expo.Audio.Recording()
-      this.setState({recording:recording, isRecording: true})
+      this.setState({recording: recording, isRecording: true})
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
@@ -91,21 +91,19 @@ export default class Recorder extends Component {
     }
 
   async stopRecording(){
-    clearInterval(this.state.timer)
     this.setState({isRecording: false})
     try {
-      console.log('recording has stopped')
       await this.state.recording.stopAndUnloadAsync()
     } catch (error) {
       console.log(error)
     }
     this.setState({
       isClicked: !this.state.isClicked,
-
     })
   }
 
   onButtonClear() {
+    this.stopRecording()
     this.setState({
         timer: null,
         miliseconds: '00',
@@ -118,7 +116,6 @@ export default class Recorder extends Component {
         duration: 0,
         begin: false,
     })
-    this.stopRecording()
 }
 
   startTimer() {
@@ -151,26 +148,30 @@ export default class Recorder extends Component {
     seconds = this.state.seconds
     return  (
       <View style={styles.container}>
+        <View style={styles.recorderHeader}>
+        {this.renderHeader()}
+        </View>
         <View style={styles.recorderTopContainer}>
           <Timer duration={this.state.duration} />
         </View>
         <View style={styles.recorderBottomContainer}>
           {!this.state.begin &&
           <View style={styles.recorderBottomContainer}>
-          <Text style={styles.recorderIntroText} > Press Record and start speaking </Text>
-          <Text>''</Text>
+          <Text style={styles.recorderIntroText} > Press the mic and start speaking </Text>
+          <Text></Text>
           <Text style={styles.recorderText}> We will analyze your speech and </Text>
           <Text style={styles.recorderText}> provide you with suggestions how to improve </Text>
-          <Text>''</Text>
+          <Text></Text>
           </View>
           }
           {this.state.begin &&
           <Uploader navigation={this.props.navigation} uri={this.state.recording._uri} duration={this.state.durationMillis} />
           }
           <View style={styles.startRecordingContainer}>
-            <Button style={styles.recorderButton} color="white" onPress={buttonMethod} title={text}/>
             <RecordButton press={buttonMethod} />
-            <Button style={styles.recorderButton} color="white" onPress={this.onButtonClear} title="Reset" />
+            {this.state.isClicked &&
+            <Button style={styles.recorderButton} color="#12092f" onPress={this.onButtonClear} title="Reset" />
+            }
           </View>
         </View>
       </View>

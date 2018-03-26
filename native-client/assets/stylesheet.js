@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 55,
     width: 55,
-    borderColor: 'white',
+    borderColor: '#12092f',
     borderWidth: 7,
     borderRadius: 27.5,
   },
@@ -130,48 +130,49 @@ const styles = StyleSheet.create({
   timerContainer: {
       width: '100%',
       flex: 1,
-      // backgroundColor: '#202020',
-      backgroundColor: 'white',
-      borderWidth: 1,
       justifyContent: 'center',
       alignItems: 'center'
     },
   timerDuration: {
-    fontSize: 50,
-    color: 'black',
-    paddingTop: 5,
-    paddingBottom: 5,
+    fontFamily: 'Avenir-Book',
+    fontSize: 70,
+    color: '#12092f',
+  },
+  recorderHeader: {
+    height: 40,
+    borderBottomColor: '#12092f',
+    borderBottomWidth: 2,
   },
   recorderTopContainer: {
     flex: 1,
-    backgroundColor: '#12092f',
+    backgroundColor: 'white',
     borderColor: 'white',
   },
   startRecordingContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     marginBottom: 13,
     justifyContent: 'center',
     alignItems: 'center',
   },
   recorderBottomContainer: {
     flex: 2,
-    backgroundColor: '#12092f',
+    backgroundColor: 'white',
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
   recorderButton: {
-    color: 'white',
+    color: '#12092f',
     fontSize: 18,
     fontWeight: 'bold',
   },
   recorderIntroText: {
-    color: 'white',
+    color: '#12092f',
     fontSize: 18,
     fontWeight: 'bold',
   },
   recorderText: {
-    color: 'white',
+    color: '#12092f',
     fontSize: 14,
   },
   facebookHelpContainer: {

@@ -1,23 +1,28 @@
 import React from 'react'
 import { View, TouchableWithoutFeedback} from 'react-native'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import styles from '../../assets/stylesheet'
 
 const recordButton = (props) => {
   return (
-  <View style={styles.backgroundCircle}>
+  // <View style={styles.backgroundCircle}>
     <TouchableWithoutFeedback onPress={props.press}>
-        <View style={styles.innerBackgroundCircle}>
-          <View style={{ flex: 1, marginLeft: -14, marginTop: -14}}>
-            <MaterialCommunityIcons
+        {/* <View style={styles.innerBackgroundCircle}>
+          <View style={{ flex: 1, marginLeft: -14, marginTop: -14}}> */}
+            {/* <MaterialCommunityIcons
             name={'record'}
             size={67}
             color={'red'}
+            /> */}
+             <Ionicons
+            name={'ios-mic'}
+            size={67}
+            color={'#12092f'}
             />
-        </View>
-      </View>
+        {/* </View>
+      </View> */}
     </TouchableWithoutFeedback>
-  </View>
+  // </View>
   )
 }
 

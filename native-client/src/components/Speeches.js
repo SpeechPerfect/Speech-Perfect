@@ -41,18 +41,18 @@ class Speeches extends Component {
   }
 
   renderHeader = () => {
-    return (<View style={{flexDirection: 'row', marginTop: 10, alignItems:'flex-end', justifyContent:'center'}} >
+    return (<View style={{flexDirection: 'row', marginTop: 10, alignItems: 'flex-end', justifyContent: 'center'}} >
               <View style={{flex: 1, justifyContent: 'flex-start', alignItems: 'center'}}>
-              <Text style={{color: '#12092f', fontSize:32, fontFamily:'Geeza Pro' }}> Your Speeches </Text>
+              <Text style={{color: '#12092f', fontSize: 32, fontFamily: 'Geeza Pro' }}> Your Speeches </Text>
               </View>
               <View style={{justifyContent: 'flex-start', alignItems: 'flex-end', marginBottom: 8, marginRight: 5}}>
               <TouchableOpacity onPress={() => {
                 console.log('DELETING')
                 this.props.deleteUsersSpeeches(this.props.id)}}>
                 <Ionicons
-                  name='ios-trash'
+                  name= "ios-trash"
                   size={26}
-                  color='#12092f' />
+                  color= "#12092f" />
               </TouchableOpacity>
             </View>
           </View>)
@@ -69,12 +69,10 @@ class Speeches extends Component {
           borderColor: '#CED0CE'
         }}
       >
-        <ActivityIndicator animating size='large' />
+        <ActivityIndicator animating size= "large" />
       </View>
     )
   }
-
-
 
   _renderItem = ({ item }) => (
     <Swipeout
@@ -96,9 +94,9 @@ class Speeches extends Component {
     }
     ]}
     autoClose={true}
-    backgroundColor= 'transparent'>
+    backgroundColor= "transparent">
       <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id, userId: item.userId })} >
-        <View style={{flex:1,flexDirection: 'column', backgroundColor: 'white',borderBottomWidth: 0.5, borderColor: 'white', paddingTop:10, alignItems:'flex-start'}}>
+        <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'white', borderBottomWidth: 0.5, borderColor: 'white', paddingTop: 10, alignItems: 'flex-start'}}>
           {this.props.speeches.length &&
                 <View key={item.id} style={{height: 50, marginLeft: 20}}>
                   <SingleSpeechThumbnail speech={item} />
@@ -111,8 +109,8 @@ class Speeches extends Component {
 
   render() {
     return (
-      <View style={{flex:1,flexDirection: 'column', backgroundColor: 'white'}}>
-        <View style={{height:55, backgroundColor:'lightgrey'}}>
+      <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'white'}}>
+        <View style={{height: 55, backgroundColor: 'lightgrey'}}>
           {this.renderHeader()}
         </View>
         <View style={{backgroundColor: 'white'}}>
