@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import styles from '../../assets/stylesheet'
-import { TimerRender } from '.'
+import { TimerRender } from './'
 
  const Timer = (props) => {
     const duration = props.duration

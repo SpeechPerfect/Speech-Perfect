@@ -3,8 +3,7 @@ import { View, Button, AsyncStorage as store} from 'react-native'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
-import EditModal from '../components/EditModal'
-import {Speeches, Logout} from '../components'
+import {Speeches, Logout, EditModal} from '../components'
 
 export default class ProfileScreen extends Component {
   constructor(props) {

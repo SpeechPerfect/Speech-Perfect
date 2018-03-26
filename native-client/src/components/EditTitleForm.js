@@ -4,7 +4,7 @@ import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
 
-export class EditTitleForm extends Component {
+class EditTitleForm extends Component {
     constructor(props) {
       super(props)
       this.state = {
