@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import {Button, View, StyleSheet, Text, AsyncStorage as store } from 'react-native'
-import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo'
+import {Button, View, Text, AsyncStorage as store } from 'react-native'
+import Expo, { Audio, Permissions } from 'expo'
 import Timer  from './Timer'
 import {Uploader} from './'
 import RecordButton from './RecordButton'
+import styles from '../../assets/stylesheet'
 
 export default class Recorder extends Component {
     constructor(){
@@ -11,17 +12,9 @@ export default class Recorder extends Component {
         this.state = {
           haveRecordingPermissions: false,
           isRecording: false,
-          recordingDuration: null,
           recording: {},
-          timer: null,
           durationMillis: '',
-          seconds: '00',
-          miliseconds: '00',
-          minutes: '',
-          hours: '',
           isClicked: false,
-          userId: ''
-          // intervals: 0
         }
         this.startRecording = this.startRecording.bind(this)
         this.stopRecording = this.stopRecording.bind(this)
@@ -38,21 +31,16 @@ export default class Recorder extends Component {
     }
 
     componentDidMount = async () => {
-        // this.startTimer()
         const response = await Permissions.askAsync(Permissions.AUDIO_RECORDING)
         this.setState({
           haveRecordingPermissions: response.status === 'granted',
         })
   }
 
-    componentWillUnmount() {
-        clearInterval(this.state.timer)
-    }
-
-    _renderTitle() {
+    renderHeader() {
       return (
-        <View style={styles.header}>
-          <Text style={styles.title}>Stopwatch</Text>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}>
+          <Text style={styles.text}>Record</Text>
         </View>
       )
     }
@@ -60,7 +48,7 @@ export default class Recorder extends Component {
     async startRecording() {
       this.startTimer()
       const recording = new Expo.Audio.Recording()
-      this.setState({recording:recording, isRecording: true})
+      this.setState({recording: recording, isRecording: true})
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
@@ -90,35 +78,22 @@ export default class Recorder extends Component {
     }
 
   async stopRecording(){
-    clearInterval(this.state.timer)
     this.setState({isRecording: false})
     try {
-      console.log('recording has stopped')
       await this.state.recording.stopAndUnloadAsync()
     } catch (error) {
       console.log(error)
     }
     this.setState({
       isClicked: !this.state.isClicked,
-
     })
   }
 
   onButtonClear() {
     this.setState({
-        timer: null,
-        miliseconds: '00',
-        seconds: '00',
-        minutes: '',
-        hours: '',
-        isClicked: false,
         durationMillis: 0,
-        intervals: 0,
+        duration: null,
         begin: false,
-    })
-    this.setState({
-      isClicked: false,
-      begin: false,
     })
     this.stopRecording()
 }
@@ -135,7 +110,6 @@ export default class Recorder extends Component {
   }
 
   frame = (time) => {
-
       if (this.state.isClicked) {
         const duration = new Date().getTime() - this.startTime
         this.setState({duration})
@@ -146,78 +120,54 @@ export default class Recorder extends Component {
   }
 
   render() {
-    let text
     let buttonMethod
-    this.state.isRecording ? text = 'Stop' : text = 'Record'
     this.state.isRecording ? buttonMethod = this.stopRecording : buttonMethod = this.startRecording
-    seconds = this.state.seconds
     return  (
       <View style={styles.container}>
-        <View style={styles.top}>
+        <View style={styles.recorderHeader}>
+        {this.renderHeader()}
+        </View>
+        <View style={styles.recorderTopContainer}>
           <Timer duration={this.state.duration} />
         </View>
-        <View style={styles.bottom}>
-          {!this.state.begin &&
-          <View style={styles.bottom}>
-          <Text style={styles.introText} > Press Record and start speaking </Text>
-          <Text> </Text>
-          <Text style={styles.text}> We will analyze your speech and </Text>
-          <Text style={styles.text}> provide you with suggestions how to improve </Text>
-          <Text> </Text>
+        <View style={styles.recorderBottomContainer}>
+          <RecordButton press={buttonMethod} />
+          {this.state.begin ?
+          <View>
+          <Text style={{color: 'white'}}>''</Text>
+          </View>
+          :
+          <View style={styles.recorderBottomText}>
+            <Text style={styles.recorderIntroText} > Press the mic and start speaking </Text>
+            <Text style={styles.recorderText}> We will analyze your speech and </Text>
+            <Text style={styles.recorderText}> provide you with suggestions how to improve </Text>
           </View>
           }
-          {this.state.begin &&
-          <Uploader navigation={this.props.navigation} uri={this.state.recording._uri} duration={this.state.durationMillis} />
+          {(this.state.begin && this.state.isClicked) ?
+          <View style={styles.recorderBottomText}>
+            <Text style={styles.recorderStopText} > Press the mic to stop recording </Text>
+          </View>
+          :
+          <View style={styles.recorderBottomText}>
+          <Text style={styles.recorderStopText} > </Text>
+          </View>
           }
-          <View style={styles.startRecording}>
-            <Button style={styles.button} color="white" onPress={buttonMethod} title={text}/>
-            <RecordButton press={buttonMethod} />
-            <Button style={styles.button} color="white" onPress={this.onButtonClear} title="Reset" />
+          <View style={styles.recorderBottomText}>
+            {this.state.begin &&
+            <View style={styles.recorderButtons}>
+              <View style={styles.recorderUpload}>
+                <Button style={styles.recorderButton} color="white" onPress={this.onButtonClear} title="reset" />
+              </View>
+              {!this.state.isClicked &&
+              <View style={styles.recorderUpload}>
+                <Uploader navigation={this.props.navigation} uri={this.state.recording._uri} duration={this.state.durationMillis} />
+              </View>
+              }
+            </View>
+            }
           </View>
         </View>
       </View>
     )
   }
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    display: 'flex',
-    backgroundColor: 'white'
-  },
-  top: {
-    flex: 1,
-    backgroundColor: '#12092f',
-    borderColor: 'white',
-  },
-  startRecording: {
-    flexDirection: 'row',
-    marginBottom: 13,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  bottom: {
-    flex: 2,
-    backgroundColor: '#12092f',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  },
-  button: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  introText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  text: {
-    color: 'white',
-    fontSize: 14,
-    // fontWeight: "bold",
-  }
-})

@@ -1,33 +1,31 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableHighlight, Alert } from 'react-native'
-import { Card, Divider } from 'react-native-elements'
+import { View, TouchableHighlight, Text } from 'react-native'
 import Expo from 'expo'
-import {SpeechList} from '../components'
-import styles from '../../assets/stylesheet'
 import axios from 'axios'
-import API_ROOT from '../../IP_addresses'
-
-import { List, ListItem } from 'react-native-elements'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import API_ROOT from '../../IP_addresses'
+import styles from '../../assets/stylesheet'
+
 let soundObject
 
-export default class SingleReport extends Component {
+export default class ReplayAudio extends Component {
   static navigationOptions = {
-    title: 'SingleReport',
+    title: 'SingleReport'
   };
 
   constructor(props) {
     super(props)
     this.state = {
-        speechId: this.props.navigation.state.params.speechId,
+        speechId: this.props.speechId,
         awsData: null,
         playing: false,
-        started: false,
+        started: false
     }
-    this.navigateTranscript = this.navigateTranscript.bind(this)
+    this.navigateToTranscript = this.navigateToTranscript.bind(this)
   }
 
   componentDidMount() {
+    this.setState({speechId: this.props.speechId})
     axios.get(`${API_ROOT}/api/speech/aws-data/${this.state.speechId}`)
     .then(res => res.data)
     .then((awsData) => {
@@ -50,10 +48,6 @@ export default class SingleReport extends Component {
     }
   }
 
-  navigateTranscript(){
-    this.props.navigation.navigate('WordRepetition', { speechId: this.props.navigation.state.params.speechId, userId: this.props.navigation.state.params.userId})
-  }
-
   _pauseAudio = async () => {
     let playing = this.state.playing
 
@@ -71,21 +65,35 @@ export default class SingleReport extends Component {
     }
   }
 
+  _replayAudio = async () => {
+        let playing = this.state.playing
+
+        if (playing) {
+          this.setState({playing: false})
+          try {
+            await soundObject.replayAsync()
+            soundObject.playAsync()
+          } catch (error) {
+            console.log(error)
+          }
+        } else {
+          this.setState({playing: true})
+          await soundObject.replayAsync()
+          await soundObject.playAsync()
+        }
+      }
+
+    navigateToTranscript(){
+      this.props.navigation.navigate('WordRepetition', { speechId: this.props.navigation.state.params.speechId, userId: this.props.navigation.state.params.userId})
+    }
+
   render() {
     console.log('DATA IS', this.state.awsData)
 
     return (
-      <View>
-      <View>
-        {this.state.speechId &&
-          <SpeechList speechId={this.state.speechId} />
-        }
-      </View>
-  <Card>
-    <TouchableHighlight onPress={this.navigateTranscript}><Text style={{fontSize: 25,fontWeight: 'bold'}}>View Transcript</Text></TouchableHighlight>
-  </Card>
-  <Card>
-    <View style={styles.audioFeedback}>
+    <View style={styles.resultsContainer}>
+      <View style={styles.resultsBottomContainer}>
+        <View style={styles.audioFeedback}>
           {!this.state.started &&
           <TouchableHighlight onPress={this._playAudio}>
               <MaterialCommunityIcons
@@ -112,12 +120,48 @@ export default class SingleReport extends Component {
               color={'#12092f'}
               />
             </TouchableHighlight>
-           }
+          }
+          <TouchableHighlight onPress={this.navigateToTranscript}><Text style={{fontSize: 25,fontWeight: 'bold'}}>View Transcript</Text></TouchableHighlight>
+
         </View>
         <Text style={{fontSize: 25,fontWeight: 'bold'}}>Play Audio</Text>
-      </Card>
+       </View>
     </View>
     )
   }
 }
 
+/* <BarChart
+data={{
+  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+  datasets: [{
+    data: [ 20, 45, 28, 80, 99, 43 ]
+  }]
+}}
+width={Dimensions.get('window').width}
+height={220}
+chartConfig={{
+  backgroundColor: 'red',
+  backgroundGradientFrom: 'white',
+  backgroundGradientTo: 'lightgrey',
+  marginRight:20,
+  paddingRight:20,
+  marginLeft:-20,
+  paddingLeft:-20,
+  color: (opacity = 1) => `#12092f`,
+  style: {
+    borderRadius: 16,
+    marginRight:20,
+    marginLeft:-20,
+  paddingLeft:-20,
+  paddingRight:20,
+  }
+}}
+style={{
+  marginVertical: 8,
+  borderRadius: 16,
+  marginRight:20,
+  paddingRight:20,
+  // marginLeft:-5,
+  // paddingLeft:-5,
+}}        /> */

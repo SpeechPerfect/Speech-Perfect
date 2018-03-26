@@ -4,29 +4,26 @@ import { Platform, Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 
-import { RecordScreen, ResultsScreen, Profile, SingleReport, Login, WordRepetition } from '../screens'
+import { RecordScreen, ResultsScreen, ProfileScreen, SingleReportScreen, WordRepetition } from '../screens'
 
-export default TabNavigator(
+export const SignedInNav = TabNavigator(
   {
     Record: {
       screen: RecordScreen
     },
-      Login: {
-          screen: Login
-      },
     Profile: {
       screen: StackNavigator({
-        profile: { screen: Profile, path: 'profile/:name',
+        profile: { screen: ProfileScreen, path: 'profile/:name',
         navigationOptions: ({ navigation }) => ({
           title: 'Profile',
           headerStyle: {
             backgroundColor: 'white',
-            height: 20,
+            height: 20
             // tintColor:'rgb(252,197,76)',
           },
           // Why do we need this?
           // headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('results')} />,
-          headerTintColor: '#12092f',
+          headerTintColor: '#12092f'
         }),
         },
         Results: {
@@ -38,11 +35,11 @@ export default TabNavigator(
                 backgroundColor: 'white',
                 height: 20
               },
-              headerLeft: <Button title="Profile" color="#12092f" onPress={() => navigation.navigate('profile')} />,
-              headerTintColor: '#12092f',
-            }),
+              headerLeft: <Button title="Profile" color="#12092f" onPress={() => navigation.navigate('results')} />,
+              headerTintColor: '#12092f'
+            })
             },
-            singleReport: { screen: SingleReport, path: 'profile/report',
+            singleReport: { screen: SingleReportScreen, path: 'profile/report',
             navigationOptions: ({ navigation }) => ({
               title: 'Report',
               headerStyle: {
@@ -50,22 +47,23 @@ export default TabNavigator(
                 height: 20
               },
               headerLeft: <Button title="Back to Profile" color="#12092f" onPress={() => navigation.navigate('profile')} />,
-              headerTintColor: '#12092f',
+              headerTintColor: '#12092f'
             }),
             },
             WordRepetition: {
-              screen: WordRepetition, path: 'profile/report/trascript',
+              screen: WordRepetition,
               navigationOptions: ({ navigation }) => ({
                 title: 'Transcript',
                 headerStyle: {
                   backgroundColor: 'white',
                   height: 20
                 },
-                headerLeft: <Button title='Back to Report' color='#12092f' onPress={() => navigation.navigate('profile')} />,
-                headerTintColor: '#12092f',
-              }),
+                headerLeft: <Button title="Back to Report" color="#12092f" onPress={() => navigation.navigate('singleReport')} />,
+                headerTintColor: '#12092f'
+              })
             }
         },
+
         {
           navigationOptions: { tabBarVisible: false }
           }
@@ -101,19 +99,21 @@ export default TabNavigator(
             // color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
           />
         )
-      },
+      }
     }),
     tabBarOptions: {
       activeTintColor: 'tomato',
       inactiveTintColor: 'gray',
       style: {
         // backgroundColor: '#12092f',
-        height: 45,
-          },
+        height: 45
+          }
         },
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     animationEnabled: false,
-    swipeEnabled: false,
+    swipeEnabled: false
   },
 )
+
+export default SignedInNav

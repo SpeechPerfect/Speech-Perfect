@@ -16,6 +16,7 @@
     "prod-client": "cd client && npm run build"
   },
   "dependencies": {
-    "concurrently": "^3.5.1"
+    "concurrently": "^3.5.1",
+    "fs": "^0.0.1-security"
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, FlatList, TouchableHighlight, Alert } from 'react-native'
+import { Text, View } from 'react-native'
 import styles from '../../assets/stylesheet'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses.js'
@@ -8,7 +8,7 @@ import { List, ListItem, SearchBar, Card, } from "react-native-elements"
 
 export default class SpeechList extends Component {
   static navigationOptions = {
-    title: 'SingleReport',
+    title: 'SingleReport'
   };
 
   constructor(props) {
@@ -19,9 +19,11 @@ export default class SpeechList extends Component {
   }
 
   componentDidMount = () => {
+    console.log('SPEECH ID IS ', this.props.speechId)
     axios.get(`${API_ROOT}/api/speech/watson-data/${this.props.speechId}`)
     .then((res) => res.data)
     .then((speechData) => {
+      console.log('speech data is', speechData)
       this.setState({
         speechData
       })
@@ -33,47 +35,21 @@ render() {
 
   const { duration, likeCount, umCount, wordCount } = this.state.speechData
 
-  let pace = null
+  let pace = wordCount / (duration / 60)
 
   let speechData = [['Duration: ', duration], ['Word Count: ', wordCount], ['Pace: ', pace], ['Um Count: ', umCount], ['Like Count: ', likeCount]]
 
 
   return (
-  <View>
-   <View style={{flex:1,height:200,  borderColor:'black', borderWidth:0.5, borderRadius:5, padding:5}}>
-   <View>
-      <Text>Duration: {duration}</Text>
-      <Text>Pace: {umCount}</Text>
-    </View>
-   </View>
-
-   <View>
-    <Text>Word count: {wordCount}</Text>
-   </View>
-
-   <View>
-   <Text>"Um" count: {umCount}</Text>
-    <Text>"Like" count: {umCount}</Text>
-   </View>
-
-   <View>
-    <Text>Tone</Text>
-   </View>
-
-
- 
-  {/* <FlatList style={{flex: 1}}
-        data={this.speechData}
-      renderItem={({item}) =>  <Text style={{fontSize: 24, color: 'black'}}>{item[0]} {item[1]}</Text>} /> */}
-  </View>
-  )}
+    <View>
+  {speechData && <View style={styles.resultsContainer}>
+  <Text style={styles.resultsText}>Duration: {duration}</Text>
+  <Text style={styles.resultsText}>Word count: {wordCount}</Text>
+  <Text style={styles.resultsText}>"Um" count: {umCount}</Text>
+  <Text style={styles.resultsText}>"Like" count: {likeCount}</Text>
+  <Text style={styles.resultsText}>Pace: {umCount}</Text>
+       </View>}
+      </View>
+  )
 }
-
-
-// (<TouchableHighlight
-//   id={item.id} onPress={() => {
-//           Alert.alert('The appropriate pace for public speaking is between 140 - 160 words per minute')
-//           this.props.navigation.navigate('profile', { speechId: item.id })}
-//           } >
-//             <Text style={{fontSize: 24, color: 'black'}}>{item[0]} {item[1]}</Text>
-//   </TouchableHighlight>)
+}

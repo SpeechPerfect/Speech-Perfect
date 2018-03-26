@@ -37,7 +37,7 @@ class Speeches extends Component {
     console.log(this.props.speeches)
     let speeches = this.props.speeches.map(speech =>
     <Swipeout right={swipeoutBtns} style={{backgroundColor:'transparent'}}>
-    <View style={{ flexDirection:'row', alignItems:'center',alignSelf:'center',justifyContent: 'space-between', width:'90%', height: 75, borderBottomWidth: 0.5,borderColor: 'white'}}>
+    <View style={{ flexDirection:'row', alignItems:'center',alignSelf:'center',justifyContent: 'space-between', width:'90%', height: 75, borderBottomWidth: 0.5,borderColor: ''}}>
       <Avatar
         medium
         rounded

@@ -2,6 +2,21 @@ import React, { Component } from 'react'
 import { Alert, Button, View, AsyncStorage as store } from 'react-native'
 import API_ROOT from '../../IP_addresses'
 
+const sendToAws = (data, id) => {
+    fetch(`${API_ROOT}/api/audio/upload/${id}`, {
+        method: 'post',
+        body: data,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+        },
+    })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => console.log(err))
+}
+
 class Uploader extends Component {
   constructor(props) {
     super(props)
@@ -25,7 +40,7 @@ class Uploader extends Component {
       data.append('soundFile', {
         uri: this.props.uri,
         type: 'audio/vnd.wav',
-        name: 'testAudio',
+        name: 'testAudio'
         })
       data.append('duration', this.props.duration)
 
@@ -34,7 +49,7 @@ class Uploader extends Component {
         body: data,
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data'
         },
       })
       .then(res => {
@@ -48,13 +63,13 @@ class Uploader extends Component {
       .then(idOrError => {
         if (idOrError === 'Low confidence') {
           console.log('Front end detects low confidence')
-          Alert.alert('Poor recording quality', 'Please re-record your message for best accuracy.')
+          // Alert.alert('Poor recording quality', 'Please re-record your message for best accuracy.')
           throw new Error('Poor recording quality')
         }
           this.setState({
             speechId: idOrError
           })
-          this.sendToAws(data, idOrError)
+          sendToAws(data, idOrError)
       })
       .then(() => {
         // navigate to profile page
@@ -62,27 +77,12 @@ class Uploader extends Component {
       })
       .catch(err => console.log(err))
     }
-    //SEND TO AWS
-  sendToAws(data, id) {
-    fetch(`${API_ROOT}/api/audio/upload/${id}`, {
-      method: 'post',
-      body: data,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => console.log(err))
-  }
 
   render() {
     console.log('DURATION IS', this.props.duration)
     return (
       <View>
-        <Button onPress={this.onSubmit} color="white" title="click to send audio" />
+        <Button onPress={this.onSubmit} color="white" title="analyze" />
       </View>
     )
   }
