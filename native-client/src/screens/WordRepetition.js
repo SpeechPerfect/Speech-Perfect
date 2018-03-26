@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, ScrollView, Button } from 'react-native'
+import { Text, ScrollView, Button, View, TouchableOpacity } from 'react-native'
 import { Card } from 'react-native-elements'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
