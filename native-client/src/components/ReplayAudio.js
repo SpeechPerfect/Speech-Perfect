@@ -85,12 +85,11 @@ export default class ReplayAudio extends Component {
       }
 
     navigateToTranscript(){
-      this.props.navigation.navigate('WordRepetition', { speechId: this.props.navigation.state.params.speechId, userId: this.props.navigation.state.params.userId})
+      this.props.navigation.navigate('TranscriptScreen', { speechId: this.props.navigation.state.params.speechId, userId: this.props.navigation.state.params.userId})
     }
 
   render() {
     console.log('DATA IS', this.props.url)
-
     return (
       <View style={styles.resultsBottomContainer}>
         <View style={styles.audioFeedback}>

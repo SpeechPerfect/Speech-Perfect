@@ -4,7 +4,7 @@ import { Platform, Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 
-import { RecordScreen, ResultsScreen, ProfileScreen, SingleReportScreen, WordRepetition } from '../screens'
+import { RecordScreen, ResultsScreen, ProfileScreen, SingleReportScreen, TranscriptScreen } from '../screens'
 
 export const SignedInNav = TabNavigator(
   {
@@ -50,8 +50,10 @@ export const SignedInNav = TabNavigator(
               headerTintColor: '#12092f'
             }),
             },
-            WordRepetition: {
-              screen: WordRepetition,
+            TranscriptScreen
+          : {
+              screen: TranscriptScreen
+            ,
               navigationOptions: ({ navigation }) => ({
                 title: 'Transcript',
                 headerStyle: {
