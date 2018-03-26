@@ -13,10 +13,12 @@ export default class SingleReportScreen extends Component {
     super(props)
     this.state = {
         speechId: this.props.navigation.state.params.speechId,
+        url: this.props.navigation.state.params.url
     }
   }
 
   render() {
+    console.log('DATA IN SINGLE REPORT IS', this.state.url)
     return (
     <View style={styles.resultsContainer}>
       {this.state.speechId &&
@@ -24,7 +26,7 @@ export default class SingleReportScreen extends Component {
           <SpeechList speechId={this.state.speechId} />
         </View>
       }
-     <ReplayAudio speechId={this.state.speechId} navigation={this.props.navigation} />
+     <ReplayAudio speechId={this.state.speechId} navigation={this.props.navigation} url={this.state.url} />
     </View>
     )
   }

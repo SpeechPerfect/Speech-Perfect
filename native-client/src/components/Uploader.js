@@ -2,8 +2,20 @@ import React, { Component } from 'react'
 import { Alert, Button, View, AsyncStorage as store } from 'react-native'
 import API_ROOT from '../../IP_addresses'
 
-const sendToAws = (data, id) => {
-    fetch(`${API_ROOT}/api/audio/upload/${id}`, {
+
+class Uploader extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      userId: '',
+      url: '',
+      speechId: null
+    }
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
+  sendToAws (data, id) {
+    return fetch(`${API_ROOT}/api/audio/upload/${id}`, {
         method: 'post',
         body: data,
         headers: {
@@ -11,22 +23,15 @@ const sendToAws = (data, id) => {
             'Content-Type': 'multipart/form-data'
         },
     })
-        .then(res => {
-            console.log(res)
+      .then(res => res.json())
+        .then(awsData => {
+          this.setState({
+            url: awsData.url
+          })
         })
+        .then(() => this.state.url)
         .catch(err => console.log(err))
 }
-
-class Uploader extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      userId: '',
-      speechId: null
-    }
-    this.onSubmit = this.onSubmit.bind(this)
-  }
-
   componentDidMount() {
     store.getItem('user')
     .then(user => JSON.parse(user))
@@ -69,11 +74,13 @@ class Uploader extends Component {
           this.setState({
             speechId: idOrError
           })
-          sendToAws(data, idOrError)
+          return idOrError
       })
+      .then((id) => this.sendToAws(data, id))
       .then(() => {
-        // navigate to profile page
-      this.props.navigation.navigate('singleReport', { speechId: this.state.speechId, userId: this.state.userId })
+        console.log('URL IN STATE IS', this.state.url)
+
+      this.props.navigation.navigate('singleReport', { speechId: this.state.speechId, userId: this.state.userId, url: this.state.url })
       })
       .catch(err => console.log(err))
     }
