@@ -3,8 +3,8 @@ import React from 'react'
 import { Platform, Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
-
 import { RecordScreen, ProfileScreen, SingleReportScreen, TranscriptScreen } from '../screens'
+import styles from '../../assets/stylesheet'
 
 export const SignedInNav = TabNavigator(
   {
@@ -68,9 +68,7 @@ export const SignedInNav = TabNavigator(
           <Ionicons
             name={iconName}
             size={28}
-            style={{ marginBottom: -3 }}
-            color={'#12092f'}
-            // color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+            style={styles.navigatorIonicon}
           />
         )
       }

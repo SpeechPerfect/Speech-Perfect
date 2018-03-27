@@ -19,7 +19,7 @@ const EditModal = (props) =>  {
               onPress={() => { props.setModalVisible(false, speech) }}
             >
             <View style={styles.modal}>
-              <Text> Edit Speech Title </Text>
+              <Text style={styles.text}> Edit Speech Title </Text>
               <EditTitleForm speech={props.speech} setModalVisible={props.setModalVisible} />
             </View>
             </TouchableHighlight>
