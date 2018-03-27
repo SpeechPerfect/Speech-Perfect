@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { AsyncStorage as asyncStore } from 'react-native'
 import Expo, { Audio, Permissions } from 'expo'
 import {RecorderRender} from '../renders'
 
@@ -22,10 +21,6 @@ export default class Recorder extends Component {
         this.recordingSettings.ios.extension = '.wav'
     }
 
-    componentWillMount = async () => {
-        let user = await asyncStore.getItem('user')
-        if (!user) this.props.navigation.navigate('Login')
-    }
 
     componentDidMount = async () => {
         const response = await Permissions.askAsync(Permissions.AUDIO_RECORDING)
@@ -33,7 +28,6 @@ export default class Recorder extends Component {
           haveRecordingPermissions: response.status === 'granted'
         })
   }
-
 
     async startRecording() {
       this.startTimer()

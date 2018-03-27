@@ -40,6 +40,7 @@ export default class SignupScreen extends Component {
         .then(res => {
             asyncStore.setItem('user', JSON.stringify(res.data))
             this.setState({error: false, loggedin: true, user: res.data })
+
         })
         .then(() => navigation.navigate('SignedIn'))
         .catch(() => {

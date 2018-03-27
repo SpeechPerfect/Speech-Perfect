@@ -15,5 +15,7 @@ router.get('/:userId', (req, res, next) => {
     where: {
       userId: req.params.userId
     }
-  }).then(foundSpeeches => res.json(foundSpeeches))
+  })
+  .then(foundSpeeches => res.json(foundSpeeches))
+  .catch(next)
 })

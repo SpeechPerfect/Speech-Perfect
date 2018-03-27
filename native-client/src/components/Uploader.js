@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, Button, View, AsyncStorage as asyncStore } from 'react-native'
+import { Alert, Button, View } from 'react-native'
 import {connect} from 'react-redux'
 import { isLoadingAction, setSpeechAction, editUrlAction } from '../../store'
 import API_ROOT from '../../IP_addresses'
@@ -9,7 +9,7 @@ class Uploader extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: '',
+      userId: this.props.user,
       url: '',
       speechId: null
     }
@@ -33,13 +33,6 @@ class Uploader extends Component {
         .then(() => this.state.url)
         .catch(err => console.log(err))
 }
-  componentDidMount() {
-    asyncStore.getItem('user')
-    .then(user => JSON.parse(user))
-    .then((userData) => this.setState({
-      userId: userData.id
-    }))
-  }
 
   onSubmit() {
       const { isLoadingAction, setSpeechAction, editUrlAction } = this.props
@@ -81,13 +74,13 @@ class Uploader extends Component {
       .then((id) => this.sendToAws(data, id))
       .then(() => {
       isLoadingAction(false)
-      this.props.navigation.navigate('singleReport', {userId: this.state.userId})
+      this.props.navigation.navigate('singleReport')
       })
       .catch(err => console.log(err))
     }
 
   render() {
-    console.log('LOADING????', this.props.loading)
+    console.log('USER????', this.props.user)
     return (
       <View>
         <Button onPress={this.onSubmit} color="white" title="analyze" />
@@ -100,7 +93,8 @@ const mapStateToProps = function(state) {
   return {
     loading: state.loading,
     speech: state.speech,
-    url: state.url
+    url: state.url,
+    user: state.user
   }
 }
 
