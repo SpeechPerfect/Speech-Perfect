@@ -12,6 +12,50 @@ const RenderHeader = () => {
     )
 }
 
+const RenderBegin = props => {
+    return props.begin ? (
+        <View style={{height: 2, marginBottom: -2}}>
+          <Text style={{color: 'white'}}>
+            ''
+          </Text>
+        </View>
+    ) : (
+        <View style={styles.recorderBottomText}>
+          <Text style={styles.recorderIntroText} > Press the mic and start speaking </Text>
+          <Text style={styles.recorderText}>
+            We will analyze your speech and
+          </Text>
+          <Text style={styles.recorderText}> provide you with suggestions on how to improve </Text>
+        </View>
+    )
+}
+
+const RenderStop = () => {
+    return (
+        <View style={styles.recorderIntroText}>
+          <Text style={styles.recorderStopText} > Press the mic to stop recording </Text>
+        </View>
+    )
+}
+
+const RenderReset = props => {
+    const state = props.state
+    const onButtonClear = props.onButtonClear
+
+    return (
+        <View style={styles.recorderButtons}>
+          <View style={styles.recorderUpload}>
+            <Button style={styles.recorderButton} color="white" onPress={onButtonClear} title="reset" />
+          </View>
+          {!state.isClicked && (
+                  <View style={styles.recorderUpload}>
+                    <Uploader navigation={props.navigation} uri={state.recording._uri} duration={state.durationMillis} />
+                  </View>
+              )}
+            </View>
+    )
+}
+
 const RecorderRender = props => {
     const state = props.state
     const { onButtonClear, startRecording, stopRecording } = props.buttons
@@ -27,49 +71,11 @@ const RecorderRender = props => {
           </View>
           <View style={styles.recorderBottomContainer}>
             <RecordButton press={buttonMethod} />
-            {
-                state.begin ? (
-                    <View style={{height: 2, marginBottom: -2}}>
-                      <Text style={{color: 'white'}}>
-                        ''
-                      </Text>
-                    </View>
-                ) : (
-                    <View style={styles.recorderBottomText}>
-                      <Text style={styles.recorderIntroText} > Press the mic and start speaking </Text>
-                      <Text style={styles.recorderText}>
-                        We will analyze your speech and
-                      </Text>
-                      <Text style={styles.recorderText}> provide you with suggestions on how to improve </Text>
-                    </View>
-                )
-            } {
-                (state.begin && state.isClicked)
-                    ? (
-                        <View style={styles.recorderIntroText}>
-                          <Text style={styles.recorderStopText} > Press the mic to stop recording </Text>
-                        </View>
-                    ) : (
-                        <View style={styles.recorderBottomText}>
-                          <Text style={styles.recorderStopText} />
-                        </View>
-                    )
-            }
+            <RenderBegin begin={state.begin} />
+            {(state.begin && state.isClicked) && <RenderStop />}
             <View style={styles.recorderBottomText}>
-            {
-                state.begin && (
-                    <View style={styles.recorderButtons}>
-                      <View style={styles.recorderUpload}>
-                        <Button style={styles.recorderButton} color="white" onPress={onButtonClear} title="reset" />
-                      </View>
-                      {!state.isClicked && (
-                          <View style={styles.recorderUpload}>
-                            <Uploader navigation={props.navigation} uri={state.recording._uri} duration={state.durationMillis} />
-                          </View>
-                      )}
-                    </View>
-                )
-            } </View>
+              {state.begin && <RenderReset navigation={props.navigation} state={state} onButtonClear={onButtonClear} />}
+             </View>
             </View>
             </View>
     )
