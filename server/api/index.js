@@ -1,4 +1,4 @@
-const router = require('express').Router()
+const router = require('express').Router() //eslint-disable-line new-cap
 module.exports = router
 
 router.use('/user', require('./user'))
