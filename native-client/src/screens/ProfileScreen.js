@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import { View, Text, Button, TouchableHighlight, AsyncStorage as asyncStore} from 'react-native'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
@@ -24,7 +25,6 @@ export default class ProfileScreen extends Component {
     .then(userData => JSON.parse(userData))
     .then((data) => {
       this.setState({
-      email: data.email,
       id: data.id,
       selectedSpeech: null,
       speeches: [],
@@ -95,8 +95,13 @@ export default class ProfileScreen extends Component {
     this.getUserAndSpeeches()
   }
 
+  componentWillReceiveProps() {
+
+  }
+
   render() {
     const { id, speeches } = this.state
+    console.log(speeches, 'ARE THE SPEECHES IN PROFILE SCREEN')
     return (
       <View style={styles.container}>
        <View>
@@ -115,5 +120,12 @@ export default class ProfileScreen extends Component {
         }
       </View>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    speeches: state.speeches,
+
   }
 }

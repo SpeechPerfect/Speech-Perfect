@@ -17,4 +17,5 @@ router.get('/:userId', (req, res, next) => {
     }
   })
   .then(foundSpeeches => res.json(foundSpeeches))
+  .catch(next)
 })
