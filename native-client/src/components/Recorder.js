@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { AsyncStorage as asyncStore } from 'react-native'
 import Expo, { Audio, Permissions } from 'expo'
-import RecorderRender from '../renders'
+import {RecorderRender} from '../renders'
 
 export default class Recorder extends Component {
     constructor(){

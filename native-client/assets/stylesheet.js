@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   navigatorIonicon: {
-    size: 40,
+    // size: 40,
     marginBottom: -5,
     color: '#12092f',
   },
