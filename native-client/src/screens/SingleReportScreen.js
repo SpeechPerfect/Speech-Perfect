@@ -29,7 +29,6 @@ class SingleReportScreen extends Component {
   renderHeader() {
     return (
       <View style={styles.profileHeader}>
-        <Spinner size= 'large' />
         <View style={styles.profileHeaderLogoutContainer}>
         <TouchableHighlight onPress={() => this.props.navigation.navigate('profile')}>
           <Text> Profile </Text>
@@ -46,7 +45,8 @@ class SingleReportScreen extends Component {
     const { speechId } = this.state
     return (
     <View style={styles.resultsContainer}>
-     {  this.props.loading && this.renderSpinner }
+     {/* {  this.props.loading && this.renderSpinner } */}
+     { this.renderSpinner() }
       <View>
           {this.renderHeader()}
       </View>
