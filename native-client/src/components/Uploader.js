@@ -81,7 +81,7 @@ class Uploader extends Component {
       .then((id) => this.sendToAws(data, id))
       .then(() => {
       isLoadingAction(false)
-      this.props.navigation.navigate('singleReport')
+      this.props.navigation.navigate('singleReport', {userId: this.state.userId})
       })
       .catch(err => console.log(err))
     }
