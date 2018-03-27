@@ -3,6 +3,7 @@ import { Text, ScrollView, Button, View, TouchableOpacity } from 'react-native'
 import { Card } from 'react-native-elements'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
+import styles from '../../assets/stylesheet'
 
 export default class TranscriptScreen extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ export default class TranscriptScreen extends Component {
     axios.get(`${API_ROOT}/api/speech/thesaurus/${word}`)
       .then(res => {
         //set state to first ten words returnd from the backend
-        alternatives = res.data.slice(0,10).map(word => <Text style={{fontSize: 20, fontWeight: 'bold', fontFamily: 'Cochin'}}>{word}, </Text>)
+        alternatives = res.data.slice(0,10).map(word => <Text style={styles.transcriptAlternativesText}>{word}, </Text>)
         this.setState({selectedWord: word, alternatives: alternatives})
       })
       .catch(err => console.log(err))
@@ -55,7 +56,7 @@ export default class TranscriptScreen extends Component {
     for(let i = 0; i < speech.length; i++){
       wordCount[speech[i]] = (wordCount[speech[i]] || 0) + 1
     }
-  
+
     // Match pattern from value at i
     const match = (pattern, value, start=0) => {
       const end = pattern.length
@@ -116,18 +117,18 @@ export default class TranscriptScreen extends Component {
   render() {
     return (
       <View>
-        {this.state.alternatives.length ? 
-        <Card>      
-            <TouchableOpacity style={{ width: 25, height: 25, borderRadius: 20}}  onPress={() => this.setState({alternatives: []}) }><Text>X</Text></TouchableOpacity>
-            <Text style={{fontSize: 25,fontWeight: 'bold'}}>Synonoms for {this.state.selectedWord}</Text>
-            <View style={{flexDirection: 'row',flexWrap: 'wrap'}}>{this.state.alternatives}</View>
-          </Card> 
-          : 
+        {this.state.alternatives.length ?
+        <Card>
+            <TouchableOpacity style={styles.transcriptCard}  onPress={() => this.setState({alternatives: []}) }><Text>X</Text></TouchableOpacity>
+            <Text style={styles.transcriptSelectedWord}>Synonoms for {this.state.selectedWord}</Text>
+            <View style={styles.transcriptAlternative}>{this.state.alternatives}</View>
+          </Card>
+          :
           <Text></Text>}
 
-        <Card containerStyle={{padding: 0 , padding: 5}} >
-          <ScrollView>     
-            <View style={{flexDirection: 'row',flexWrap: 'wrap'}}>
+        <Card containerStyle={styles.transcriptCardContainer} >
+          <ScrollView>
+            <View style={styles.transcriptCardContainerView}>
                 {this.state.speech ? this.renderSpeech() : <Text></Text>}
             </View>
           </ScrollView>

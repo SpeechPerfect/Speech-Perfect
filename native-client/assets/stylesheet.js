@@ -332,7 +332,33 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 10,
     backgroundColor: '#3b5998'
-  }
+  },
+  transcriptAlternativesText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'Cochin',
+  },
+  transcriptCard: {
+    width: 25,
+    height: 25,
+    borderRadius: 20
+  },
+  transcriptCardContainer: {
+    padding: 5,
+  },
+  transcriptCardContainerView: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  transcriptSelectedWord: {
+    fontSize: 25,
+    fontWeight: 'bold'
+  },
+  transcriptAlternative: {
+    width: 25,
+    height: 25,
+    borderRadius: 20
+  },
 })
 
 export default styles
