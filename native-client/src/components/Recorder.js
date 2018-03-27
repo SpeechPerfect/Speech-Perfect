@@ -132,8 +132,8 @@ export default class Recorder extends Component {
         <View style={styles.recorderBottomContainer}>
           <RecordButton press={buttonMethod} />
           {this.state.begin ?
-          <View style={{height: 2, marginBottom: -2}}>
-            <Text style={{color: 'white'}}>''</Text>
+          <View style={styles.recorderBuffer}>
+            <Text style={styles.whiteText}>''</Text>
           </View>
           :
           <View style={styles.recorderBottomText}>

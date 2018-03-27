@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, AsyncStorage as store, Alert } from 'react-native'
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements'
+import styles from '../../assets/stylesheet'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 
@@ -51,7 +52,7 @@ export default class SignupScreen extends Component {
   render() {
     console.log(this.state, 'is the state')
     return (
-      <View style={{ paddingVertical: 20 }}>
+      <View style={styles.signUpView}>
     <Card>
       <FormLabel>Email</FormLabel>
       <FormInput
@@ -72,15 +73,14 @@ export default class SignupScreen extends Component {
       placeholder="Confirm Password..." />
 
       <Button
-        buttonStyle={{ marginTop: 20 }}
-        backgroundColor="#03A9F4"
+        buttonStyle={styles.signUpButtonStyle}
+        backgroundColor="purple"
         title="SIGN UP"
         onPress={() => this.onButtonPress()}
       />
       <Button
-        buttonStyle={{ marginTop: 20 }}
-        backgroundColor="transparent"
-        textStyle={{ color: '#bcbec1' }}
+        buttonStyle={styles.signInButtonStyle}
+        textStyle={styles.signUpButtonTextStyle}
         title="Sign In"
         onPress={() => this.props.navigation.navigate('SignIn')}
       />

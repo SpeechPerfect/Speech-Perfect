@@ -26,13 +26,10 @@ class EditTitleForm extends Component {
     console.log('edit title form', this.props)
     return (
       <View style={styles.editTitleContainer}>
-          <View>
-            <Text style={styles.editTitleText}> Update Profile </Text>
-          </View>
-          <View style={{backgroundColor: 'purple'}} >
+          <View >
             <TextInput style={styles.editTitleInput}
-            placeholder= {"Test Speech"}
-            placeholderTextColor='white'
+            placeholder= {"New Speech Title"}
+            placeholderTextColor='lightgrey'
             onChangeText={text => this.setState({ title : text })}
             />
           </View>
@@ -45,7 +42,7 @@ class EditTitleForm extends Component {
 
   renderButton() {
     return (
-      <TouchableOpacity style={{backgroundColor: '#12092f', borderRadius: 20, paddingVertical: 1, paddingHorizontal: 10, margin:10}} onPress={this.onButtonPress.bind(this)}>
+      <TouchableOpacity style={styles.editTitleButton} onPress={this.onButtonPress.bind(this)}>
             <Text style={styles.editTitleButtonText} > UPDATE </Text>
       </TouchableOpacity>
     )
@@ -54,7 +51,7 @@ class EditTitleForm extends Component {
   renderError() {
       if (this.props.error) {
         return (
-          <View style={{backgroundColor: 'white'}}>
+          <View>
           <Text style={styles.errorTextStyle}>
           {this.props.error}
           </Text>
