@@ -36,7 +36,7 @@ router.delete('/:speechId', (req, res, next) => {
       id: req.params.speechId
     }
   })
-  .then(() => res.status(204))
+  .then((deletedSpeeches) => res.json(deletedSpeeches))
   .catch(next)
 })
 
