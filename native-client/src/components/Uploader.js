@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, Button, View, AsyncStorage as asyncStore } from 'react-native'
+import { Alert, Button, View } from 'react-native'
 import {connect} from 'react-redux'
 import { isLoadingAction, setSpeechAction, editUrlAction } from '../../store'
 import API_ROOT from '../../IP_addresses'
@@ -33,13 +33,6 @@ class Uploader extends Component {
         .then(() => this.state.url)
         .catch(err => console.log(err))
 }
-  // componentDidMount() {
-  //   asyncStore.getItem('user')
-  //   .then(user => JSON.parse(user))
-  //   .then((userData) => this.setState({
-  //     userId: userData.id
-  //   }))
-  // }
 
   onSubmit() {
       const { isLoadingAction, setSpeechAction, editUrlAction } = this.props

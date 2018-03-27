@@ -103,7 +103,6 @@ class ProfileScreen extends Component {
             setModalVisible={ (vis, speech) => { this._setModalVisible(false, speech) }}
             id={this.state.id}
             speech={this.state.selectedSpeech}
-            getUserAndSpeeches={this.getUserAndSpeeches.bind(this)}
             style={styles.editModalContainer}
           />
         }
