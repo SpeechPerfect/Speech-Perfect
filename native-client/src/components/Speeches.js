@@ -40,7 +40,7 @@ class Speeches extends Component {
               <View style={styles.speechesHeaderTextContainer}>
               <Text style={styles.speechesHeaderText}> Your Speeches </Text>
               </View>
-              <View style={styles.speechesHeaderDeleteButtonCOntainer}>
+              <View style={styles.speechesHeaderDeleteButtonContainer}>
               <TouchableOpacity onPress={() => {
                 console.log('DELETING')
                 this.props.deleteUsersSpeeches(this.props.id)}}>

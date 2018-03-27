@@ -41,7 +41,7 @@ render() {
 
   return (
     <View>
-  {speechData && <View style={styles.resultsContainer}>
+  {!!speechData && <View style={styles.resultsContainer}>
   <Text style={styles.resultsText}>Duration: {duration}</Text>
   <Text style={styles.resultsText}>Word count: {wordCount}</Text>
   <Text style={styles.resultsText}>"Um" count: {umCount}</Text>

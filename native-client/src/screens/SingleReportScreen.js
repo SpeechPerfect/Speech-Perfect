@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import { View, TouchableHighlight, Text } from 'react-native'
 import { SpeechList, ReplayAudio } from '../components'
 import styles from '../../assets/stylesheet'
 
-export default class SingleReportScreen extends Component {
+class SingleReportScreen extends Component {
   static navigationOptions = {
     header: null,
   };
@@ -11,8 +12,8 @@ export default class SingleReportScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        speechId: this.props.navigation.state.params.speechId,
-        url: this.props.navigation.state.params.url
+        speechId: this.props.speech,
+        url: this.props.url
     }
   }
   renderHeader() {
@@ -31,22 +32,34 @@ export default class SingleReportScreen extends Component {
   }
 
   render() {
-    console.log('DATA IN SINGLE REPORT IS', this.state.url)
+    const { speechId } = this.state
     return (
     <View style={styles.resultsContainer}>
       <View>
           {this.renderHeader()}
       </View>
-      {this.state.speechId &&
+      {!!speechId &&
+      <View style={styles.resultsContainer}>
         <View style={styles.resultsContainer}>
-          <SpeechList speechId={this.state.speechId} />
+          <SpeechList speechId={this.props.speech} />
         </View>
-      }
-     <ReplayAudio speechId={this.state.speechId} navigation={this.props.navigation} url={this.state.url} />
+    <ReplayAudio speechId={this.props.speech} navigation={this.props.navigation} url={this.props.url} />
+    </View>}
     </View>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    speech: state.speech,
+    url: state.url
+  }
+}
+
+const SingleReportScreenContainer = connect(mapStateToProps)(SingleReportScreen)
+
+export default SingleReportScreenContainer
 
 
 {/* <BarChart

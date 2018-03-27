@@ -33,7 +33,7 @@ router.delete('/:speechId', (req, res, next) => {
       id: req.params.speechId
     }
   })
-  .then(deletedSpeech => res.json(deletedSpeech))
+  .then(() => res.status(204))
 })
 
 router.delete('/all/:userId', (req, res, next) => {
@@ -42,7 +42,7 @@ router.delete('/all/:userId', (req, res, next) => {
       userId: req.params.userId
     }
   })
-  .then(deletedSpeeches => res.json(deletedSpeeches))
+  .then(() => res.status(204))
 })
 
 router.put('/:speechId', (req, res, next) => {
