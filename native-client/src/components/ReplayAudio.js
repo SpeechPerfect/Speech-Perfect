@@ -156,7 +156,7 @@ chartConfig={{
   paddingRight:20,
   }
 }}
-style={{
+//style={{
   marginVertical: 8,
   borderRadius: 16,
   marginRight:20,
