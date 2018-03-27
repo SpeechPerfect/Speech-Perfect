@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Text, ScrollView, Button, View, TouchableOpacity } from 'react-native'
+import { connect } from 'react-redux'
 import { Card } from 'react-native-elements'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
 
-export default class TranscriptScreen extends Component {
+class TranscriptScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -23,9 +24,7 @@ export default class TranscriptScreen extends Component {
   }
 
   componentDidMount(){
-    let userId = this.props.navigation.state.params.userId
-    let speechId = this.props.navigation.state.params.speechId
-    axios.get(`${API_ROOT}/api/speech/watson-data/${speechId}`)
+    axios.get(`${API_ROOT}/api/speech/watson-data/${this.props.speech}`)
         .then(speech => {
           this.setState({
             speech: speech.data.transcript
@@ -120,7 +119,7 @@ export default class TranscriptScreen extends Component {
         {this.state.alternatives.length ?
         <Card>
             <TouchableOpacity style={styles.transcriptCard}  onPress={() => this.setState({alternatives: []}) }><Text>X</Text></TouchableOpacity>
-            <Text style={styles.transcriptSelectedWord}>Synonoms for {this.state.selectedWord}</Text>
+            <Text style={styles.transcriptSelectedWord}>Synonyms for {this.state.selectedWord}</Text>
             <View style={styles.transcriptAlternative}>{this.state.alternatives}</View>
           </Card>
           :
@@ -137,3 +136,13 @@ export default class TranscriptScreen extends Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    speech: state.speech
+  }
+}
+
+const TranscriptScreenContainer = connect(mapStateToProps)(TranscriptScreen)
+
+export default TranscriptScreenContainer

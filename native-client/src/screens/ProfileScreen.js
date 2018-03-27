@@ -69,13 +69,17 @@ class ProfileScreen extends Component {
     // this.props.editSpeech(item)
   }
 
-  componentDidMount() {
+  getSpeeches() {
     axios.get(`${API_ROOT}/api/user/${this.props.user}`)
     .then(res => res.data)
     .then((data) => this.setState({
       speeches: data
     }))
     .then(err => console.log(err))
+  }
+
+  componentDidMount() {
+   this.getSpeeches()
   }
 
   render() {
