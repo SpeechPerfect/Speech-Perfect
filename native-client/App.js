@@ -1,4 +1,5 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import { Platform, StatusBar, View, AsyncStorage as store } from 'react-native'
 import createRootNavigator from './src/navigation/RootNavigation'
 import { Font, AppLoading } from 'expo'
@@ -56,6 +57,7 @@ export default class App extends React.Component {
 
 
       return (
+    <Provider store={store}>
       <View style={styles.container}>
         {/* what is this element? */}
         <View style={styles.statusBar} >
@@ -64,5 +66,6 @@ export default class App extends React.Component {
         </View>
         {<Layout />}
       </View>
+    </Provider>
     )}
 }
