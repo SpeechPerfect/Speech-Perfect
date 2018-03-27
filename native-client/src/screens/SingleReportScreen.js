@@ -33,7 +33,7 @@ class SingleReportScreen extends Component {
   }
 
   render() {
-    const { speechId } = this.state
+    const { speechId, url } = this.state
     return (
     <View style={styles.resultsContainer}>
       <View>
@@ -44,7 +44,7 @@ class SingleReportScreen extends Component {
         <View style={styles.resultsContainer}>
           <SpeechList speechId={this.props.speech} />
         </View>
-    <ReplayAudio speechId={this.props.speech} navigation={this.props.navigation} url={this.props.url} />
+    <ReplayAudio speechId={speechId} navigation={this.props.navigation} url={url} />
     </View>}
     </View>
     )
@@ -54,7 +54,8 @@ class SingleReportScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     speech: state.speech,
-    url: state.url
+    url: state.url,
+    user: state.user
   }
 }
 

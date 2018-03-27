@@ -26,7 +26,7 @@ router.get('/thesaurus/:word', (req, res, next) => {
   let word = req.params.word
   let wordList = thesaurus.find(word)
   res.json(wordList)
-  .catch(next)
+  // .catch(next)
 })
 
 
