@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, AsyncStorage as store, Button, TextInput} from 'react-native'
+import { Text, View, AsyncStorage as asyncStore, Button, TextInput} from 'react-native'
 // import Expo, { Facebook } from 'expo'
 import styles from '../../assets/stylesheet'
 import axios from 'axios'
@@ -22,7 +22,7 @@ export default class LoginForm extends Component {
         const { email, password } = this.state
         axios.post(`${API_ROOT}/auth/login`, {email, password})
             .then(res => {
-                store.setItem('user', JSON.stringify(res.data))
+                asyncStore.setItem('user', JSON.stringify(res.data))
                 this.setState({error: false, loggedin: true, user: res.data })
             })
             .catch(() => {

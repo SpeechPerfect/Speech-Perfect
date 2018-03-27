@@ -8,6 +8,7 @@ router.get('/watson-data/:speechId', (req, res, next) => {
     speechId: req.params.speechId
   }})
   .then(result => res.json(result))
+  .catch(next)
 })
 
 router.get('/aws-data/:speechId', (req, res, next) => {
@@ -17,6 +18,7 @@ router.get('/aws-data/:speechId', (req, res, next) => {
     }
   })
   .then(result => res.json(result))
+  .catch(next)
 })
 
 
@@ -24,6 +26,7 @@ router.get('/thesaurus/:word', (req, res, next) => {
   let word = req.params.word
   let wordList = thesaurus.find(word)
   res.json(wordList)
+  .catch(next)
 })
 
 
@@ -34,6 +37,7 @@ router.delete('/:speechId', (req, res, next) => {
     }
   })
   .then(() => res.status(204))
+  .catch(next)
 })
 
 router.delete('/all/:userId', (req, res, next) => {
@@ -43,6 +47,7 @@ router.delete('/all/:userId', (req, res, next) => {
     }
   })
   .then(() => res.status(204))
+  .catch(next)
 })
 
 router.put('/:speechId', (req, res, next) => {
@@ -54,6 +59,7 @@ router.put('/:speechId', (req, res, next) => {
     returning: true
   })
   .then(updatedSpeech => res.json(updatedSpeech))
+  .catch(next)
 })
 
 module.exports = router
