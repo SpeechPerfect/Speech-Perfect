@@ -50,9 +50,9 @@ const RenderReset = props => {
           {!state.isClicked && (
                   <View style={styles.recorderUpload}>
                     <Uploader navigation={props.navigation} uri={state.recording._uri} duration={state.durationMillis} />
-                  </View>
-              )}
-            </View>
+                  </View>)
+          }
+        </View>
     )
 }
 
