@@ -16,6 +16,7 @@ class SingleReportScreen extends Component {
         url: this.props.url
     }
   }
+
   renderHeader() {
     return (
       <View style={styles.profileHeader}>
