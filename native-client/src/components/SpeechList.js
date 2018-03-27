@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import { Text, View } from 'react-native'
 import styles from '../../assets/stylesheet'
 import axios from 'axios'

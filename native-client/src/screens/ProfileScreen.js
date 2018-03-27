@@ -3,7 +3,7 @@ import { View, Text, Button, TouchableHighlight, AsyncStorage as asyncStore} fro
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
-import { Speeches, Logout, EditModal } from '../components'
+import { Speeches, EditModal } from '../components'
 
 export default class ProfileScreen extends Component {
   static navigationOptions = {
