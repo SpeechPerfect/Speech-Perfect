@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import Swipeout from 'react-native-swipeout'
 import SingleSpeechThumbnail from './SingleSpeechThumbnail'
 import { Ionicons } from '@expo/vector-icons'
+import {setSpeechAction} from '../../store'
 import styles from '../../assets/stylesheet'
 
 class Speeches extends Component {
@@ -40,7 +42,7 @@ class Speeches extends Component {
               <View style={styles.speechesHeaderTextContainer}>
               <Text style={styles.speechesHeaderText}> Your Speeches </Text>
               </View>
-              <View style={styles.speechesHeaderDeleteButtonCOntainer}>
+              <View style={styles.speechesHeaderDeleteButtonContainer}>
               <TouchableOpacity onPress={() => {
                 console.log('DELETING')
                 this.props.deleteUsersSpeeches(this.props.id)}}>
@@ -75,7 +77,9 @@ class Speeches extends Component {
     ]}
     autoClose={true}
     backgroundColor= "transparent">
-      <TouchableWithoutFeedback id={item.id} onPress={() => this.props.navigation.navigate('singleReport', { speechId: item.id, userId: item.userId })} >
+      <TouchableWithoutFeedback id={item.id} onPress={() => {
+        this.props.setSpeechAction(item.id)
+        this.props.navigation.navigate('singleReport', { userId: item.userId })}} >
         <View style={styles.speechesListItemContainer}>
           {this.props.speeches.length &&
                 <View key={item.id} style={styles.speechesListItem}>
@@ -111,4 +115,11 @@ class Speeches extends Component {
   }
 }
 
-export default Speeches
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setSpeechAction: (id) => dispatch(setSpeechAction(id))
+  }
+}
+const SpeechesContainer = connect(null, mapDispatchToProps)(Speeches)
+
+export default SpeechesContainer

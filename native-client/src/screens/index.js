@@ -1,5 +1,4 @@
 export { default as RecordScreen } from './RecordScreen.js'
-export { default as ResultsScreen } from './ResultsScreen.js'
 export { default as ProfileScreen } from './ProfileScreen.js'
 export { default as SingleReportScreen } from './SingleReportScreen.js'
 export { default as TranscriptScreen } from './TranscriptScreen.js'

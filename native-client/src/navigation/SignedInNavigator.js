@@ -3,8 +3,8 @@ import React from 'react'
 import { Platform, Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
-
-import { RecordScreen, ResultsScreen, ProfileScreen, SingleReportScreen, TranscriptScreen } from '../screens'
+import { RecordScreen, ProfileScreen, SingleReportScreen, TranscriptScreen } from '../screens'
+import styles from '../../assets/stylesheet'
 
 export const SignedInNav = TabNavigator(
   {
@@ -13,63 +13,38 @@ export const SignedInNav = TabNavigator(
     },
     Profile: {
       screen: StackNavigator({
-        profile: { screen: ProfileScreen, path: 'profile/:name',
+        profile: { screen: ProfileScreen,
         navigationOptions: ({ navigation }) => ({
           title: 'History',
           headerStyle: {
             backgroundColor: 'white',
             height: 20
-            // tintColor:'rgb(252,197,76)',
           },
-          // Why do we need this?
-          // headerRight: <Button title='Coach' color='#12092f' onPress={() => navigation.navigate('results')} />,
           headerTintColor: '#12092f'
         }),
         },
-        Results: {
-          screen: TabNavigator({
-            results: { screen: ResultsScreen, path: 'profile/results',
-            navigationOptions: ({ navigation }) => ({
-              title: 'Results',
-              headerStyle: {
-                backgroundColor: 'white',
-                height: 20
-              },
-              headerLeft: <Button title="Profile" color="#12092f" onPress={() => navigation.navigate('results')} />,
-              headerTintColor: '#12092f'
-            })
-            },
-            singleReport: { screen: SingleReportScreen, path: 'profile/report',
-            navigationOptions: ({ navigation }) => ({
-              title: 'Report',
-              headerStyle: {
-                backgroundColor: 'white',
-                height: 20
-              },
-              headerLeft: <Button title="Back to Profile" color="#12092f" onPress={() => navigation.navigate('profile')} />,
-              headerTintColor: '#12092f'
-            }),
-            },
-            TranscriptScreen
-          : {
-              screen: TranscriptScreen
-            ,
-              navigationOptions: ({ navigation }) => ({
-                title: 'Transcript',
-                headerStyle: {
-                  backgroundColor: 'white',
-                  height: 20
-                },
-                headerLeft: <Button title="Back to Report" color="#12092f" onPress={() => navigation.navigate('singleReport')} />,
-                headerTintColor: '#12092f'
-              })
-            }
+        singleReport: { screen: SingleReportScreen,
+        navigationOptions: ({ navigation }) => ({
+          title: 'Report',
+          headerStyle: {
+            backgroundColor: 'white',
+            height: 20
+          },
+          headerLeft: <Button title="Back to Profile" color="#12092f" onPress={() => navigation.navigate('profile')} />,
+          headerTintColor: '#12092f'
+        }),
         },
-
-        {
-          navigationOptions: { tabBarVisible: false }
-          }
-      )}
+        TranscriptScreen: {screen: TranscriptScreen,
+          navigationOptions: ({ navigation }) => ({
+            title: 'Transcript',
+            headerStyle: {
+              backgroundColor: 'white',
+              height: 20
+            },
+            headerLeft: <Button title="Back to Report" color="#12092f" onPress={() => navigation.navigate('singleReport')} />,
+            headerTintColor: '#12092f'
+          })
+        },
       })
     },
 
@@ -85,9 +60,6 @@ export const SignedInNav = TabNavigator(
         case 'Record':
             iconName = Platform.OS === 'ios' ? `ios-microphone${focused ? '' : '-outline'}` : 'md-microphone'
             break
-        case 'Results':
-            iconName =
-                Platform.OS === 'ios' ? `ios-list${focused ? '' : '-outline'}` : 'md-options'
         case 'Profile':
             iconName =
                 Platform.OS === 'ios' ? `ios-bookmark${focused ? '' : '-outline'}` : 'md-bookmark'
@@ -96,9 +68,7 @@ export const SignedInNav = TabNavigator(
           <Ionicons
             name={iconName}
             size={28}
-            style={{ marginBottom: -3 }}
-            color={'#12092f'}
-            // color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+            style={styles.navigatorIonicon}
           />
         )
       }

@@ -14,6 +14,25 @@ const styles = StyleSheet.create({
     fontSize: 70,
     color: 'white'
   },
+  navigatorIonicon: {
+    size: 40,
+    marginBottom: -5,
+    color: '#12092f',
+  },
+  signUpButtonStyle: {
+    marginTop: 20,
+    backgroundColor: "purple",
+  },
+  signUpButtonTextStyle: {
+    color: 'purple',
+  },
+  signInButtonStyle: {
+    color: 'purple',
+    backgroundColor: "transparent",
+  },
+  signUpView: {
+    paddingVertical: 20,
+  },
   resultsContainer: {
     flex: 1,
     backgroundColor: 'white',
@@ -62,7 +81,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,0.5)',
-    height: 500,
+    height: 300,
     width: 500,
     flex: 1,
   },
@@ -71,7 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'lightgrey',
-    height: 300,
+    height: 150,
     width: 300,
   },
   inputFieldContainer: {
@@ -100,22 +119,25 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   editTitleInput: {
-    width: 300.3,
-    height: 15.3,
-    // fontFamily: 'WorkSans',
+    width: 220,
+    height: 50,
     fontSize: 20.7,
+    backgroundColor: 'white',
     fontWeight: 'normal',
     fontStyle: 'normal',
     letterSpacing: 0,
     textAlign: 'left',
-    marginVertical: 20,
-    color: '#ffffff'
+    marginVertical:  5,
+    color: 'purple'
+  },
+  editTitleButton: {
+    backgroundColor: '#12092f', borderRadius: 20, paddingVertical: 1, paddingHorizontal: 10, margin:10,
   },
   editTitleButtonText: {
     fontSize: 16,
     color: 'white',
     fontWeight: '700',
-    marginVertical: 20,
+    marginVertical: 10,
   },
   editTitleText: {
     fontSize: 20,
@@ -126,8 +148,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   editTitleContainer: {
-    flexGrow: 1,
     alignItems: 'center',
+    width: '90%',
   },
   stopwatch: {
     flex: 2,
@@ -179,7 +201,7 @@ const styles = StyleSheet.create({
     // marginBottom: 20,
   },
   recorderButton: {
-    color: '#12092f',
+    // color: '#12092f',
     fontSize: 18,
     fontWeight: 'bold',
   },
@@ -212,6 +234,13 @@ const styles = StyleSheet.create({
   recorderText: {
     color: '#12092f',
     fontSize: 14,
+  },
+  recorderBuffer: {
+    height: 2,
+    marginBottom: -2
+  },
+  whiteText: {
+    color: 'white',
   },
   profileHeader: {
     height: 40,
@@ -303,7 +332,33 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 10,
     backgroundColor: '#3b5998'
-  }
+  },
+  transcriptAlternativesText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'Cochin',
+  },
+  transcriptCard: {
+    width: 25,
+    height: 25,
+    borderRadius: 20
+  },
+  transcriptCardContainer: {
+    padding: 5,
+  },
+  transcriptCardContainerView: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  transcriptSelectedWord: {
+    fontSize: 25,
+    fontWeight: 'bold'
+  },
+  transcriptAlternative: {
+    width: 25,
+    height: 25,
+    borderRadius: 20
+  },
 })
 
 export default styles

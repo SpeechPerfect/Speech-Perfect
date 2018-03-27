@@ -14,8 +14,8 @@ const RenderHeader = () => {
 
 const RenderBegin = props => {
     return props.begin ? (
-        <View style={{height: 2, marginBottom: -2}}>
-          <Text style={{color: 'white'}}>
+        <View style={styles.recorderBuffer}>
+          <Text style={styles.whiteText}>
             ''
           </Text>
         </View>

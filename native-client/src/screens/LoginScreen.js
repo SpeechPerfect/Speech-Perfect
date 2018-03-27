@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
-import { View, AsyncStorage as store, Alert } from 'react-native'
+import { View, AsyncStorage as asyncStore, Alert } from 'react-native'
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
+import styles from '../../assets/stylesheet'
 
 export default class LoginScreen extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ export default class LoginScreen extends Component {
     const { email, password } = this.state
     axios.post(`${API_ROOT}/auth/login`, {email, password})
         .then(res => {
-            store.setItem('user', JSON.stringify(res.data))
+            asyncStore.setItem('user', JSON.stringify(res.data))
             this.setState({error: false, loggedin: true, user: res.data })
         })
         .then(() => console.log('SIGNED IN NOW'))
@@ -45,7 +46,7 @@ export default class LoginScreen extends Component {
   render() {
 
     return (
-      <View style={{ paddingVertical: 20 }}>
+      <View style={styles.signUpView}>
         <Card>
           <FormLabel>Email</FormLabel>
           <FormInput
@@ -59,8 +60,8 @@ export default class LoginScreen extends Component {
           secureTextEntry placeholder="Password..." />
 
           <Button
-            buttonStyle={{ marginTop: 20 }}
-            backgroundColor="#03A9F4"
+            buttonStyle={styles.signUpButtonStyle}
+            // backgroundColor="purple"
             title="SIGN IN"
             onPress={() => this.onButtonPress()}
           />

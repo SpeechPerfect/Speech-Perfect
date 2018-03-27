@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Alert, Button, View, AsyncStorage as store } from 'react-native'
+import { Alert, Button, View, AsyncStorage as asyncStore } from 'react-native'
+import {connect} from 'react-redux'
+import { isLoadingAction, setSpeechAction, editUrlAction } from '../../store'
 import API_ROOT from '../../IP_addresses'
 
 
@@ -25,15 +27,14 @@ class Uploader extends Component {
     })
       .then(res => res.json())
         .then(awsData => {
-          this.setState({
-            url: awsData.url
-          })
+          console.log('THE URL IS *** REDUCER', awsData.url)
+          editUrlAction(awsData.url)
         })
         .then(() => this.state.url)
         .catch(err => console.log(err))
 }
   componentDidMount() {
-    store.getItem('user')
+    asyncStore.getItem('user')
     .then(user => JSON.parse(user))
     .then((userData) => this.setState({
       userId: userData.id
@@ -41,6 +42,7 @@ class Uploader extends Component {
   }
 
   onSubmit() {
+      const { isLoadingAction, setSpeechAction, editUrlAction } = this.props
       const data = new FormData()
       data.append('soundFile', {
         uri: this.props.uri,
@@ -49,6 +51,7 @@ class Uploader extends Component {
         })
       data.append('duration', this.props.duration)
 
+      isLoadingAction(true)
       fetch(`${API_ROOT}/api/watson-api/upload/${this.state.userId}`, {
         method: 'post',
         body: data,
@@ -68,25 +71,23 @@ class Uploader extends Component {
       .then(idOrError => {
         if (idOrError === 'Low confidence') {
           console.log('Front end detects low confidence')
-          // Alert.alert('Poor recording quality', 'Please re-record your message for best accuracy.')
+          Alert.alert('Poor recording quality', 'Please re-record your message for best accuracy.')
+          isLoadingAction(false)
           throw new Error('Poor recording quality')
         }
-          this.setState({
-            speechId: idOrError
-          })
+          setSpeechAction(idOrError)
           return idOrError
       })
       .then((id) => this.sendToAws(data, id))
       .then(() => {
-        console.log('URL IN STATE IS', this.state.url)
-
-      this.props.navigation.navigate('singleReport', { speechId: this.state.speechId, userId: this.state.userId, url: this.state.url })
+      isLoadingAction(false)
+      this.props.navigation.navigate('singleReport', {userId: this.state.userId})
       })
       .catch(err => console.log(err))
     }
 
   render() {
-    console.log('DURATION IS', this.props.duration)
+    console.log('LOADING????', this.props.loading)
     return (
       <View>
         <Button onPress={this.onSubmit} color="white" title="analyze" />
@@ -95,4 +96,20 @@ class Uploader extends Component {
   }
 }
 
-export default Uploader
+const mapStateToProps = function(state) {
+  return {
+    loading: state.loading,
+    speech: state.speech,
+    url: state.url
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  isLoadingAction: (loading) => dispatch(isLoadingAction(loading)),
+  setSpeechAction: (id) => dispatch(setSpeechAction(id)),
+  editUrlAction: (url) => dispatch(editUrlAction(url))
+})
+
+const UploaderContainer = connect(mapStateToProps, mapDispatchToProps)(Uploader)
+
+export default UploaderContainer

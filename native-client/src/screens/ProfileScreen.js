@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, Button, TouchableHighlight, AsyncStorage as store} from 'react-native'
+import { View, Text, Button, TouchableHighlight, AsyncStorage as asyncStore} from 'react-native'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
-import { Speeches, Logout, EditModal } from '../components'
+import { Speeches, EditModal } from '../components'
 
 export default class ProfileScreen extends Component {
   static navigationOptions = {
@@ -20,7 +20,7 @@ export default class ProfileScreen extends Component {
   }
 
   getUserAndSpeeches() {
-    store.getItem('user')
+    asyncStore.getItem('user')
     .then(userData => JSON.parse(userData))
     .then((data) => {
       this.setState({
@@ -56,7 +56,7 @@ export default class ProfileScreen extends Component {
   }
 
   logout() {
-    store.removeItem('user')
+    asyncStore.removeItem('user')
     this.props.navigation.navigate('SignedOut')
   }
 

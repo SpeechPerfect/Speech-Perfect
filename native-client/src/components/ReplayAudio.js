@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, TouchableHighlight, Text } from 'react-native'
+import {connect} from 'react-redux'
 import Expo from 'expo'
 import axios from 'axios'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -8,7 +9,7 @@ import styles from '../../assets/stylesheet'
 
 let soundObject
 
-export default class ReplayAudio extends Component {
+class ReplayAudio extends Component {
   static navigationOptions = {
     title: 'SingleReport'
   };
@@ -16,7 +17,7 @@ export default class ReplayAudio extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        speechId: this.props.speechId,
+        speechId: this.props.speech,
         awsData: null,
         url: this.props.url,
         playing: false,
@@ -30,7 +31,7 @@ export default class ReplayAudio extends Component {
     .then(res => res.data)
     .then((awsData) => {
       this.setState({
-        awsData
+        url: awsData.url
       })
     })
   }
@@ -85,7 +86,7 @@ export default class ReplayAudio extends Component {
       }
 
     navigateToTranscript(){
-      this.props.navigation.navigate('TranscriptScreen', { speechId: this.props.navigation.state.params.speechId, userId: this.props.navigation.state.params.userId})
+      this.props.navigation.navigate('TranscriptScreen', { speechId: this.props.speech, userId: this.props.navigation.state.params.userId})
     }
 
   render() {
@@ -130,6 +131,16 @@ export default class ReplayAudio extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    speech: state.speech
+  }
+}
+
+const ReplayAudioContainer = connect(mapStateToProps)(ReplayAudio)
+
+export default ReplayAudioContainer
+
 /* <BarChart
 data={{
   labels: ['January', 'February', 'March', 'April', 'May', 'June'],
@@ -156,7 +167,7 @@ chartConfig={{
   paddingRight:20,
   }
 }}
-style={{
+//style={{
   marginVertical: 8,
   borderRadius: 16,
   marginRight:20,

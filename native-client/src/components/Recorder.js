@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AsyncStorage as store } from 'react-native'
+import { AsyncStorage as asyncStore } from 'react-native'
 import Expo, { Audio, Permissions } from 'expo'
 import RecorderRender from '../renders'
 
@@ -23,7 +23,7 @@ export default class Recorder extends Component {
     }
 
     componentWillMount = async () => {
-        let user = await store.getItem('user')
+        let user = await asyncStore.getItem('user')
         if (!user) this.props.navigation.navigate('Login')
     }
 

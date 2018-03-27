@@ -8,7 +8,7 @@ const RecordButton = (props) => {
   // <View style={styles.backgroundCircle}>
     <TouchableWithoutFeedback onPress={props.press}>
         {/* <View style={styles.innerBackgroundCircle}>
-          <View style={{ flex: 1, marginLeft: -14, marginTop: -14}}> */}
+          //<View style={{ flex: 1, marginLeft: -14, marginTop: -14}}> */}
             {/* <MaterialCommunityIcons
             name={'record'}
             size={67}
