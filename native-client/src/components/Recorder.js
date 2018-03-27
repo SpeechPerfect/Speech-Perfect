@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import {Button, View, Text, AsyncStorage as store } from 'react-native'
+import { AsyncStorage as store } from 'react-native'
 import Expo, { Audio, Permissions } from 'expo'
-import Timer  from './Timer'
-import { Uploader, RecordButton } from './'
-import styles from '../../assets/stylesheet'
+import RecorderRender from './RecorderRender.js'
 
 export default class Recorder extends Component {
     constructor(){
@@ -13,7 +11,7 @@ export default class Recorder extends Component {
           isRecording: false,
           recording: {},
           durationMillis: '',
-          isClicked: false,
+          isClicked: false
         }
         this.startRecording = this.startRecording.bind(this)
         this.stopRecording = this.stopRecording.bind(this)
@@ -32,17 +30,10 @@ export default class Recorder extends Component {
     componentDidMount = async () => {
         const response = await Permissions.askAsync(Permissions.AUDIO_RECORDING)
         this.setState({
-          haveRecordingPermissions: response.status === 'granted',
+          haveRecordingPermissions: response.status === 'granted'
         })
   }
 
-    renderHeader() {
-      return (
-        <View >
-          <Text style={styles.text}>Record</Text>
-        </View>
-      )
-    }
 
     async startRecording() {
       this.startTimer()
@@ -53,7 +44,7 @@ export default class Recorder extends Component {
         interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
         playsInSilentModeIOS: true,
         shouldDuckAndroid: true,
-        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX
       })
       recording.setOnRecordingStatusUpdate(status => this.setState(status))
       try {
@@ -84,7 +75,7 @@ export default class Recorder extends Component {
       console.log(error)
     }
     this.setState({
-      isClicked: !this.state.isClicked,
+      isClicked: !this.state.isClicked
     })
   }
 
@@ -92,7 +83,7 @@ export default class Recorder extends Component {
     this.setState({
         durationMillis: 0,
         duration: null,
-        begin: false,
+        begin: false
     })
     this.stopRecording()
 }
@@ -119,54 +110,14 @@ export default class Recorder extends Component {
   }
 
   render() {
-    let buttonMethod
-    this.state.isRecording ? buttonMethod = this.stopRecording : buttonMethod = this.startRecording
-    return  (
-      <View style={styles.container}>
-        <View style={styles.recorderHeader}>
-        {this.renderHeader()}
-        </View>
-        <View style={styles.recorderTopContainer}>
-          <Timer duration={this.state.duration} />
-        </View>
-        <View style={styles.recorderBottomContainer}>
-          <RecordButton press={buttonMethod} />
-          {this.state.begin ?
-          <View style={{height: 2, marginBottom: -2}}>
-            <Text style={{color: 'white'}}>''</Text>
-          </View>
-          :
-          <View style={styles.recorderBottomText}>
-            <Text style={styles.recorderIntroText} > Press the mic and start speaking </Text>
-            <Text style={styles.recorderText}> We will analyze your speech and </Text>
-            <Text style={styles.recorderText}> provide you with suggestions on how to improve </Text>
-          </View>
-          }
-          {(this.state.begin && this.state.isClicked) ?
-          <View style={styles.recorderIntroText}>
-            <Text style={styles.recorderStopText} > Press the mic to stop recording </Text>
-          </View>
-          :
-          <View style={styles.recorderBottomText}>
-          <Text style={styles.recorderStopText} />
-          </View>
-          }
-          <View style={styles.recorderBottomText}>
-            {this.state.begin &&
-            <View style={styles.recorderButtons}>
-              <View style={styles.recorderUpload}>
-                <Button style={styles.recorderButton} color="white" onPress={this.onButtonClear} title="reset" />
-              </View>
-              {!this.state.isClicked &&
-              <View style={styles.recorderUpload}>
-                <Uploader navigation={this.props.navigation} uri={this.state.recording._uri} duration={this.state.durationMillis} />
-              </View>
-              }
-            </View>
-            }
-          </View>
-        </View>
-      </View>
-    )
+      const state = this.state
+      const navigation = this.props.navigation
+      const stopRecording = this.stopRecording
+      const startRecording = this.startRecording
+      const onButtonClear = this.onButtonClear
+      const buttons = { stopRecording, startRecording, onButtonClear }
+      return (
+          <RecorderRender state={state} navigation={navigation} buttons={buttons} />
+      )
   }
 }
