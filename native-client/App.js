@@ -1,8 +1,10 @@
 import React from 'react'
-import { Platform, StatusBar, View, AsyncStorage as store } from 'react-native'
+import { Provider } from 'react-redux'
+import { Platform, StatusBar, View, AsyncStorage as asyncStore } from 'react-native'
 import createRootNavigator from './src/navigation/RootNavigation'
 import { Font, AppLoading } from 'expo'
 import styles from './assets/stylesheet'
+import store from './store'
 console.disableYellowBox = true
 
 
@@ -31,7 +33,7 @@ export default class App extends React.Component {
         setTimeout(() => this.setState({ fontLoaded: true }), 1100)
             }
 
-        store.getItem('user')
+        asyncStore.getItem('user')
         .then((user) => JSON.parse(user))
         .then(userData => {
             console.log('user data is ', userData)
@@ -56,13 +58,15 @@ export default class App extends React.Component {
 
 
       return (
+    <Provider store={store}>
       <View style={styles.container}>
         {/* what is this element? */}
         <View style={styles.statusBar} >
          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
         </View>
-        {<Layout />}
+        <Layout />
       </View>
+    </Provider>
     )}
 }

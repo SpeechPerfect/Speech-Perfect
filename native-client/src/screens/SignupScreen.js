@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, AsyncStorage as store, Alert } from 'react-native'
+import { View, AsyncStorage as asyncStore, Alert } from 'react-native'
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements'
 import styles from '../../assets/stylesheet'
 import axios from 'axios'
@@ -38,7 +38,7 @@ export default class SignupScreen extends Component {
     const { email, password } = this.state
     axios.post(`${API_ROOT}/auth/signup`, {email, password})
         .then(res => {
-            store.setItem('user', JSON.stringify(res.data))
+            asyncStore.setItem('user', JSON.stringify(res.data))
             this.setState({error: false, loggedin: true, user: res.data })
         })
         .then(() => navigation.navigate('SignedIn'))

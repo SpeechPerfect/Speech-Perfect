@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     // marginBottom: 20,
   },
   recorderButton: {
-    color: '#12092f',
+    // color: '#12092f',
     fontSize: 18,
     fontWeight: 'bold',
   },
