@@ -355,10 +355,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   transcriptAlternative: {
-    width: 25,
-    height: 25,
-    borderRadius: 20
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
+  spinnerStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 })
 
 export default styles
