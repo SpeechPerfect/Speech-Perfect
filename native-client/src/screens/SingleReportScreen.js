@@ -32,19 +32,16 @@ class SingleReportScreen extends Component {
   }
 
   render() {
-    const { speechId } = this.state
     return (
-    <View style={styles.resultsContainer}>
+    <View style={{flex:1}}>
+      {this.state.speechId &&
       <View>
-          {this.renderHeader()}
-      </View>
-      {!!speechId &&
-      <View style={styles.resultsContainer}>
         <View style={styles.resultsContainer}>
           <SpeechList speechId={this.props.speech} />
         </View>
     <ReplayAudio speechId={this.props.speech} navigation={this.props.navigation} url={this.props.url} />
-    </View>}
+    </View>
+    }
     </View>
     )
   }

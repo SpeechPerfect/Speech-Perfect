@@ -4,6 +4,7 @@ import { Text, View } from 'react-native'
 import styles from '../../assets/stylesheet'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses.js'
+import { LinearGradient } from 'expo';
 
 
 export default class SpeechList extends Component {
@@ -30,6 +31,31 @@ export default class SpeechList extends Component {
     })
   }
 
+
+  renderItems(speechData){
+    return speechData.map(data => {
+      let label = data[0]
+      let value = data[1]
+      return(
+        <View style={{flexDirection:'row', width:'90%', alignSelf:'center',shadowColor:'black', alignItems:'center', borderRadius:10, height: 60, justifyContent:'space-between', padding:10, marginTop:10}}>
+        <LinearGradient
+          colors={['#5e4ba0','#413372']}
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            height: 60,
+            borderRadius:10
+          }}
+        />
+          <Text style={{fontFamily:'Futura-Medium',fontSize: 18,color:'white'}}>{label}</Text>
+          <Text style={{color:'white', fontSize:22, fontWeight: 'bold'}}>{value}</Text>
+        </View>
+      )
+    })
+  }
+
 render() {
   console.log('IN SPEECH LIST, state is ', this.state)
 
@@ -39,17 +65,13 @@ render() {
 
   let speechData = [['Duration: ', duration], ['Word Count: ', wordCount], ['Pace: ', pace], ['Um Count: ', umCount], ['Like Count: ', likeCount]]
 
-
   return (
-    <View>
-  {!!speechData && <View style={styles.resultsContainer}>
-  <Text style={styles.resultsText}>Duration: {duration}</Text>
-  <Text style={styles.resultsText}>Word count: {wordCount}</Text>
-  <Text style={styles.resultsText}>"Um" count: {umCount}</Text>
-  <Text style={styles.resultsText}>"Like" count: {likeCount}</Text>
-  <Text style={styles.resultsText}>Pace: {umCount}</Text>
-       </View>}
-      </View>
+    <View style={{flex:1}}>
+      <Text>Title</Text>
+      {
+        this.renderItems(speechData)
+      }
+    </View>
   )
 }
 }

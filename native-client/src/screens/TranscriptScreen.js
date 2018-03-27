@@ -74,15 +74,18 @@ export default class TranscriptScreen extends Component {
     }
 
     const styled = style => ({ text }) =>
+  
+
+  
       text.map(
         word =>
           <TouchableOpacity
             onPress={() => {this.thesaurus(word)}}>
             <Text style={style}>{
-              word
+              word 
             } </Text>
           </TouchableOpacity>
-      )
+        )
 
     const red = styled({fontSize: 21,color:'red',fontFamily: 'Avenir-Roman'})
     const orange = styled({fontSize: 21,style:'orange',fontFamily: 'Avenir-Roman'})

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   resultsBottomContainer: {
     flex: 1,
-    backgroundColor: '#12092f',
+    
   },
   audioFeedback: {
     justifyContent: 'center',

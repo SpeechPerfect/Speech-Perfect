@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { View, TouchableHighlight, Text } from 'react-native'
-import {connect} from 'react-redux'
 import Expo from 'expo'
 import axios from 'axios'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
+import { LinearGradient } from 'expo';
 
 let soundObject
 
-class ReplayAudio extends Component {
+export default class ReplayAudio extends Component {
   static navigationOptions = {
     title: 'SingleReport'
   };
@@ -17,7 +17,7 @@ class ReplayAudio extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        speechId: this.props.speech,
+        speechId: this.props.speechId,
         awsData: null,
         url: this.props.url,
         playing: false,
@@ -31,7 +31,7 @@ class ReplayAudio extends Component {
     .then(res => res.data)
     .then((awsData) => {
       this.setState({
-        url: awsData.url
+        awsData
       })
     })
   }
@@ -86,20 +86,32 @@ class ReplayAudio extends Component {
       }
 
     navigateToTranscript(){
-      this.props.navigation.navigate('TranscriptScreen', { speechId: this.props.speech, userId: this.props.navigation.state.params.userId})
+      this.props.navigation.navigate('TranscriptScreen', { speechId: this.props.navigation.state.params.speechId, userId: this.props.navigation.state.params.userId})
     }
 
   render() {
     console.log('DATA IS', this.props.url)
     return (
-      <View style={styles.resultsBottomContainer}>
-        <View style={styles.audioFeedback}>
+    <View style={{flex:1, width:'90%', alignSelf:'center',borderBottomLeftRadius: 10,borderBottomRightRadius: 10, borderTopLeftRadius: 10, borderTopRightRadius:10, marginTop:100}}>
+     <View style={{flex:1}}>
+        <View style={{alignSelf:'center', width:'100%', justifyContent:'center', height:150, alignItems:'center', backgroundColor:'#c8d3e5',borderBottomLeftRadius: 10,borderBottomRightRadius: 10, borderTopLeftRadius: 10, borderTopRightRadius:10}}>
+        <LinearGradient
+          colors={['#ccb144','#b88c03']}
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            height: 150,
+            borderRadius:10
+          }}
+        />
           {!this.state.started &&
           <TouchableHighlight onPress={this._playAudio}>
               <MaterialCommunityIcons
               name={'play-circle-outline'}
-              size={67}
-              color={'#12092f'}
+              size={90}
+              color={'white'}
               />
             </TouchableHighlight>
           }
@@ -107,8 +119,8 @@ class ReplayAudio extends Component {
             <TouchableHighlight onPress={this._pauseAudio}>
               <MaterialCommunityIcons
               name={'pause-circle-outline'}
-              size={67}
-              color={'#12092f'}
+              size={90}
+              color={'white'}
               />
             </TouchableHighlight>
           }
@@ -116,30 +128,18 @@ class ReplayAudio extends Component {
           <TouchableHighlight onPress={this._pauseAudio}>
               <MaterialCommunityIcons
               name={'play-circle-outline'}
-              size={67}
-              color={'#12092f'}
+              size={90}
+              color={'white'}
               />
             </TouchableHighlight>
           }
-          <TouchableHighlight onPress={this.navigateToTranscript}><Text style={styles.transcriptButtonText}>View Transcript</Text></TouchableHighlight>
-
-        </View>
-        <View style={styles.transcript}>
         </View>
       </View>
+      <TouchableHighlight style={{flex:1 ,marginTop:50, flexDirection:'row', alignSelf:'center'}} onPress={this.navigateToTranscript}><Text style={{fontSize: 25,fontWeight: 'bold'}}>View Transcript</Text></TouchableHighlight>
+    </View>
     )
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    speech: state.speech
-  }
-}
-
-const ReplayAudioContainer = connect(mapStateToProps)(ReplayAudio)
-
-export default ReplayAudioContainer
 
 /* <BarChart
 data={{
@@ -167,7 +167,7 @@ chartConfig={{
   paddingRight:20,
   }
 }}
-//style={{
+style={{
   marginVertical: 8,
   borderRadius: 16,
   marginRight:20,
