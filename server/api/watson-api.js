@@ -7,7 +7,7 @@ var SpeechToTextV1 = require('watson-developer-cloud/speech-to-text/v1')
 var fs = require('fs')
 let speechId = ''
 
-let dataAnalysis = async (params) => {
+const dataAnalysis = async (params) => {
   var speechToText = new SpeechToTextV1({
     username: process.env.WATSON_USERNAME,
     password: process.env.WATSON_PASSWORD,
@@ -21,28 +21,28 @@ let dataAnalysis = async (params) => {
 
 // add regex to account for end of sentence
 
-let analyzeTranscript = (str) => {
+const analyzeTranscript = (str) => {
   let obj = {}
   obj.umCount = 0
   obj.likeCount = 0
-  let strArr = str.split(' ')
+  const strArr = str.split(' ')
   for (let i = 0; i < strArr.length; i++) {
-    if (strArr[i] === 'um' || strArr[i] === '%HESITATION') obj.umCount++
+    if (strArr[i] === 'um' || strArr[i] === '%HESITATION' ) obj.umCount++
     if (strArr[i] === 'like') obj.likeCount++
   }
   return obj
 }
 
-let getConfidence = (dataArr, transcriptLength) => {
-  let totalConfidence = dataArr.map((x, i) => {
+const getConfidence = (dataArr, transcriptLength) => {
+  const totalConfidence = dataArr.map((x, i) => {
     return dataArr[i].confidence * (x.sectionLength / transcriptLength )
   }).reduce((a, b) => a + b)
   return totalConfidence
 
 }
 
-let getLengthAndConfidence = (arr) => {
-  let transcriptLength  = 0
+const getLengthAndConfidence = (arr) => {
+  let transcriptLength = 0
   let sectionInfo = []
   arr.map(result => {
     let obj = {}
@@ -59,7 +59,7 @@ let getLengthAndConfidence = (arr) => {
   return [transcriptLength, totalConfidence]
 }
 
-let getTranscript = (arr) => {
+const getTranscript = (arr) => {
   return arr.map(result => result.alternatives[0].transcript.trim()).join(' ')
 }
 
@@ -71,11 +71,11 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
     }
     dataAnalysis(params)
     .then(results => {
-      let speechConfidence = getLengthAndConfidence(results)[1]
+      const speechConfidence = getLengthAndConfidence(results)[1]
       if (speechConfidence < 0.75) {
         return res.status(400).json('Low confidence')
       }
-      let speechTranscript = analyzeTranscript(results[0].alternatives[0].transcript)
+      const speechTranscript = analyzeTranscript(results[0].alternatives[0].transcript)
       Speech.create({
         userId: req.params.userId
       })
