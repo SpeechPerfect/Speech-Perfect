@@ -1,7 +1,6 @@
 import React from 'react'
 import {Button, View, Text } from 'react-native'
-import Timer  from './Timer'
-import { Uploader, RecordButton } from './'
+import { Uploader, RecordButton, Timer } from '../components/'
 import styles from '../../assets/stylesheet'
 
 const RenderHeader = () => {
