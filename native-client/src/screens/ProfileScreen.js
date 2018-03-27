@@ -36,7 +36,6 @@ export default class ProfileScreen extends Component {
 
   deleteSpeech = (speech) => {
     axios.delete(`${API_ROOT}/api/speech/${speech.id}`)
-    .then(res => console.log('response is!!', res))
     .then(() => this.getSpeeches())
     .then(err => console.log(err))
   }
