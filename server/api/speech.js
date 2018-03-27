@@ -5,10 +5,11 @@ var thesaurus = require('thesaurus')
 router.get('/watson-data/:speechId', (req, res, next) => {
   WatsonReport.findOne({
     where: {
-    speechId: req.params.speechId
-  }})
-  .then(result => res.json(result))
-  .catch(next)
+      speechId: req.params.speechId
+    }
+  })
+    .then(result => res.json(result))
+    .catch(next)
 })
 
 router.get('/aws-data/:speechId', (req, res, next) => {
@@ -17,8 +18,8 @@ router.get('/aws-data/:speechId', (req, res, next) => {
       speechId: req.params.speechId
     }
   })
-  .then(result => res.json(result))
-  .catch(next)
+    .then(result => res.json(result))
+    .catch(next)
 })
 
 router.get('/thesaurus/:word', (req, res, next) => {
@@ -34,8 +35,8 @@ router.delete('/:speechId', (req, res, next) => {
       id: req.params.speechId
     }
   })
-  .then((deletedSpeeches) => res.json(deletedSpeeches))
-  .catch(next)
+    .then(deletedSpeeches => res.json(deletedSpeeches))
+    .catch(next)
 })
 
 router.delete('/all/:userId', (req, res, next) => {
@@ -44,8 +45,8 @@ router.delete('/all/:userId', (req, res, next) => {
       userId: req.params.userId
     }
   })
-  .then(() => res.status(204))
-  .catch(next)
+    .then(() => res.status(204))
+    .catch(next)
 })
 
 router.put('/:speechId', (req, res, next) => {
@@ -56,8 +57,8 @@ router.put('/:speechId', (req, res, next) => {
     },
     returning: true
   })
-  .then(updatedSpeech => res.json(updatedSpeech))
-  .catch(next)
+    .then(updatedSpeech => res.json(updatedSpeech))
+    .catch(next)
 })
 
 module.exports = router

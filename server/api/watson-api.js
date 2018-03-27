@@ -7,7 +7,7 @@ var SpeechToTextV1 = require('watson-developer-cloud/speech-to-text/v1')
 var fs = require('fs')
 let speechId = ''
 
-const dataAnalysis = async (params) => {
+const dataAnalysis = async params => {
   var speechToText = new SpeechToTextV1({
     username: process.env.WATSON_USERNAME,
     password: process.env.WATSON_PASSWORD,
@@ -23,26 +23,28 @@ const dataAnalysis = async (params) => {
 
 // add regex to account for end of sentence
 
-const analyzeTranscript = (str) => {
+const analyzeTranscript = str => {
   let obj = {}
   obj.umCount = 0
   obj.likeCount = 0
   const strArr = str.split(' ')
   for (let i = 0; i < strArr.length; i++) {
-    if (strArr[i] === 'um' || strArr[i] === '%HESITATION' ) obj.umCount++
+    if (strArr[i] === 'um' || strArr[i] === '%HESITATION') obj.umCount++
     if (strArr[i] === 'like') obj.likeCount++
   }
   return obj
 }
 
 const getConfidence = (dataArr, transcriptLength) => {
-  const totalConfidence = dataArr.map((x, i) => {
-    return dataArr[i].confidence * (x.sectionLength / transcriptLength )
-  }).reduce((a, b) => a + b)
+  const totalConfidence = dataArr
+    .map((x, i) => {
+      return dataArr[i].confidence * (x.sectionLength / transcriptLength)
+    })
+    .reduce((a, b) => a + b)
   return totalConfidence
 }
 
-const getLengthAndConfidence = (arr) => {
+const getLengthAndConfidence = arr => {
   let transcriptLength = 0
   let sectionInfo = []
   arr.map(result => {
@@ -61,7 +63,7 @@ const getLengthAndConfidence = (arr) => {
   return [transcriptLength, totalConfidence]
 }
 
-const getTranscript = (arr) => {
+const getTranscript = arr => {
   return arr.map(result => result.alternatives[0].transcript.trim()).join(' ')
 }
 
@@ -77,7 +79,9 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
       if (speechConfidence < 0.75) {
         return res.status(400).json('Low confidence')
       }
-      const speechTranscript = analyzeTranscript(results[0].alternatives[0].transcript)
+      const speechTranscript = analyzeTranscript(
+        results[0].alternatives[0].transcript
+      )
       Speech.create({
         userId: req.params.userId
       }).then(speech => {
