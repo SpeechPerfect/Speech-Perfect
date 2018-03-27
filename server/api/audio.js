@@ -1,6 +1,6 @@
-const router = require('express').Router()
+const router = require('express').Router() //eslint-disable-line new-cap
 const { AwsReport } = require('../db/models')
-const multer  = require('multer')
+const multer = require('multer')
 const multerS3 = require('multer-s3')
 const AWS = require('aws-sdk')
 const creds = require('../secrets')
@@ -8,7 +8,6 @@ const creds = require('../secrets')
 // AWS.config.loadFromPath('./s3_config.json')
 
 AWS.config.update(creds.creds)
-
 
 const s3 = new AWS.S3()
 
@@ -20,23 +19,26 @@ const upload = multer({
     contentType: (req, file, cb) => {
       return cb(null, 'audio/x-wav')
     }, // multerS3.AUTO_CONTENT_TYPE,
-    metadata: function (req, file, cb) {
-      cb(null, {fieldName: file.fieldname})
+    metadata: function(req, file, cb) {
+      cb(null, { fieldName: file.fieldname })
     },
-    key: function (req, file, cb) {
+    key: function(req, file, cb) {
       cb(null, Date.now().toString())
     }
   })
 })
 
-router.post('/upload/:speechId', upload.single('soundFile'), (req, res, next) => {
-  console.log('in post route, file is ', req.file)
-  AwsReport.create({
-    url: req.file.location,
-    speechId: req.params.speechId
-  })
-  .then(createdAws => res.json(createdAws))
-  // res.send('Successfully uploaded ' + req.file.fieldName + ' file!')
-})
+router.post(
+  '/upload/:speechId',
+  upload.single('soundFile'),
+  (req, res, next) => {
+    console.log('in post route, file is ', req.file)
+    AwsReport.create({
+      url: req.file.location,
+      speechId: req.params.speechId
+    }).then(createdAws => res.json(createdAws))
+    // res.send('Successfully uploaded ' + req.file.fieldName + ' file!')
+  }
+)
 
 module.exports = router

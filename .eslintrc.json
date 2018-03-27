@@ -2,7 +2,8 @@
     "plugins": ["prettier"],
     "extends": ["fullstack", "plugin:prettier/recommended"],
     "rules": {
-	"prettier/prettier": "error"
+	      "prettier/prettier": "error",
+        "id-length": ["error", {"min": 1 }]
     },
     "parser": "babel-eslint"
 }

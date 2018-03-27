@@ -24,4 +24,3 @@ const WatsonReport = db.define('watsonReport', {
 })
 
 module.exports = WatsonReport
-

@@ -1,5 +1,5 @@
-const router = require('express').Router()
-const { User, Speech }  = require('../db/models')
+const router = require('express').Router() //eslint-disable-line new-cap
+const { User, Speech } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -15,6 +15,5 @@ router.get('/:userId', (req, res, next) => {
     where: {
       userId: req.params.userId
     }
-  })
-  .then(foundSpeeches => res.json(foundSpeeches))
+  }).then(foundSpeeches => res.json(foundSpeeches))
 })

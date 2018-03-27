@@ -1,13 +1,13 @@
-const router = require('express').Router()
+const router = require('express').Router() //eslint-disable-line new-cap
 const { WatsonReport, Speech, AwsReport } = require('../db/models')
 var thesaurus = require('thesaurus')
 
 router.get('/watson-data/:speechId', (req, res, next) => {
   WatsonReport.findOne({
     where: {
-    speechId: req.params.speechId
-  }})
-  .then(result => res.json(result))
+      speechId: req.params.speechId
+    }
+  }).then(result => res.json(result))
 })
 
 router.get('/aws-data/:speechId', (req, res, next) => {
@@ -15,10 +15,8 @@ router.get('/aws-data/:speechId', (req, res, next) => {
     where: {
       speechId: req.params.speechId
     }
-  })
-  .then(result => res.json(result))
+  }).then(result => res.json(result))
 })
-
 
 router.get('/thesaurus/:word', (req, res, next) => {
   let word = req.params.word
@@ -26,14 +24,12 @@ router.get('/thesaurus/:word', (req, res, next) => {
   res.json(wordList)
 })
 
-
 router.delete('/:speechId', (req, res, next) => {
   Speech.destroy({
     where: {
       id: req.params.speechId
     }
-  })
-  .then(() => res.status(204))
+  }).then(() => res.status(204))
 })
 
 router.delete('/all/:userId', (req, res, next) => {
@@ -41,8 +37,7 @@ router.delete('/all/:userId', (req, res, next) => {
     where: {
       userId: req.params.userId
     }
-  })
-  .then(() => res.status(204))
+  }).then(() => res.status(204))
 })
 
 router.put('/:speechId', (req, res, next) => {
@@ -52,8 +47,7 @@ router.put('/:speechId', (req, res, next) => {
       id: req.params.speechId
     },
     returning: true
-  })
-  .then(updatedSpeech => res.json(updatedSpeech))
+  }).then(updatedSpeech => res.json(updatedSpeech))
 })
 
 module.exports = router

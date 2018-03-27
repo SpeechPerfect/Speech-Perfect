@@ -1,27 +1,29 @@
-const router = require('express').Router()
+const router = require('express').Router() //eslint-disable-line new-cap
 const { Speech, WatsonReport } = require('../db/models')
 let multer = require('multer')
-const upload = multer({dest: '/tmp'})
+const upload = multer({ dest: '/tmp' })
 const { promisify } = require('util')
 var SpeechToTextV1 = require('watson-developer-cloud/speech-to-text/v1')
 var fs = require('fs')
 let speechId = ''
 
-let dataAnalysis = async (params) => {
+let dataAnalysis = async params => {
   var speechToText = new SpeechToTextV1({
     username: process.env.WATSON_USERNAME,
     password: process.env.WATSON_PASSWORD,
     url: 'https://stream.watsonplatform.net/speech-to-text/api/'
   })
 
- const speechToTextPromisified = promisify(speechToText.recognize.bind(speechToText))
- const { results } = await speechToTextPromisified(params)
- return results
+  const speechToTextPromisified = promisify(
+    speechToText.recognize.bind(speechToText)
+  )
+  const { results } = await speechToTextPromisified(params)
+  return results
 }
 
 // add regex to account for end of sentence
 
-let analyzeTranscript = (str) => {
+let analyzeTranscript = str => {
   let obj = {}
   obj.umCount = 0
   obj.likeCount = 0
@@ -34,19 +36,21 @@ let analyzeTranscript = (str) => {
 }
 
 let getConfidence = (dataArr, transcriptLength) => {
-  let totalConfidence = dataArr.map((x, i) => {
-    return dataArr[i].confidence * (x.sectionLength / transcriptLength )
-  }).reduce((a, b) => a + b)
+  let totalConfidence = dataArr
+    .map((x, i) => {
+      return dataArr[i].confidence * (x.sectionLength / transcriptLength)
+    })
+    .reduce((a, b) => a + b)
   return totalConfidence
-
 }
 
-let getLengthAndConfidence = (arr) => {
-  let transcriptLength  = 0
+let getLengthAndConfidence = arr => {
+  let transcriptLength = 0
   let sectionInfo = []
   arr.map(result => {
     let obj = {}
-    const sectionLength = result.alternatives[0].transcript.trim().split(' ').length
+    const sectionLength = result.alternatives[0].transcript.trim().split(' ')
+      .length
     obj.sectionLength = sectionLength
     obj.confidence = result.alternatives[0].confidence
     sectionInfo.push(obj)
@@ -59,27 +63,28 @@ let getLengthAndConfidence = (arr) => {
   return [transcriptLength, totalConfidence]
 }
 
-let getTranscript = (arr) => {
+let getTranscript = arr => {
   return arr.map(result => result.alternatives[0].transcript.trim()).join(' ')
 }
 
 router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
-    console.log('req body is', req.body)
-    const params = {
-      audio: fs.createReadStream(req.file.path),
-      content_type: 'audio/wav rate=44100'
-    }
-    dataAnalysis(params)
+  console.log('req body is', req.body)
+  const params = {
+    audio: fs.createReadStream(req.file.path),
+    content_type: 'audio/wav rate=44100' //eslint-disable-line camelcase
+  }
+  dataAnalysis(params)
     .then(results => {
       let speechConfidence = getLengthAndConfidence(results)[1]
       if (speechConfidence < 0.75) {
         return res.status(400).json('Low confidence')
       }
-      let speechTranscript = analyzeTranscript(results[0].alternatives[0].transcript)
+      let speechTranscript = analyzeTranscript(
+        results[0].alternatives[0].transcript
+      )
       Speech.create({
         userId: req.params.userId
-      })
-      .then((speech) => {
+      }).then(speech => {
         speechId = speech.id
         return WatsonReport.create({
           speechId: speech.id,
@@ -89,16 +94,16 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
           wordCount: getLengthAndConfidence(results)[0],
           confidence: speechConfidence.toFixed(2),
           // get from AWS or front-end
-          duration: (req.body.duration / 1000)
+          duration: req.body.duration / 1000
         })
-        .then((createdWReport) => {
-          return speech.update({
-            WatsonReportId: createdWReport.id
+          .then(createdWReport => {
+            return speech.update({
+              WatsonReportId: createdWReport.id
+            })
           })
-        })
-        .then(() => {
-          res.json(speechId)
-        })
+          .then(() => {
+            res.json(speechId)
+          })
       })
     })
     .catch(next)
