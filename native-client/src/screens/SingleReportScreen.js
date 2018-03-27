@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import { View, TouchableHighlight, Text } from 'react-native'
 import { SpeechList, ReplayAudio } from '../components'
 import styles from '../../assets/stylesheet'
-import {Spinner} from '../components/LoadingSpinner'
 
 class SingleReportScreen extends Component {
   static navigationOptions = {
@@ -16,14 +15,6 @@ class SingleReportScreen extends Component {
         speechId: this.props.speech,
         url: this.props.url
     }
-  }
-  renderSpinner() {
-    return (
-    <View>
-      <Text> Your report is currently loading </Text>
-      <Spinner size="large" />
-    </View>
-    )
   }
 
   renderHeader() {
@@ -45,8 +36,6 @@ class SingleReportScreen extends Component {
     const { speechId } = this.state
     return (
     <View style={styles.resultsContainer}>
-     {/* {  this.props.loading && this.renderSpinner } */}
-     { this.renderSpinner() }
       <View>
           {this.renderHeader()}
       </View>

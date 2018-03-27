@@ -65,6 +65,20 @@ const styles = StyleSheet.create({
     color: '#12092f',
     fontWeight: 'bold',
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    // flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontFamily: 'Avenir-Book',
+    fontSize: 20,
+    color: '#12092f',
+    fontWeight: 'bold',
+  },
   resultsText: {
     fontFamily: 'Avenir-Book',
     fontSize: 20,
@@ -359,7 +373,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   spinnerStyle: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   }
