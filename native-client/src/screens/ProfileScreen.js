@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { View, Text, Button, TouchableHighlight, AsyncStorage as asyncStore} from 'react-native'
+import { View, Text, TouchableHighlight, AsyncStorage as asyncStore} from 'react-native'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
 import { Speeches, EditModal } from '../components'
 
-export default class ProfileScreen extends Component {
+class ProfileScreen extends Component {
   static navigationOptions = {
     header: null,
   }
@@ -15,23 +15,10 @@ export default class ProfileScreen extends Component {
     super(props)
     this.state = {
       email: null,
-      id: null,
+      id: this.props.user,
+      speeches: [],
       modalVisible: false,
     }
-  }
-
-  getUserAndSpeeches() {
-    asyncStore.getItem('user')
-    .then(userData => JSON.parse(userData))
-    .then((data) => {
-      this.setState({
-      id: data.id,
-      selectedSpeech: null,
-      speeches: [],
-      })
-    })
-    .then(() => this.getSpeeches())
-    .catch(err => console.log(err))
   }
 
   deleteSpeech = (speech) => {
@@ -82,8 +69,8 @@ export default class ProfileScreen extends Component {
     // this.props.editSpeech(item)
   }
 
-  getSpeeches() {
-    axios.get(`${API_ROOT}/api/user/${this.state.id}`)
+  componentDidMount() {
+    axios.get(`${API_ROOT}/api/user/${this.props.user}`)
     .then(res => res.data)
     .then((data) => this.setState({
       speeches: data
@@ -91,27 +78,25 @@ export default class ProfileScreen extends Component {
     .then(err => console.log(err))
   }
 
-  componentDidMount() {
-    this.getUserAndSpeeches()
-  }
-
-  componentWillReceiveProps() {
-
-  }
-
   render() {
     const { id, speeches } = this.state
+    console.log(this.props.user, 'IS THE USER!')
     console.log(speeches, 'ARE THE SPEECHES IN PROFILE SCREEN')
     return (
       <View style={styles.container}>
        <View>
           {this.renderHeader()}
         </View>
-        <Speeches id={id} speeches={speeches} navigation={this.props.navigation} deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)} editSpeech={this.editSpeech.bind(this)} setModalVisible={this._setModalVisible.bind(this)} getUserAndSpeeches={this.getUserAndSpeeches.bind(this)} />
+        {speeches && <Speeches
+        id={id}
+        speeches={speeches}
+        navigation={this.props.navigation}
+        deleteSpeech={this.deleteSpeech.bind(this)} deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)}
+        editSpeech={this.editSpeech.bind(this)} setModalVisible={this._setModalVisible.bind(this)} />}
         {this.state.modalVisible &&
         <EditModal
             modalVisible={ this.state.modalVisible }
-            setModalVisible={ (vis,speech) => { this._setModalVisible(false,speech) }}
+            setModalVisible={ (vis, speech) => { this._setModalVisible(false, speech) }}
             id={this.state.id}
             speech={this.state.selectedSpeech}
             getUserAndSpeeches={this.getUserAndSpeeches.bind(this)}
@@ -126,6 +111,10 @@ export default class ProfileScreen extends Component {
 const mapStateToProps = state => {
   return {
     speeches: state.speeches,
-
+    user: state.user
   }
 }
+
+const ProfileScreenContainer = connect(mapStateToProps)(ProfileScreen)
+
+export default ProfileScreenContainer
