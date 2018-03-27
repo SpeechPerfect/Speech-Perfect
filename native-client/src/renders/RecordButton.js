@@ -3,7 +3,7 @@ import { View, TouchableWithoutFeedback} from 'react-native'
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import styles from '../../assets/stylesheet'
 
-const recordButton = (props) => {
+const RecordButton = (props) => {
   return (
   // <View style={styles.backgroundCircle}>
     <TouchableWithoutFeedback onPress={props.press}>
@@ -26,4 +26,4 @@ const recordButton = (props) => {
   )
 }
 
-export default recordButton
+export default RecordButton
