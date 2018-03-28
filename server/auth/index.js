@@ -1,9 +1,9 @@
-const router = require('express').Router()
+const router = require('express').Router() //eslint-disable-line new-cap
 const User = require('../db/models/user')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
-  User.findOne({where: {email: req.body.email}})
+  User.findOne({ where: { email: req.body.email } })
     .then(user => {
       if (!user) {
         res.status(401).send('User not found')

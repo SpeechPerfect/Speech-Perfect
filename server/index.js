@@ -7,7 +7,7 @@ const session = require('express-session')
 const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
-const sessionStore = new SequelizeStore({db})
+const sessionStore = new SequelizeStore({ db })
 const PORT = process.env.PORT || 5000
 const app = express()
 module.exports = app
@@ -25,9 +25,11 @@ if (process.env.NODE_ENV !== 'production') require('./secrets')
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser((id, done) =>
-  db.models.user.findById(id)
+  db.models.user
+    .findById(id)
     .then(user => done(null, user))
-    .catch(done))
+    .catch(done)
+)
 
 const createApp = () => {
   // logging middleware
@@ -41,12 +43,14 @@ const createApp = () => {
   app.use(compression())
 
   // session middleware with passport
-  app.use(session({
-    secret: process.env.SESSION_SECRET || 'my best friend is Cody',
-    store: sessionStore,
-    resave: false,
-    saveUninitialized: false
-  }))
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET || 'my speech is perfect',
+      store: sessionStore,
+      resave: false,
+      saveUninitialized: false
+    })
+  )
   app.use(passport.initialize())
   app.use(passport.session())
 
@@ -71,7 +75,6 @@ const createApp = () => {
 
   // sends index.html
 
-
   // error handling endware
   app.use((err, req, res, next) => {
     console.error(err)
@@ -82,10 +85,9 @@ const createApp = () => {
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
+  app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
 
   // set up our socket control center
- 
 }
 
 const syncDb = () => db.sync()
@@ -95,7 +97,8 @@ const syncDb = () => db.sync()
 // It will evaluate false when this module is required by another module - for example,
 // if we wanted to require our app in a test spec
 if (require.main === module) {
-  sessionStore.sync()
+  sessionStore
+    .sync()
     .then(syncDb)
     .then(createApp)
     .then(startListening)
