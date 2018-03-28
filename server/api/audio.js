@@ -3,7 +3,6 @@ const { AwsReport } = require('../db/models')
 const multer = require('multer')
 const multerS3 = require('multer-s3')
 const AWS = require('aws-sdk')
-// const creds = require('../secrets')
 
 /* eslint-disable */
 AWS.config.update({"accessKeyId": process.env.AWS_ID, "secretAccessKey": process.env.AWS_KEY, "region": process.env.AWS_REGION})
