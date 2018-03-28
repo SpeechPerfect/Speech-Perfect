@@ -52,13 +52,11 @@ export default class SpeechList extends Component {
 
     const { duration, likeCount, umCount, wordCount } = this.state.speechData
 
-    let pace = wordCount / (duration / 60000)
+    let pace = Math.floor(wordCount / (duration / 60))
 
     let minutes = Math.floor(duration / 60) || 0
     let seconds = duration % 60 || 0
-    seconds = (seconds < 10) ? `0${seconds}` : `${seconds}`
-
-    
+    seconds = seconds < 10 ? `0${seconds}` : `${seconds}`
 
     minutes = minutes.toString().length === 1 ? `0${minutes}` : minutes
     seconds = seconds.toString().length === 1 ? `0${seconds}` : seconds
