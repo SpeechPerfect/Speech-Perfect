@@ -452,6 +452,15 @@ const styles = StyleSheet.create({
     // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  speechTitle: {
+    marginTop:10, 
+    fontSize:35, 
+    fontFamily:'Futura-Medium'
+  },
+  speechTitleContainer:{
+    width:'90%', 
+    alignSelf:'center'
   }
 })
 

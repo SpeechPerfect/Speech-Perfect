@@ -40,7 +40,7 @@ export default class SpeechList extends Component {
         <View style={styles.speechListItem}>
         <LinearGradient colors={['#5e4ba0','#413372']} style={styles.linearGradientPurple}/>
           <Text style={styles.speechItemLabel}>{label}</Text>
-          <Text style={styles.speechItemValue}>{value} {label === 'Pace' ? <Text>wpm</Text> : <Text></Text>}</Text>
+          <Text style={styles.speechItemValue}>{value}</Text>
         </View>
       )
     })
@@ -50,15 +50,23 @@ render() {
 
   const { duration, likeCount, umCount, wordCount } = this.state.speechData
 
-  let pace = wordCount / (duration / 60)
+  let pace = wordCount / (duration / 60000)
 
-  let speechData = [['Duration: ', duration], ['Word Count: ', wordCount], ['Pace: ', pace], ['Um Count: ', umCount], ['Like Count: ', likeCount]]
+  let minutes = Math.floor(duration / 60000) || 0
+  let seconds = Math.floor(duration / 1000) % 60 || 0
+  let  milliseconds = duration % 1000 || '00'
+
+  minutes = minutes.toString().length === 1 ? `0${minutes}` : minutes
+  seconds = seconds.toString().length === 1 ? `0${seconds}` : seconds
+  milliseconds = milliseconds.toString().slice(0, 2)
+
+  let speechData = [['Duration: ', `${minutes}:${seconds}.${milliseconds}`], ['Word Count: ', wordCount], ['Pace: ', `${pace} wpm`], ['Um Count: ', umCount], ['Like Count: ', likeCount]]
 
 
   return (
     <View style={styles.speechListContainer}>
     {
-      this.renderItems(speechData)
+        this.state.speechData && this.renderItems(speechData)
     }
   </View>
   )

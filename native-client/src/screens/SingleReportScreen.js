@@ -53,8 +53,8 @@ class SingleReportScreen extends Component {
       <View>
           {this.renderHeader()}
       </View>
-      <View style={{width:'90%', alignSelf:'center'}}>
-        <Text style={{marginTop:10, fontSize:35, fontFamily:'Futura-Medium'}}>{this.state.speechTitle}</Text>
+      <View style={styles.speechTitleContainer}>
+        <Text style={styles.speechTitle}>{this.state.speechTitle}</Text>
       </View>
       {!!speechId &&
       <View style={styles.resultsContainer}>
