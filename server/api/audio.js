@@ -13,7 +13,7 @@ const s3 = new AWS.S3()
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: process.env.AWS_BUCKET,
+    bucket: 'speech-perfect',
     acl: 'public-read',
     contentType: (req, file, cb) => {
       return cb(null, 'audio/x-wav')
