@@ -92,9 +92,8 @@ export default class ReplayAudio extends Component {
   render() {
     console.log('DATA IS', this.props.url)
     return (
-    <View style={{flex:1, width:'90%', alignSelf:'center',borderBottomLeftRadius: 10,borderBottomRightRadius: 10, borderTopLeftRadius: 10, borderTopRightRadius:10, marginTop:100}}>
-     <View style={{flex:1}}>
-        <View style={{alignSelf:'center', width:'100%', justifyContent:'center', height:150, alignItems:'center', backgroundColor:'#c8d3e5',borderBottomLeftRadius: 10,borderBottomRightRadius: 10, borderTopLeftRadius: 10, borderTopRightRadius:10}}>
+    <View style={{flex:1, width:'90%', alignSelf:'center',borderBottomLeftRadius: 10,borderBottomRightRadius: 10, borderTopLeftRadius: 10, borderTopRightRadius:10, marginTop:450, backgroundColor: 'black'}}>
+      <View style={{alignSelf:'center', width:'100%', justifyContent:'center', height:150, alignItems:'center', backgroundColor:'#c8d3e5',borderBottomLeftRadius: 10,borderBottomRightRadius: 10, borderTopLeftRadius: 10, borderTopRightRadius:10}}>
         <LinearGradient
           colors={['#ccb144','#b88c03']}
           style={{
@@ -133,45 +132,13 @@ export default class ReplayAudio extends Component {
               />
             </TouchableHighlight>
           }
+          
+      </View>
+        <View style={{flex: 1}}>
+          <TouchableHighlight style={{marginTop:10, flexDirection:'row', alignSelf:'center'}} onPress={this.navigateToTranscript}><Text style={{fontSize: 75,fontWeight:'bold', color:'black'}}>View Transcript</Text></TouchableHighlight>
         </View>
       </View>
-      <TouchableHighlight style={{flex:1 ,marginTop:50, flexDirection:'row', alignSelf:'center'}} onPress={this.navigateToTranscript}><Text style={{fontSize: 25,fontWeight: 'bold'}}>View Transcript</Text></TouchableHighlight>
-    </View>
     )
   }
 }
 
-/* <BarChart
-data={{
-  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-  datasets: [{
-    data: [ 20, 45, 28, 80, 99, 43 ]
-  }]
-}}
-width={Dimensions.get('window').width}
-height={220}
-chartConfig={{
-  backgroundColor: 'red',
-  backgroundGradientFrom: 'white',
-  backgroundGradientTo: 'lightgrey',
-  marginRight:20,
-  paddingRight:20,
-  marginLeft:-20,
-  paddingLeft:-20,
-  color: (opacity = 1) => `#12092f`,
-  style: {
-    borderRadius: 16,
-    marginRight:20,
-    marginLeft:-20,
-  paddingLeft:-20,
-  paddingRight:20,
-  }
-}}
-style={{
-  marginVertical: 8,
-  borderRadius: 16,
-  marginRight:20,
-  paddingRight:20,
-  // marginLeft:-5,
-  // paddingLeft:-5,
-}}        /> */

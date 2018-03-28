@@ -34,6 +34,7 @@ class SingleReportScreen extends Component {
   render() {
     return (
     <View style={{flex:1}}>
+    {this.renderHeader()}
       {this.state.speechId &&
       <View>
         <View style={styles.resultsContainer}>

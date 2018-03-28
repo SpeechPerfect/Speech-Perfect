@@ -66,8 +66,7 @@ render() {
   let speechData = [['Duration: ', duration], ['Word Count: ', wordCount], ['Pace: ', pace], ['Um Count: ', umCount], ['Like Count: ', likeCount]]
 
   return (
-    <View style={{flex:1}}>
-      <Text>Title</Text>
+    <View style={{flex:1, marginTop: 60}}>
       {
         this.renderItems(speechData)
       }
