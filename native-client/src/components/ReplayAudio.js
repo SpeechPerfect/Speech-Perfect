@@ -6,6 +6,7 @@ import axios from 'axios'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
+import { LinearGradient } from 'expo';
 
 let soundObject
 
@@ -92,14 +93,18 @@ class ReplayAudio extends Component {
   render() {
     console.log('DATA IS', this.props.url)
     return (
-      <View style={styles.resultsBottomContainer}>
-        <View style={styles.audioFeedback}>
+      <View style={styles.audioButtonContainer}>
+      <View style={styles.audioButton}>
+        <LinearGradient
+          colors={['#ccb144','#b88c03']}
+          style={styles.linearGradientGold}
+        />
           {!this.state.started &&
           <TouchableHighlight onPress={this._playAudio}>
               <MaterialCommunityIcons
               name={'play-circle-outline'}
-              size={67}
-              color={'#12092f'}
+              size={90}
+              color={'white'}
               />
             </TouchableHighlight>
           }
@@ -107,8 +112,8 @@ class ReplayAudio extends Component {
             <TouchableHighlight onPress={this._pauseAudio}>
               <MaterialCommunityIcons
               name={'pause-circle-outline'}
-              size={67}
-              color={'#12092f'}
+              size={90}
+              color={'white'}
               />
             </TouchableHighlight>
           }
@@ -116,21 +121,20 @@ class ReplayAudio extends Component {
           <TouchableHighlight onPress={this._pauseAudio}>
               <MaterialCommunityIcons
               name={'play-circle-outline'}
-              size={67}
-              color={'#12092f'}
+              size={90}
+              color={'white'}
               />
             </TouchableHighlight>
           }
-          <TouchableHighlight onPress={this.navigateToTranscript}><Text style={styles.transcriptButtonText}>View Transcript</Text></TouchableHighlight>
-
-        </View>
-        <View style={styles.transcript}>
+          
+      </View>
+        <View style={styles.viewTranscriptButtonContainer}>
+          <TouchableHighlight style={styles.viewTranscriptButton} onPress={this.navigateToTranscript}><Text style={styles.viewTranscriptButtonText}>View Transcript</Text></TouchableHighlight>
         </View>
       </View>
     )
   }
 }
-
 const mapStateToProps = (state) => {
   return {
     speech: state.speech
@@ -140,38 +144,3 @@ const mapStateToProps = (state) => {
 const ReplayAudioContainer = connect(mapStateToProps)(ReplayAudio)
 
 export default ReplayAudioContainer
-
-/* <BarChart
-data={{
-  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-  datasets: [{
-    data: [ 20, 45, 28, 80, 99, 43 ]
-  }]
-}}
-width={Dimensions.get('window').width}
-height={220}
-chartConfig={{
-  backgroundColor: 'red',
-  backgroundGradientFrom: 'white',
-  backgroundGradientTo: 'lightgrey',
-  marginRight:20,
-  paddingRight:20,
-  marginLeft:-20,
-  paddingLeft:-20,
-  color: (opacity = 1) => `#12092f`,
-  style: {
-    borderRadius: 16,
-    marginRight:20,
-    marginLeft:-20,
-  paddingLeft:-20,
-  paddingRight:20,
-  }
-}}
-//style={{
-  marginVertical: 8,
-  borderRadius: 16,
-  marginRight:20,
-  paddingRight:20,
-  // marginLeft:-5,
-  // paddingLeft:-5,
-}}        /> */
