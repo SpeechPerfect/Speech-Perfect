@@ -92,7 +92,7 @@ async function seed() {
   // Watson Reports Seed
   const watsonReports = await Promise.all([
     WatsonReport.create({
-      duration: 1000,
+      duration: 1,
       umCount: 10,
       likeCount: 10,
       speechId: 1,
@@ -100,7 +100,7 @@ async function seed() {
       transcript: 'Test transcript number 1'
     }),
     WatsonReport.create({
-      duration: 2000,
+      duration: 2,
       umCount: 20,
       likeCount: 20,
       speechId: 2,
@@ -108,7 +108,7 @@ async function seed() {
       transcript: 'Test transcript number 2'
     }),
     WatsonReport.create({
-      duration: 3000,
+      duration: 3,
       umCount: 30,
       likeCount: 30,
       speechId: 3,
@@ -116,7 +116,7 @@ async function seed() {
       transcript: 'Test transcript number 3'
     }),
     WatsonReport.create({
-      duration: 4000,
+      duration: 4,
       umCount: 40,
       likeCount: 40,
       speechId: 4,
@@ -124,7 +124,7 @@ async function seed() {
       transcript: 'Test transcript number 4'
     }),
     WatsonReport.create({
-      duration: 1000,
+      duration: 1,
       umCount: 10,
       likeCount: 10,
       speechId: 5,
@@ -132,7 +132,7 @@ async function seed() {
       transcript: 'Test transcript number 1'
     }),
     WatsonReport.create({
-      duration: 2000,
+      duration: 2,
       umCount: 20,
       likeCount: 20,
       speechId: 6,
@@ -140,7 +140,7 @@ async function seed() {
       transcript: 'Test transcript number 2'
     }),
     WatsonReport.create({
-      duration: 3000,
+      duration: 3,
       umCount: 30,
       likeCount: 30,
       speechId: 7,
@@ -148,21 +148,21 @@ async function seed() {
       transcript: 'Test transcript number 3'
     }),
     WatsonReport.create({
-      duration: 4000,
+      duration: 4,
       umCount: 40,
       likeCount: 40,
       speechId: 8,
       transcript: 'Test transcript number 4'
     }),
     WatsonReport.create({
-      duration: 4000,
+      duration: 4,
       umCount: 40,
       likeCount: 40,
       speechId: 9,
       transcript: 'Test transcript number 4'
     }),
     WatsonReport.create({
-      duration: 100000,
+      duration: 10,
       umCount: 10,
       likeCount: 10,
       speechId: 10,
@@ -171,7 +171,7 @@ async function seed() {
         "Thomas Jefferson once said I'm a great believer in luck, and I find the harder I work, the more I have of it. What, though, is luck? Webster's dictionary suggests that luck is the events or circumstances that operate for or against an individual.In truth, luck has nothing to do with something operating for or against you. Luck is not a matter of chance. It is a matter of being open to new experiences, perseverance, hard work, and positive thinking.  When seventeen year old Steven Spielberg spent some time with his cousin in the summer of 1965, they toured Universal pictures. The tram stopped at none of the sound stages. Spielberg snuck off on a bathroom break to watch a bit of the real action. When he encountered an unfamiliar face who demanded to know what he was doing, he told him his story. The man turned out to be the head of the editorial department. Spielberg got a pass to the lot for the very next day and showed a very impressed Chuck Silvers four of his eight millimeter films. This was the foot in the door Spielberg needed to start squatting on the lot, a decision that led to his first contract with Universal Studios. Studies have shown that lucky people tend to be far more open to new experiences. Those who are unlucky are creatures of habit, never varying from one day to the next. If you want to be lucky, add some variety to your life. Meet new people, go to new places, and increase the possibility of those chance opportunities the lucky people always seem to run into."
     }),
     WatsonReport.create({
-      duration: 200000,
+      duration: 20,
       umCount: 20,
       likeCount: 20,
       speechId: 11,
@@ -179,7 +179,7 @@ async function seed() {
       transcript: 'Test transcript number 2'
     }),
     WatsonReport.create({
-      duration: 300000,
+      duration: 300,
       umCount: 30,
       likeCount: 30,
       speechId: 12,
