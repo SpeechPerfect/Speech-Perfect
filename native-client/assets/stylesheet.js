@@ -447,10 +447,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color:'black',
     fontFamily:'Futura-Medium'
-  }
-
-
-  
+  },
   spinnerStyle: {
     // flex: 1,
     justifyContent: 'center',
