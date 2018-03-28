@@ -54,16 +54,17 @@ export default class SpeechList extends Component {
 
     let pace = wordCount / (duration / 60000)
 
-    let minutes = Math.floor(duration / 60000) || 0
-    let seconds = Math.floor(duration / 1000) % 60 || 0
-    let milliseconds = duration % 1000 || '00'
+    let minutes = Math.floor(duration / 60) || 0
+    let seconds = duration % 60 || 0
+    seconds = (seconds < 10) ? `0${seconds}` : `${seconds}`
+
+    
 
     minutes = minutes.toString().length === 1 ? `0${minutes}` : minutes
     seconds = seconds.toString().length === 1 ? `0${seconds}` : seconds
-    milliseconds = milliseconds.toString().slice(0, 2)
 
     let speechData = [
-      ['Duration: ', `${minutes}:${seconds}.${milliseconds}`],
+      ['Duration: ', `${minutes}:${seconds}`],
       ['Word Count: ', wordCount],
       ['Pace: ', `${pace} wpm`],
       ['Um Count: ', umCount],
