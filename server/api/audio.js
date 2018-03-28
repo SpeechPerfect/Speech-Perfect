@@ -5,16 +5,16 @@ const multerS3 = require('multer-s3')
 const AWS = require('aws-sdk')
 const creds = require('../secrets')
 
-// AWS.config.loadFromPath('./s3_config.json')
-
-AWS.config.update(creds.creds)
+/* eslint-disable */
+AWS.config.update({"accessKeyId": process.env.AWS_ID, "secretAccessKey": process.env.AWS_KEY, "region": process.env.AWS_REGION})
+/* eslint-enable */
 
 const s3 = new AWS.S3()
 
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: creds.bucket,
+    bucket: 'speech-perfect',
     acl: 'public-read',
     contentType: (req, file, cb) => {
       return cb(null, 'audio/x-wav')
