@@ -5,9 +5,10 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import loading from './loading-redux'
 import url from './url-redux'
 import speech from './speech-redux'
+import speeches from './speeches-redux'
 import user from './user-redux'
 
-const reducer = combineReducers({ loading, url, speech, user })
+const reducer = combineReducers({ loading, url, speech, speeches, user })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 )
@@ -25,5 +26,6 @@ export default store = createStore(reducer, middleware)
 export * from './loading-redux'
 export * from './url-redux'
 export * from './speech-redux'
+export * from './speeches-redux'
 export * from './user-redux'
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { View, TouchableHighlight, Text } from 'react-native'
-import { SpeechList, ReplayAudio } from '../components'
+import { View, ScrollView, TouchableHighlight, Text } from 'react-native'
+import { ReportData, ReplayAudio } from '../components'
 import styles from '../../assets/stylesheet'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses.js'
@@ -49,7 +49,7 @@ class SingleReportScreen extends Component {
   render() {
     const { speechId, url } = this.state
     return (
-    <View style={styles.resultsContainer}>
+    <View style={styles.container}>
       <View>
           {this.renderHeader()}
       </View>
@@ -57,12 +57,14 @@ class SingleReportScreen extends Component {
         <Text style={styles.speechTitle}>{this.state.speechTitle}</Text>
       </View>
       {!!speechId &&
-      <View style={styles.resultsContainer}>
-        <View style={styles.resultsContainer}>
-          <SpeechList speechId={this.props.speech} />
+      <ScrollView style={styles.container}>
+          <View style={styles.speechListContainer}>
+          <ReportData speechId={this.props.speech} />
+          </View>
+          <View styles={styles.audioButtonContainer}>
+         <ReplayAudio speechId={speechId} navigation={this.props.navigation} url={url} />
         </View>
-    <ReplayAudio speechId={speechId} navigation={this.props.navigation} url={url} />
-    </View>}
+    </ScrollView>}
     </View>
     )
   }

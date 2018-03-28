@@ -6,7 +6,7 @@ import axios from 'axios'
 import API_ROOT from '../../IP_addresses.js'
 import { LinearGradient } from 'expo'
 
-export default class SpeechList extends Component {
+export default class ReportData extends Component {
   static navigationOptions = {
     title: 'SingleReport'
   }

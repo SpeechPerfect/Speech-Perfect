@@ -33,10 +33,6 @@ const styles = StyleSheet.create({
   signUpView: {
     paddingVertical: 20,
   },
-  resultsContainer: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
   resultsTopContainer: {
     flex: 1,
     backgroundColor: 'white',
@@ -313,23 +309,21 @@ const styles = StyleSheet.create({
   },
   speechesSeparator: {
     height: 1,
-    width: '85%',
-    backgroundColor: '#12092f',
+    width: '100%',
+    backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center'
   },
   speechesListItemContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'white',
-    borderBottomWidth: 0.5,
-    borderColor: 'white',
-    paddingTop: 10,
-    alignItems: 'flex-start',
+    paddingTop: 15,
+    paddingBottom: 10,
   },
   speechesListItem: {
     height: 50,
     marginLeft: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   editModalContainer: {
     display: 'flex', height: 800, width: 800, alignItems: 'center', justifyContent: 'center'
@@ -374,15 +368,15 @@ const styles = StyleSheet.create({
   },
   speechListItem:{
     flexDirection:'row',
-     width:'90%', 
+     width:'90%',
      alignSelf:'center',
-     shadowColor:'black', 
-     alignItems:'center', 
+     shadowColor:'black',
+     alignItems:'center',
      borderRadius:10,
-     height: 60, 
-     justifyContent:'space-between', 
-     padding:10,
-     marginTop:10
+     height: 44,
+     justifyContent:'space-between',
+     padding: 5,
+     marginBottom: 20
   },
   linearGradientPurple:{
     position: 'absolute',
@@ -398,33 +392,36 @@ const styles = StyleSheet.create({
     color:'white'
   },
   speechItemValue:{
-    color:'white', 
+    color:'white',
     fontSize:22,
     fontWeight: 'bold'
     },
   speechListContainer:{
-    flex:1, 
-    marginTop: 15
+    flex:1,
+    marginTop: 5,
+    justifyContent:'space-between',
   },
   audioButtonContainer:{
     flex:1,
-    width:'90%', 
+    width:'90%',
     alignSelf:'center',
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius:10,
-    marginTop:175
+    marginTop: 5,
+    height: 50,
   },
   audioButton:{
-    alignSelf:'center', 
-    width:'100%', 
+    alignSelf:'center',
+    width:'100%',
     justifyContent:'center',
-    height:150, alignItems:'center', 
+    height:150,
+    alignItems:'center',
     backgroundColor:'#c8d3e5',
     borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10, 
-    borderTopLeftRadius: 10, 
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
     borderTopRightRadius:10
   },
   linearGradientGold:{
@@ -439,8 +436,8 @@ const styles = StyleSheet.create({
     flex:1
   },
   viewTranscriptButton:{
-    marginTop:17, 
-    flexDirection:'row', 
+    marginTop:5,
+    flexDirection:'row',
     alignSelf:'center'
   },
   viewTranscriptButtonText:{
@@ -454,14 +451,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   speechTitle: {
-    marginTop:10, 
-    fontSize:35, 
+    marginTop:5,
+    fontSize:30,
     fontFamily:'Futura-Medium'
   },
   speechTitleContainer:{
-    width:'90%', 
+    width:'90%',
     alignSelf:'center'
-  }
+  },
 })
 
 export default styles

@@ -1,10 +1,10 @@
-// import axios from 'axios'
 
 //INITIAL STATE
 const speech = 0
 
 // ACTION TYPE
 const SET_SPEECH_ID = 'SET_SPEECH_ID'
+const GET_SPEECHES = 'GET_SPEECHES'
 
 // ACTION CREATOR
 export const setSpeechAction = (id) => {
@@ -13,6 +13,7 @@ export const setSpeechAction = (id) => {
     id
   }
 }
+
 
 // REDUCER
 

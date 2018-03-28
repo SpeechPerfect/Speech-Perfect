@@ -115,7 +115,7 @@ class TranscriptScreen extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         {this.state.alternatives.length ?
         <Card>
             <TouchableOpacity style={styles.transcriptCard}  onPress={() => this.setState({alternatives: []}) }><Text>X</Text></TouchableOpacity>
