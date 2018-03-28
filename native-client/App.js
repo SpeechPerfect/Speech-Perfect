@@ -30,7 +30,7 @@ export default class App extends React.Component {
                 .then(() => this.setState({ fontLoaded: true }))
         }
         else {
-        setTimeout(() => this.setState({ fontLoaded: true }), 1100)
+        setTimeout(() => this.setState({ fontLoaded: true }), 1800)
             }
 
         asyncStore.getItem('user')

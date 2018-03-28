@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    // marginBottom: 10,
+    marginBottom: 15,
   },
   recordButtonContainer: {
     flexDirection: 'column',
