@@ -4,6 +4,7 @@ import { Text, View } from 'react-native'
 import styles from '../../assets/stylesheet'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses.js'
+import { LinearGradient } from 'expo';
 
 
 export default class SpeechList extends Component {
@@ -30,6 +31,20 @@ export default class SpeechList extends Component {
     })
   }
 
+
+  renderItems(speechData){
+    return speechData.map(data => {
+      let label = data[0]
+      let value = data[1]
+      return(
+        <View style={styles.speechListItem}>
+        <LinearGradient colors={['#5e4ba0','#413372']} style={styles.linearGradientPurple}/>
+          <Text style={styles.speechItemLabel}>{label}</Text>
+          <Text style={styles.speechItemValue}>{value} {label === 'Pace' ? <Text>wpm</Text> : <Text></Text>}</Text>
+        </View>
+      )
+    })
+  }
 render() {
   console.log('IN SPEECH LIST, state is ', this.state)
 
@@ -41,15 +56,11 @@ render() {
 
 
   return (
-    <View>
-  {!!speechData && <View style={styles.resultsContainer}>
-  <Text style={styles.resultsText}>Duration: {duration}</Text>
-  <Text style={styles.resultsText}>Word count: {wordCount}</Text>
-  <Text style={styles.resultsText}>"Um" count: {umCount}</Text>
-  <Text style={styles.resultsText}>"Like" count: {likeCount}</Text>
-  <Text style={styles.resultsText}>Pace: {umCount}</Text>
-       </View>}
-      </View>
+    <View style={styles.speechListContainer}>
+    {
+      this.renderItems(speechData)
+    }
+  </View>
   )
 }
 }

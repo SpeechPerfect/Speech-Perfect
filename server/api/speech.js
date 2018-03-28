@@ -26,6 +26,11 @@ router.get('/thesaurus/:word', (req, res, next) => {
   res.json(wordList)
 })
 
+router.get('/:speechId', (req, res, next) => {
+  Speech.findById(req.params.speechId)
+    .then((speech) => res.json(speech))
+})
+
 
 router.delete('/:speechId', (req, res, next) => {
   Speech.destroy({

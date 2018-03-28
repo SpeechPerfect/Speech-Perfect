@@ -359,6 +359,85 @@ const styles = StyleSheet.create({
     height: 25,
     borderRadius: 20
   },
+  speechListItem:{
+    flexDirection:'row',
+     width:'90%', 
+     alignSelf:'center',
+     shadowColor:'black', 
+     alignItems:'center', 
+     borderRadius:10,
+     height: 60, 
+     justifyContent:'space-between', 
+     padding:10,
+     marginTop:10
+  },
+  linearGradientPurple:{
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 60,
+    borderRadius:10
+  },
+  speechItemLabel:{
+    fontFamily:'Futura-Medium',
+    fontSize: 18,
+    color:'white'
+  },
+  speechItemValue:{
+    color:'white', 
+    fontSize:22,
+    fontWeight: 'bold'
+    },
+  speechListContainer:{
+    flex:1, 
+    marginTop: 15
+  },
+  audioButtonContainer:{
+    flex:1,
+    width:'90%', 
+    alignSelf:'center',
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius:10,
+    marginTop:175
+  },
+  audioButton:{
+    alignSelf:'center', 
+    width:'100%', 
+    justifyContent:'center',
+    height:150, alignItems:'center', 
+    backgroundColor:'#c8d3e5',
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10, 
+    borderTopLeftRadius: 10, 
+    borderTopRightRadius:10
+  },
+  linearGradientGold:{
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 150,
+    borderRadius:10
+  },
+  viewTranscriptButtonContainer:{
+    flex:1
+  },
+  viewTranscriptButton:{
+    marginTop:17, 
+    flexDirection:'row', 
+    alignSelf:'center'
+  },
+  viewTranscriptButtonText:{
+    fontSize: 25,
+    color:'black',
+    fontFamily:'Futura-Medium'
+  }
+
+
+  
 })
 
 export default styles
