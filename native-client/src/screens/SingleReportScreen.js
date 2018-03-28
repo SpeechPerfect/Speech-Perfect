@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { View, TouchableHighlight, Text } from 'react-native'
-import { SpeechList, ReplayAudio } from '../components'
+import { ReportData, ReplayAudio } from '../components'
 import styles from '../../assets/stylesheet'
 
 class SingleReportScreen extends Component {
@@ -42,7 +42,7 @@ class SingleReportScreen extends Component {
       {!!speechId &&
       <View style={styles.resultsContainer}>
         <View style={styles.resultsContainer}>
-          <SpeechList speechId={this.props.speech} />
+          <ReportData speechId={this.props.speech} />
         </View>
     <ReplayAudio speechId={speechId} navigation={this.props.navigation} url={url} />
     </View>}

@@ -5,6 +5,7 @@ import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
 import styles from '../../assets/stylesheet'
 import { Speeches, EditModal } from '../components'
+import {fetchSpeeches} from '../../store'
 
 class ProfileScreen extends Component {
   static navigationOptions = {
@@ -21,9 +22,17 @@ class ProfileScreen extends Component {
     }
   }
 
+
+  componentDidMount() {
+    this.props.fetchSpeechData(this.props.user)
+  }
+
+
+
   deleteSpeech = (speech) => {
+    const user = this.props.user
     axios.delete(`${API_ROOT}/api/speech/${speech.id}`)
-    .then(() => this.getSpeeches())
+    .then(() => this.props.fetchSpeechData(user))
     .then(err => console.log(err))
   }
 
@@ -49,15 +58,14 @@ class ProfileScreen extends Component {
 
   editSpeech = (speech) => {
     axios.put(`${API_ROOT}/api/speech/${speech.id}`)
-    // .then(res => res.data)
-    .then(() => this.getSpeeches())
+    .then(() => this.props.fetchSpeechData(this.props.user))
     .then(err => console.log(err))
   }
 
   deleteUsersSpeeches = (userId) => {
     axios.delete(`${API_ROOT}/api/speech/all/${userId}`)
     // .then(res => res.data)
-    .then(() => this.getSpeeches())
+    .then(() => this.props.fetchSpeechData(this.props.user))
     .then(err => console.log(err))
   }
 
@@ -69,23 +77,9 @@ class ProfileScreen extends Component {
     // this.props.editSpeech(item)
   }
 
-  getSpeeches() {
-    axios.get(`${API_ROOT}/api/user/${this.props.user}`)
-    .then(res => res.data)
-    .then((data) => this.setState({
-      speeches: data
-    }))
-    .then(err => console.log(err))
-  }
-
-  componentDidMount() {
-   this.getSpeeches()
-  }
-
   render() {
-    const { id, speeches } = this.state
-    console.log(this.props.user, 'IS THE USER!')
-    console.log(speeches, 'ARE THE SPEECHES IN PROFILE SCREEN')
+    const { id } = this.state
+    const speeches = this.props.speeches
     return (
       <View style={styles.container}>
        <View>
@@ -114,10 +108,14 @@ class ProfileScreen extends Component {
 const mapStateToProps = state => {
   return {
     speeches: state.speeches,
-    user: state.user
+    user: state.user || 0
   }
 }
 
-const ProfileScreenContainer = connect(mapStateToProps)(ProfileScreen)
+const mapDispatch = dispatch => ({
+  fetchSpeechData: (user) => dispatch(fetchSpeeches(user))
+})
+
+const ProfileScreenContainer = connect(mapStateToProps, mapDispatch)(ProfileScreen)
 
 export default ProfileScreenContainer

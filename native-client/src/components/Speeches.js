@@ -69,8 +69,8 @@ class Speeches extends Component {
     }},
     {
       text: 'Edit',
-      color: '#12092f',
-      backgroundColor: 'white',
+      color: 'white',
+      backgroundColor: '#12092f',
       // underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
       onPress: () => this.props.setModalVisible(true, item)
     }
@@ -92,6 +92,7 @@ class Speeches extends Component {
   )
 
   render() {
+    console.log(this.state.data)
     return (
       <View style={styles.container}>
         {/* <View style={styles.speechesHeader}>

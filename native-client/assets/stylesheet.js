@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   resultsContainer: {
     flex: 1,
     backgroundColor: 'white',
+    flexDirection: 'column',
   },
   resultsTopContainer: {
     flex: 1,
@@ -313,23 +314,21 @@ const styles = StyleSheet.create({
   },
   speechesSeparator: {
     height: 1,
-    width: '85%',
-    backgroundColor: '#12092f',
+    width: '100%',
+    backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center'
   },
   speechesListItemContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'white',
-    borderBottomWidth: 0.5,
-    borderColor: 'white',
-    paddingTop: 10,
-    alignItems: 'flex-start',
+    paddingTop: 15,
+    paddingBottom: 10,
   },
   speechesListItem: {
     height: 50,
     marginLeft: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   editModalContainer: {
     display: 'flex', height: 800, width: 800, alignItems: 'center', justifyContent: 'center'
