@@ -28,7 +28,8 @@ export default class App extends React.Component {
       Font.loadAsync({
         Arial: require('./fonts/Arial.ttf'),
         'Geeza Pro': require('./fonts/Geeza_Pro_Regular.ttf'),
-        'Avenir-Book': require('./fonts/Avenir-Book.otf')
+        'Avenir-Book': require('./fonts/Avenir-Book.otf'),
+        'Courier New': require('./fonts/cour.ttf')
       }).then(() => this.setState({ fontLoaded: true }))
     } else {
       setTimeout(() => this.setState({ fontLoaded: true }), 1800)
