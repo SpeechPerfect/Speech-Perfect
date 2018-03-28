@@ -13,15 +13,14 @@ const styles = StyleSheet.create({
 
 const DigitsRender = props => {
   let { minutes, hours, seconds, milliseconds } = props.time
+  minutes = minutes.toString().length === 1 ? `0${minutes}` : minutes
+  seconds = seconds.toString().length === 1 ? `0${seconds}` : seconds
   milliseconds = milliseconds.toString().slice(0, 1) + '0'
-  if (minutes > 0)
-    seconds = seconds.toString().length === 1 ? `0${seconds}` : seconds
-  if (hours > 0) minutes = minutes.length === 1 ? '0' + minutes : minutes
+  if (minutes.toString() === 'NaN') minutes = '00'
 
   let outStr
-  if (hours) outStr = `${hours}:${minutes}:${seconds}`
-  else if (minutes) outStr = `${minutes}:${seconds}.${milliseconds}`
-  else outStr = `${seconds}.${milliseconds}`
+  if (hours) outStr = `Way too long`
+  else outStr = `${minutes}:${seconds}.${milliseconds}`
 
   return (
     <View>
