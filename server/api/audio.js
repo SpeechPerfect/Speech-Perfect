@@ -5,9 +5,9 @@ const multerS3 = require('multer-s3')
 const AWS = require('aws-sdk')
 // const creds = require('../secrets')
 
-// AWS.config.loadFromPath('./s3_config.json')
-
+/* eslint-disable */
 AWS.config.update({"accessKeyId": process.env.AWS_ID, "secretAccessKey": process.env.AWS_KEY, "region": process.env.AWS_REGION})
+/* eslint-enable */
 
 const s3 = new AWS.S3()
 
