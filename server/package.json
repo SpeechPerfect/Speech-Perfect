@@ -19,6 +19,7 @@
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --require @babel/polyfill --require @babel/register"
   },
+  "eslintIgnore": ["secrets.js", "secrets.json"],
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
