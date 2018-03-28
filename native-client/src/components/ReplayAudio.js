@@ -126,11 +126,9 @@ class ReplayAudio extends Component {
               />
             </TouchableHighlight>
           }
-          
+
       </View>
-        <View style={styles.viewTranscriptButtonContainer}>
           <TouchableHighlight style={styles.viewTranscriptButton} onPress={this.navigateToTranscript}><Text style={styles.viewTranscriptButtonText}>View Transcript</Text></TouchableHighlight>
-        </View>
       </View>
     )
   }
