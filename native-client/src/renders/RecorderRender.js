@@ -63,21 +63,21 @@ const RecorderRender = props => {
     buttonMethod = state.isRecording ? stopRecording : startRecording
     return (
         <View style={styles.container}>
-          <View style={styles.recorderHeader}>
-            <RenderHeader />
-          </View>
-          <View style={styles.recorderTopContainer}>
-            <Timer duration={state.duration} />
-          </View>
-          <View style={styles.recorderBottomContainer}>
-            <RecordButton press={buttonMethod} />
-            <RenderBegin begin={state.begin} />
-            {(state.begin && state.isClicked) && <RenderStop />}
-            <View style={styles.recorderBottomText}>
-              {state.begin && <RenderReset navigation={props.navigation} state={state} onButtonClear={onButtonClear} />}
-             </View>
+            <View style={styles.recorderHeader}>
+              <RenderHeader />
             </View>
+            <View style={styles.recorderTopContainer}>
+              <Timer duration={state.duration} />
             </View>
+            <View style={styles.recorderBottomContainer}>
+              <RecordButton press={buttonMethod} />
+              <RenderBegin begin={state.begin} />
+              {(state.begin && state.isClicked) && <RenderStop />}
+              <View style={styles.recorderBottomText}>
+                {state.begin && <RenderReset navigation={props.navigation} state={state} onButtonClear={onButtonClear} />}
+              </View>
+              </View>
+          </View>
     )
 }
 

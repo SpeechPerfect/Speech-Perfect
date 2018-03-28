@@ -1,8 +1,9 @@
 {
-    "extends": "fullstack",
+    "plugins": ["prettier"],
+    "extends": ["fullstack", "plugin:prettier/recommended"],
     "rules": {
-	"semi": ["error", "never"],
-	"id-length": ["error", {"min": 1 }]
+	      "prettier/prettier": "error",
+        "id-length": ["error", {"min": 1 }]
     },
     "parser": "babel-eslint"
 }

@@ -1,8 +1,9 @@
 {
   "expo": {
+    "name": "speakr",
     "sdkVersion": "25.0.0",
     "splash": {
-      "image": "./assets/Drawing.png",
+      "image": "./assets/speakrsplash.png",
       "resizeMode": "cover"
     }
   },

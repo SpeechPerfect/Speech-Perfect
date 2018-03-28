@@ -87,7 +87,7 @@ class ReplayAudio extends Component {
       }
 
     navigateToTranscript(){
-      this.props.navigation.navigate('TranscriptScreen', { speechId: this.props.speech, userId: this.props.navigation.state.params.userId})
+      this.props.navigation.navigate('TranscriptScreen')
     }
 
   render() {
