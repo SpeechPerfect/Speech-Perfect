@@ -56,6 +56,7 @@ class Uploader extends Component {
       .then(res => {
         if (res.status === 500) {
           Alert.alert('No audio detected', 'Please re-record')
+          isLoadingAction(false)
           throw new Error('No audio found')
         } else {
           return res.json()
