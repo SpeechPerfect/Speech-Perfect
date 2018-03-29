@@ -61,7 +61,7 @@ class SingleReportScreen extends Component {
           <View style={styles.speechListContainer}>
           <ReportData speechId={this.props.speech} />
           </View>
-          <View styles={styles.audioButtonContainer}>
+          <View style={styles.audioButtonContainer}>
          <ReplayAudio speechId={speechId} navigation={this.props.navigation} url={url} />
         </View>
     </ScrollView>}

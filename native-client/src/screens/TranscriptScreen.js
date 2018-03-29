@@ -49,9 +49,10 @@ class TranscriptScreen extends Component {
     let speech = this.state.speech.toLocaleLowerCase().split(/\s+/)
     // let speechArr = this.state.speech.split(' ')
     let result = []
-    let badWords = ['A little bit', 'just', 'My topic is', "I've been asked to speak about", 'so', 'actually', 'basically', 'supposedly', 'totally','you know', 'like I said']
+    let badWords = ['%hesitation','A little bit', 'just', 'My topic is', "I've been asked to speak about", 'so', 'actually', 'basically', 'supposedly', 'totally','you know', 'like I said']
       .map(x => x.toLocaleLowerCase().split(/\s+/))
     let excludedWords = []
+
     for(let i = 0; i < speech.length; i++){
       wordCount[speech[i]] = (wordCount[speech[i]] || 0) + 1
     }
@@ -64,7 +65,10 @@ class TranscriptScreen extends Component {
         if (pattern[i] !== value[start + i])
           return false
         else
-          matched.push(pattern[i])
+          if(pattern[i] === '%hesitation') 
+            matched.push('um')
+          else
+             matched.push(pattern[i])
       return matched
     }
 
