@@ -373,10 +373,10 @@ const styles = StyleSheet.create({
      shadowColor:'black',
      alignItems:'center',
      borderRadius:10,
-     height: 44,
+     height: 42,
      justifyContent:'space-between',
-     padding: 5,
-     marginBottom: 20
+     padding: 4,
+     marginBottom: 21
   },
   linearGradientPurple:{
     position: 'absolute',
@@ -409,7 +409,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius:10,
-    marginTop: 5,
+    marginTop: 3,
     height: 50,
   },
   audioButton:{
@@ -432,33 +432,33 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius:10
   },
-  viewTranscriptButtonContainer:{
+  viewTranscriptButtonContainer: {
     flex:1
   },
-  viewTranscriptButton:{
-    marginTop:5,
-    flexDirection:'row',
-    alignSelf:'center'
+  viewTranscriptButton: {
+    marginTop: 5,
+    flexDirection: 'row',
+    alignSelf: 'center'
   },
-  viewTranscriptButtonText:{
+  viewTranscriptButtonText: {
     fontSize: 25,
-    color:'black',
-    fontFamily:'Futura-Medium'
+    color: 'black',
+    fontFamily: 'Futura-Medium'
   },
   spinnerStyle: {
     // flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   speechTitle: {
     marginTop:5,
-    fontSize:30,
-    fontFamily:'Futura-Medium'
+    fontSize: 30,
+    fontFamily: 'Futura-Medium'
   },
-  speechTitleContainer:{
-    width:'90%',
-    alignSelf:'center'
-  },
+  speechTitleContainer: {
+    width: '90%',
+    alignSelf: 'center'
+  }
 })
 
 export default styles
