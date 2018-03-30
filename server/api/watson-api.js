@@ -82,6 +82,7 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
       const speechTranscript = analyzeTranscript(
         results[0].alternatives[0].transcript
       )
+      console.log(speechTranscript)
       Speech.create({
         userId: req.params.userId
       }).then(speech => {
