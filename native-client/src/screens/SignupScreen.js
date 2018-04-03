@@ -33,25 +33,23 @@ export default class SignupScreen extends Component {
     })
   }
 
-  onButtonPress() {
+  async onButtonPress() {
     const { navigation } = this.props
     const { email, password } = this.state
-    axios
-      .post(`${API_ROOT}/auth/signup`, { email, password })
-      .then(res => {
-        asyncStore.setItem('user', JSON.stringify(res.data))
-        this.setState({ error: false, loggedin: true, user: res.data })
+    try {
+      let res = await axios.post(`${API_ROOT}/auth/signup`, { email, password })
+      asyncStore.setItem('user', JSON.stringify(res.data))
+      this.setState({ error: false, loggedin: true, user: res.data })
+      navigation.navigate('SignedIn')
+    } catch (err) {
+      this.setState({
+        error: true,
+        email: '',
+        password: '',
+        confirmPassword: ''
       })
-      .then(() => navigation.navigate('SignedIn'))
-      .catch(() => {
-        this.setState({
-          error: true,
-          email: '',
-          password: '',
-          confirmPassword: ''
-        })
-        Alert.alert('Error', 'Something went wrong. Please try again.')
-      })
+      Alert.alert('Error', 'Something went wrong. Please try again.')
+    }
   }
 
   render() {
