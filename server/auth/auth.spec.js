@@ -11,7 +11,6 @@ describe('Auth routes', () => {
 
   describe('/auth/login', () => {
     const whitsEmail = 'whit@whit.com'
-    const whitsSpeech = "Whit's Speech"
 
     beforeEach(() => {
       return User.create({
