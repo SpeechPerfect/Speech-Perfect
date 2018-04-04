@@ -25,7 +25,7 @@ describe('User routes', () => {
       )
     })
 
-    it('GET /api/user', () => {
+    it("returns the user's info", () => {
       return request(app)
         .get('/api/user')
         .expect(200)
@@ -35,7 +35,7 @@ describe('User routes', () => {
         })
     })
 
-    it('GET /api/user/:userId', () => {
+    it("returns the user's speech info", () => {
       return request(app)
         .get('/api/user/1')
         .expect(200)

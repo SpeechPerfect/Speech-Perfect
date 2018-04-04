@@ -48,7 +48,7 @@ describe('Speech routes', () => {
         })
     })
 
-    it('GET /api/speech/watson-data/:speechId', () => {
+    it('returns watson report data for a given speech', () => {
       return request(app)
         .get('/api/speech/watson-data/1')
         .expect(200)
@@ -58,14 +58,46 @@ describe('Speech routes', () => {
         })
     })
 
-    // it('GET /api/user/:userId', () => {
-    //   return request(app)
-    //     .get('/api/user/1')
-    //     .expect(200)
-    //     .then(res => {
-    //       expect(res.body).to.be.an('array')
-    //       expect(res.body[0].title).to.be.equal(whitsSpeech)
-    //     })
-    // })
+    it('returns AWS data for a given speech', () => {
+      return request(app)
+        .get('/api/speech/aws-data/1')
+        .expect(200)
+        .then(res => {
+          expect(res.body).to.be.an('object')
+          expect(res.body.url).to.equal('https://www.amazon.com/speech-perfect')
+        })
+    })
+
+    it('returns AWS data for a given speech', () => {
+      return request(app)
+        .get('/api/speech/aws-data/1')
+        .expect(200)
+        .then(res => {
+          expect(res.body).to.be.an('object')
+          expect(res.body.url).to.equal('https://www.amazon.com/speech-perfect')
+        })
+    })
+
+    it('returns speech data when searching by id', () => {
+      return request(app)
+        .get('/api/speech/1')
+        .expect(200)
+        .then(res => {
+          expect(res.body).to.be.an('object')
+          expect(res.body.title).to.equal(whitsSpeech)
+        })
+    })
+
+    it('deletes a given speech', () => {
+      return request(app)
+        .delete('/api/speech/1')
+        .expect(200)
+        .then(() => request(app).get('/api/user/1'))
+        .then(res => {
+          console.log('response is', res.body)
+          expect(res.body).to.be.an('array')
+          expect(res.body.length).to.equal(0)
+        })
+    })
   })
 })
