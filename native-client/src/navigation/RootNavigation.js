@@ -1,9 +1,10 @@
 import { StackNavigator } from 'react-navigation'
-import {SignedInNav} from './SignedInNavigator'
-import {SignedOutNav} from './SignedOutNavigator'
+import { SignedInNav } from './SignedInNavigator'
+import { SignedOutNav } from './SignedOutNavigator'
 
 const createRootNavigator = (signedIn = false) => {
-  return StackNavigator( //eslint-disable-line new-cap
+  return StackNavigator(
+    //eslint-disable-line new-cap
     {
       SignedIn: {
         screen: SignedInNav,

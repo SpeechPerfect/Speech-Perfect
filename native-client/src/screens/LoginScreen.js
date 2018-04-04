@@ -33,7 +33,6 @@ export default class LoginScreen extends Component {
       let res = await axios.post(`${API_ROOT}/auth/login`, { email, password })
       asyncStore.setItem('user', JSON.stringify(res.data))
       this.setState({ error: false, loggedin: true, user: res.data })
-      console.log('SIGNED IN NOW')
       navigation.navigate('SignedIn')
     } catch (err) {
       this.setState({

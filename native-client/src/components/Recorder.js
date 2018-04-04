@@ -49,7 +49,6 @@ export default class Recorder extends Component {
       console.log('recording has begun')
       setTimeout(async () => {
         await this.state.recording.getStatusAsync().then(data => {
-          console.log('DATA IS', data)
           this.setState({
             durationMillis: data.durationMillis
           })

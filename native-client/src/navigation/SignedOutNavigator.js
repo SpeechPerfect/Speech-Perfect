@@ -1,8 +1,9 @@
 import { StackNavigator } from 'react-navigation'
 
-import {SignupScreen, LoginScreen} from '../screens'
+import { SignupScreen, LoginScreen } from '../screens'
 
-export const SignedOutNav = StackNavigator({ //eslint-disable-line new-cap
+export const SignedOutNav = StackNavigator({
+  //eslint-disable-line new-cap
   SignUp: {
     screen: SignupScreen,
     navigationOptions: {
@@ -12,7 +13,7 @@ export const SignedOutNav = StackNavigator({ //eslint-disable-line new-cap
   SignIn: {
     screen: LoginScreen,
     navigationOptions: {
-      title: "Sign In"
+      title: 'Sign In'
     }
   }
 })

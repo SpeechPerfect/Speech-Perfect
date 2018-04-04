@@ -7,7 +7,7 @@ const user = 0
 const SET_USER_ID = 'SET_USER_ID'
 
 // ACTION CREATOR
-export const setUserAction = (id) => {
+export const setUserAction = id => {
   return {
     type: SET_USER_ID,
     id
@@ -16,7 +16,7 @@ export const setUserAction = (id) => {
 
 // REDUCER
 
-function reducer (state = user, action) {
+function reducer(state = user, action) {
   switch (action.type) {
     case SET_USER_ID:
       return action.id

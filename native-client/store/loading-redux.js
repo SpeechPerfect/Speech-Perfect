@@ -7,7 +7,7 @@ const loading = false
 const IS_LOADING = 'IS_LOADING'
 
 // ACTION CREATOR
-export const isLoadingAction = (isLoading) => {
+export const isLoadingAction = isLoading => {
   return {
     type: IS_LOADING,
     isLoading
@@ -16,7 +16,7 @@ export const isLoadingAction = (isLoading) => {
 
 // REDUCER
 
-function reducer (state = loading, action) {
+function reducer(state = loading, action) {
   switch (action.type) {
     case IS_LOADING:
       return action.isLoading

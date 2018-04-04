@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import {createLogger} from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import loading from './loading-redux'
@@ -21,11 +21,10 @@ const middleware = composeWithDevTools(
 //   localStorage.state = JSON.stringify(store.getState())
 // });
 
-export default store = createStore(reducer, middleware)
+export default (store = createStore(reducer, middleware))
 
 export * from './loading-redux'
 export * from './url-redux'
 export * from './speech-redux'
 export * from './speeches-redux'
 export * from './user-redux'
-

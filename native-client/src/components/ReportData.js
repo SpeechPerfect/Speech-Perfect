@@ -19,12 +19,10 @@ export default class ReportData extends Component {
   }
 
   componentDidMount = () => {
-    console.log('SPEECH ID IS ', this.props.speechId)
     axios
       .get(`${API_ROOT}/api/speech/watson-data/${this.props.speechId}`)
       .then(res => res.data)
       .then(speechData => {
-        console.log('speech data is', speechData)
         this.setState({
           speechData
         })
