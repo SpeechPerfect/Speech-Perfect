@@ -68,7 +68,6 @@ const getTranscript = arr => {
 }
 
 router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
-  console.log('req body is', req.body)
   const params = {
     audio: fs.createReadStream(req.file.path),
     content_type: 'audio/wav rate=44100' //eslint-disable-line camelcase
@@ -82,7 +81,6 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
       const speechTranscript = analyzeTranscript(
         results[0].alternatives[0].transcript
       )
-      console.log(speechTranscript)
       Speech.create({
         userId: req.params.userId
       }).then(speech => {
@@ -94,7 +92,6 @@ router.post('/upload/:userId', upload.single('soundFile'), (req, res, next) => {
           umCount: speechTranscript.umCount,
           wordCount: getLengthAndConfidence(results)[0],
           confidence: speechConfidence.toFixed(2),
-          // get from AWS or front-end
           duration: req.body.duration / 1000
         })
           .then(createdWReport => {

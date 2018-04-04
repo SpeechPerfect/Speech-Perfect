@@ -119,7 +119,6 @@ describe('Speech routes', () => {
         .expect(200)
         .then(() => request(app).get('/api/user/1'))
         .then(res => {
-          console.log('response is', res.body)
           expect(res.body).to.be.an('array')
           expect(res.body.length).to.equal(1)
         })
@@ -131,7 +130,6 @@ describe('Speech routes', () => {
         .expect(204)
         .then(() => request(app).get('/api/user/1'))
         .then(res => {
-          console.log('response is', res.body)
           expect(res.body).to.be.an('array')
           expect(res.body.length).to.equal(0)
         })
@@ -142,7 +140,6 @@ describe('Speech routes', () => {
         .put('/api/speech/1')
         .send({ title: whitsOtherSpeech })
         .then(res => {
-          console.log(res.body, 'is the response')
           expect(res.body).to.be.an('array')
           expect(res.body[1][0].title).to.equal(whitsOtherSpeech)
         })

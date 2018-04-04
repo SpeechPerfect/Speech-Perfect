@@ -15,7 +15,6 @@ class EditTitleForm extends Component {
     onButtonPress() {
       id = this.props.speech.id
       title=this.state.title
-      console.log('speech', { ...this.props.speech, title })
       updatedSpeech = { ...this.props.speech, title }
       axios.put(`${API_ROOT}/api/speech/${id}`, updatedSpeech)
         .then(updatedTitle => this.props.setModalVisible(false, updatedTitle))
@@ -23,7 +22,6 @@ class EditTitleForm extends Component {
     }
 
   render() {
-    console.log('edit title form', this.props)
     return (
       <View style={styles.editTitleContainer}>
           <View >

@@ -48,7 +48,7 @@ router.delete('/all/:userId', (req, res, next) => {
       userId: req.params.userId
     }
   })
-    .then(() => res.send(204))
+    .then(() => res.sendStatus(204))
     .catch(next)
 })
 

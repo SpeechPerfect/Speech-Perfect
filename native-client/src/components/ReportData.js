@@ -48,8 +48,6 @@ export default class ReportData extends Component {
     })
   }
   render() {
-    console.log('IN SPEECH LIST, state is ', this.state)
-
     const { duration, likeCount, umCount, wordCount } = this.state.speechData
 
     let pace = Math.floor(wordCount / (duration / 60))
