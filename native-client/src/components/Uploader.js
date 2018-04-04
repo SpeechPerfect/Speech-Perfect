@@ -63,7 +63,6 @@ class Uploader extends Component {
       })
       .then(idOrError => {
         if (idOrError === 'Low confidence') {
-          console.log('Front end detects low confidence')
           Alert.alert('Poor recording quality', 'Please re-record your message for best accuracy.')
           isLoadingAction(false)
           throw new Error('Poor recording quality')
