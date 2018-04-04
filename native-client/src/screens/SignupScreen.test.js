@@ -21,13 +21,12 @@ describe('Signup', () => {
       password: '123',
       confirmPassword: '123'
     })
-    console.log('LOUDNESS', rendered.instance())
-    let loggedin = rendered
+    let user = rendered
       .instance()
       .onButtonPress()
       .then(() => {
-        return rendered.instance().state.loggedin
+        return rendered.instance().state.user
       })
-    return expect(loggedin).resolves.toBe(true)
+    return expect(user).resolves.toEqual(JSON.parse(fakeData))
   })
 })
