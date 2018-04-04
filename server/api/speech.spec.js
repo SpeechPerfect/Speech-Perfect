@@ -15,8 +15,9 @@ describe('Speech routes', () => {
   describe('/api/speech', () => {
     const whitsEmail = 'whit@whit.com'
     const whitsSpeech = "Whit's Speech"
+    const whitsOtherSpeech = "Whit's Other Speech"
 
-    let speechId
+    let speechId, updatedCount, updatedSpeech
 
     beforeEach(() => {
       return User.create({
@@ -46,6 +47,30 @@ describe('Speech routes', () => {
             wordCount: 6
           })
         })
+        .then(() =>
+          Speech.create({
+            title: whitsSpeech,
+            userId: 1
+          })
+        )
+        .then(createdSpeech => {
+          speechId = createdSpeech.dataValues.id
+          return AwsReport.create({
+            url: 'https://www.amazon.com/speech-perfect-2',
+            speechId
+          })
+        })
+        .then(() => {
+          return WatsonReport.create({
+            speechId,
+            duration: 11.5,
+            umCount: 3,
+            likeCount: 3,
+            transcript: 'Um um like hello um like like world',
+            confidence: 0.9,
+            wordCount: 8
+          })
+        })
     })
 
     it('returns watson report data for a given speech', () => {
@@ -68,13 +93,13 @@ describe('Speech routes', () => {
         })
     })
 
-    it('returns AWS data for a given speech', () => {
+    it('returns thesaurus alternatives for a given word', () => {
       return request(app)
-        .get('/api/speech/aws-data/1')
+        .get('/api/speech/thesaurus/eighty')
         .expect(200)
         .then(res => {
-          expect(res.body).to.be.an('object')
-          expect(res.body.url).to.equal('https://www.amazon.com/speech-perfect')
+          expect(res.body).to.be.an('array')
+          expect(res.body).to.include('fourscore')
         })
     })
 
@@ -96,7 +121,30 @@ describe('Speech routes', () => {
         .then(res => {
           console.log('response is', res.body)
           expect(res.body).to.be.an('array')
+          expect(res.body.length).to.equal(1)
+        })
+    })
+
+    it("deletes all of a given user's speeches", () => {
+      return request(app)
+        .delete('/api/speech/all/1')
+        .expect(204)
+        .then(() => request(app).get('/api/user/1'))
+        .then(res => {
+          console.log('response is', res.body)
+          expect(res.body).to.be.an('array')
           expect(res.body.length).to.equal(0)
+        })
+    })
+
+    it('modifies a speech title', () => {
+      return request(app)
+        .put('/api/speech/1')
+        .send({ title: whitsOtherSpeech })
+        .then(res => {
+          console.log(res.body, 'is the response')
+          expect(res.body).to.be.an('array')
+          expect(res.body[1][0].title).to.equal(whitsOtherSpeech)
         })
     })
   })
