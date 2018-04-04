@@ -20,10 +20,10 @@ describe('Auth routes', () => {
       })
     })
 
-    it("recognizes an existing user", () => {
+    it('recognizes an existing user', () => {
       return request(app)
         .post('/auth/login')
-        .send({email: whitsEmail, password: 'abcde'})
+        .send({ email: whitsEmail, password: 'abcde' })
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('object')
@@ -31,17 +31,17 @@ describe('Auth routes', () => {
         })
     })
 
-    it("sends a 401 if the user is unrecognized", () => {
+    it('sends a 401 if the user enters the wrong password', () => {
       return request(app)
         .post('/auth/login')
-        .send({email: whitsEmail, password: 'abcd'})
+        .send({ email: whitsEmail, password: 'abcd' })
         .expect(401)
     })
 
-    it("signs up a new user", () => {
+    it('signs up a new user', () => {
       return request(app)
         .post('/auth/signup')
-        .send({email: 'bob@bob.com', password: '12345'})
+        .send({ email: 'bob@bob.com', password: '12345' })
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('object')
