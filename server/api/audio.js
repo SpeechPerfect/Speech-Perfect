@@ -32,7 +32,6 @@ router.post(
   '/upload/:speechId',
   upload.single('soundFile'),
   (req, res, next) => {
-    console.log('in post route, file is ', req.file)
     AwsReport.create({
       url: req.file.location,
       speechId: req.params.speechId
