@@ -4,7 +4,6 @@ import styles from '../../assets/stylesheet'
 import { EditTitleForm } from './'
 
 const EditModal = (props) =>  {
-    console.log('EDIT MODAL', props)
     speech = props.speech
     return (
        <Modal

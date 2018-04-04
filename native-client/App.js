@@ -39,7 +39,6 @@ export default class App extends React.Component {
       .getItem('user')
       .then(user => JSON.parse(user))
       .then(userData => {
-        console.log('user data is ', userData)
         this.setState({
           signedIn: !!userData.id,
           checkedForUser: true
@@ -49,7 +48,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log('OH HAI', this.state)
     const { signedIn } = this.state
     const Layout = createRootNavigator(signedIn)
 

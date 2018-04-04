@@ -53,7 +53,6 @@ export default class SignupScreen extends Component {
   }
 
   render() {
-    console.log(this.state, 'is the state')
     return (
       <View style={styles.signUpView}>
         <Card>
