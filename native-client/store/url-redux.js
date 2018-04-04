@@ -7,7 +7,7 @@ const url = ''
 const EDIT_URL = 'EDIT_URL'
 
 // ACTION CREATOR
-export const editUrlAction = (newUrl) => {
+export const editUrlAction = newUrl => {
   return {
     type: EDIT_URL,
     newUrl
@@ -16,7 +16,7 @@ export const editUrlAction = (newUrl) => {
 
 // REDUCER
 
-function reducer (state = url, action) {
+function reducer(state = url, action) {
   switch (action.type) {
     case EDIT_URL:
       return action.url
