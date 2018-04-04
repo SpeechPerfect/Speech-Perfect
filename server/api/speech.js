@@ -49,7 +49,7 @@ router.delete('/all/:userId', (req, res, next) => {
       userId: req.params.userId
     }
   })
-    .then(() => res.status(204))
+    .then(() => res.send(204))
     .catch(next)
 })
 

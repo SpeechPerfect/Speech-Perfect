@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "test": "cd server && npm run test",
     "start": "concurrently --kill-others-on-fail \"npm run start-server\" \"npm run start-client\"",
     "start-server": "cd server && nodemon server.js",
     "start-client": "cd client && npm start",
