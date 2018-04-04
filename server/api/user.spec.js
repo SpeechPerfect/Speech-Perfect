@@ -1,5 +1,3 @@
-/* global describe beforeEach it */
-
 const { expect } = require('chai')
 const request = require('supertest')
 const db = require('../db')
@@ -21,7 +19,7 @@ describe('User routes', () => {
         email: whitsEmail
       }).then(() =>
         Speech.create({
-          title: "Whit's Speech",
+          title: whitsSpeech,
           userId: 1
         })
       )
@@ -46,5 +44,5 @@ describe('User routes', () => {
           expect(res.body[0].title).to.be.equal(whitsSpeech)
         })
     })
-  }) // end describe('/api/users')
-}) // end describe('User routes')
+  })
+})
