@@ -5,28 +5,45 @@ const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
 const User = db.model('user')
+const Speech = db.model('speech')
 
 describe('User routes', () => {
   beforeEach(() => {
     return db.sync({ force: true })
   })
 
-  describe('/api/users/', () => {
-    const codysEmail = 'cody@puppybook.com'
+  describe('/api/user', () => {
+    const whitsEmail = 'whit@whit.com'
+    const whitsSpeech = "Whit's Speech"
 
     beforeEach(() => {
       return User.create({
-        email: codysEmail
-      })
+        email: whitsEmail
+      }).then(() =>
+        Speech.create({
+          title: "Whit's Speech",
+          userId: 1
+        })
+      )
     })
 
-    it('GET /api/users', () => {
+    it('GET /api/user', () => {
       return request(app)
-        .get('/api/users')
+        .get('/api/user')
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('array')
-          expect(res.body[0].email).to.be.equal(codysEmail)
+          expect(res.body[0].email).to.be.equal(whitsEmail)
+        })
+    })
+
+    it('GET /api/user/:userId', () => {
+      return request(app)
+        .get('/api/user/1')
+        .expect(200)
+        .then(res => {
+          expect(res.body).to.be.an('array')
+          expect(res.body[0].title).to.be.equal(whitsSpeech)
         })
     })
   }) // end describe('/api/users')
