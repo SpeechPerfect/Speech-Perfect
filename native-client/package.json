@@ -8,6 +8,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest-expo": "25.0.0",
     "prettier": "^1.11.1",
     "react-native-scripts": "1.11.1",
@@ -22,7 +23,10 @@
     "test": "node node_modules/jest/bin/jest.js"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "moduleNameMapper": {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
+    }
   },
   "dependencies": {
     "@expo/samples": "^2.1.1",
