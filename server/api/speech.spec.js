@@ -17,7 +17,7 @@ describe('Speech routes', () => {
     const whitsSpeech = "Whit's Speech"
     const whitsOtherSpeech = "Whit's Other Speech"
 
-    let speechId, updatedCount, updatedSpeech
+    let speechId
 
     beforeEach(() => {
       return User.create({
