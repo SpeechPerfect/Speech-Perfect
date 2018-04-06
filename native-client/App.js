@@ -37,12 +37,17 @@ export default class App extends React.Component {
 
     asyncStore
       .getItem('user')
-      .then(user => JSON.parse(user))
-      .then(userData => {
-        this.setState({
-          signedIn: !!userData.id,
-          checkedForUser: true
-        })
+      .then(user => {
+        if (user) {
+          JSON.parse(user).then(userData => {
+            this.setState({
+              signedIn: !!userData.id,
+              checkedForUser: true
+            })
+          })
+        } else {
+          this.setState({ checkedForUser: true })
+        }
       })
       .catch(err => console.log(err))
   }
