@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+// import { connect } from 'react-redux'
 import { Text, View, TextInput, TouchableOpacity } from 'react-native'
 import axios from 'axios'
 import API_ROOT from '../../IP_addresses'
@@ -13,13 +14,13 @@ class EditTitleForm extends Component {
   }
 
   onButtonPress() {
-    id = this.props.speech.id
-    title = this.state.title
-    updatedSpeech = { ...this.props.speech, title }
+    const id = this.props.speech.id
+    const title = this.state.title
+    const updatedSpeech = { title }
     axios
       .put(`${API_ROOT}/api/speech/${id}`, updatedSpeech)
       .then(updatedTitle => this.props.setModalVisible(false, updatedTitle))
-      .then(() => this.setState(this.state))
+      .then(() => console.log('editing in edit title form'))
   }
 
   render() {

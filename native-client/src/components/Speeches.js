@@ -32,7 +32,11 @@ class Speeches extends Component {
   }
 
   makeRemoteRequest = () => {
-    this.setState({ data: this.props.speeches })
+    let sortedSpeeches = this.props.speeches.sort((a, b) => {
+      return a.id - b.id
+    })
+    console.log(sortedSpeeches)
+    this.setState({ data: sortedSpeeches })
   }
 
   renderSeparator = () => {

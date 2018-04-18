@@ -59,13 +59,6 @@ class ProfileScreen extends Component {
     this.props.navigation.navigate('SignedOut')
   }
 
-  editSpeech = speech => {
-    axios
-      .put(`${API_ROOT}/api/speech/${speech.id}`)
-      .then(() => this.props.fetchSpeechData(this.props.user))
-      .then(err => console.log(err))
-  }
-
   deleteUsersSpeeches = userId => {
     axios
       .delete(`${API_ROOT}/api/speech/all/${userId}`)
@@ -81,9 +74,11 @@ class ProfileScreen extends Component {
         selectedSpeech: item,
         id: item.id
       })
+      this.props.fetchSpeechData(this.props.user)
     } else {
       this.setState({ modalVisible: visible, id: item.id })
     }
+    // console.log('state in modal is', this.state)
   }
 
   render() {
@@ -99,7 +94,7 @@ class ProfileScreen extends Component {
             navigation={this.props.navigation}
             deleteSpeech={this.deleteSpeech.bind(this)}
             deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)}
-            editSpeech={this.editSpeech.bind(this)}
+            // editSpeech={this.editSpeech.bind(this)}
             setModalVisible={this._setModalVisible.bind(this)}
           />
         )}
