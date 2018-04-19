@@ -26,6 +26,7 @@ const EditModal = props => {
             <EditTitleForm
               speech={props.speech}
               setModalVisible={props.setModalVisible}
+              // updateTitle = {props.editTitle}
             />
           </View>
         </TouchableHighlight>
