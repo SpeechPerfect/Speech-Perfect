@@ -17,7 +17,6 @@ client/build/*
 .env.test.local
 .env.production.local
 secrets.js
-native-client/IP_addresses.js
 
 npm-debug.log*
 yarn-debug.log*
@@ -27,6 +26,5 @@ yarn-error.log*
 
 # secrets
 secrets.js
-IP_addresses.js
 
 notes.org
