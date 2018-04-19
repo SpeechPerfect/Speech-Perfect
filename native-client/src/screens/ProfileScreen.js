@@ -28,7 +28,12 @@ class ProfileScreen extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchSpeechData(this.props.user)
+    this.props
+      .fetchSpeechData(this.props.user)
+      .then(speeches => this.setState({ speeches }))
+      .then(() =>
+        console.log(this.props.speeches, 'ARE SPEECHES IN PROFILE SCREEN')
+      )
   }
 
   deleteSpeech = speech => {
@@ -78,7 +83,6 @@ class ProfileScreen extends Component {
     } else {
       this.setState({ modalVisible: visible, id: item.id })
     }
-    // console.log('state in modal is', this.state)
   }
 
   render() {
@@ -87,11 +91,10 @@ class ProfileScreen extends Component {
     return (
       <View style={styles.container}>
         <View>{this.renderHeader()}</View>
-        {speeches && (
+        {!!speeches.length && (
           <Speeches
-            id={id}
-            speeches={speeches}
             navigation={this.props.navigation}
+            speeches={this.props.speeches}
             deleteSpeech={this.deleteSpeech.bind(this)}
             deleteUsersSpeeches={this.deleteUsersSpeeches.bind(this)}
             // editSpeech={this.editSpeech.bind(this)}

@@ -28,14 +28,9 @@ class Speeches extends Component {
   }
 
   componentDidMount() {
-    this.makeRemoteRequest()
-  }
-
-  makeRemoteRequest = () => {
     let sortedSpeeches = this.props.speeches.sort((a, b) => {
       return a.id - b.id
     })
-    console.log(sortedSpeeches)
     this.setState({ data: sortedSpeeches })
   }
 
@@ -95,7 +90,7 @@ class Speeches extends Component {
         }}
       >
         <View style={styles.speechesListItemContainer}>
-          {this.props.speeches.length && (
+          {this.state.data.length && (
             <View key={item.id} style={styles.speechesListItem}>
               <SingleSpeechThumbnail speech={item} />
             </View>
@@ -108,23 +103,29 @@ class Speeches extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <View style={styles.speechesHeader}>
-          {this.renderHeader()}
-        </View> */}
-        <View>
-          <FlatList
-            keyExtractor={(speech, index) => index}
-            data={this.props.speeches}
-            renderItem={this._renderItem}
-            ItemSeparatorComponent={this.renderSeparator}
-            onRefresh={this.handleRefresh}
-            refreshing={this.state.refreshing}
-            onEndReached={this.handleLoadMore}
-            onEndReachedThreshold={50}
-          />
-        </View>
+        {!!this.state.data.length && (
+          <View>
+            <FlatList
+              keyExtractor={(speech, index) => index}
+              data={this.props.speeches.sort((a, b) => a.id - b.id)}
+              renderItem={this._renderItem}
+              ItemSeparatorComponent={this.renderSeparator}
+              onRefresh={this.handleRefresh}
+              refreshing={this.state.refreshing}
+              onEndReached={this.handleLoadMore}
+              onEndReachedThreshold={50}
+            />
+          </View>
+        )}
       </View>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    speeches: state.speeches,
+    id: state.id
   }
 }
 
@@ -133,6 +134,6 @@ const mapDispatchToProps = dispatch => {
     setSpeechAction: id => dispatch(setSpeechAction(id))
   }
 }
-const SpeechesContainer = connect(null, mapDispatchToProps)(Speeches)
+const SpeechesContainer = connect(mapStateToProps, mapDispatchToProps)(Speeches)
 
 export default SpeechesContainer
